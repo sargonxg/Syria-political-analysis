@@ -1,5 +1,7 @@
 # Verification: source atlas
 
+Historical atlas-only checkpoint before the country/ontology merge and private-desk implementation. Current reconciliation and server checks are recorded in [desk verification](desk-verification.md); the current corpus contains 44 document references and 14 attributed paraphrases.
+
 Checked locally on Windows with Python 3.12 and an isolated Chromium session on 2 November 2026. This is local verification, not a claim that remote CI or a deployment ran.
 
 ## Passed

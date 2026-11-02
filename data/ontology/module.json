@@ -1,0 +1,395 @@
+{
+  "schema_version": 1,
+  "version": "1.0.0",
+  "country_code": "SY",
+  "title": "Syria political research vocabulary",
+  "status": "Source-scoped research vocabulary, not a current political assessment",
+  "concepts": [
+    {
+      "id": "political-process",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Political process"
+      },
+      "scope_note": "An analytical category for documented efforts toward a political arrangement; not proof that one is operating.",
+      "terminology_basis": {
+        "reference_id": "unsc-2254",
+        "locator": "Operative paragraphs 1–4.",
+        "url": "https://digitallibrary.un.org/record/814715",
+        "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "country_code": "SY"
+    },
+    {
+      "id": "syrian-led-owned",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Syrian-led and Syrian-owned process"
+      },
+      "scope_note": "A Syria-specific formulation retained as historical document language.",
+      "terminology_basis": {
+        "reference_id": "unsc-2254",
+        "locator": "Operative paragraphs 1 and 4.",
+        "url": "https://digitallibrary.un.org/record/814715",
+        "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "broader": [
+        "political-process"
+      ],
+      "country_profile": [
+        "sy"
+      ],
+      "country_code": "SY"
+    },
+    {
+      "id": "good-offices",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Good offices"
+      },
+      "scope_note": "A facilitative role; identify the particular mandate or action being described.",
+      "terminology_basis": {
+        "reference_id": "unsc-2254",
+        "locator": "Operative paragraph 2.",
+        "url": "https://digitallibrary.un.org/record/814715",
+        "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "country_code": "SY"
+    },
+    {
+      "id": "mediation",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Mediation"
+      },
+      "scope_note": "A separately evidenced role in a political process; do not infer mediation from contact, attendance or facilitation.",
+      "terminology_basis": {
+        "reference_id": "ose-civil-society",
+        "locator": "Indexed institutional description of political and mediation processes.",
+        "url": "https://specialenvoysyria.unmissions.org/en/civil-society-support-room",
+        "verification": "First-party indexed text describes civil-society consultation and engagement. Direct retrieval returned 403. Do not infer present membership or operating status."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "country_code": "SY"
+    },
+    {
+      "id": "formal-negotiations",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Formal negotiations"
+      },
+      "scope_note": "A source-described negotiation process; invitations, attendance and agreements are distinct observations.",
+      "terminology_basis": {
+        "reference_id": "unsc-2254",
+        "locator": "Operative paragraph 2.",
+        "url": "https://digitallibrary.un.org/record/814715",
+        "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "broader": [
+        "political-process"
+      ],
+      "country_code": "SY"
+    },
+    {
+      "id": "governance",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Governance"
+      },
+      "scope_note": "A topic or stated objective, not an automatic description of governing authority.",
+      "terminology_basis": {
+        "reference_id": "unsc-2254",
+        "locator": "Operative paragraph 4.",
+        "url": "https://digitallibrary.un.org/record/814715",
+        "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "country_code": "SY"
+    },
+    {
+      "id": "constitutional-process",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Constitutional process"
+      },
+      "scope_note": "Work on a constitutional schedule or text, distinguishing proposals from adopted instruments.",
+      "terminology_basis": {
+        "reference_id": "unsc-2254",
+        "locator": "Operative paragraph 4.",
+        "url": "https://digitallibrary.un.org/record/814715",
+        "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "broader": [
+        "political-process"
+      ],
+      "country_code": "SY"
+    },
+    {
+      "id": "electoral-process",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Electoral process"
+      },
+      "scope_note": "Elections as a documented topic, objective or event; actual timing and eligibility require separate evidence.",
+      "terminology_basis": {
+        "reference_id": "unsc-2254",
+        "locator": "Operative paragraph 4.",
+        "url": "https://digitallibrary.un.org/record/814715",
+        "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "broader": [
+        "political-process"
+      ],
+      "country_code": "SY"
+    },
+    {
+      "id": "inclusion",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Inclusion"
+      },
+      "scope_note": "An analytical question about participation and access; a stated aspiration is not measured inclusion.",
+      "terminology_basis": {
+        "reference_id": "unsc-2254",
+        "locator": "Preamble and operative paragraph 4.",
+        "url": "https://digitallibrary.un.org/record/814715",
+        "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "country_code": "SY"
+    },
+    {
+      "id": "women-meaningful-participation",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Meaningful participation of women"
+      },
+      "scope_note": "Retain the source’s participation language; attendance alone is not a measure of meaningful influence.",
+      "terminology_basis": {
+        "reference_id": "unsc-2254",
+        "locator": "Preamble, printed page 2, paragraph beginning Encouraging the meaningful participation of women.",
+        "url": "https://digitallibrary.un.org/record/814715",
+        "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "broader": [
+        "inclusion"
+      ],
+      "country_code": "SY"
+    },
+    {
+      "id": "representation",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Representation"
+      },
+      "scope_note": "A claim about who speaks for whom; document source, constituency, selection basis and limits.",
+      "terminology_basis": {
+        "reference_id": "unsc-2254",
+        "locator": "Preamble on negotiation representatives; operative paragraph 2.",
+        "url": "https://digitallibrary.un.org/record/814715",
+        "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "country_code": "SY"
+    },
+    {
+      "id": "civil-society",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Civil society"
+      },
+      "scope_note": "An operational reading category; organizational status does not imply neutrality or nationally representative authority.",
+      "terminology_basis": {
+        "reference_id": "ose-civil-society",
+        "locator": "Indexed page description of diverse civil-society engagement.",
+        "url": "https://specialenvoysyria.unmissions.org/en/civil-society-support-room",
+        "verification": "First-party indexed text describes civil-society consultation and engagement. Direct retrieval returned 403. Do not infer present membership or operating status."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "country_code": "SY"
+    },
+    {
+      "id": "consultation",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Consultation"
+      },
+      "scope_note": "A documented engagement mechanism, distinct from decision rights or formal negotiation membership.",
+      "terminology_basis": {
+        "reference_id": "ose-civil-society",
+        "locator": "Indexed description of consulting and engaging civil-society actors.",
+        "url": "https://specialenvoysyria.unmissions.org/en/civil-society-support-room",
+        "verification": "First-party indexed text describes civil-society consultation and engagement. Direct retrieval returned 403. Do not infer present membership or operating status."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "country_code": "SY"
+    },
+    {
+      "id": "institutional-mandate",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Institutional mandate"
+      },
+      "scope_note": "A published remit, kept distinct from implementation and capacity.",
+      "terminology_basis": {
+        "reference_id": "ose-mandate",
+        "locator": "Mandate page and repository context-political-process-mandate.",
+        "url": "https://specialenvoysyria.unmissions.org/en/osesg-syria/mandate",
+        "verification": "Repository receipt and fresh first-party indexed text checked. Direct page retrieval returned 403. Institutional self-description, not current implementation evidence."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "country_code": "SY"
+    },
+    {
+      "id": "legal-instrument",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Legal instrument"
+      },
+      "scope_note": "A local document category. The category alone establishes no present force, hierarchy or binding effect.",
+      "terminology_basis": {
+        "reference_id": "unsc-2254",
+        "locator": "Document heading, symbol and adoption metadata.",
+        "url": "https://digitallibrary.un.org/record/814715",
+        "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "country_code": "SY"
+    },
+    {
+      "id": "accountability",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Accountability"
+      },
+      "scope_note": "Keep political transparency, investigative findings and judicial decisions separate.",
+      "terminology_basis": {
+        "reference_id": "coi-methodology",
+        "locator": "Section I, paragraphs 1–2; compare resolution 2254 operative paragraph 4.",
+        "url": "https://digitallibrary.un.org/record/4039851",
+        "verification": "Existing repository methodology anchor; historical reporting period July–December 2023. No current incident finding is inferred."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "country_code": "SY"
+    },
+    {
+      "id": "humanitarian-coordination",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Humanitarian coordination"
+      },
+      "scope_note": "A distinct institutional remit, not political command or mediation.",
+      "terminology_basis": {
+        "reference_id": "ocha-mission",
+        "locator": "Institutional mission paragraph.",
+        "url": "https://www.ungeneva.org/en/about/organizations/unocha",
+        "verification": "Existing repository source context; distinguishes humanitarian coordination from political mediation and investigation."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "country_code": "SY"
+    },
+    {
+      "id": "facilitation",
+      "type": "skos:Concept",
+      "pref_label": {
+        "en": "Facilitation"
+      },
+      "scope_note": "A separately evidenced process-support role, distinct from mediation and formal decision authority.",
+      "terminology_basis": {
+        "reference_id": "ose-good-offices",
+        "locator": "Page title and indexed institutional description.",
+        "url": "https://specialenvoysyria.unmissions.org/en/osesg-syria/good-offices-and-facilitation-geneva-political-process",
+        "verification": "First-party indexed page title and excerpt checked; direct retrieval returned 403. Suggested terminology reference, not an imported receipt or verified current activity."
+      },
+      "status": "proposed_operational_vocabulary",
+      "no_current_world_assertion": true,
+      "country_code": "SY"
+    }
+  ],
+  "references": [
+    {
+      "id": "unsc-2254",
+      "existing_document_id": "doc-83ad8cbb868c0c88",
+      "existing_source_id": "un-security-council",
+      "title": "Resolution 2254 (2015)",
+      "symbol": "S/RES/2254 (2015)",
+      "published_on": "2015-12-18",
+      "url": "https://digitallibrary.un.org/record/814715",
+      "full_text_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+      "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5.",
+      "sha256": "932c9614e588e910c5c23a82b4df67679aba7bbe2c47ef2edd1d02970f0faa62"
+    },
+    {
+      "id": "ose-mandate",
+      "existing_document_id": "doc-427ee7a72090ffab",
+      "existing_source_id": "ose-syria",
+      "title": "Mandate — Office of the Special Envoy for Syria",
+      "published_on": null,
+      "url": "https://specialenvoysyria.unmissions.org/en/osesg-syria/mandate",
+      "verification": "Repository receipt and fresh first-party indexed text checked. Direct page retrieval returned 403. Institutional self-description, not current implementation evidence."
+    },
+    {
+      "id": "ose-good-offices",
+      "existing_document_id": null,
+      "existing_source_id": "ose-syria",
+      "title": "Good Offices and Facilitation of the Geneva Political Process",
+      "published_on": null,
+      "url": "https://specialenvoysyria.unmissions.org/en/osesg-syria/good-offices-and-facilitation-geneva-political-process",
+      "verification": "First-party indexed page title and excerpt checked; direct retrieval returned 403. Suggested terminology reference, not an imported receipt or verified current activity."
+    },
+    {
+      "id": "ose-civil-society",
+      "existing_document_id": null,
+      "existing_source_id": "ose-syria",
+      "title": "Civil Society Support Room",
+      "published_on": null,
+      "url": "https://specialenvoysyria.unmissions.org/en/civil-society-support-room",
+      "verification": "First-party indexed text describes civil-society consultation and engagement. Direct retrieval returned 403. Do not infer present membership or operating status."
+    },
+    {
+      "id": "coi-methodology",
+      "existing_document_id": "doc-195dc9a7e6f261bf",
+      "existing_source_id": "coi-syria",
+      "title": "Report of the Independent International Commission of Inquiry on the Syrian Arab Republic",
+      "published_on": "2024-02-09",
+      "url": "https://digitallibrary.un.org/record/4039851",
+      "full_text_url": "https://www.ohchr.org/sites/default/files/documents/hrbodies/hrcouncil/sessions-regular/session55/A_HRC_55_64_EN.pdf",
+      "locator": "Section I, paragraphs 1–2",
+      "verification": "Existing repository methodology anchor; historical reporting period July–December 2023. No current incident finding is inferred."
+    },
+    {
+      "id": "ocha-mission",
+      "existing_document_id": "doc-cbd0bcfb486a0fc4",
+      "existing_source_id": "ocha",
+      "title": "United Nations Office for the Coordination of Humanitarian Affairs — UN Geneva organizational profile",
+      "published_on": null,
+      "url": "https://www.ungeneva.org/en/about/organizations/unocha",
+      "locator": "Institutional mission paragraph",
+      "verification": "Existing repository source context; distinguishes humanitarian coordination from political mediation and investigation."
+    }
+  ]
+}

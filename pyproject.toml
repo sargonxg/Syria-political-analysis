@@ -4,21 +4,26 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "syria-political-analysis"
-version = "0.1.0"
-description = "Public-source evidence, context and briefing tools for political analysis of Syria"
+version = "0.2.0"
+description = "Country-extensible public-source political analysis, beginning with Syria and the Middle East"
 requires-python = ">=3.11"
 license = {text = "MIT"}
 authors = [{name = "Giulio Catanzariti"}]
 dependencies = []
 
 [project.optional-dependencies]
-dev = ["jsonschema>=4.23,<5"]
+dev = ["jsonschema>=4.23,<5", "PyLD>=2.0,<3"]
+desk = ["fastapi>=0.115,<1", "uvicorn>=0.30,<1"]
+test = ["httpx>=0.27,<1", "ruff>=0.9,<1", "pip-audit>=2.7,<3"]
 
 [project.scripts]
 syria-analysis = "syria_analysis.cli:main"
+policy-analysis = "syria_analysis.cli:main"
+analysis-desk-admin = "syria_analysis.desk.manage:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
 syria_analysis = ["web/*.html", "web/*.css", "web/*.js"]
+"syria_analysis.desk" = ["web/*.html", "web/*.css", "web/*.js"]

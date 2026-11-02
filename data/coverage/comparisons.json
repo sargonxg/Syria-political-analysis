@@ -1,0 +1,104 @@
+{
+  "checked_on": "2026-11-02",
+  "comparisons": [
+    {
+      "id": "sana-paris-language-pair",
+      "title": "One publisher, two language accounts",
+      "reference_ids": [
+        "sana-paris-banking-ar-2026-10-31",
+        "sana-paris-banking-en-2026-10-31"
+      ],
+      "comparison_type": "Manually selected same-publisher accounts of the same reported Paris meetings.",
+      "observation": "Both reports foreground the bank’s stated institutional outreach. Compare vocabulary, attribution and omitted or added context, without counting two independent witnesses.",
+      "relationship_status": "Topic/event correspondence manually reviewed; no translation_of or syndicated_from edge established.",
+      "link_check": "The English AR menu led to the Arabic homepage, not the Arabic article. A site language switch alone does not establish an article translation.",
+      "limits": [
+        "Same publisher and same underlying statement.",
+        "Displayed clock times have no verified timezone; do not infer translation direction from them."
+      ]
+    },
+    {
+      "id": "banking-institution-household-comparison",
+      "title": "Institutional outreach and household experience",
+      "reference_ids": [
+        "sana-paris-banking-ar-2026-10-31",
+        "syria-direct-finance-2026-10-23"
+      ],
+      "comparison_type": "Cross-publisher, Arabic/English thematic comparison across different dates.",
+      "observation": "SANA’s Arabic account presents reported banking outreach; Syria Direct’s English feature asks how financial reconnection relates to household costs and practical access.",
+      "questions": [
+        "What is attributed to official statements, and what is supported by reported interviews?",
+        "Which additional primary rules, datasets and follow-up reporting would test the respective claims?"
+      ],
+      "limits": [
+        "Shared broad topic, not the same event or publication date.",
+        "Selected articles cannot establish an outlet’s general ideology, coordination, influence or overall coverage.",
+        "The Syria Direct language switch and hreflang checks did not verify a corresponding Arabic article.",
+        "This comparison is an editorial reading exercise, not a measured media-effects result."
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "id": "sana-paris-banking-en-2026-10-31",
+      "source_id": "sana",
+      "publisher": "Syrian Arab News Agency",
+      "title": "Central Bank governor discusses reconnecting Syria to European banking system in Paris",
+      "url": "https://sana.sy/en/economic/2354876/",
+      "published_on": "2026-10-31",
+      "publication_date_precision": "day",
+      "language": "en",
+      "publication_display": "2026/10/31 8:49 PM; updated 9:31 PM; timezone not stated.",
+      "document_type": "News article relaying an institutional statement",
+      "review_state": "article_read_for_framing_comparison",
+      "original_summary": "SANA presents reported Paris banking meetings through the stated aims of institutional outreach and financial reconnection.",
+      "evidence_locator": "Article body paragraphs 1–4, particularly attribution to the bank statement.",
+      "limits": [
+        "Reported aims and meetings are attributed to SANA and its cited bank statement; this is not independent verification of banking access or legal status."
+      ],
+      "checked_on": "2026-11-02"
+    },
+    {
+      "id": "sana-paris-banking-ar-2026-10-31",
+      "source_id": "sana",
+      "publisher": "Syrian Arab News Agency",
+      "title": "حاكم المصرف المركزي يبحث في باريس مع بنوك دولية إعادة ربط سوريا بالنظام ‏الأوروبي",
+      "url": "https://sana.sy/economy/syrian-economy/2622492/",
+      "published_on": "2026-10-31",
+      "publication_date_precision": "day",
+      "language": "ar",
+      "publication_display": "2026/10/31 8:46 مساءً; timezone not stated.",
+      "document_type": "News article relaying an institutional statement",
+      "review_state": "article_read_for_framing_comparison",
+      "original_summary": "The Arabic report describes Paris meetings and attributes discussion of banking relationships and payments to the central bank’s public account.",
+      "evidence_locator": "Article body below the Paris dateline and the section on banking relationships.",
+      "checked_on": "2026-11-02"
+    },
+    {
+      "id": "syria-direct-finance-2026-10-23",
+      "existing_receipt_id": "doc-f3c467829fc37bbf",
+      "source_id": "syria-direct",
+      "publisher": "Syria Direct",
+      "title": "Syria reconnects to global finance, but ordinary Syrians are still struggling",
+      "url": "https://syriadirect.org/syria-reconnects-to-global-finance-but-ordinary-syrians-are-still-struggling/",
+      "published_on": "2026-10-23",
+      "published_at": "2026-10-23T12:58:38Z",
+      "publication_date_precision": "day",
+      "language": "en",
+      "document_type": "Reported feature",
+      "review_state": "article_read_for_framing_comparison",
+      "original_summary": "Syria Direct considers financial reconnection alongside interviews about household costs and the practical obstacles Syrians face.",
+      "evidence_locator": "Headline, standfirst and opening reported interviews.",
+      "limits": [
+        "The selected interview accounts are not a representative household survey. The article date differs from the selected SANA report."
+      ],
+      "checked_on": "2026-11-02"
+    }
+  ],
+  "method": [
+    "Shared terms do not prove coordination, influence, agreement or causation.",
+    "An absent reference is not evidence that a publisher ignored a topic.",
+    "A source classification is not a reliability rating.",
+    "Two languages from one publisher do not create independent corroboration."
+  ]
+}

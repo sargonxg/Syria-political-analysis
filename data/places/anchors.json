@@ -124,5 +124,75 @@
     "geographic_scope": "North-west regional findings covering Aleppo and Idleb",
     "geometry_role": "regional_navigation_anchor",
     "not_an_incident_geotag": true
+  },
+  {
+    "id": "area-nawa-civil-registration",
+    "name": "Nawa",
+    "region": "Dar’a",
+    "coordinates": [
+      36.04,
+      32.89
+    ],
+    "coordinate_basis": "Coordinates are a representative place centre, not a location supplied by the report or a facility geotag.",
+    "precision": "Approximate editorial navigation point rounded to 0.01 degree.",
+    "geographic_scope": "Town named in a two-location civil-registry rehabilitation update.",
+    "geometry_role": "regional_navigation_anchor",
+    "not_an_incident_geotag": true
+  },
+  {
+    "id": "area-hasakeh-legal-outreach",
+    "name": "Al-Hasakeh governorate",
+    "region": "Al-Hasakeh",
+    "coordinates": [
+      40.75,
+      36.51
+    ],
+    "coordinate_basis": "Coordinates are a representative place centre, not a location supplied by the report or a facility geotag.",
+    "precision": "Approximate editorial navigation point rounded to 0.01 degree.",
+    "geographic_scope": "Governorate-level outreach; point near the governorate capital represents the wider area.",
+    "geometry_role": "regional_navigation_anchor",
+    "not_an_incident_geotag": true
+  },
+  {
+    "id": "area-qamishli-community-accountability",
+    "name": "Qamishli area",
+    "region": "Al-Hasakeh",
+    "coordinates": [
+      41.22,
+      37.05
+    ],
+    "coordinate_basis": "Coordinates are a representative place centre, not a location supplied by the report or a facility geotag.",
+    "precision": "Approximate editorial navigation point rounded to 0.01 degree.",
+    "geographic_scope": "Qamishli named alongside Ar-Raqqa in a combined training update; exact venue is not provided.",
+    "geometry_role": "regional_navigation_anchor",
+    "not_an_incident_geotag": true
+  },
+  {
+    "id": "area-douma-community-protection",
+    "name": "Douma",
+    "region": "Rural Damascus",
+    "coordinates": [
+      36.4,
+      33.57
+    ],
+    "coordinate_basis": "Coordinates are a representative place centre, not a location supplied by the report or a facility geotag.",
+    "precision": "Approximate editorial navigation point rounded to 0.01 degree.",
+    "geographic_scope": "Town named among community-organization initiative examples.",
+    "geometry_role": "regional_navigation_anchor",
+    "not_an_incident_geotag": true
+  },
+  {
+    "id": "area-al-bab-vocational-rehabilitation",
+    "name": "Al-Bab",
+    "region": "Aleppo",
+    "coordinates": [
+      37.52,
+      36.37
+    ],
+    "coordinate_basis": "Coordinates are a representative place centre, not a location supplied by the report or a facility geotag.",
+    "precision": "Approximate editorial navigation point rounded to 0.01 degree.",
+    "geographic_scope": "Town named in a vocational-training rehabilitation update.",
+    "geometry_role": "regional_navigation_anchor",
+    "not_an_incident_geotag": true
   }
 ]

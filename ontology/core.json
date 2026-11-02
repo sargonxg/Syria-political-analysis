@@ -1,0 +1,371 @@
+{
+  "schema_version": 1,
+  "version": "1.0.0",
+  "namespace": "urn:policy-analysis:ontology:core:",
+  "title": "Political research evidence model",
+  "status": "Independent editorial ontology; no official UN endorsement",
+  "classes": [
+    {
+      "id": "SourceProfile",
+      "label": "Source Profile",
+      "definition": "A documented publishing identity and collection profile.",
+      "subclass_of": [],
+      "scope_note": "Keep existing source IDs. Do not automatically classify an outlet as a political actor."
+    },
+    {
+      "id": "Document",
+      "label": "Document",
+      "definition": "A particular public source resource or version.",
+      "subclass_of": [],
+      "scope_note": "Keep canonical URL and existing document ID. In an RDF export, distinguish the source resource from its locally created receipt."
+    },
+    {
+      "id": "DocumentReceipt",
+      "label": "Document Receipt",
+      "definition": "The locally created metadata record and collection history.",
+      "subclass_of": [],
+      "scope_note": "The receipt’s creation/retrieval time is not the publication time of the source document."
+    },
+    {
+      "id": "LegalInstrument",
+      "label": "Legal Instrument",
+      "definition": "A source-identified resolution, agreement or other instrument.",
+      "subclass_of": [
+        "Document"
+      ],
+      "scope_note": "Instrument kind, issuer and symbol require source evidence. Legal force, amendment, entry into force and present applicability are separate assertions."
+    },
+    {
+      "id": "PublicActor",
+      "label": "Public Actor",
+      "definition": "A source-identified public institution, organization or professional public person.",
+      "subclass_of": [],
+      "scope_note": "Keep actor identity separate from publisher identity; do not instantiate private individuals. Offices, role holders and role dates require qualified assertions, not permanent inferred affiliations."
+    },
+    {
+      "id": "PoliticalProcess",
+      "label": "Political Process",
+      "definition": "A documented process reference with explicit geographic and temporal scope.",
+      "subclass_of": [],
+      "scope_note": "Do not turn a document’s proposal into an actually operating process."
+    },
+    {
+      "id": "ProcessEpisode",
+      "label": "Process Episode",
+      "definition": "A proposed, announced or reported meeting, consultation or negotiation episode.",
+      "subclass_of": [],
+      "scope_note": "Keep occurrence status, source date, event date and participant claims distinct."
+    },
+    {
+      "id": "NormativeObjective",
+      "label": "Normative Objective",
+      "definition": "An aim, requested action or proposed arrangement expressed by a document.",
+      "subclass_of": [],
+      "scope_note": "Use for the 2254 exemplar so governance, elections and ceasefire objectives do not become unqualified current-world facts."
+    },
+    {
+      "id": "Assertion",
+      "label": "Assertion",
+      "definition": "An attributed statement or assessment, optionally with a subject/predicate/object structure.",
+      "subclass_of": [],
+      "scope_note": "Existing textual claims remain valid. Add structured triples only when the statement can be faithfully represented."
+    },
+    {
+      "id": "EvidenceLink",
+      "label": "Evidence Link",
+      "definition": "A document and locator tied to a particular assertion, with a stated evidence relationship.",
+      "subclass_of": [],
+      "scope_note": "Preserve existing document_id and locator; add supports_paraphrase / qualifies / contradicts / mentions, never an implied truth guarantee."
+    },
+    {
+      "id": "ReviewActivity",
+      "label": "Review Activity",
+      "definition": "A collection, annotation, extraction or review operation.",
+      "subclass_of": [],
+      "scope_note": "Record who or what performed it, its inputs and actual execution time. Do not invent a human reviewer."
+    },
+    {
+      "id": "ReviewDecision",
+      "label": "Review Decision",
+      "definition": "A versioned record of a review outcome and rationale.",
+      "subclass_of": [],
+      "scope_note": "Keep decision history; a current review label does not erase previous evidence."
+    },
+    {
+      "id": "Concept",
+      "label": "Concept",
+      "definition": "A controlled analytical term, distinct from a person, institution, place or event.",
+      "subclass_of": [],
+      "scope_note": "Use a shared scheme plus a Syria profile; multilingual labels are not entity-identity assertions."
+    },
+    {
+      "id": "PlaceReference",
+      "label": "Place Reference",
+      "definition": "A named geographic scope, with optional existing navigation anchor.",
+      "subclass_of": [],
+      "scope_note": "Retain the current point basis and scope. A navigation point is not an incident geotag, political boundary or sovereignty claim."
+    },
+    {
+      "id": "InstitutionOrOrganization",
+      "label": "Institution or organization",
+      "definition": "A source-identified public institution or organization.",
+      "subclass_of": [
+        "PublicActor"
+      ],
+      "scope_note": "Roles and mandates require dated assertions."
+    },
+    {
+      "id": "PublicPerson",
+      "label": "Public person",
+      "definition": "A public professional actor identified in a source.",
+      "subclass_of": [
+        "PublicActor"
+      ],
+      "scope_note": "Office, holder and role dates stay separate. No private-person profiles are supplied."
+    },
+    {
+      "id": "ConstituencyReference",
+      "label": "Constituency reference",
+      "definition": "A constituency as described by a particular source.",
+      "subclass_of": [],
+      "scope_note": "A representation claim does not establish legitimacy, consent or exhaustive representation."
+    }
+  ],
+  "relations": [
+    {
+      "id": "published_by",
+      "label": "published by",
+      "kind": "metadata",
+      "domain": [
+        "Document"
+      ],
+      "range": [
+        "SourceProfile"
+      ],
+      "meaning": "The publishing entity of a source document. The legacy evidence graph uses the inverse source-to-document direction.",
+      "required_qualifiers": []
+    },
+    {
+      "id": "has_subject",
+      "label": "has subject",
+      "kind": "metadata",
+      "domain": [
+        "Document",
+        "Assertion"
+      ],
+      "range": [
+        "Concept"
+      ],
+      "meaning": "Curated subject annotation.",
+      "required_qualifiers": []
+    },
+    {
+      "id": "supported_by",
+      "label": "supported by",
+      "kind": "evidence",
+      "domain": [
+        "Assertion"
+      ],
+      "range": [
+        "EvidenceLink"
+      ],
+      "meaning": "A qualified source relationship, not a bare claim of truth.",
+      "required_qualifiers": []
+    },
+    {
+      "id": "requests",
+      "label": "requests",
+      "kind": "normative",
+      "domain": [
+        "LegalInstrument"
+      ],
+      "range": [
+        "NormativeObjective"
+      ],
+      "meaning": "The instrument explicitly requests an action; retain addressee and exact source verb.",
+      "required_qualifiers": []
+    },
+    {
+      "id": "expresses_support_for",
+      "label": "expresses support for",
+      "kind": "normative",
+      "domain": [
+        "LegalInstrument"
+      ],
+      "range": [
+        "NormativeObjective"
+      ],
+      "meaning": "Support expressed in the document; does not assert implementation.",
+      "required_qualifiers": []
+    },
+    {
+      "id": "calls_for",
+      "label": "calls for",
+      "kind": "normative",
+      "domain": [
+        "Document"
+      ],
+      "range": [
+        "NormativeObjective"
+      ],
+      "meaning": "Use only when this accurately represents the source wording; do not normalize every diplomatic verb to calls_for.",
+      "required_qualifiers": []
+    },
+    {
+      "id": "has_documented_mandate",
+      "label": "has documented mandate",
+      "kind": "political_domain",
+      "domain": [
+        "PublicActor"
+      ],
+      "range": [
+        "LegalInstrument",
+        "Document"
+      ],
+      "meaning": "Evidence describes a role/mandate, with the instrument and time scope retained.",
+      "required_qualifiers": [
+        "mandate_scope",
+        "valid_time_basis"
+      ]
+    },
+    {
+      "id": "convenes",
+      "label": "convenes",
+      "kind": "political_domain",
+      "domain": [
+        "PublicActor"
+      ],
+      "range": [
+        "ProcessEpisode"
+      ],
+      "meaning": "Source reports actual convening; a request to convene belongs in requests instead.",
+      "required_qualifiers": [
+        "occurrence_status",
+        "event_date_or_unknown"
+      ]
+    },
+    {
+      "id": "mediates",
+      "label": "mediates",
+      "kind": "political_domain",
+      "domain": [
+        "PublicActor"
+      ],
+      "range": [
+        "PoliticalProcess",
+        "ProcessEpisode"
+      ],
+      "meaning": "A source describes a specific mediation role; distinguish the mandate, acceptance by parties and reported activity.",
+      "required_qualifiers": [
+        "role_basis"
+      ]
+    },
+    {
+      "id": "invited_to",
+      "label": "invited to",
+      "kind": "political_domain",
+      "domain": [
+        "PublicActor"
+      ],
+      "range": [
+        "ProcessEpisode"
+      ],
+      "meaning": "An evidenced invitation, not proof of attendance.",
+      "required_qualifiers": []
+    },
+    {
+      "id": "participates_in",
+      "label": "participates in",
+      "kind": "political_domain",
+      "domain": [
+        "PublicActor"
+      ],
+      "range": [
+        "ProcessEpisode"
+      ],
+      "meaning": "Participation is documented; role, date and source retained. Attendance does not establish representation of a population.",
+      "required_qualifiers": []
+    },
+    {
+      "id": "consulted_in",
+      "label": "consulted in",
+      "kind": "political_domain",
+      "domain": [
+        "PublicActor"
+      ],
+      "range": [
+        "ProcessEpisode"
+      ],
+      "meaning": "The source describes consultation, separately from negotiation membership or decision-making authority.",
+      "required_qualifiers": []
+    },
+    {
+      "id": "described_as_representing",
+      "label": "described as representing",
+      "kind": "political_domain",
+      "domain": [
+        "PublicActor"
+      ],
+      "range": [
+        "ConstituencyReference"
+      ],
+      "meaning": "A particular source’s representation claim; no automatic claim of legitimacy, consent or exhaustive representation.",
+      "required_qualifiers": [
+        "constituency_basis",
+        "representation_scope"
+      ]
+    },
+    {
+      "id": "explicitly_references_instrument",
+      "label": "explicitly references instrument",
+      "kind": "documentary",
+      "domain": [
+        "Document"
+      ],
+      "range": [
+        "LegalInstrument"
+      ],
+      "meaning": "An explicit document citation, not amendment, legal precedence or implementation.",
+      "required_qualifiers": []
+    },
+    {
+      "id": "facilitates",
+      "label": "facilitates",
+      "kind": "political_domain",
+      "domain": [
+        "PublicActor"
+      ],
+      "range": [
+        "PoliticalProcess",
+        "ProcessEpisode"
+      ],
+      "meaning": "A documented facilitation role, distinct from mediation, convening or participation.",
+      "required_qualifiers": [
+        "role_basis"
+      ]
+    }
+  ],
+  "standards": [
+    {
+      "name": "PROV-O",
+      "url": "https://www.w3.org/TR/prov-o/",
+      "use": "Provenance of records, collection and review, not political influence."
+    },
+    {
+      "name": "SKOS",
+      "url": "https://www.w3.org/TR/skos-reference/",
+      "use": "Controlled analytical concepts, not entity identity."
+    },
+    {
+      "name": "Dublin Core Terms",
+      "url": "https://www.dublincore.org/specifications/dublin-core/dcmi-terms/",
+      "use": "Source document metadata, not political mediation."
+    },
+    {
+      "name": "JSON-LD 1.1",
+      "url": "https://www.w3.org/TR/json-ld11/",
+      "use": "Offline, inline-context RDF statement reification with country-qualified identifiers."
+    }
+  ],
+  "export_policy": "Political relationships are qualified assertions. JSON-LD names RDF statements without emitting their unqualified political triples."
+}

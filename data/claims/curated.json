@@ -241,5 +241,138 @@
     "source_published_on": "2026-08-04",
     "independence_assessment": null,
     "checked_on": "2026-11-02"
+  },
+  {
+    "id": "claim-nawa-civil-registration",
+    "statement": "UNHCR reported that rehabilitation of civil-registry centres in Nawa and Haran Al-Awamid had commenced, with improved access to documentation as the stated aim.",
+    "theme": "civilian protection",
+    "evidence": [
+      {
+        "document_id": "doc-c0031518de25cb59",
+        "locator": "PDF p.2",
+        "original_passage": null,
+        "passage_note": "Attributed editorial paraphrase; no verbatim passage included."
+      }
+    ],
+    "place_ids": [
+      "area-nawa-civil-registration"
+    ],
+    "review_state": "curated_paraphrase",
+    "geographic_scope": "Town named in a two-location civil-registry rehabilitation update.",
+    "qualification": "The Nawa point identifies the town, not the registry building. The source does not establish completion or present opening hours.",
+    "reporting_period": {
+      "start": "2026-08-01",
+      "end": "2026-08-31",
+      "label": "August 2026"
+    },
+    "source_published_on": "2026-09-29",
+    "independence_assessment": null,
+    "checked_on": "2026-11-02"
+  },
+  {
+    "id": "claim-hasakeh-legal-outreach",
+    "statement": "UNHCR reported legal counselling and awareness work particularly in Al-Hasakeh and Ar-Raqqa in connection with a nationality-documentation programme.",
+    "theme": "civilian protection",
+    "evidence": [
+      {
+        "document_id": "doc-cf08e229dff034c3",
+        "locator": "PDF p.4",
+        "original_passage": null,
+        "passage_note": "Attributed editorial paraphrase; no verbatim passage included."
+      }
+    ],
+    "place_ids": [
+      "area-hasakeh-legal-outreach"
+    ],
+    "review_state": "curated_paraphrase",
+    "geographic_scope": "Governorate-level outreach; point near the governorate capital represents the wider area.",
+    "qualification": "The narrative does not assign programme-wide counts exclusively to Al-Hasakeh. It is not current legal advice or proof of an individual’s eligibility.",
+    "reporting_period": {
+      "start": "2026-01-01",
+      "end": "2026-09-30",
+      "label": "PDF header January–September 2026; third-quarter narrative, with year-to-date metrics."
+    },
+    "source_published_on": "2026-11-02",
+    "independence_assessment": null,
+    "checked_on": "2026-11-02"
+  },
+  {
+    "id": "claim-qamishli-community-accountability",
+    "statement": "UNHCR reported training in Qamishli and Ar-Raqqa on engagement with affected communities and feedback and complaints mechanisms.",
+    "theme": "civilian protection",
+    "evidence": [
+      {
+        "document_id": "doc-dc64b0d98ec3337d",
+        "locator": "PDF p.2",
+        "original_passage": null,
+        "passage_note": "Attributed editorial paraphrase; no verbatim passage included."
+      }
+    ],
+    "place_ids": [
+      "area-qamishli-community-accountability"
+    ],
+    "review_state": "curated_paraphrase",
+    "geographic_scope": "Qamishli named alongside Ar-Raqqa in a combined training update; exact venue is not provided.",
+    "qualification": "This shares its activity and source with the existing Ar-Raqqa anchor; the two points must not duplicate combined totals.",
+    "reporting_period": {
+      "start": "2026-09-01",
+      "end": "2026-09-30"
+    },
+    "source_published_on": "2026-10-20",
+    "independence_assessment": null,
+    "checked_on": "2026-11-02"
+  },
+  {
+    "id": "claim-douma-community-protection",
+    "statement": "The protection factsheet lists a Douma initiative to create a centre for children with autism and Down syndrome among selected community-organization projects.",
+    "theme": "civilian protection",
+    "evidence": [
+      {
+        "document_id": "doc-cf08e229dff034c3",
+        "locator": "PDF p.2",
+        "original_passage": null,
+        "passage_note": "Attributed editorial paraphrase; no verbatim passage included."
+      }
+    ],
+    "place_ids": [
+      "area-douma-community-protection"
+    ],
+    "review_state": "curated_paraphrase",
+    "geographic_scope": "Town named among community-organization initiative examples.",
+    "qualification": "The point locates Douma for reading the report. It does not identify a facility or establish present availability of a service.",
+    "reporting_period": {
+      "start": "2026-01-01",
+      "end": "2026-09-30",
+      "label": "PDF header January–September 2026; third-quarter narrative, with year-to-date metrics."
+    },
+    "source_published_on": "2026-11-02",
+    "independence_assessment": null,
+    "checked_on": "2026-11-02"
+  },
+  {
+    "id": "claim-al-bab-vocational-rehabilitation",
+    "statement": "UNHCR reported that it and Première Urgence Internationale had started rehabilitation of the Al-Bab Vocational Training Centre after preparatory assessments.",
+    "theme": "humanitarian",
+    "evidence": [
+      {
+        "document_id": "doc-dc64b0d98ec3337d",
+        "locator": "PDF p.3",
+        "original_passage": null,
+        "passage_note": "Attributed editorial paraphrase; no verbatim passage included."
+      }
+    ],
+    "place_ids": [
+      "area-al-bab-vocational-rehabilitation"
+    ],
+    "review_state": "curated_paraphrase",
+    "geographic_scope": "Town named in a vocational-training rehabilitation update.",
+    "qualification": "The town point is not a facility geotag. Expected livelihood benefits are aims, not measured employment outcomes.",
+    "reporting_period": {
+      "start": "2026-09-01",
+      "end": "2026-09-30"
+    },
+    "source_published_on": "2026-10-20",
+    "independence_assessment": null,
+    "checked_on": "2026-11-02"
   }
 ]

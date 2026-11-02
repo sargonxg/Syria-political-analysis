@@ -1,0 +1,1529 @@
+{
+  "@context": {
+    "policy": "urn:policy-analysis:ontology:core:",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "urn:policy-analysis:ontology:core:SourceProfile",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Source Profile",
+      "rdfs:comment": "A documented publishing identity and collection profile.",
+      "rdfs:subClassOf": []
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:Document",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Document",
+      "rdfs:comment": "A particular public source resource or version.",
+      "rdfs:subClassOf": []
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:DocumentReceipt",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Document Receipt",
+      "rdfs:comment": "The locally created metadata record and collection history.",
+      "rdfs:subClassOf": []
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:LegalInstrument",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Legal Instrument",
+      "rdfs:comment": "A source-identified resolution, agreement or other instrument.",
+      "rdfs:subClassOf": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:Document"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:PublicActor",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Public Actor",
+      "rdfs:comment": "A source-identified public institution, organization or professional public person.",
+      "rdfs:subClassOf": []
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:PoliticalProcess",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Political Process",
+      "rdfs:comment": "A documented process reference with explicit geographic and temporal scope.",
+      "rdfs:subClassOf": []
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:ProcessEpisode",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Process Episode",
+      "rdfs:comment": "A proposed, announced or reported meeting, consultation or negotiation episode.",
+      "rdfs:subClassOf": []
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:NormativeObjective",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Normative Objective",
+      "rdfs:comment": "An aim, requested action or proposed arrangement expressed by a document.",
+      "rdfs:subClassOf": []
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:Assertion",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Assertion",
+      "rdfs:comment": "An attributed statement or assessment, optionally with a subject/predicate/object structure.",
+      "rdfs:subClassOf": []
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:EvidenceLink",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Evidence Link",
+      "rdfs:comment": "A document and locator tied to a particular assertion, with a stated evidence relationship.",
+      "rdfs:subClassOf": []
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:ReviewActivity",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Review Activity",
+      "rdfs:comment": "A collection, annotation, extraction or review operation.",
+      "rdfs:subClassOf": []
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:ReviewDecision",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Review Decision",
+      "rdfs:comment": "A versioned record of a review outcome and rationale.",
+      "rdfs:subClassOf": []
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:Concept",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Concept",
+      "rdfs:comment": "A controlled analytical term, distinct from a person, institution, place or event.",
+      "rdfs:subClassOf": []
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:PlaceReference",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Place Reference",
+      "rdfs:comment": "A named geographic scope, with optional existing navigation anchor.",
+      "rdfs:subClassOf": []
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:InstitutionOrOrganization",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Institution or organization",
+      "rdfs:comment": "A source-identified public institution or organization.",
+      "rdfs:subClassOf": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:PublicActor"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:PublicPerson",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Public person",
+      "rdfs:comment": "A public professional actor identified in a source.",
+      "rdfs:subClassOf": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:PublicActor"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:ConstituencyReference",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Constituency reference",
+      "rdfs:comment": "A constituency as described by a particular source.",
+      "rdfs:subClassOf": []
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:published_by",
+      "@type": "rdf:Property",
+      "rdfs:label": "published by",
+      "rdfs:comment": "The publishing entity of a source document. The legacy evidence graph uses the inverse source-to-document direction.",
+      "policy:allowedDomainType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:Document"
+        }
+      ],
+      "policy:allowedRangeType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:SourceProfile"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:has_subject",
+      "@type": "rdf:Property",
+      "rdfs:label": "has subject",
+      "rdfs:comment": "Curated subject annotation.",
+      "policy:allowedDomainType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:Document"
+        },
+        {
+          "@id": "urn:policy-analysis:ontology:core:Assertion"
+        }
+      ],
+      "policy:allowedRangeType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:Concept"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:supported_by",
+      "@type": "rdf:Property",
+      "rdfs:label": "supported by",
+      "rdfs:comment": "A qualified source relationship, not a bare claim of truth.",
+      "policy:allowedDomainType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:Assertion"
+        }
+      ],
+      "policy:allowedRangeType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:EvidenceLink"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:requests",
+      "@type": "rdf:Property",
+      "rdfs:label": "requests",
+      "rdfs:comment": "The instrument explicitly requests an action; retain addressee and exact source verb.",
+      "policy:allowedDomainType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:LegalInstrument"
+        }
+      ],
+      "policy:allowedRangeType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:NormativeObjective"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:expresses_support_for",
+      "@type": "rdf:Property",
+      "rdfs:label": "expresses support for",
+      "rdfs:comment": "Support expressed in the document; does not assert implementation.",
+      "policy:allowedDomainType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:LegalInstrument"
+        }
+      ],
+      "policy:allowedRangeType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:NormativeObjective"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:calls_for",
+      "@type": "rdf:Property",
+      "rdfs:label": "calls for",
+      "rdfs:comment": "Use only when this accurately represents the source wording; do not normalize every diplomatic verb to calls_for.",
+      "policy:allowedDomainType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:Document"
+        }
+      ],
+      "policy:allowedRangeType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:NormativeObjective"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:has_documented_mandate",
+      "@type": "rdf:Property",
+      "rdfs:label": "has documented mandate",
+      "rdfs:comment": "Evidence describes a role/mandate, with the instrument and time scope retained.",
+      "policy:allowedDomainType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:PublicActor"
+        }
+      ],
+      "policy:allowedRangeType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:LegalInstrument"
+        },
+        {
+          "@id": "urn:policy-analysis:ontology:core:Document"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:convenes",
+      "@type": "rdf:Property",
+      "rdfs:label": "convenes",
+      "rdfs:comment": "Source reports actual convening; a request to convene belongs in requests instead.",
+      "policy:allowedDomainType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:PublicActor"
+        }
+      ],
+      "policy:allowedRangeType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:ProcessEpisode"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:mediates",
+      "@type": "rdf:Property",
+      "rdfs:label": "mediates",
+      "rdfs:comment": "A source describes a specific mediation role; distinguish the mandate, acceptance by parties and reported activity.",
+      "policy:allowedDomainType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:PublicActor"
+        }
+      ],
+      "policy:allowedRangeType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:PoliticalProcess"
+        },
+        {
+          "@id": "urn:policy-analysis:ontology:core:ProcessEpisode"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:invited_to",
+      "@type": "rdf:Property",
+      "rdfs:label": "invited to",
+      "rdfs:comment": "An evidenced invitation, not proof of attendance.",
+      "policy:allowedDomainType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:PublicActor"
+        }
+      ],
+      "policy:allowedRangeType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:ProcessEpisode"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:participates_in",
+      "@type": "rdf:Property",
+      "rdfs:label": "participates in",
+      "rdfs:comment": "Participation is documented; role, date and source retained. Attendance does not establish representation of a population.",
+      "policy:allowedDomainType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:PublicActor"
+        }
+      ],
+      "policy:allowedRangeType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:ProcessEpisode"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:consulted_in",
+      "@type": "rdf:Property",
+      "rdfs:label": "consulted in",
+      "rdfs:comment": "The source describes consultation, separately from negotiation membership or decision-making authority.",
+      "policy:allowedDomainType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:PublicActor"
+        }
+      ],
+      "policy:allowedRangeType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:ProcessEpisode"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:described_as_representing",
+      "@type": "rdf:Property",
+      "rdfs:label": "described as representing",
+      "rdfs:comment": "A particular source’s representation claim; no automatic claim of legitimacy, consent or exhaustive representation.",
+      "policy:allowedDomainType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:PublicActor"
+        }
+      ],
+      "policy:allowedRangeType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:ConstituencyReference"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:explicitly_references_instrument",
+      "@type": "rdf:Property",
+      "rdfs:label": "explicitly references instrument",
+      "rdfs:comment": "An explicit document citation, not amendment, legal precedence or implementation.",
+      "policy:allowedDomainType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:Document"
+        }
+      ],
+      "policy:allowedRangeType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:LegalInstrument"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:ontology:core:facilitates",
+      "@type": "rdf:Property",
+      "rdfs:label": "facilitates",
+      "rdfs:comment": "A documented facilitation role, distinct from mediation, convening or participation.",
+      "policy:allowedDomainType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:PublicActor"
+        }
+      ],
+      "policy:allowedRangeType": [
+        {
+          "@id": "urn:policy-analysis:ontology:core:PoliticalProcess"
+        },
+        {
+          "@id": "urn:policy-analysis:ontology:core:ProcessEpisode"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:SY:entity:instrument-unsc-2254-2015",
+      "@type": "policy:LegalInstrument",
+      "rdfs:label": "Security Council resolution 2254 (2015)",
+      "policy:identityEvidence": [
+        {
+          "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:SY:entity:objective-norm-2254-op2-convening",
+      "@type": "policy:NormativeObjective",
+      "rdfs:label": "Convening formal negotiations on political transition",
+      "policy:identityEvidence": [
+        {
+          "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:SY:entity:objective-norm-2254-op4-process",
+      "@type": "policy:NormativeObjective",
+      "rdfs:label": "A Syrian-led political process facilitated by the United Nations",
+      "policy:identityEvidence": [
+        {
+          "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:SY:entity:objective-norm-2254-op4-governance",
+      "@type": "policy:NormativeObjective",
+      "rdfs:label": "Credible, inclusive and non-sectarian governance",
+      "policy:identityEvidence": [
+        {
+          "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:SY:entity:objective-norm-2254-op4-constitution",
+      "@type": "policy:NormativeObjective",
+      "rdfs:label": "A schedule and process for drafting a new constitution",
+      "policy:identityEvidence": [
+        {
+          "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:SY:entity:objective-norm-2254-op4-elections",
+      "@type": "policy:NormativeObjective",
+      "rdfs:label": "Free and fair elections pursuant to a new constitution",
+      "policy:identityEvidence": [
+        {
+          "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:SY:entity:objective-norm-2254-op5-ceasefire",
+      "@type": "policy:NormativeObjective",
+      "rdfs:label": "A nationwide ceasefire linked to steps toward political transition",
+      "policy:identityEvidence": [
+        {
+          "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+        }
+      ]
+    },
+    {
+      "@id": "https://digitallibrary.un.org/record/814715",
+      "@type": [
+        "policy:Document",
+        "prov:Entity"
+      ],
+      "dcterms:title": "Resolution 2254 (2015), adopted by the Security Council on 18 December 2015",
+      "dcterms:issued": {
+        "@value": "2015-12-18",
+        "@type": "xsd:date"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88",
+      "@type": [
+        "policy:DocumentReceipt",
+        "prov:Entity"
+      ],
+      "dcterms:identifier": "doc-83ad8cbb868c0c88",
+      "dcterms:source": {
+        "@id": "https://digitallibrary.un.org/record/814715"
+      },
+      "prov:wasDerivedFrom": {
+        "@id": "https://digitallibrary.un.org/record/814715"
+      },
+      "policy:retrievedAt": {
+        "@value": "2026-11-02T16:05:37.068108Z",
+        "@type": "xsd:dateTime"
+      },
+      "policy:retrievalMethod": "curated_source_metadata"
+    },
+    {
+      "@id": "urn:policy-analysis:SY:evidence:norm-2254-op2-convening-0",
+      "@type": "policy:EvidenceLink",
+      "dcterms:source": {
+        "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+      },
+      "policy:locator": "Operative paragraph 2, printed page 2/4",
+      "policy:evidenceRelation": "supports_paraphrase"
+    },
+    {
+      "@id": "urn:policy-analysis:SY:assertion:norm-2254-op2-convening",
+      "@type": [
+        "rdf:Statement",
+        "prov:Entity",
+        "policy:Assertion"
+      ],
+      "rdf:subject": {
+        "@id": "urn:policy-analysis:SY:entity:instrument-unsc-2254-2015"
+      },
+      "rdf:predicate": {
+        "@id": "urn:policy-analysis:ontology:core:requests"
+      },
+      "rdf:object": {
+        "@id": "urn:policy-analysis:SY:entity:objective-norm-2254-op2-convening"
+      },
+      "dcterms:description": "In operative paragraph 2, the Council requests the Secretary-General, through his good offices and the efforts of his Special Envoy for Syria, to convene representatives for formal negotiations on political transition.",
+      "policy:attribution": "United Nations Security Council, in resolution 2254 (2015)",
+      "policy:modality": "normative_expression",
+      "policy:sourceVerb": "requests",
+      "policy:implementationAsserted": false,
+      "policy:sourceStatementOn": {
+        "@value": "2015-12-18",
+        "@type": "xsd:date"
+      },
+      "policy:temporalScope": {
+        "@value": {
+          "kind": "document_expression_at_adoption",
+          "source_statement_on": "2015-12-18",
+          "implementation_period_verified": false,
+          "source_target_expression": "Target of early January 2016 for the initiation of talks; source wording retained without calculating a new deadline.",
+          "current_applicability_assessed": false
+        },
+        "@type": "@json"
+      },
+      "policy:reviewState": "needs_source_check",
+      "policy:humanReviewRecorded": false,
+      "policy:countryCode": "SY",
+      "policy:roleContext": {
+        "@value": {
+          "requested_actor": "Secretary-General",
+          "means_described": "His good offices and the efforts of his Special Envoy for Syria",
+          "participants_as_described_in_2015": "Representatives of the Syrian government and the opposition"
+        },
+        "@type": "@json"
+      },
+      "policy:qualifiers": {
+        "@value": {},
+        "@type": "@json"
+      },
+      "policy:geographicScope": {
+        "@value": {
+          "country_pack": "sy",
+          "level": "national normative objective in the 2015 instrument",
+          "map_geometry": null,
+          "note": "No territorial-control or present-implementation claim."
+        },
+        "@type": "@json"
+      },
+      "policy:qualification": [
+        "The request is dated 18 December 2015. It does not establish that talks occurred or that particular representatives hold a present mandate."
+      ],
+      "policy:evidence": [
+        {
+          "@id": "urn:policy-analysis:SY:evidence:norm-2254-op2-convening-0"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+        }
+      ],
+      "dcterms:subject": [
+        {
+          "@id": "urn:policy-analysis:SY:concept:good-offices"
+        },
+        {
+          "@id": "urn:policy-analysis:SY:concept:formal-negotiations"
+        },
+        {
+          "@id": "urn:policy-analysis:SY:concept:political-process"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:SY:evidence:norm-2254-op4-process-0",
+      "@type": "policy:EvidenceLink",
+      "dcterms:source": {
+        "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+      },
+      "policy:locator": "Operative paragraph 4, printed page 2/4",
+      "policy:evidenceRelation": "supports_paraphrase"
+    },
+    {
+      "@id": "urn:policy-analysis:SY:assertion:norm-2254-op4-process",
+      "@type": [
+        "rdf:Statement",
+        "prov:Entity",
+        "policy:Assertion"
+      ],
+      "rdf:subject": {
+        "@id": "urn:policy-analysis:SY:entity:instrument-unsc-2254-2015"
+      },
+      "rdf:predicate": {
+        "@id": "urn:policy-analysis:ontology:core:expresses_support_for"
+      },
+      "rdf:object": {
+        "@id": "urn:policy-analysis:SY:entity:objective-norm-2254-op4-process"
+      },
+      "dcterms:description": "Operative paragraph 4 expresses support for a Syrian-led political process facilitated by the United Nations.",
+      "policy:attribution": "United Nations Security Council, in resolution 2254 (2015)",
+      "policy:modality": "normative_expression",
+      "policy:sourceVerb": "expresses its support for",
+      "policy:implementationAsserted": false,
+      "policy:sourceStatementOn": {
+        "@value": "2015-12-18",
+        "@type": "xsd:date"
+      },
+      "policy:temporalScope": {
+        "@value": {
+          "kind": "document_expression_at_adoption",
+          "source_statement_on": "2015-12-18",
+          "implementation_period_verified": false,
+          "source_target_expression": null,
+          "current_applicability_assessed": false
+        },
+        "@type": "@json"
+      },
+      "policy:reviewState": "needs_source_check",
+      "policy:humanReviewRecorded": false,
+      "policy:countryCode": "SY",
+      "policy:roleContext": {
+        "@value": null,
+        "@type": "@json"
+      },
+      "policy:qualifiers": {
+        "@value": {},
+        "@type": "@json"
+      },
+      "policy:geographicScope": {
+        "@value": {
+          "country_pack": "sy",
+          "level": "national normative objective in the 2015 instrument",
+          "map_geometry": null,
+          "note": "No territorial-control or present-implementation claim."
+        },
+        "@type": "@json"
+      },
+      "policy:qualification": [
+        "This is the Council’s expressed support in the 2015 instrument, not a description of a current operating process."
+      ],
+      "policy:evidence": [
+        {
+          "@id": "urn:policy-analysis:SY:evidence:norm-2254-op4-process-0"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+        }
+      ],
+      "dcterms:subject": [
+        {
+          "@id": "urn:policy-analysis:SY:concept:political-process"
+        },
+        {
+          "@id": "urn:policy-analysis:SY:concept:syrian-led-owned"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:SY:evidence:norm-2254-op4-governance-0",
+      "@type": "policy:EvidenceLink",
+      "dcterms:source": {
+        "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+      },
+      "policy:locator": "Operative paragraph 4, printed page 2/4",
+      "policy:evidenceRelation": "supports_paraphrase"
+    },
+    {
+      "@id": "urn:policy-analysis:SY:assertion:norm-2254-op4-governance",
+      "@type": [
+        "rdf:Statement",
+        "prov:Entity",
+        "policy:Assertion"
+      ],
+      "rdf:subject": {
+        "@id": "urn:policy-analysis:SY:entity:instrument-unsc-2254-2015"
+      },
+      "rdf:predicate": {
+        "@id": "urn:policy-analysis:ontology:core:expresses_support_for"
+      },
+      "rdf:object": {
+        "@id": "urn:policy-analysis:SY:entity:objective-norm-2254-op4-governance"
+      },
+      "dcterms:description": "Within the process described in operative paragraph 4, the Council expresses support for establishing credible, inclusive and non-sectarian governance.",
+      "policy:attribution": "United Nations Security Council, in resolution 2254 (2015)",
+      "policy:modality": "normative_expression",
+      "policy:sourceVerb": "expresses its support for",
+      "policy:implementationAsserted": false,
+      "policy:sourceStatementOn": {
+        "@value": "2015-12-18",
+        "@type": "xsd:date"
+      },
+      "policy:temporalScope": {
+        "@value": {
+          "kind": "document_expression_at_adoption",
+          "source_statement_on": "2015-12-18",
+          "implementation_period_verified": false,
+          "source_target_expression": "Within a target of six months, as stated in operative paragraph 4; no implementation date or outcome is inferred.",
+          "current_applicability_assessed": false
+        },
+        "@type": "@json"
+      },
+      "policy:reviewState": "needs_source_check",
+      "policy:humanReviewRecorded": false,
+      "policy:countryCode": "SY",
+      "policy:roleContext": {
+        "@value": null,
+        "@type": "@json"
+      },
+      "policy:qualifiers": {
+        "@value": {},
+        "@type": "@json"
+      },
+      "policy:geographicScope": {
+        "@value": {
+          "country_pack": "sy",
+          "level": "national normative objective in the 2015 instrument",
+          "map_geometry": null,
+          "note": "No territorial-control or present-implementation claim."
+        },
+        "@type": "@json"
+      },
+      "policy:qualification": [
+        "This objective belongs to the process supported in the paragraph; no governance arrangement is asserted to have been established."
+      ],
+      "policy:evidence": [
+        {
+          "@id": "urn:policy-analysis:SY:evidence:norm-2254-op4-governance-0"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+        }
+      ],
+      "dcterms:subject": [
+        {
+          "@id": "urn:policy-analysis:SY:concept:governance"
+        },
+        {
+          "@id": "urn:policy-analysis:SY:concept:inclusion"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:SY:evidence:norm-2254-op4-constitution-0",
+      "@type": "policy:EvidenceLink",
+      "dcterms:source": {
+        "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+      },
+      "policy:locator": "Operative paragraph 4, printed page 2/4",
+      "policy:evidenceRelation": "supports_paraphrase"
+    },
+    {
+      "@id": "urn:policy-analysis:SY:assertion:norm-2254-op4-constitution",
+      "@type": [
+        "rdf:Statement",
+        "prov:Entity",
+        "policy:Assertion"
+      ],
+      "rdf:subject": {
+        "@id": "urn:policy-analysis:SY:entity:instrument-unsc-2254-2015"
+      },
+      "rdf:predicate": {
+        "@id": "urn:policy-analysis:ontology:core:expresses_support_for"
+      },
+      "rdf:object": {
+        "@id": "urn:policy-analysis:SY:entity:objective-norm-2254-op4-constitution"
+      },
+      "dcterms:description": "Within the same supported process, operative paragraph 4 envisages setting a schedule and process for drafting a new constitution.",
+      "policy:attribution": "United Nations Security Council, in resolution 2254 (2015)",
+      "policy:modality": "normative_expression",
+      "policy:sourceVerb": "expresses its support for",
+      "policy:implementationAsserted": false,
+      "policy:sourceStatementOn": {
+        "@value": "2015-12-18",
+        "@type": "xsd:date"
+      },
+      "policy:temporalScope": {
+        "@value": {
+          "kind": "document_expression_at_adoption",
+          "source_statement_on": "2015-12-18",
+          "implementation_period_verified": false,
+          "source_target_expression": "Within a target of six months applies to the process language in the paragraph; no adopted timetable is asserted.",
+          "current_applicability_assessed": false
+        },
+        "@type": "@json"
+      },
+      "policy:reviewState": "needs_source_check",
+      "policy:humanReviewRecorded": false,
+      "policy:countryCode": "SY",
+      "policy:roleContext": {
+        "@value": null,
+        "@type": "@json"
+      },
+      "policy:qualifiers": {
+        "@value": {},
+        "@type": "@json"
+      },
+      "policy:geographicScope": {
+        "@value": {
+          "country_pack": "sy",
+          "level": "national normative objective in the 2015 instrument",
+          "map_geometry": null,
+          "note": "No territorial-control or present-implementation claim."
+        },
+        "@type": "@json"
+      },
+      "policy:qualification": [
+        "The object is the proposed schedule and drafting process, not an adopted constitution."
+      ],
+      "policy:evidence": [
+        {
+          "@id": "urn:policy-analysis:SY:evidence:norm-2254-op4-constitution-0"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+        }
+      ],
+      "dcterms:subject": [
+        {
+          "@id": "urn:policy-analysis:SY:concept:constitutional-process"
+        },
+        {
+          "@id": "urn:policy-analysis:SY:concept:political-process"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:SY:evidence:norm-2254-op4-elections-0",
+      "@type": "policy:EvidenceLink",
+      "dcterms:source": {
+        "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+      },
+      "policy:locator": "Operative paragraph 4, printed page 2/4",
+      "policy:evidenceRelation": "supports_paraphrase"
+    },
+    {
+      "@id": "urn:policy-analysis:SY:assertion:norm-2254-op4-elections",
+      "@type": [
+        "rdf:Statement",
+        "prov:Entity",
+        "policy:Assertion"
+      ],
+      "rdf:subject": {
+        "@id": "urn:policy-analysis:SY:entity:instrument-unsc-2254-2015"
+      },
+      "rdf:predicate": {
+        "@id": "urn:policy-analysis:ontology:core:expresses_support_for"
+      },
+      "rdf:object": {
+        "@id": "urn:policy-analysis:SY:entity:objective-norm-2254-op4-elections"
+      },
+      "dcterms:description": "Operative paragraph 4 further expresses support for free and fair elections pursuant to a new constitution, under United Nations supervision, with participation including the diaspora.",
+      "policy:attribution": "United Nations Security Council, in resolution 2254 (2015)",
+      "policy:modality": "normative_expression",
+      "policy:sourceVerb": "expresses its support for",
+      "policy:implementationAsserted": false,
+      "policy:sourceStatementOn": {
+        "@value": "2015-12-18",
+        "@type": "xsd:date"
+      },
+      "policy:temporalScope": {
+        "@value": {
+          "kind": "document_expression_at_adoption",
+          "source_statement_on": "2015-12-18",
+          "implementation_period_verified": false,
+          "source_target_expression": "To be held within 18 months, as stated in the source; no new deadline or current election date is calculated.",
+          "current_applicability_assessed": false
+        },
+        "@type": "@json"
+      },
+      "policy:reviewState": "needs_source_check",
+      "policy:humanReviewRecorded": false,
+      "policy:countryCode": "SY",
+      "policy:roleContext": {
+        "@value": null,
+        "@type": "@json"
+      },
+      "policy:qualifiers": {
+        "@value": {},
+        "@type": "@json"
+      },
+      "policy:geographicScope": {
+        "@value": {
+          "country_pack": "sy",
+          "level": "national normative objective in the 2015 instrument",
+          "map_geometry": null,
+          "note": "No territorial-control or present-implementation claim."
+        },
+        "@type": "@json"
+      },
+      "policy:qualification": [
+        "The paragraph also specifies transparency and accountability standards.",
+        "Eligibility and supervision are objectives in the 2015 text, not statements of present electoral law or arrangements."
+      ],
+      "policy:evidence": [
+        {
+          "@id": "urn:policy-analysis:SY:evidence:norm-2254-op4-elections-0"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+        }
+      ],
+      "dcterms:subject": [
+        {
+          "@id": "urn:policy-analysis:SY:concept:electoral-process"
+        },
+        {
+          "@id": "urn:policy-analysis:SY:concept:inclusion"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:SY:evidence:norm-2254-op5-ceasefire-0",
+      "@type": "policy:EvidenceLink",
+      "dcterms:source": {
+        "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+      },
+      "policy:locator": "Operative paragraph 5, printed page 3/4",
+      "policy:evidenceRelation": "supports_paraphrase"
+    },
+    {
+      "@id": "urn:policy-analysis:SY:assertion:norm-2254-op5-ceasefire",
+      "@type": [
+        "rdf:Statement",
+        "prov:Entity",
+        "policy:Assertion"
+      ],
+      "rdf:subject": {
+        "@id": "urn:policy-analysis:SY:entity:instrument-unsc-2254-2015"
+      },
+      "rdf:predicate": {
+        "@id": "urn:policy-analysis:ontology:core:expresses_support_for"
+      },
+      "rdf:object": {
+        "@id": "urn:policy-analysis:SY:entity:objective-norm-2254-op5-ceasefire"
+      },
+      "dcterms:description": "Operative paragraph 5 expresses support for a nationwide ceasefire, linked in the text to initial steps by representatives toward a political transition under United Nations auspices.",
+      "policy:attribution": "United Nations Security Council, in resolution 2254 (2015)",
+      "policy:modality": "normative_expression",
+      "policy:sourceVerb": "expresses its support for",
+      "policy:implementationAsserted": false,
+      "policy:sourceStatementOn": {
+        "@value": "2015-12-18",
+        "@type": "xsd:date"
+      },
+      "policy:temporalScope": {
+        "@value": {
+          "kind": "document_expression_at_adoption",
+          "source_statement_on": "2015-12-18",
+          "implementation_period_verified": false,
+          "source_target_expression": "To come into effect as soon as the described initial steps toward a political transition begin; this is a condition in the 2015 document.",
+          "current_applicability_assessed": false
+        },
+        "@type": "@json"
+      },
+      "policy:reviewState": "needs_source_check",
+      "policy:humanReviewRecorded": false,
+      "policy:countryCode": "SY",
+      "policy:roleContext": {
+        "@value": null,
+        "@type": "@json"
+      },
+      "policy:qualifiers": {
+        "@value": {},
+        "@type": "@json"
+      },
+      "policy:geographicScope": {
+        "@value": {
+          "country_pack": "sy",
+          "level": "national normative objective in the 2015 instrument",
+          "map_geometry": null,
+          "note": "No territorial-control or present-implementation claim."
+        },
+        "@type": "@json"
+      },
+      "policy:qualification": [
+        "The source’s conditional linkage is retained. No ceasefire in force, current party commitment or present compliance is asserted."
+      ],
+      "policy:evidence": [
+        {
+          "@id": "urn:policy-analysis:SY:evidence:norm-2254-op5-ceasefire-0"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "urn:policy-analysis:SY:document:doc-83ad8cbb868c0c88"
+        }
+      ],
+      "dcterms:subject": [
+        {
+          "@id": "urn:policy-analysis:SY:concept:political-process"
+        }
+      ]
+    },
+    {
+      "@id": "urn:policy-analysis:SY:scheme:1.0.0",
+      "@type": "skos:ConceptScheme",
+      "dcterms:title": "Syria political research vocabulary"
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:political-process",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Political process",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "An analytical category for documented efforts toward a political arrangement; not proof that one is operating.",
+      "skos:broader": [],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "unsc-2254",
+          "locator": "Operative paragraphs 1–4.",
+          "url": "https://digitallibrary.un.org/record/814715",
+          "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://digitallibrary.un.org/record/814715"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:syrian-led-owned",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Syrian-led and Syrian-owned process",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "A Syria-specific formulation retained as historical document language.",
+      "skos:broader": [
+        {
+          "@id": "urn:policy-analysis:SY:concept:political-process"
+        }
+      ],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "unsc-2254",
+          "locator": "Operative paragraphs 1 and 4.",
+          "url": "https://digitallibrary.un.org/record/814715",
+          "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://digitallibrary.un.org/record/814715"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:good-offices",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Good offices",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "A facilitative role; identify the particular mandate or action being described.",
+      "skos:broader": [],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "unsc-2254",
+          "locator": "Operative paragraph 2.",
+          "url": "https://digitallibrary.un.org/record/814715",
+          "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://digitallibrary.un.org/record/814715"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:mediation",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Mediation",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "A separately evidenced role in a political process; do not infer mediation from contact, attendance or facilitation.",
+      "skos:broader": [],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "ose-civil-society",
+          "locator": "Indexed institutional description of political and mediation processes.",
+          "url": "https://specialenvoysyria.unmissions.org/en/civil-society-support-room",
+          "verification": "First-party indexed text describes civil-society consultation and engagement. Direct retrieval returned 403. Do not infer present membership or operating status."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://specialenvoysyria.unmissions.org/en/civil-society-support-room"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:formal-negotiations",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Formal negotiations",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "A source-described negotiation process; invitations, attendance and agreements are distinct observations.",
+      "skos:broader": [
+        {
+          "@id": "urn:policy-analysis:SY:concept:political-process"
+        }
+      ],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "unsc-2254",
+          "locator": "Operative paragraph 2.",
+          "url": "https://digitallibrary.un.org/record/814715",
+          "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://digitallibrary.un.org/record/814715"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:governance",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Governance",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "A topic or stated objective, not an automatic description of governing authority.",
+      "skos:broader": [],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "unsc-2254",
+          "locator": "Operative paragraph 4.",
+          "url": "https://digitallibrary.un.org/record/814715",
+          "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://digitallibrary.un.org/record/814715"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:constitutional-process",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Constitutional process",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "Work on a constitutional schedule or text, distinguishing proposals from adopted instruments.",
+      "skos:broader": [
+        {
+          "@id": "urn:policy-analysis:SY:concept:political-process"
+        }
+      ],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "unsc-2254",
+          "locator": "Operative paragraph 4.",
+          "url": "https://digitallibrary.un.org/record/814715",
+          "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://digitallibrary.un.org/record/814715"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:electoral-process",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Electoral process",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "Elections as a documented topic, objective or event; actual timing and eligibility require separate evidence.",
+      "skos:broader": [
+        {
+          "@id": "urn:policy-analysis:SY:concept:political-process"
+        }
+      ],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "unsc-2254",
+          "locator": "Operative paragraph 4.",
+          "url": "https://digitallibrary.un.org/record/814715",
+          "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://digitallibrary.un.org/record/814715"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:inclusion",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Inclusion",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "An analytical question about participation and access; a stated aspiration is not measured inclusion.",
+      "skos:broader": [],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "unsc-2254",
+          "locator": "Preamble and operative paragraph 4.",
+          "url": "https://digitallibrary.un.org/record/814715",
+          "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://digitallibrary.un.org/record/814715"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:women-meaningful-participation",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Meaningful participation of women",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "Retain the source’s participation language; attendance alone is not a measure of meaningful influence.",
+      "skos:broader": [
+        {
+          "@id": "urn:policy-analysis:SY:concept:inclusion"
+        }
+      ],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "unsc-2254",
+          "locator": "Preamble, printed page 2, paragraph beginning Encouraging the meaningful participation of women.",
+          "url": "https://digitallibrary.un.org/record/814715",
+          "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://digitallibrary.un.org/record/814715"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:representation",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Representation",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "A claim about who speaks for whom; document source, constituency, selection basis and limits.",
+      "skos:broader": [],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "unsc-2254",
+          "locator": "Preamble on negotiation representatives; operative paragraph 2.",
+          "url": "https://digitallibrary.un.org/record/814715",
+          "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://digitallibrary.un.org/record/814715"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:civil-society",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Civil society",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "An operational reading category; organizational status does not imply neutrality or nationally representative authority.",
+      "skos:broader": [],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "ose-civil-society",
+          "locator": "Indexed page description of diverse civil-society engagement.",
+          "url": "https://specialenvoysyria.unmissions.org/en/civil-society-support-room",
+          "verification": "First-party indexed text describes civil-society consultation and engagement. Direct retrieval returned 403. Do not infer present membership or operating status."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://specialenvoysyria.unmissions.org/en/civil-society-support-room"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:consultation",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Consultation",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "A documented engagement mechanism, distinct from decision rights or formal negotiation membership.",
+      "skos:broader": [],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "ose-civil-society",
+          "locator": "Indexed description of consulting and engaging civil-society actors.",
+          "url": "https://specialenvoysyria.unmissions.org/en/civil-society-support-room",
+          "verification": "First-party indexed text describes civil-society consultation and engagement. Direct retrieval returned 403. Do not infer present membership or operating status."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://specialenvoysyria.unmissions.org/en/civil-society-support-room"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:institutional-mandate",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Institutional mandate",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "A published remit, kept distinct from implementation and capacity.",
+      "skos:broader": [],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "ose-mandate",
+          "locator": "Mandate page and repository context-political-process-mandate.",
+          "url": "https://specialenvoysyria.unmissions.org/en/osesg-syria/mandate",
+          "verification": "Repository receipt and fresh first-party indexed text checked. Direct page retrieval returned 403. Institutional self-description, not current implementation evidence."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://specialenvoysyria.unmissions.org/en/osesg-syria/mandate"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:legal-instrument",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Legal instrument",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "A local document category. The category alone establishes no present force, hierarchy or binding effect.",
+      "skos:broader": [],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "unsc-2254",
+          "locator": "Document heading, symbol and adoption metadata.",
+          "url": "https://digitallibrary.un.org/record/814715",
+          "verification": "Primary four-page English PDF downloaded and read on 2 November 2026, particularly operative paragraphs 2–5."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://digitallibrary.un.org/record/814715"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:accountability",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Accountability",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "Keep political transparency, investigative findings and judicial decisions separate.",
+      "skos:broader": [],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "coi-methodology",
+          "locator": "Section I, paragraphs 1–2; compare resolution 2254 operative paragraph 4.",
+          "url": "https://digitallibrary.un.org/record/4039851",
+          "verification": "Existing repository methodology anchor; historical reporting period July–December 2023. No current incident finding is inferred."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://digitallibrary.un.org/record/4039851"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:humanitarian-coordination",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Humanitarian coordination",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "A distinct institutional remit, not political command or mediation.",
+      "skos:broader": [],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "ocha-mission",
+          "locator": "Institutional mission paragraph.",
+          "url": "https://www.ungeneva.org/en/about/organizations/unocha",
+          "verification": "Existing repository source context; distinguishes humanitarian coordination from political mediation and investigation."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://www.ungeneva.org/en/about/organizations/unocha"
+      }
+    },
+    {
+      "@id": "urn:policy-analysis:SY:concept:facilitation",
+      "@type": "skos:Concept",
+      "skos:inScheme": {
+        "@id": "urn:policy-analysis:SY:scheme:1.0.0"
+      },
+      "skos:prefLabel": [
+        {
+          "@value": "Facilitation",
+          "@language": "en"
+        }
+      ],
+      "skos:scopeNote": "A separately evidenced process-support role, distinct from mediation and formal decision authority.",
+      "skos:broader": [],
+      "policy:terminologyBasis": {
+        "@value": {
+          "reference_id": "ose-good-offices",
+          "locator": "Page title and indexed institutional description.",
+          "url": "https://specialenvoysyria.unmissions.org/en/osesg-syria/good-offices-and-facilitation-geneva-political-process",
+          "verification": "First-party indexed page title and excerpt checked; direct retrieval returned 403. Suggested terminology reference, not an imported receipt or verified current activity."
+        },
+        "@type": "@json"
+      },
+      "dcterms:source": {
+        "@id": "https://specialenvoysyria.unmissions.org/en/osesg-syria/good-offices-and-facilitation-geneva-political-process"
+      }
+    }
+  ]
+}

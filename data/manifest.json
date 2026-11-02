@@ -6,22 +6,41 @@
   "automatic_refresh": false,
   "counts": {
     "sources": 39,
-    "documents": 21,
-    "claims": 9,
-    "places": 9,
+    "documents": 44,
+    "claims": 14,
+    "places": 14,
     "context_topics": 8,
     "verified_profile_social_links": 2,
-    "social_posts_collected": 0
+    "social_posts_collected": 0,
+    "analytical_layers": 8,
+    "coverage_references": 33,
+    "verified_rss_endpoints": 5
   },
   "provenance": "Original source profiles, attributed paraphrases and typed research questions assembled from public linked material. Publisher text and copyrighted reports are not republished.",
   "license": "MIT for code; CC BY 4.0 for original annotations and compilation; publisher rights retained for linked material.",
   "website": "https://giulio-catanzariti-atlas.sargonx6.chatgpt.site/syria",
-  "scope": "Bounded starter corpus. No claim of comprehensive or real-time coverage; no current territorial control map.",
+  "scope": "Country-extensible public-source toolkit. Syria is the current curated corpus, with eight analytical lenses, title-level coverage tags and a dated political ontology exemplar.",
   "graph": {
-    "nodes": 86,
-    "edges": 81
+    "nodes": 127,
+    "edges": 137
   },
-  "last_feed_collection_at": "2026-11-02T16:12:36.595675Z",
+  "last_feed_collection_at": "2026-11-02T17:12:14.422757Z",
+  "toolkit_version": "0.2.0",
+  "country_registry": "data/countries.json",
+  "default_country": "SY",
+  "region": "Middle East",
+  "country_extension_status": "Syria is the only curated collection; other country workspaces begin empty.",
+  "political_model": {
+    "core_version": "1.0.0",
+    "module_version": "1.0.0",
+    "classes": 17,
+    "relations": 15,
+    "concepts": 18,
+    "entities": 7,
+    "assertion_drafts": 6,
+    "human_reviews_recorded": 0,
+    "source_statement_day": "2015-12-18"
+  },
   "catalogue_input": {
     "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
     "library_version": 1,

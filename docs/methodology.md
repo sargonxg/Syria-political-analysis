@@ -28,7 +28,7 @@ Original passages in this starter dataset are `null`; attributed paraphrases mus
 
 ## Geography
 
-The nine points are approximate **regional navigation anchors**, rounded to 0.01 degree. Some stand for a city, others for a governorate or a multi-governorate region. They do not identify an incident site, facility, person or current risk. No feed title or social reference is assigned a coordinate. Do not interpret this as a travel-safety map or a tactical layer.
+The fourteen points are approximate **regional navigation anchors**, rounded to 0.01 degree. Some stand for a city, others for a governorate or a multi-governorate region. They do not identify an incident site, facility, person or current risk. No feed title or social reference is assigned a coordinate. Do not interpret this as a travel-safety map or a tactical layer.
 
 ## Time
 

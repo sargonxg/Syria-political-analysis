@@ -1,0 +1,2086 @@
+{
+  "schema_version": 1,
+  "built_at": "2026-11-02T21:18:42.760470Z",
+  "title": "Syria source-coverage sample",
+  "method": "Deterministic English/Arabic title-keyword matching with recorded matched terms. No article bodies, inferred incidents or causal influence scores.",
+  "lexicon_version": 1,
+  "topics": [
+    {
+      "id": "political-process",
+      "name": "Politics & institutions",
+      "terms": [
+        "diplomacy",
+        "political",
+        "government",
+        "minister",
+        "negotiations",
+        "الحكومة",
+        "الحكومه",
+        "التفاوض",
+        "سياسية",
+        "السياسية",
+        "رئيس"
+      ]
+    },
+    {
+      "id": "protection",
+      "name": "Protection & accountability",
+      "terms": [
+        "protection",
+        "rights",
+        "detention",
+        "civilian",
+        "accountability",
+        "اعتقالات",
+        "انتهاكات",
+        "المدني",
+        "الحماية",
+        "مخلفات الحرب"
+      ]
+    },
+    {
+      "id": "returns",
+      "name": "Displacement & return",
+      "terms": [
+        "return",
+        "returns",
+        "refugees",
+        "displacement",
+        "displaced",
+        "عودة",
+        "المهجرين",
+        "النازحين",
+        "لاجئين"
+      ]
+    },
+    {
+      "id": "services",
+      "name": "Services & recovery",
+      "terms": [
+        "water",
+        "schools",
+        "school",
+        "recovery",
+        "services",
+        "electricity",
+        "reopens",
+        "reconstruction",
+        "schools",
+        "مدارس",
+        "المياه",
+        "الكهرباء",
+        "إعمار",
+        "مشروع"
+      ]
+    },
+    {
+      "id": "economy",
+      "name": "Economy & livelihoods",
+      "terms": [
+        "economy",
+        "economic",
+        "bank",
+        "banking",
+        "financial",
+        "investment",
+        "oil",
+        "trade",
+        "statistics",
+        "الاقتصاد",
+        "اقتصادية",
+        "استثمار",
+        "المنتجات",
+        "صناعة",
+        "العقارية"
+      ]
+    },
+    {
+      "id": "regional",
+      "name": "Regional relations",
+      "terms": [
+        "Washington",
+        "Turkey",
+        "Iran",
+        "US",
+        "Israel",
+        "Israeli",
+        "Saudi",
+        "إسرائيل",
+        "الإسرائيلي",
+        "واشنطن",
+        "إيران",
+        "الإيرانية",
+        "الأميركية",
+        "الاحتلال"
+      ]
+    },
+    {
+      "id": "media",
+      "name": "Media & public debate",
+      "terms": [
+        "media",
+        "journalist",
+        "journalists",
+        "press",
+        "الصحفيين",
+        "إعلام",
+        "الصحافة",
+        "ترخيص",
+        "الاعتماد"
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "damascus",
+      "name": "Damascus",
+      "terms": [
+        "Damascus",
+        "دمشق"
+      ]
+    },
+    {
+      "id": "aleppo",
+      "name": "Aleppo",
+      "terms": [
+        "Aleppo",
+        "حلب"
+      ]
+    },
+    {
+      "id": "homs",
+      "name": "Homs",
+      "terms": [
+        "Homs",
+        "حمص"
+      ]
+    },
+    {
+      "id": "daraa",
+      "name": "Daraa",
+      "terms": [
+        "Daraa",
+        "Dera",
+        "درعا"
+      ]
+    },
+    {
+      "id": "suwayda",
+      "name": "Suwayda",
+      "terms": [
+        "Suwayda",
+        "Sweida",
+        "السويداء"
+      ]
+    },
+    {
+      "id": "coast",
+      "name": "Latakia / Tartous",
+      "terms": [
+        "Latakia",
+        "Tartous",
+        "اللاذقية",
+        "طرطوس"
+      ]
+    },
+    {
+      "id": "raqqa",
+      "name": "Raqqa",
+      "terms": [
+        "Raqqa",
+        "الرقة"
+      ]
+    },
+    {
+      "id": "deir-ez-zor",
+      "name": "Deir-ez-Zor",
+      "terms": [
+        "Deir ez-Zor",
+        "Deir Ezzor",
+        "Deir-ez-Zor",
+        "دير الزور"
+      ]
+    },
+    {
+      "id": "hasakeh",
+      "name": "Al-Hasakeh",
+      "terms": [
+        "Hasakeh",
+        "Hasakah",
+        "Hasaka",
+        "الحسكة",
+        "بالحسكة"
+      ]
+    },
+    {
+      "id": "qamishli",
+      "name": "Qamishli",
+      "terms": [
+        "Qamishli",
+        "Qamishlo",
+        "القامشلي"
+      ]
+    },
+    {
+      "id": "idleb",
+      "name": "Idleb",
+      "terms": [
+        "Idleb",
+        "Idlib",
+        "إدلب"
+      ]
+    },
+    {
+      "id": "quneitra",
+      "name": "Quneitra",
+      "terms": [
+        "Quneitra",
+        "القنيطرة"
+      ]
+    },
+    {
+      "id": "al-bab",
+      "name": "Al-Bab",
+      "terms": [
+        "Al-Bab",
+        "الباب"
+      ]
+    },
+    {
+      "id": "douma",
+      "name": "Douma",
+      "terms": [
+        "Douma",
+        "دوما"
+      ]
+    },
+    {
+      "id": "nawa",
+      "name": "Nawa",
+      "terms": [
+        "Nawa",
+        "نوى"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "snhr",
+      "name": "Syrian Network for Human Rights",
+      "type": "advocacy_monitoring",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "syrian-archive",
+      "name": "Syrian Archive",
+      "type": "advocacy_monitoring",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "ocha",
+      "name": "OCHA",
+      "type": "official_reporting",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "unhcr-syria",
+      "name": "UNHCR Syria Operational Data Portal",
+      "type": "official_reporting",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "ose-syria",
+      "name": "Office of the UN Special Envoy for Syria",
+      "type": "official_reporting",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "coi-syria",
+      "name": "UN Commission of Inquiry on Syria",
+      "type": "official_reporting",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "iom-dtm-syria",
+      "name": "IOM Displacement Tracking Matrix — Syria",
+      "type": "official_reporting",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "reuters",
+      "name": "Reuters",
+      "type": "international_wire",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "associated-press",
+      "name": "Associated Press",
+      "type": "international_wire",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "afp",
+      "name": "Agence France-Presse",
+      "type": "international_wire",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "enab-baladi",
+      "name": "Enab Baladi",
+      "type": "syrian_local_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "syria-direct",
+      "name": "Syria Direct",
+      "type": "syrian_local_media",
+      "reference_count": 6,
+      "status": "Collected references"
+    },
+    {
+      "id": "syria-tv",
+      "name": "Syria Television",
+      "type": "syrian_local_media",
+      "reference_count": 6,
+      "status": "Collected references"
+    },
+    {
+      "id": "north-press",
+      "name": "North Press Agency",
+      "type": "syrian_local_media",
+      "reference_count": 6,
+      "status": "Collected references"
+    },
+    {
+      "id": "daraa24",
+      "name": "Daraa 24",
+      "type": "syrian_local_media",
+      "reference_count": 7,
+      "status": "Collected references"
+    },
+    {
+      "id": "sana",
+      "name": "Syrian Arab News Agency — SANA",
+      "type": "state_media",
+      "reference_count": 8,
+      "status": "Collected references"
+    },
+    {
+      "id": "rudaw",
+      "name": "Rudaw Media Network",
+      "type": "syrian_local_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "crisis-group",
+      "name": "International Crisis Group",
+      "type": "think_tank",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "carnegie-middle-east",
+      "name": "Malcolm H. Kerr Carnegie Middle East Center",
+      "type": "think_tank",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "mei",
+      "name": "Middle East Institute — Syria Initiative",
+      "type": "think_tank",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "chatham-house",
+      "name": "Chatham House",
+      "type": "think_tank",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "omran",
+      "name": "Omran Center for Strategic Studies",
+      "type": "think_tank",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "charles-lister",
+      "name": "Charles Lister",
+      "type": "analyst",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "haid-haid",
+      "name": "Haid Haid",
+      "type": "analyst",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "aron-lund",
+      "name": "Aron Lund",
+      "type": "analyst",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "karam-shaar",
+      "name": "Karam Shaar",
+      "type": "analyst",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "un-syria",
+      "name": "United Nations in Syria",
+      "type": "official_reporting",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "un-security-council",
+      "name": "UN Security Council",
+      "type": "official_reporting",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "syria-untold",
+      "name": "SyriaUntold",
+      "type": "syrian_local_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "syrian-observer",
+      "name": "The Syrian Observer",
+      "type": "syrian_local_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "kurd-online",
+      "name": "Kurd Online",
+      "type": "syrian_local_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "al-jazeera",
+      "name": "Al Jazeera",
+      "type": "regional_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "hrw",
+      "name": "Human Rights Watch",
+      "type": "advocacy_monitoring",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "amnesty",
+      "name": "Amnesty International",
+      "type": "advocacy_monitoring",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "deirezzor24",
+      "name": "DeirEzzor24",
+      "type": "syrian_local_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "rozana",
+      "name": "Rozana",
+      "type": "syrian_local_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "arta-fm",
+      "name": "ARTA FM",
+      "type": "syrian_local_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "trt-world",
+      "name": "TRT World",
+      "type": "regional_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "al-majalla",
+      "name": "Al Majalla",
+      "type": "regional_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    }
+  ],
+  "references": [
+    {
+      "id": "doc-fa2f1d6631839bff",
+      "source_id": "daraa24",
+      "title": "اعتقالات وتهديدات وتوغلات لقوات الاحتلال الإسرائيلي في الجنوب السوري يوم 1 تشرين الثاني 2026",
+      "url": "https://daraa24.org/%d8%a7%d8%b9%d8%aa%d9%82%d8%a7%d9%84%d8%a7%d8%aa-%d9%88%d8%aa%d9%88%d8%ba%d9%84%d8%a7%d8%aa-%d8%a7%d9%84%d8%a7%d8%ad%d8%aa%d9%84%d8%a7%d9%84-%d8%a7%d9%84%d8%ac%d9%86%d9%88%d8%a8-1-%d8%aa%d8%b4%d8%b1/",
+      "published_at": "2026-11-01T22:56:29Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [
+        {
+          "id": "protection",
+          "terms": [
+            "اعتقالات"
+          ]
+        },
+        {
+          "id": "regional",
+          "terms": [
+            "الإسرائيلي",
+            "الاحتلال"
+          ]
+        }
+      ],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-6b34c80d2a35b578",
+      "source_id": "daraa24",
+      "title": "العثور على شاب متوفى في مدينة إنخل شمالي درعا",
+      "url": "https://daraa24.org/%d8%a7%d9%84%d8%b9%d8%ab%d9%88%d8%b1-%d8%b9%d9%84%d9%89-%d8%a7%d9%84%d8%b4%d8%a7%d8%a8-%d8%ae%d8%a7%d9%84%d8%af-%d8%a7%d9%84%d8%b9%d9%8a%d8%af-%d9%85%d8%b4%d9%86%d9%88%d9%82%d8%a7%d9%8b-%d9%81%d9%8a/",
+      "published_at": "2026-11-01T20:32:32Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [],
+      "place_mentions": [
+        {
+          "id": "daraa",
+          "terms": [
+            "درعا"
+          ]
+        }
+      ],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-2ad8fd328258c527",
+      "source_id": "daraa24",
+      "title": "مقتل يافع طعناً إثر مشاجرة في مدينة نوى",
+      "url": "https://daraa24.org/%d9%85%d9%82%d8%aa%d9%84-%d8%a7%d9%84%d9%8a%d8%a7%d9%81%d8%b9-%d8%ad%d8%b3%d9%86-%d8%ae%d9%84%d8%af%d9%88%d9%86-%d8%a7%d9%84%d8%ac%d9%87%d9%85%d8%a7%d9%86%d9%8a-%d8%b7%d8%b9%d9%86%d8%a7%d9%8b-%d8%a5/",
+      "published_at": "2026-11-01T19:33:08Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [],
+      "place_mentions": [
+        {
+          "id": "nawa",
+          "terms": [
+            "نوى"
+          ]
+        }
+      ],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-cc13dc3f2e304261",
+      "source_id": "daraa24",
+      "title": "توثيق الانتهاكات والأحداث الأمنية – تشرين الأول 2026",
+      "url": "https://daraa24.org/%d8%a7%d9%84%d8%a3%d8%ad%d8%af%d8%a7%d8%ab-%d8%a7%d9%84%d8%a3%d9%85%d9%86%d9%8a%d8%a9-%d9%88%d8%a7%d9%84%d8%a7%d9%86%d8%aa%d9%87%d8%a7%d9%83%d8%a7%d8%aa-%d8%aa%d8%b4%d8%b1%d9%8a%d9%86-%d8%a7/",
+      "published_at": "2026-11-01T16:13:04Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-2b0c275512ba255c",
+      "source_id": "syria-direct",
+      "title": "Syria can speak freely, but is its government listening?",
+      "url": "https://syriadirect.org/syria-can-speak-freely-but-is-its-government-listening/",
+      "published_at": "2026-11-01T12:08:30Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [
+        {
+          "id": "political-process",
+          "terms": [
+            "government"
+          ]
+        }
+      ],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-d59c2c5f02b34266",
+      "source_id": "daraa24",
+      "title": "إحباط تهريب مخدرات على الحدود السورية الأردنية",
+      "url": "https://daraa24.org/%d8%a5%d8%ad%d8%a8%d8%a7%d8%b7-%d8%aa%d9%87%d8%b1%d9%8a%d8%a8-%d9%85%d8%ae%d8%af%d8%b1%d8%a7%d8%aa-%d8%b9%d9%84%d9%89-%d8%a7%d9%84%d8%ad%d8%af%d9%88%d8%af-%d8%a7%d9%84%d8%b3%d9%88%d8%b1%d9%8a%d8%a9/",
+      "published_at": "2026-11-01T10:05:00Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-8a9ce24774fbb4ab",
+      "source_id": "daraa24",
+      "title": "وفاة شاب شرقي درعا إثر خلاف عائلي",
+      "url": "https://daraa24.org/%d9%88%d9%81%d8%a7%d8%a9-%d8%a7%d9%84%d8%b4%d8%a7%d8%a8-%d9%88%d9%84%d9%8a%d8%af-%d8%a8%d8%b4%d8%a7%d8%b1-%d8%a7%d9%84%d8%b3%d9%84%d8%a7%d9%85%d8%a7%d8%aa-%d8%b4%d8%b1%d9%82%d9%8a-%d8%af%d8%b1%d8%b9/",
+      "published_at": "2026-10-31T20:00:00Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T16:12:36.595675Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [],
+      "place_mentions": [
+        {
+          "id": "daraa",
+          "terms": [
+            "درعا"
+          ]
+        }
+      ],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-89a9514a0659bcc1",
+      "source_id": "syria-direct",
+      "title": "The Book of Damascus: My complicated love affair",
+      "url": "https://syriadirect.org/the-book-of-damascus-my-complicated-love-affair/",
+      "published_at": "2026-10-26T10:53:32Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [],
+      "place_mentions": [
+        {
+          "id": "damascus",
+          "terms": [
+            "Damascus"
+          ]
+        }
+      ],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-f3c467829fc37bbf",
+      "source_id": "syria-direct",
+      "title": "Syria reconnects to global finance, but ordinary Syrians are still struggling",
+      "url": "https://syriadirect.org/syria-reconnects-to-global-finance-but-ordinary-syrians-are-still-struggling/",
+      "published_at": "2026-10-23T12:58:38Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-5325024bfc3b8e38",
+      "source_id": "syria-direct",
+      "title": "Syria’s Kurds fight to keep their language alive in the classroom",
+      "url": "https://syriadirect.org/syrias-kurds-fight-to-keep-their-language-alive-in-the-classroom/",
+      "published_at": "2026-10-19T08:56:49Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-db20ae6e7b5492ec",
+      "source_id": "syria-direct",
+      "title": "What Syria’s revolution can teach the world about democracy",
+      "url": "https://syriadirect.org/what-syrias-revolution-can-teach-the-world-about-democracy/",
+      "published_at": "2026-10-16T07:52:10Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-87c0d09ebd3625b5",
+      "source_id": "syria-direct",
+      "title": "The Damascus oud maker fighting to keep a generations-old craft alive",
+      "url": "https://syriadirect.org/the-damascus-oud-maker-fighting-to-keep-a-generations-old-craft-alive/",
+      "published_at": "2026-10-12T04:29:12Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [],
+      "place_mentions": [
+        {
+          "id": "damascus",
+          "terms": [
+            "Damascus"
+          ]
+        }
+      ],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-900f089b273fc10f",
+      "source_id": "daraa24",
+      "title": "من الثأر إلى القضاء: هل تحمي العدالة الانتقالية السلم الأهلي في درعا؟",
+      "url": "https://daraa24.org/%d9%85%d9%86-%d8%a7%d9%84%d8%ab%d8%a3%d8%b1-%d8%a5%d9%84%d9%89-%d8%a7%d9%84%d9%82%d8%b6%d8%a7%d8%a1-%d9%87%d9%84-%d8%aa%d8%ad%d9%85%d9%8a-%d8%a7%d9%84%d8%b9%d8%af%d8%a7%d9%84%d8%a9-%d8%a7%d9%84%d8%a7/",
+      "published_at": "2026-11-02T16:45:20Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [],
+      "place_mentions": [
+        {
+          "id": "daraa",
+          "terms": [
+            "درعا"
+          ]
+        }
+      ],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-4358615636878d5e",
+      "source_id": "syria-tv",
+      "title": "بمشاركة 150 شركة من 12 دولة.. انطلاق \"بروجكت سوريا 2026\" في دمشق",
+      "url": "https://www.syria.tv/%D8%A8%D9%85%D8%B4%D8%A7%D8%B1%D9%83%D8%A9-150-%D8%B4%D8%B1%D9%83%D8%A9-%D9%85%D9%86-12-%D8%AF%D9%88%D9%84%D8%A9-%D8%A7%D9%86%D8%B7%D9%84%D8%A7%D9%82-%D8%A8%D8%B1%D9%88%D8%AC%D9%83%D8%AA-%D8%B3%D9%88%D8%B1%D9%8A%D8%A7-2026-%D9%81%D9%8A-%D8%AF%D9%85%D8%B4%D9%82",
+      "published_at": "2026-11-02T16:30:05Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [],
+      "place_mentions": [
+        {
+          "id": "damascus",
+          "terms": [
+            "دمشق"
+          ]
+        }
+      ],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-17cb9bef05af5ed0",
+      "source_id": "syria-tv",
+      "title": "الدفاع المدني يحذر من انجراف مخلفات الحرب إلى مناطق آمنة بفعل السيول",
+      "url": "https://www.syria.tv/%D8%A7%D9%84%D8%AF%D9%81%D8%A7%D8%B9-%D8%A7%D9%84%D9%85%D8%AF%D9%86%D9%8A-%D9%8A%D8%AD%D8%B0%D8%B1-%D9%85%D9%86-%D8%A7%D9%86%D8%AC%D8%B1%D8%A7%D9%81-%D9%85%D8%AE%D9%84%D9%81%D8%A7%D8%AA-%D8%A7%D9%84%D8%AD%D8%B1%D8%A8-%D8%A5%D9%84%D9%89-%D9%85%D9%86%D8%A7%D8%B7%D9%82-%D8%A2%D9%85%D9%86%D8%A9-%D8%A8%D9%81%D8%B9%D9%84-%D8%A7%D9%84%D8%B3%D9%8A%D9%88%D9%84",
+      "published_at": "2026-11-02T16:23:28Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [
+        {
+          "id": "protection",
+          "terms": [
+            "المدني",
+            "مخلفات الحرب"
+          ]
+        }
+      ],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-9c581aa33b0547a2",
+      "source_id": "syria-tv",
+      "title": "من الكرك الى درعا.. مقاربة هادئة",
+      "url": "https://www.syria.tv/%D9%85%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%83-%D8%A7%D9%84%D9%89-%D8%AF%D8%B1%D8%B9%D8%A7-%D9%85%D9%82%D8%A7%D8%B1%D8%A8%D8%A9-%D9%87%D8%A7%D8%AF%D8%A6%D8%A9",
+      "published_at": "2026-11-02T16:17:25Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [],
+      "place_mentions": [
+        {
+          "id": "daraa",
+          "terms": [
+            "درعا"
+          ]
+        }
+      ],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-dfa18cbef3279576",
+      "source_id": "syria-tv",
+      "title": "قوات الاحتلال الإسرائيلي تتوغل بثلاث عربات في قرية معرية غربي درعا",
+      "url": "https://www.syria.tv/%D9%82%D9%88%D8%A7%D8%AA-%D8%A7%D9%84%D8%A7%D8%AD%D8%AA%D9%84%D8%A7%D9%84-%D8%A7%D9%84%D8%A5%D8%B3%D8%B1%D8%A7%D8%A6%D9%8A%D9%84%D9%8A-%D8%AA%D8%AA%D9%88%D8%BA%D9%84-%D8%A8%D8%AB%D9%84%D8%A7%D8%AB-%D8%B9%D8%B1%D8%A8%D8%A7%D8%AA-%D9%81%D9%8A-%D9%82%D8%B1%D9%8A%D8%A9-%D9%85%D8%B9%D8%B1%D9%8A%D8%A9-%D8%BA%D8%B1%D8%A8%D9%8A-%D8%AF%D8%B1%D8%B9%D8%A7",
+      "published_at": "2026-11-02T16:17:24Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [
+        {
+          "id": "regional",
+          "terms": [
+            "الإسرائيلي",
+            "الاحتلال"
+          ]
+        }
+      ],
+      "place_mentions": [
+        {
+          "id": "daraa",
+          "terms": [
+            "درعا"
+          ]
+        }
+      ],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-f288d332796c0934",
+      "source_id": "north-press",
+      "title": "رئيس إيران: المرشد الأعلى منح صلاحيات للحكومة للتفاوض مع واشنطن",
+      "url": "https://npasyria.com/248450/",
+      "published_at": "2026-11-02T16:16:37Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [
+        {
+          "id": "political-process",
+          "terms": [
+            "رئيس"
+          ]
+        },
+        {
+          "id": "regional",
+          "terms": [
+            "واشنطن",
+            "إيران"
+          ]
+        }
+      ],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-2200e457cc3b9294",
+      "source_id": "syria-tv",
+      "title": "دخول الصحفيين الأجانب إلى سوريا.. ما شروط الاعتماد والترخيص؟",
+      "url": "https://www.syria.tv/%D8%AF%D8%AE%D9%88%D9%84-%D8%A7%D9%84%D8%B5%D8%AD%D9%81%D9%8A%D9%8A%D9%86-%D8%A7%D9%84%D8%A3%D8%AC%D8%A7%D9%86%D8%A8-%D8%A5%D9%84%D9%89-%D8%B3%D9%88%D8%B1%D9%8A%D8%A7-%D9%85%D8%A7-%D8%B4%D8%B1%D9%88%D8%B7-%D8%A7%D9%84%D8%A7%D8%B9%D8%AA%D9%85%D8%A7%D8%AF-%D9%88%D8%A7%D9%84%D8%AA%D8%B1%D8%AE%D9%8A%D8%B5%D8%9F",
+      "published_at": "2026-11-02T16:04:17Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [
+        {
+          "id": "media",
+          "terms": [
+            "الصحفيين",
+            "الاعتماد"
+          ]
+        }
+      ],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-8925d77beae8cf97",
+      "source_id": "syria-tv",
+      "title": "بعد توقف لأسبوعين.. استئناف عودة المهجّرين إلى ريف رأس العين بالحسكة",
+      "url": "https://www.syria.tv/%D8%A8%D8%B9%D8%AF-%D8%AA%D9%88%D9%82%D9%81-%D9%84%D8%A3%D8%B3%D8%A8%D9%88%D8%B9%D9%8A%D9%86-%D8%A7%D8%B3%D8%AA%D8%A6%D9%86%D8%A7%D9%81-%D8%B9%D9%88%D8%AF%D8%A9-%D8%A7%D9%84%D9%85%D9%87%D8%AC%D9%91%D8%B1%D9%8A%D9%86-%D8%A5%D9%84%D9%89-%D8%B1%D9%8A%D9%81-%D8%B1%D8%A3%D8%B3-%D8%A7%D9%84%D8%B9%D9%8A%D9%86-%D8%A8%D8%A7%D9%84%D8%AD%D8%B3%D9%83%D8%A9",
+      "published_at": "2026-11-02T15:57:51Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [
+        {
+          "id": "returns",
+          "terms": [
+            "عودة",
+            "المهجرين"
+          ]
+        }
+      ],
+      "place_mentions": [
+        {
+          "id": "hasakeh",
+          "terms": [
+            "بالحسكة"
+          ]
+        }
+      ],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-1f2021f892e27271",
+      "source_id": "north-press",
+      "title": "من بينها الرقة ودير الزور.. انطلاق مشروع للرقمنة العقارية في خمس محافظات سورية",
+      "url": "https://npasyria.com/248447/",
+      "published_at": "2026-11-02T13:39:43Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [
+        {
+          "id": "services",
+          "terms": [
+            "مشروع"
+          ]
+        },
+        {
+          "id": "economy",
+          "terms": [
+            "العقارية"
+          ]
+        }
+      ],
+      "place_mentions": [
+        {
+          "id": "raqqa",
+          "terms": [
+            "الرقة"
+          ]
+        }
+      ],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-5f9c1fc29976f602",
+      "source_id": "north-press",
+      "title": "باحث سعودي لنورث برس: المباحثات الإيرانية بالدوحة تسعى لتفاهم مرحلي",
+      "url": "https://npasyria.com/248442/",
+      "published_at": "2026-11-02T09:29:51Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [
+        {
+          "id": "regional",
+          "terms": [
+            "الإيرانية"
+          ]
+        }
+      ],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-a4d478bedd170dcd",
+      "source_id": "north-press",
+      "title": "آثار الرقة لنورث برس: التنقيب غير القانوني يحظى بمتابعة جدية بالتعاون مع الأمن",
+      "url": "https://npasyria.com/248434/",
+      "published_at": "2026-11-02T08:41:54Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [],
+      "place_mentions": [
+        {
+          "id": "raqqa",
+          "terms": [
+            "الرقة"
+          ]
+        }
+      ],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-6457e87943100d1e",
+      "source_id": "north-press",
+      "title": "هيئة المنافذ لنورث برس: نعمل على تفعيل ممرات وفي مقدمتها منفذ القامشلي-نصيبين",
+      "url": "https://npasyria.com/248430/",
+      "published_at": "2026-11-02T07:58:21Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [],
+      "place_mentions": [
+        {
+          "id": "qamishli",
+          "terms": [
+            "القامشلي"
+          ]
+        }
+      ],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-dc9cd91924b109f2",
+      "source_id": "north-press",
+      "title": "رئيس غرفة صناعة حلب لنورث برس: فرص لدخول المنتجات السورية إلى السوق الأميركية",
+      "url": "https://npasyria.com/248427/",
+      "published_at": "2026-11-02T07:13:10Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [
+        {
+          "id": "political-process",
+          "terms": [
+            "رئيس"
+          ]
+        },
+        {
+          "id": "economy",
+          "terms": [
+            "المنتجات",
+            "صناعة"
+          ]
+        },
+        {
+          "id": "regional",
+          "terms": [
+            "الأميركية"
+          ]
+        }
+      ],
+      "place_mentions": [
+        {
+          "id": "aleppo",
+          "terms": [
+            "حلب"
+          ]
+        }
+      ],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-859a8ac8ac476bc1",
+      "source_id": "sana",
+      "title": "Erdogan says Turkey’s financial system insulated from investment fund turmoil",
+      "url": "https://sana.sy/en/international/2346749/",
+      "published_at": "2026-09-29T08:23:18Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [
+        {
+          "id": "economy",
+          "terms": [
+            "financial",
+            "investment"
+          ]
+        },
+        {
+          "id": "regional",
+          "terms": [
+            "Turkey"
+          ]
+        }
+      ],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-b166c907d66b074a",
+      "source_id": "sana",
+      "title": "Syria reopens 35 damaged schools in Homs under Saudi-funded project",
+      "url": "https://sana.sy/en/education/2346742/",
+      "published_at": "2026-09-29T08:06:00Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [
+        {
+          "id": "services",
+          "terms": [
+            "schools",
+            "reopens",
+            "schools"
+          ]
+        },
+        {
+          "id": "regional",
+          "terms": [
+            "Saudi"
+          ]
+        }
+      ],
+      "place_mentions": [
+        {
+          "id": "homs",
+          "terms": [
+            "Homs"
+          ]
+        }
+      ],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-3f27718c3f2a13f0",
+      "source_id": "sana",
+      "title": "Syria assumes chairmanship of Arab statistics institute board",
+      "url": "https://sana.sy/en/syria/2346737/",
+      "published_at": "2026-09-29T07:59:54Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [
+        {
+          "id": "economy",
+          "terms": [
+            "statistics"
+          ]
+        }
+      ],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-748e026e97e1b6ac",
+      "source_id": "sana",
+      "title": "UNESCO-listed Deir Samaan Citadel in northern Syria reopens to visitors",
+      "url": "https://sana.sy/en/photos/2346726/",
+      "published_at": "2026-09-29T07:41:00Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [
+        {
+          "id": "services",
+          "terms": [
+            "reopens"
+          ]
+        }
+      ],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-01f5734333dea8fd",
+      "source_id": "sana",
+      "title": "UNESCO-listed Deir Samaan Citadel in northern Syria reopens to visitors",
+      "url": "https://sana.sy/en/culture-and-arts/2346698/",
+      "published_at": "2026-09-29T07:24:21Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [
+        {
+          "id": "services",
+          "terms": [
+            "reopens"
+          ]
+        }
+      ],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-2ff5a735b5232a8f",
+      "source_id": "sana",
+      "title": "Oil prices rise amid concerns over Middle East supply disruptions",
+      "url": "https://sana.sy/en/economic/2346715/",
+      "published_at": "2026-09-29T07:16:42Z",
+      "published_on": null,
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "review_state": "unreviewed_reference",
+      "topic_matches": [
+        {
+          "id": "economy",
+          "terms": [
+            "oil"
+          ]
+        }
+      ],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-dc88677149498a02",
+      "source_id": "sana",
+      "title": "Central Bank governor discusses reconnecting Syria to European banking system in Paris",
+      "url": "https://sana.sy/en/economic/2354876/",
+      "published_at": null,
+      "published_on": "2026-10-31",
+      "retrieved_at": "2026-11-02T17:13:07.944432Z",
+      "review_state": "curated_paraphrase",
+      "topic_matches": [
+        {
+          "id": "economy",
+          "terms": [
+            "bank",
+            "banking"
+          ]
+        }
+      ],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    },
+    {
+      "id": "doc-ce63e6199295ca73",
+      "source_id": "sana",
+      "title": "حاكم المصرف المركزي يبحث في باريس مع بنوك دولية إعادة ربط سوريا بالنظام ‏الأوروبي",
+      "url": "https://sana.sy/economy/syrian-economy/2622492/",
+      "published_at": null,
+      "published_on": "2026-10-31",
+      "retrieved_at": "2026-11-02T17:13:07.944447Z",
+      "review_state": "curated_paraphrase",
+      "topic_matches": [],
+      "place_mentions": [],
+      "tagging_basis": "Literal words in the saved title only",
+      "coordinates": null
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "doc-fa2f1d6631839bff",
+        "type": "reference",
+        "label": "اعتقالات وتهديدات وتوغلات لقوات الاحتلال الإسرائيلي في الجنوب السوري يوم 1 تشرين الثاني 2026",
+        "source_id": "daraa24"
+      },
+      {
+        "id": "doc-6b34c80d2a35b578",
+        "type": "reference",
+        "label": "العثور على شاب متوفى في مدينة إنخل شمالي درعا",
+        "source_id": "daraa24"
+      },
+      {
+        "id": "doc-2ad8fd328258c527",
+        "type": "reference",
+        "label": "مقتل يافع طعناً إثر مشاجرة في مدينة نوى",
+        "source_id": "daraa24"
+      },
+      {
+        "id": "doc-cc13dc3f2e304261",
+        "type": "reference",
+        "label": "توثيق الانتهاكات والأحداث الأمنية – تشرين الأول 2026",
+        "source_id": "daraa24"
+      },
+      {
+        "id": "doc-2b0c275512ba255c",
+        "type": "reference",
+        "label": "Syria can speak freely, but is its government listening?",
+        "source_id": "syria-direct"
+      },
+      {
+        "id": "doc-d59c2c5f02b34266",
+        "type": "reference",
+        "label": "إحباط تهريب مخدرات على الحدود السورية الأردنية",
+        "source_id": "daraa24"
+      },
+      {
+        "id": "doc-8a9ce24774fbb4ab",
+        "type": "reference",
+        "label": "وفاة شاب شرقي درعا إثر خلاف عائلي",
+        "source_id": "daraa24"
+      },
+      {
+        "id": "doc-89a9514a0659bcc1",
+        "type": "reference",
+        "label": "The Book of Damascus: My complicated love affair",
+        "source_id": "syria-direct"
+      },
+      {
+        "id": "doc-f3c467829fc37bbf",
+        "type": "reference",
+        "label": "Syria reconnects to global finance, but ordinary Syrians are still struggling",
+        "source_id": "syria-direct"
+      },
+      {
+        "id": "doc-5325024bfc3b8e38",
+        "type": "reference",
+        "label": "Syria’s Kurds fight to keep their language alive in the classroom",
+        "source_id": "syria-direct"
+      },
+      {
+        "id": "doc-db20ae6e7b5492ec",
+        "type": "reference",
+        "label": "What Syria’s revolution can teach the world about democracy",
+        "source_id": "syria-direct"
+      },
+      {
+        "id": "doc-87c0d09ebd3625b5",
+        "type": "reference",
+        "label": "The Damascus oud maker fighting to keep a generations-old craft alive",
+        "source_id": "syria-direct"
+      },
+      {
+        "id": "doc-900f089b273fc10f",
+        "type": "reference",
+        "label": "من الثأر إلى القضاء: هل تحمي العدالة الانتقالية السلم الأهلي في درعا؟",
+        "source_id": "daraa24"
+      },
+      {
+        "id": "doc-4358615636878d5e",
+        "type": "reference",
+        "label": "بمشاركة 150 شركة من 12 دولة.. انطلاق \"بروجكت سوريا 2026\" في دمشق",
+        "source_id": "syria-tv"
+      },
+      {
+        "id": "doc-17cb9bef05af5ed0",
+        "type": "reference",
+        "label": "الدفاع المدني يحذر من انجراف مخلفات الحرب إلى مناطق آمنة بفعل السيول",
+        "source_id": "syria-tv"
+      },
+      {
+        "id": "doc-9c581aa33b0547a2",
+        "type": "reference",
+        "label": "من الكرك الى درعا.. مقاربة هادئة",
+        "source_id": "syria-tv"
+      },
+      {
+        "id": "doc-dfa18cbef3279576",
+        "type": "reference",
+        "label": "قوات الاحتلال الإسرائيلي تتوغل بثلاث عربات في قرية معرية غربي درعا",
+        "source_id": "syria-tv"
+      },
+      {
+        "id": "doc-f288d332796c0934",
+        "type": "reference",
+        "label": "رئيس إيران: المرشد الأعلى منح صلاحيات للحكومة للتفاوض مع واشنطن",
+        "source_id": "north-press"
+      },
+      {
+        "id": "doc-2200e457cc3b9294",
+        "type": "reference",
+        "label": "دخول الصحفيين الأجانب إلى سوريا.. ما شروط الاعتماد والترخيص؟",
+        "source_id": "syria-tv"
+      },
+      {
+        "id": "doc-8925d77beae8cf97",
+        "type": "reference",
+        "label": "بعد توقف لأسبوعين.. استئناف عودة المهجّرين إلى ريف رأس العين بالحسكة",
+        "source_id": "syria-tv"
+      },
+      {
+        "id": "doc-1f2021f892e27271",
+        "type": "reference",
+        "label": "من بينها الرقة ودير الزور.. انطلاق مشروع للرقمنة العقارية في خمس محافظات سورية",
+        "source_id": "north-press"
+      },
+      {
+        "id": "doc-5f9c1fc29976f602",
+        "type": "reference",
+        "label": "باحث سعودي لنورث برس: المباحثات الإيرانية بالدوحة تسعى لتفاهم مرحلي",
+        "source_id": "north-press"
+      },
+      {
+        "id": "doc-a4d478bedd170dcd",
+        "type": "reference",
+        "label": "آثار الرقة لنورث برس: التنقيب غير القانوني يحظى بمتابعة جدية بالتعاون مع الأمن",
+        "source_id": "north-press"
+      },
+      {
+        "id": "doc-6457e87943100d1e",
+        "type": "reference",
+        "label": "هيئة المنافذ لنورث برس: نعمل على تفعيل ممرات وفي مقدمتها منفذ القامشلي-نصيبين",
+        "source_id": "north-press"
+      },
+      {
+        "id": "doc-dc9cd91924b109f2",
+        "type": "reference",
+        "label": "رئيس غرفة صناعة حلب لنورث برس: فرص لدخول المنتجات السورية إلى السوق الأميركية",
+        "source_id": "north-press"
+      },
+      {
+        "id": "doc-859a8ac8ac476bc1",
+        "type": "reference",
+        "label": "Erdogan says Turkey’s financial system insulated from investment fund turmoil",
+        "source_id": "sana"
+      },
+      {
+        "id": "doc-b166c907d66b074a",
+        "type": "reference",
+        "label": "Syria reopens 35 damaged schools in Homs under Saudi-funded project",
+        "source_id": "sana"
+      },
+      {
+        "id": "doc-3f27718c3f2a13f0",
+        "type": "reference",
+        "label": "Syria assumes chairmanship of Arab statistics institute board",
+        "source_id": "sana"
+      },
+      {
+        "id": "doc-748e026e97e1b6ac",
+        "type": "reference",
+        "label": "UNESCO-listed Deir Samaan Citadel in northern Syria reopens to visitors",
+        "source_id": "sana"
+      },
+      {
+        "id": "doc-01f5734333dea8fd",
+        "type": "reference",
+        "label": "UNESCO-listed Deir Samaan Citadel in northern Syria reopens to visitors",
+        "source_id": "sana"
+      },
+      {
+        "id": "doc-2ff5a735b5232a8f",
+        "type": "reference",
+        "label": "Oil prices rise amid concerns over Middle East supply disruptions",
+        "source_id": "sana"
+      },
+      {
+        "id": "doc-dc88677149498a02",
+        "type": "reference",
+        "label": "Central Bank governor discusses reconnecting Syria to European banking system in Paris",
+        "source_id": "sana"
+      },
+      {
+        "id": "doc-ce63e6199295ca73",
+        "type": "reference",
+        "label": "حاكم المصرف المركزي يبحث في باريس مع بنوك دولية إعادة ربط سوريا بالنظام ‏الأوروبي",
+        "source_id": "sana"
+      },
+      {
+        "id": "syria-direct",
+        "type": "source",
+        "label": "Syria Direct",
+        "category": "syrian_local_media"
+      },
+      {
+        "id": "syria-tv",
+        "type": "source",
+        "label": "Syria Television",
+        "category": "syrian_local_media"
+      },
+      {
+        "id": "north-press",
+        "type": "source",
+        "label": "North Press Agency",
+        "category": "syrian_local_media"
+      },
+      {
+        "id": "daraa24",
+        "type": "source",
+        "label": "Daraa 24",
+        "category": "syrian_local_media"
+      },
+      {
+        "id": "sana",
+        "type": "source",
+        "label": "Syrian Arab News Agency — SANA",
+        "category": "state_media"
+      },
+      {
+        "id": "topic-political-process",
+        "type": "topic",
+        "label": "Politics & institutions"
+      },
+      {
+        "id": "topic-protection",
+        "type": "topic",
+        "label": "Protection & accountability"
+      },
+      {
+        "id": "topic-returns",
+        "type": "topic",
+        "label": "Displacement & return"
+      },
+      {
+        "id": "topic-services",
+        "type": "topic",
+        "label": "Services & recovery"
+      },
+      {
+        "id": "topic-economy",
+        "type": "topic",
+        "label": "Economy & livelihoods"
+      },
+      {
+        "id": "topic-regional",
+        "type": "topic",
+        "label": "Regional relations"
+      },
+      {
+        "id": "topic-media",
+        "type": "topic",
+        "label": "Media & public debate"
+      },
+      {
+        "id": "mention-damascus",
+        "type": "place_mention",
+        "label": "Damascus"
+      },
+      {
+        "id": "mention-aleppo",
+        "type": "place_mention",
+        "label": "Aleppo"
+      },
+      {
+        "id": "mention-homs",
+        "type": "place_mention",
+        "label": "Homs"
+      },
+      {
+        "id": "mention-daraa",
+        "type": "place_mention",
+        "label": "Daraa"
+      },
+      {
+        "id": "mention-raqqa",
+        "type": "place_mention",
+        "label": "Raqqa"
+      },
+      {
+        "id": "mention-hasakeh",
+        "type": "place_mention",
+        "label": "Al-Hasakeh"
+      },
+      {
+        "id": "mention-qamishli",
+        "type": "place_mention",
+        "label": "Qamishli"
+      },
+      {
+        "id": "mention-nawa",
+        "type": "place_mention",
+        "label": "Nawa"
+      }
+    ],
+    "edges": [
+      {
+        "source": "daraa24",
+        "target": "doc-fa2f1d6631839bff",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-fa2f1d6631839bff",
+        "target": "topic-protection",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "اعتقالات"
+        ]
+      },
+      {
+        "source": "doc-fa2f1d6631839bff",
+        "target": "topic-regional",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "الإسرائيلي",
+          "الاحتلال"
+        ]
+      },
+      {
+        "source": "daraa24",
+        "target": "doc-6b34c80d2a35b578",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-6b34c80d2a35b578",
+        "target": "mention-daraa",
+        "relation": "title_place_mention",
+        "matched_terms": [
+          "درعا"
+        ]
+      },
+      {
+        "source": "daraa24",
+        "target": "doc-2ad8fd328258c527",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-2ad8fd328258c527",
+        "target": "mention-nawa",
+        "relation": "title_place_mention",
+        "matched_terms": [
+          "نوى"
+        ]
+      },
+      {
+        "source": "daraa24",
+        "target": "doc-cc13dc3f2e304261",
+        "relation": "published_reference"
+      },
+      {
+        "source": "syria-direct",
+        "target": "doc-2b0c275512ba255c",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-2b0c275512ba255c",
+        "target": "topic-political-process",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "government"
+        ]
+      },
+      {
+        "source": "daraa24",
+        "target": "doc-d59c2c5f02b34266",
+        "relation": "published_reference"
+      },
+      {
+        "source": "daraa24",
+        "target": "doc-8a9ce24774fbb4ab",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-8a9ce24774fbb4ab",
+        "target": "mention-daraa",
+        "relation": "title_place_mention",
+        "matched_terms": [
+          "درعا"
+        ]
+      },
+      {
+        "source": "syria-direct",
+        "target": "doc-89a9514a0659bcc1",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-89a9514a0659bcc1",
+        "target": "mention-damascus",
+        "relation": "title_place_mention",
+        "matched_terms": [
+          "Damascus"
+        ]
+      },
+      {
+        "source": "syria-direct",
+        "target": "doc-f3c467829fc37bbf",
+        "relation": "published_reference"
+      },
+      {
+        "source": "syria-direct",
+        "target": "doc-5325024bfc3b8e38",
+        "relation": "published_reference"
+      },
+      {
+        "source": "syria-direct",
+        "target": "doc-db20ae6e7b5492ec",
+        "relation": "published_reference"
+      },
+      {
+        "source": "syria-direct",
+        "target": "doc-87c0d09ebd3625b5",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-87c0d09ebd3625b5",
+        "target": "mention-damascus",
+        "relation": "title_place_mention",
+        "matched_terms": [
+          "Damascus"
+        ]
+      },
+      {
+        "source": "daraa24",
+        "target": "doc-900f089b273fc10f",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-900f089b273fc10f",
+        "target": "mention-daraa",
+        "relation": "title_place_mention",
+        "matched_terms": [
+          "درعا"
+        ]
+      },
+      {
+        "source": "syria-tv",
+        "target": "doc-4358615636878d5e",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-4358615636878d5e",
+        "target": "mention-damascus",
+        "relation": "title_place_mention",
+        "matched_terms": [
+          "دمشق"
+        ]
+      },
+      {
+        "source": "syria-tv",
+        "target": "doc-17cb9bef05af5ed0",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-17cb9bef05af5ed0",
+        "target": "topic-protection",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "المدني",
+          "مخلفات الحرب"
+        ]
+      },
+      {
+        "source": "syria-tv",
+        "target": "doc-9c581aa33b0547a2",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-9c581aa33b0547a2",
+        "target": "mention-daraa",
+        "relation": "title_place_mention",
+        "matched_terms": [
+          "درعا"
+        ]
+      },
+      {
+        "source": "syria-tv",
+        "target": "doc-dfa18cbef3279576",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-dfa18cbef3279576",
+        "target": "topic-regional",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "الإسرائيلي",
+          "الاحتلال"
+        ]
+      },
+      {
+        "source": "doc-dfa18cbef3279576",
+        "target": "mention-daraa",
+        "relation": "title_place_mention",
+        "matched_terms": [
+          "درعا"
+        ]
+      },
+      {
+        "source": "north-press",
+        "target": "doc-f288d332796c0934",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-f288d332796c0934",
+        "target": "topic-political-process",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "رئيس"
+        ]
+      },
+      {
+        "source": "doc-f288d332796c0934",
+        "target": "topic-regional",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "واشنطن",
+          "إيران"
+        ]
+      },
+      {
+        "source": "syria-tv",
+        "target": "doc-2200e457cc3b9294",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-2200e457cc3b9294",
+        "target": "topic-media",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "الصحفيين",
+          "الاعتماد"
+        ]
+      },
+      {
+        "source": "syria-tv",
+        "target": "doc-8925d77beae8cf97",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-8925d77beae8cf97",
+        "target": "topic-returns",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "عودة",
+          "المهجرين"
+        ]
+      },
+      {
+        "source": "doc-8925d77beae8cf97",
+        "target": "mention-hasakeh",
+        "relation": "title_place_mention",
+        "matched_terms": [
+          "بالحسكة"
+        ]
+      },
+      {
+        "source": "north-press",
+        "target": "doc-1f2021f892e27271",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-1f2021f892e27271",
+        "target": "topic-services",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "مشروع"
+        ]
+      },
+      {
+        "source": "doc-1f2021f892e27271",
+        "target": "topic-economy",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "العقارية"
+        ]
+      },
+      {
+        "source": "doc-1f2021f892e27271",
+        "target": "mention-raqqa",
+        "relation": "title_place_mention",
+        "matched_terms": [
+          "الرقة"
+        ]
+      },
+      {
+        "source": "north-press",
+        "target": "doc-5f9c1fc29976f602",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-5f9c1fc29976f602",
+        "target": "topic-regional",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "الإيرانية"
+        ]
+      },
+      {
+        "source": "north-press",
+        "target": "doc-a4d478bedd170dcd",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-a4d478bedd170dcd",
+        "target": "mention-raqqa",
+        "relation": "title_place_mention",
+        "matched_terms": [
+          "الرقة"
+        ]
+      },
+      {
+        "source": "north-press",
+        "target": "doc-6457e87943100d1e",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-6457e87943100d1e",
+        "target": "mention-qamishli",
+        "relation": "title_place_mention",
+        "matched_terms": [
+          "القامشلي"
+        ]
+      },
+      {
+        "source": "north-press",
+        "target": "doc-dc9cd91924b109f2",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-dc9cd91924b109f2",
+        "target": "topic-political-process",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "رئيس"
+        ]
+      },
+      {
+        "source": "doc-dc9cd91924b109f2",
+        "target": "topic-economy",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "المنتجات",
+          "صناعة"
+        ]
+      },
+      {
+        "source": "doc-dc9cd91924b109f2",
+        "target": "topic-regional",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "الأميركية"
+        ]
+      },
+      {
+        "source": "doc-dc9cd91924b109f2",
+        "target": "mention-aleppo",
+        "relation": "title_place_mention",
+        "matched_terms": [
+          "حلب"
+        ]
+      },
+      {
+        "source": "sana",
+        "target": "doc-859a8ac8ac476bc1",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-859a8ac8ac476bc1",
+        "target": "topic-economy",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "financial",
+          "investment"
+        ]
+      },
+      {
+        "source": "doc-859a8ac8ac476bc1",
+        "target": "topic-regional",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "Turkey"
+        ]
+      },
+      {
+        "source": "sana",
+        "target": "doc-b166c907d66b074a",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-b166c907d66b074a",
+        "target": "topic-services",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "schools",
+          "reopens",
+          "schools"
+        ]
+      },
+      {
+        "source": "doc-b166c907d66b074a",
+        "target": "topic-regional",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "Saudi"
+        ]
+      },
+      {
+        "source": "doc-b166c907d66b074a",
+        "target": "mention-homs",
+        "relation": "title_place_mention",
+        "matched_terms": [
+          "Homs"
+        ]
+      },
+      {
+        "source": "sana",
+        "target": "doc-3f27718c3f2a13f0",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-3f27718c3f2a13f0",
+        "target": "topic-economy",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "statistics"
+        ]
+      },
+      {
+        "source": "sana",
+        "target": "doc-748e026e97e1b6ac",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-748e026e97e1b6ac",
+        "target": "topic-services",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "reopens"
+        ]
+      },
+      {
+        "source": "sana",
+        "target": "doc-01f5734333dea8fd",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-01f5734333dea8fd",
+        "target": "topic-services",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "reopens"
+        ]
+      },
+      {
+        "source": "sana",
+        "target": "doc-2ff5a735b5232a8f",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-2ff5a735b5232a8f",
+        "target": "topic-economy",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "oil"
+        ]
+      },
+      {
+        "source": "sana",
+        "target": "doc-dc88677149498a02",
+        "relation": "published_reference"
+      },
+      {
+        "source": "doc-dc88677149498a02",
+        "target": "topic-economy",
+        "relation": "title_keyword_match",
+        "matched_terms": [
+          "bank",
+          "banking"
+        ]
+      },
+      {
+        "source": "sana",
+        "target": "doc-ce63e6199295ca73",
+        "relation": "published_reference"
+      }
+    ]
+  },
+  "limits": [
+    "This bounded feed/reference sample is not a representative sample of Syria media or opinion.",
+    "Different sources and collection windows have unequal coverage; counts cannot measure importance or bias.",
+    "A title may mention a place without describing an event there. No event coordinates are inferred.",
+    "Keyword matches can miss context, negation, synonyms and morphology; a human must read the original.",
+    "Edges record publication or explicit title terms, not influence, causality, affiliation or corroboration."
+  ]
+}

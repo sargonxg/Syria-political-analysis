@@ -1,19 +1,35 @@
-# Syria · Political Analysis
+# Middle East · Political Analysis
+
+![Selected source-backed regional navigation anchors](docs/source-map.svg)
 
 An independent, public-source research toolkit by Giulio Catanzariti. Start with a source, preserve what it actually says, and keep the analyst's judgement visible.
 
-The corpus contains **39 source profiles, 21 document references, nine attributed report paraphrases, nine regional navigation anchors, eight context themes and two social-account links verified through institutional profiles**. Twelve document references were collected from two verified RSS feeds on 2 November 2026. No social posts have been collected. Seventeen selected organizational and operating-location relationships have separately cited profile evidence.
+**Syria is the first curated country collection.** Shared evidence contracts, collection tools and exports now support isolated country workspaces. The repository URL and `syria-analysis` command remain compatible; `policy-analysis` is the regional command alias. Other countries begin as empty frameworks, with no copied Syria claims or invented coverage.
+
+The reconciled corpus contains **39 source profiles, 44 document references, 14 attributed report paraphrases, 14 regional navigation anchors, eight context themes, eight analytical lenses and two social-account links verified through institutional profiles**. The atlas adds 17 explicitly qualified organizational/location relationships. Five verified RSS endpoints feed a saved reading sample; the coverage export contains 33 references, including two manually registered SANA language accounts. No social posts have been collected.
+
+The **Syria political ontology** adds 17 entity types, 15 qualified relationship types and 18 source-scoped concepts. Seven entity records and six dated normative assertion drafts provide a working example from Security Council resolution 2254 (2015). Every assertion retains its original source verb, paragraph/page locator, date, modality, qualifications and review state. These historical objectives are not current implementation findings. No human review is claimed for the drafts. [Inspect the model](docs/political-ontology.md).
 
 This is a working foundation, not comprehensive coverage or a live intelligence service. It does not infer current territorial control, assign coordinates to headlines, or score a publisher's credibility.
 
 ## Start locally
+
+### Private second-brain desk
+
+The optional **analysis desk** adds a durable, authenticated research workspace: cases, sources, stored document text, claims with exact excerpts and locators, analyst notes, actors/events/themes, search, backlinks, a relationship view, confidence rationales, revision history and private exports. Stale edits return a conflict instead of overwriting newer work. Claim citations pin the document revision used; old paraphrases are imported as attributed notes when their original excerpts are absent.
+
+Start with the [local/container run instructions](docs/deployment.md), [API contracts](docs/desk-api.md), [analytical method](docs/analysis-method.md) and [verification limits](docs/desk-verification.md). Runtime dependency versions are pinned in `requirements-desk.lock`. `Dockerfile` and `compose.yaml` support a single-instance container with persistent storage; the application refuses a missing access key and the default host port is loopback-only. Private databases, keys and backups are ignored by Git and the image build context. There is no URL fetcher, file-parser upload endpoint, automatic RAG service, API fee or cloud account dependency.
+
+**No deployment is performed by these files or workflows.** GitHub Actions runs validation, browser tests and a disposable container smoke test only. It does not publish images or create infrastructure. A cloud operator must separately supply private authentication, an HTTPS/private-access boundary, persistent storage and backups. This is a single-operator desk, not a multi-tenant production service.
+
+### Existing offline toolkit
 
 Python 3.11 or later; no runtime dependencies. Run from this repository:
 
 ```sh
 python -m venv .venv
 . .venv/bin/activate
-python -m pip install -e '.[dev]'
+python -m pip install -e '.[dev,desk,test]'
 syria-analysis validate
 python -m unittest discover -s tests -v
 ```
@@ -50,7 +66,7 @@ On Windows, use `$env:PYTHONPATH='src'` then `python -m syria_analysis build-atl
 ### Command-line research
 
 ```sh
-# Explicit refresh of the two registered, verified endpoints; titles and links only.
+# Explicit refresh of the five registered, verified endpoints; titles and links only.
 syria-analysis collect-rss --limit 6
 
 # Select a registered feed rather than scraping an arbitrary site.
@@ -67,11 +83,28 @@ syria-analysis brief --question "What does the Homs project announcement establi
 syria-analysis export-graph --format graphml
 syria-analysis export-graph --format json
 syria-analysis export-csv
+
+# Publisher → reference → explicit title terms, with English/Arabic evidence.
+syria-analysis coverage
+
+# Qualified political context; JSON-LD includes an inline context for offline use.
+policy-analysis --country SY ontology
+policy-analysis --country SY ontology --format jsonld
+
+# Create a different country collection deliberately, without copying facts.
+policy-analysis countries
+policy-analysis init-country --code LB --name Lebanon --region "Middle East"
+policy-analysis --country LB validate
+policy-analysis --country LB build-context
 ```
 
 `brief` is deterministic source assembly. The question titles the brief; it does not trigger an AI answer or claim to have answered the question. Add your own assessment with `--analyst-note`, or use the [AI research prompts](prompts/briefing.md) with an explicit model of your choice. No model service or API key is configured here.
 
 To register a public X/Twitter post reference, use `syria-analysis import-post --url PUBLIC_POST_URL --note "Why this needs review"`. Supply a real `/account/status/numeric-id` URL. This records metadata only: no post text is fetched, no publication time is guessed, and no location is inferred. Two account links are documented in [accounts.json](data/social/accounts.json); their institutional-profile provenance does not verify the authorship or content of an individual post.
+
+## Compare coverage
+
+`coverage` builds a graph of publishers, saved references, literal title keywords and explicit place mentions. Every lexical edge keeps the words that matched. This is a tool for reading questions and coverage, not a causal influence model, a bias score or an event geocoder. The lexicon and curated two-language comparisons are in [data/coverage](data/coverage); see [coverage methodology](docs/coverage.md). Eight source-backed analytical lenses in [data/context/layers.json](data/context/layers.json) cover political process, protection, displacement, services, economy, regional relations, security questions and the media environment, each with a mapping policy.
 
 ## From source to brief
 
@@ -95,6 +128,8 @@ The exported evidence graph records provenance, not political affiliations or ca
 | Curated record | [data/claims](data/claims) | Attributed paraphrases, source locators and qualifications |
 | Geography | [data/places](data/places) | Approximate navigation points with explicit location basis |
 | Context | [data/context](data/context) | Institutional context, dated document summaries and research questions |
+| Country workspaces | [data/countries.json](data/countries.json) | Explicit country selection, isolated paths and honest collection status |
+| Political model | [ontology/core.json](ontology/core.json), [data/ontology](data/ontology) | Shared types/relations, Syria concepts, qualified assertions and an initially empty human-review ledger |
 | Social sources | [data/social](data/social) | Profile-linked account provenance; initially no posts |
 | Contracts | [schemas](schemas) | JSON Schema 2020-12 record contracts |
 | Exports | [exports](exports) | JSON, JSONL, GraphML, CSV and an example source briefing |
@@ -106,6 +141,8 @@ The exported evidence graph records provenance, not political affiliations or ca
 - [Sources, coverage and refresh](docs/sources.md)
 - [Using context with an AI analyst](docs/ai-context.md)
 - [Graph semantics](docs/graph.md)
+- [Political ontology and JSON-LD semantics](docs/political-ontology.md)
+- [Extending the toolkit to another country](docs/country-workspaces.md)
 - [Research agenda](docs/research-agenda.md)
 
 The companion [Syria analysis desk](https://giulio-catanzariti-atlas.sargonx6.chatgpt.site/syria) is part of a separate personal website with private access. It provides a map, a source directory and a local briefing workspace. This repository and its public records are available independently.

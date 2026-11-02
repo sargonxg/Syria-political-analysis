@@ -7,7 +7,7 @@ syria-analysis export-graph --format json
 syria-analysis export-graph --format graphml
 ```
 
-Node types: `source`, `document`, `claim`, `place`, `context`.
+Node types: `source`, `document`, `claim`, `place`, `context`, `analytical_layer`.
 
 | Directed edge | Meaning |
 | --- | --- |
@@ -16,6 +16,8 @@ Node types: `source`, `document`, `claim`, `place`, `context`.
 | claim → place · `describes_region` | The claim concerns the stated region; the point is a navigation anchor. |
 | document → context · `context_reference` | The context record cites the document. |
 | context → source · `suggested_reading_source` | Editorial reading recommendation, not corroboration. |
+
+`analytical_layer_reference` links a document to a source-backed analytical lens. The separate coverage export uses publication and explicit title-term edges; it does not add causal links.
 
 Do not infer source ownership, political alignment, affiliation, control or causality from these edges. Two claims citing the same document are dependent observations, not independent corroboration.
 

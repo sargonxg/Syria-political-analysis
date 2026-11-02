@@ -9,6 +9,7 @@ All canonical tables are UTF-8 JSON arrays. IDs are stable within the repository
 | `claims` | `statement`, `evidence`, `place_ids`, `geographic_scope`, `qualification`, `review_state` | Evidence contains a document ID and locator. |
 | `places` | `coordinates`, `coordinate_basis`, `precision`, `geographic_scope` | Coordinates are `[longitude, latitude]`, never reversed. |
 | `context` | `record_type`, `summary`, `evidence`, `source_ids`, `scope`, `limits` | `source_ids` are suggested reading; evidence links carry support for the context record. |
+| `analytical_layers` | `title`, `purpose`, `evidence`, `questions`, `map_policy` | Eight lenses retain document references and geographic limits. |
 | `social_accounts` | `source_id`, `url`, `profile_evidence_url`, `destination_status` | Verification is of the institutional profile link only. |
 | `social_references` | `url`, `account_id`, `recorded_at`, `published_at`, `content_retrieved` | Post URL import is not content retrieval or verification. |
 

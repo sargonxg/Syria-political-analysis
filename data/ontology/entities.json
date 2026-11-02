@@ -1,0 +1,150 @@
+[
+  {
+    "id": "instrument-unsc-2254-2015",
+    "country_code": "SY",
+    "type": "LegalInstrument",
+    "label": "Security Council resolution 2254 (2015)",
+    "status": "documented_legal_instrument",
+    "source_uri": "https://digitallibrary.un.org/record/814715",
+    "evidence": [
+      {
+        "document_id": "doc-83ad8cbb868c0c88",
+        "source_id": "un-security-council",
+        "source_uri": "https://digitallibrary.un.org/record/814715",
+        "source_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+        "published_on": "2015-12-18",
+        "locator": "Operative paragraph 2, printed page 2/4",
+        "page": 2,
+        "operative_paragraph": 2,
+        "relation": "supports_paraphrase",
+        "verification_method": "Full primary PDF read; no claim implementation inferred."
+      }
+    ]
+  },
+  {
+    "id": "objective-norm-2254-op2-convening",
+    "country_code": "SY",
+    "type": "NormativeObjective",
+    "label": "Convening formal negotiations on political transition",
+    "status": "objective_expressed_in_2015_document",
+    "evidence": [
+      {
+        "document_id": "doc-83ad8cbb868c0c88",
+        "source_id": "un-security-council",
+        "source_uri": "https://digitallibrary.un.org/record/814715",
+        "source_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+        "published_on": "2015-12-18",
+        "locator": "Operative paragraph 2, printed page 2/4",
+        "page": 2,
+        "operative_paragraph": 2,
+        "relation": "supports_paraphrase",
+        "verification_method": "Full primary PDF read; no claim implementation inferred."
+      }
+    ]
+  },
+  {
+    "id": "objective-norm-2254-op4-process",
+    "country_code": "SY",
+    "type": "NormativeObjective",
+    "label": "A Syrian-led political process facilitated by the United Nations",
+    "status": "objective_expressed_in_2015_document",
+    "evidence": [
+      {
+        "document_id": "doc-83ad8cbb868c0c88",
+        "source_id": "un-security-council",
+        "source_uri": "https://digitallibrary.un.org/record/814715",
+        "source_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+        "published_on": "2015-12-18",
+        "locator": "Operative paragraph 4, printed page 2/4",
+        "page": 2,
+        "operative_paragraph": 4,
+        "relation": "supports_paraphrase",
+        "verification_method": "Full primary PDF read; no claim implementation inferred."
+      }
+    ]
+  },
+  {
+    "id": "objective-norm-2254-op4-governance",
+    "country_code": "SY",
+    "type": "NormativeObjective",
+    "label": "Credible, inclusive and non-sectarian governance",
+    "status": "objective_expressed_in_2015_document",
+    "evidence": [
+      {
+        "document_id": "doc-83ad8cbb868c0c88",
+        "source_id": "un-security-council",
+        "source_uri": "https://digitallibrary.un.org/record/814715",
+        "source_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+        "published_on": "2015-12-18",
+        "locator": "Operative paragraph 4, printed page 2/4",
+        "page": 2,
+        "operative_paragraph": 4,
+        "relation": "supports_paraphrase",
+        "verification_method": "Full primary PDF read; no claim implementation inferred."
+      }
+    ]
+  },
+  {
+    "id": "objective-norm-2254-op4-constitution",
+    "country_code": "SY",
+    "type": "NormativeObjective",
+    "label": "A schedule and process for drafting a new constitution",
+    "status": "objective_expressed_in_2015_document",
+    "evidence": [
+      {
+        "document_id": "doc-83ad8cbb868c0c88",
+        "source_id": "un-security-council",
+        "source_uri": "https://digitallibrary.un.org/record/814715",
+        "source_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+        "published_on": "2015-12-18",
+        "locator": "Operative paragraph 4, printed page 2/4",
+        "page": 2,
+        "operative_paragraph": 4,
+        "relation": "supports_paraphrase",
+        "verification_method": "Full primary PDF read; no claim implementation inferred."
+      }
+    ]
+  },
+  {
+    "id": "objective-norm-2254-op4-elections",
+    "country_code": "SY",
+    "type": "NormativeObjective",
+    "label": "Free and fair elections pursuant to a new constitution",
+    "status": "objective_expressed_in_2015_document",
+    "evidence": [
+      {
+        "document_id": "doc-83ad8cbb868c0c88",
+        "source_id": "un-security-council",
+        "source_uri": "https://digitallibrary.un.org/record/814715",
+        "source_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+        "published_on": "2015-12-18",
+        "locator": "Operative paragraph 4, printed page 2/4",
+        "page": 2,
+        "operative_paragraph": 4,
+        "relation": "supports_paraphrase",
+        "verification_method": "Full primary PDF read; no claim implementation inferred."
+      }
+    ]
+  },
+  {
+    "id": "objective-norm-2254-op5-ceasefire",
+    "country_code": "SY",
+    "type": "NormativeObjective",
+    "label": "A nationwide ceasefire linked to steps toward political transition",
+    "status": "objective_expressed_in_2015_document",
+    "evidence": [
+      {
+        "document_id": "doc-83ad8cbb868c0c88",
+        "source_id": "un-security-council",
+        "source_uri": "https://digitallibrary.un.org/record/814715",
+        "source_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+        "published_on": "2015-12-18",
+        "locator": "Operative paragraph 5, printed page 3/4",
+        "page": 3,
+        "operative_paragraph": 5,
+        "relation": "supports_paraphrase",
+        "verification_method": "Full primary PDF read; no claim implementation inferred."
+      }
+    ]
+  }
+]
