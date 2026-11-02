@@ -38,7 +38,10 @@
           "international_wire",
           "syrian_local_media",
           "think_tank",
-          "analyst"
+          "analyst",
+          "state_media",
+          "advocacy_monitoring",
+          "regional_media"
         ]
       },
       "languages": {

@@ -1,12 +1,22 @@
 # Middle East · Political Analysis
 
+Build a research notebook that keeps sources, exact passages, attributed claims and analyst judgments connected.
+
+**[Beginner quickstart](docs/quickstart.md)** · [Fictional worked case](examples/README.md) · [Cloud/container instructions](docs/deployment.md) · [Contribute](CONTRIBUTING.md)
+
+The public code and sample corpus can be read, cloned and run locally. The optional private desk is a single-operator notebook: all holders of its access key can access all cases. There is no hosted public service or automatic deployment.
+
+![Private desk using synthetic test records](docs/images/desk-desktop.png)
+
+The screenshot uses fictional browser-test records only. [Mobile view](docs/images/desk-mobile.png).
+
 ![Selected source-backed regional navigation anchors](docs/source-map.svg)
 
 An independent, public-source research toolkit by Giulio Catanzariti. Start with a source, preserve what it actually says, and keep the analyst's judgement visible.
 
 **Syria is the first curated country collection.** Shared evidence contracts, collection tools and exports now support isolated country workspaces. The repository URL and `syria-analysis` command remain compatible; `policy-analysis` is the regional command alias. Other countries begin as empty frameworks, with no copied Syria claims or invented coverage.
 
-The current corpus contains **26 source profiles, 44 document references, 14 attributed report paraphrases, 14 regional navigation anchors, eight context themes, eight analytical lenses and two social-account links verified through institutional profiles**. Five verified RSS endpoints feed a saved reading sample; the coverage export contains 33 references, including two manually registered SANA language accounts. No social posts have been collected.
+The reconciled corpus contains **39 source profiles, 44 document references, 14 attributed report paraphrases, 14 regional navigation anchors, eight context themes, eight analytical lenses and two social-account links verified through institutional profiles**. The atlas adds 17 explicitly qualified organizational/location relationships. Five verified RSS endpoints feed a saved reading sample; the coverage export contains 33 references, including two manually registered SANA language accounts. No social posts have been collected.
 
 The **Syria political ontology** adds 17 entity types, 15 qualified relationship types and 18 source-scoped concepts. Seven entity records and six dated normative assertion drafts provide a working example from Security Council resolution 2254 (2015). Every assertion retains its original source verb, paragraph/page locator, date, modality, qualifications and review state. These historical objectives are not current implementation findings. No human review is claimed for the drafts. [Inspect the model](docs/political-ontology.md).
 
@@ -14,12 +24,22 @@ This is a working foundation, not comprehensive coverage or a live intelligence 
 
 ## Start locally
 
+### Private second-brain desk
+
+The optional **analysis desk** adds a durable, authenticated research workspace: cases, sources, stored document text, claims with exact excerpts and locators, analyst notes, actors/events/themes, search, backlinks, a relationship view, confidence rationales, revision history and private exports. Stale edits return a conflict instead of overwriting newer work. Claim citations pin the document revision used; old paraphrases are imported as attributed notes when their original excerpts are absent.
+
+Start with the [local/container run instructions](docs/deployment.md), [API contracts](docs/desk-api.md), [analytical method](docs/analysis-method.md) and [verification limits](docs/desk-verification.md). Runtime dependency versions are pinned in `requirements-desk.lock`. `Dockerfile` and `compose.yaml` support a single-instance container with persistent storage; the application refuses a missing access key and the default host port is loopback-only. Private databases, keys and backups are ignored by Git and the image build context. There is no URL fetcher, file-parser upload endpoint, automatic RAG service, API fee or cloud account dependency.
+
+**No deployment is performed by these files or workflows.** GitHub Actions runs validation, browser tests and a disposable container smoke test only. It does not publish images or create infrastructure. A cloud operator must separately supply private authentication, an HTTPS/private-access boundary, persistent storage and backups. This is a single-operator desk, not a multi-tenant production service.
+
+### Existing offline toolkit
+
 Python 3.11 or later; no runtime dependencies. Run from this repository:
 
 ```sh
 python -m venv .venv
 . .venv/bin/activate
-python -m pip install -e '.[dev]'
+python -m pip install -e '.[dev,desk,test]'
 syria-analysis validate
 python -m unittest discover -s tests -v
 ```
@@ -27,6 +47,33 @@ python -m unittest discover -s tests -v
 Without installing the package, prefix commands with `PYTHONPATH=src python -m syria_analysis` in place of `syria-analysis`.
 
 ## Workflows
+
+### Interactive source atlas
+
+Open [the built atlas](exports/atlas/index.html) in a browser, or rebuild it from the current validated corpus:
+
+```sh
+syria-analysis build-atlas
+```
+
+The result is one self-contained HTML file. It works offline without a server, remote scripts, tracking, credentials or runtime dependencies. It is a curated research snapshot, not a live intelligence feed.
+
+The atlas provides:
+
+- A source-to-theme network and a separate documented-relationship graph, with keyboard-selectable records and evidence inspectors.
+- Search and combined role, language and theme filters; a complete text directory; visible strengths, limits, access caveats and profile check dates.
+- Distinct state-media and monitoring/advocacy categories, alongside local reporting, wires, research institutions, analysts and official primary sources.
+- A dated evidence desk and an explicitly unreviewed reading queue.
+- Up to three source comparisons and a Markdown worksheet export separating evidence, analyst assessment, alternative explanations and gaps. Drafts are held only in the open page and cleared by reload.
+- Light/dark themes and a responsive directory alternative to the horizontally scrollable graph.
+
+Relationship records in [relationships.json](data/sources/relationships.json) contain the exact relation, basis, original profile evidence, review date and caveat. Dashed operating-location links are distinct from solid organizational links. Unknown start/end dates remain null. A first-party disclosure is not an independent audit; no missing edge establishes independence. See [atlas documentation](docs/atlas.md) for graph semantics and checks.
+
+The additional [catalogue review](data/sources/catalogue-review.json) was read in full through Library's text interface and normalized into this repository with the original Library IDs and versions preserved. It adds 11 sources and supplementary qualifications to 14 existing profiles, including corrections-policy review, funding disclosures and access limits. It is semantic ingestion, not a claim that original file bytes were materialized. The [input methodology](docs/catalogue-methodology.md) travels with the data. `field_evidence` is a relevant-source navigation index, not certified field-level corroboration.
+
+On Windows, use `$env:PYTHONPATH='src'` then `python -m syria_analysis build-atlas` if the package is not installed. The generated file opens directly from Explorer. For browser automation tools that prohibit `file:` URLs, run `python -m http.server 8766 --bind 127.0.0.1` and visit `http://127.0.0.1:8766/exports/atlas/index.html`.
+
+### Command-line research
 
 ```sh
 # Explicit refresh of the five registered, verified endpoints; titles and links only.
@@ -82,7 +129,7 @@ flowchart LR
   R --> Q[Unreviewed reading queue]
 ```
 
-The graph records provenance, not political affiliations or causal relationships. A line means something specific: a publisher issued a record, a document supports an attributed paraphrase, or a context theme suggests further reading.
+The exported evidence graph records provenance, not political affiliations or causal relationships. A line means something specific: a publisher issued a record, a document supports an attributed paraphrase, or a context theme suggests further reading. The atlas's separate documented-relationship view uses explicitly cited institutional profile records; those edges are not added to the evidence graph or treated as corroboration.
 
 | Material | Location | What it contains |
 | --- | --- | --- |

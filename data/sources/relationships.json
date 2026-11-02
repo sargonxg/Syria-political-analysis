@@ -1,0 +1,566 @@
+{
+  "schema_version": 1,
+  "scope": "Selected relationships explicitly described by publisher or institutional profiles. No edge means no relationship documented here, not proof of independence.",
+  "entities": [
+    {
+      "id": "syrian-information-ministry",
+      "name": "Syrian Ministry of Information",
+      "type": "government_institution"
+    },
+    {
+      "id": "fadaat-media",
+      "name": "Fadaat Media",
+      "type": "media_company"
+    },
+    {
+      "id": "rudaw-company",
+      "name": "RUDAW Co. for Media Affairs Ltd.",
+      "type": "media_company"
+    },
+    {
+      "id": "syrian-forum",
+      "name": "Syrian Forum",
+      "type": "organization"
+    },
+    {
+      "id": "damascus",
+      "name": "Damascus",
+      "type": "location"
+    },
+    {
+      "id": "untoldstories",
+      "name": "UntoldStories e.V.",
+      "type": "organization"
+    },
+    {
+      "id": "potomac-media",
+      "name": "Potomac Media Production, LLC",
+      "type": "organization"
+    },
+    {
+      "id": "erbil",
+      "name": "Erbil",
+      "type": "location"
+    },
+    {
+      "id": "thomson-reuters",
+      "name": "Thomson Reuters",
+      "type": "organization"
+    },
+    {
+      "id": "mnemonic",
+      "name": "Mnemonic",
+      "type": "organization"
+    },
+    {
+      "id": "un-secretariat",
+      "name": "United Nations Secretariat",
+      "type": "organization"
+    },
+    {
+      "id": "arta-organization",
+      "name": "ARTA for Media and Development",
+      "type": "organization"
+    },
+    {
+      "id": "trt",
+      "name": "Turkish Radio and Television Corporation (TRT)",
+      "type": "organization"
+    },
+    {
+      "id": "srmg",
+      "name": "Saudi Research & Media Group (SRMG)",
+      "type": "organization"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "rel-sana-ministry",
+      "source": "sana",
+      "target": "syrian-information-ministry",
+      "type": "ministry_affiliation",
+      "label": "States ministry affiliation",
+      "basis": "publisher_self_description",
+      "statement": "SANA's institutional footer identifies an affiliation with the Ministry of Information.",
+      "evidence": [
+        {
+          "url": "https://sana.sy/en/",
+          "locator": "Institutional footer",
+          "checked_on": "2026-11-02"
+        },
+        {
+          "url": "https://sana.sy/en/contact/",
+          "locator": "Reviewed organizational / mandate page",
+          "checked_on": "2026-11-02"
+        }
+      ],
+      "checked_on": "2026-11-02",
+      "valid_from": null,
+      "valid_to": null,
+      "caveat": "First-party institutional description, not an independent ownership audit. The profile check is not the relationship's start date; it does not establish every editorial decision or a historical government's continuing control.",
+      "catalogue_provenance": {
+        "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
+        "library_version": 1,
+        "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
+        "methodology_library_version": 0,
+        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "reviewed_on": "2026-11-02",
+        "verification_scope": "Organizational evidence review, not article accuracy certification",
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
+      }
+    },
+    {
+      "id": "rel-syriatv-fadaat",
+      "source": "syria-tv",
+      "target": "fadaat-media",
+      "type": "listed_group_company",
+      "label": "Listed as group company",
+      "basis": "publisher_self_description",
+      "statement": "Fadaat Media lists Syria Television among its companies.",
+      "evidence": [
+        {
+          "url": "https://www.fadaatmedia.com/en/our-companies/syria-television",
+          "locator": "Company profile",
+          "checked_on": "2026-11-02"
+        }
+      ],
+      "checked_on": "2026-11-02",
+      "valid_from": null,
+      "valid_to": null,
+      "caveat": "The group listing does not establish ultimate beneficial owners, state sponsorship, funding amounts or article-level editorial direction."
+    },
+    {
+      "id": "rel-rudaw-company",
+      "source": "rudaw",
+      "target": "rudaw-company",
+      "type": "stated_legal_owner",
+      "label": "States legal owner",
+      "basis": "publisher_self_description",
+      "statement": "Rudaw's About page identifies RUDAW Co. for Media Affairs Ltd. as its owner.",
+      "evidence": [
+        {
+          "url": "https://www.rudaw.net/english/about",
+          "locator": "About Us: ownership",
+          "checked_on": "2026-11-02"
+        }
+      ],
+      "checked_on": "2026-11-02",
+      "valid_from": null,
+      "valid_to": null,
+      "caveat": "A publisher's legal-owner disclosure is not an independent beneficial-ownership or political-affiliation investigation.",
+      "catalogue_provenance": {
+        "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
+        "library_version": 1,
+        "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
+        "methodology_library_version": 0,
+        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "reviewed_on": "2026-11-02",
+        "verification_scope": "Organizational evidence review, not article accuracy certification",
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
+      }
+    },
+    {
+      "id": "rel-omran-forum",
+      "source": "omran",
+      "target": "syrian-forum",
+      "type": "research_programme_of",
+      "label": "Policy-research programme of",
+      "basis": "publisher_self_description",
+      "statement": "Omran describes itself as the policy-research programme of the Syrian Forum.",
+      "evidence": [
+        {
+          "url": "https://omrandirasat.org/en/about/",
+          "locator": "About Omran",
+          "checked_on": "2026-11-02"
+        }
+      ],
+      "checked_on": "2026-11-02",
+      "valid_from": null,
+      "valid_to": null,
+      "caveat": "Programme membership alone does not establish funding proportions, operational command or the stance of an individual paper."
+    },
+    {
+      "id": "rel-lister-mei",
+      "source": "charles-lister",
+      "target": "mei",
+      "type": "institutional_role",
+      "label": "Senior fellow / initiative director",
+      "basis": "institutional_profile",
+      "statement": "MEI's profile identifies Charles Lister as a senior fellow and director of its Syria Initiative.",
+      "evidence": [
+        {
+          "url": "https://mei.edu/person/charles-lister/?pg=16",
+          "locator": "Institutional biography and role",
+          "checked_on": "2026-11-02"
+        }
+      ],
+      "checked_on": "2026-11-02",
+      "valid_from": null,
+      "valid_to": null,
+      "caveat": "A documented role is not institutional endorsement of every argument or independent corroboration of an author's claims. The paginated profile was readable; the canonical URL returned 403 in the source check."
+    },
+    {
+      "id": "rel-haid-chatham",
+      "source": "haid-haid",
+      "target": "chatham-house",
+      "type": "institutional_role",
+      "label": "Consulting fellow",
+      "basis": "institutional_profile",
+      "statement": "Chatham House's biography identifies Haid Haid as a consulting fellow.",
+      "evidence": [
+        {
+          "url": "https://www.chathamhouse.org/about-us/our-people/haid-haid",
+          "locator": "Biography and current role",
+          "checked_on": "2026-11-02"
+        }
+      ],
+      "checked_on": "2026-11-02",
+      "valid_from": null,
+      "valid_to": null,
+      "caveat": "Affiliation qualifies the author's public role; it is not evidence that a factual claim has been independently checked."
+    },
+    {
+      "id": "sana-damascus",
+      "source": "sana",
+      "target": "damascus",
+      "type": "operates_in",
+      "label": "Disclosed operating location",
+      "basis": "self-description",
+      "statement": "Syrian Arab News Agency — SANA: disclosed operating location damascus.",
+      "evidence": [
+        {
+          "url": "https://sana.sy/en/contact/",
+          "locator": "Reviewed organizational / mandate page",
+          "checked_on": "2026-11-02"
+        }
+      ],
+      "checked_on": "2026-11-02",
+      "valid_from": null,
+      "valid_to": null,
+      "caveat": "Headquarters location, not a control relationship.",
+      "catalogue_provenance": {
+        "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
+        "library_version": 1,
+        "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
+        "methodology_library_version": 0,
+        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "reviewed_on": "2026-11-02",
+        "verification_scope": "Organizational evidence review, not article accuracy certification",
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
+      }
+    },
+    {
+      "id": "enab-baladi-damascus",
+      "source": "enab-baladi",
+      "target": "damascus",
+      "type": "operates_in",
+      "label": "Disclosed operating location",
+      "basis": "self-description",
+      "statement": "Enab Baladi: disclosed operating location damascus.",
+      "evidence": [
+        {
+          "url": "https://www.enabbaladi.net/about-us/",
+          "locator": "Reviewed organizational / mandate page",
+          "checked_on": "2026-11-02"
+        }
+      ],
+      "checked_on": "2026-11-02",
+      "valid_from": null,
+      "valid_to": null,
+      "caveat": "Reopened office; Syrian press licence does not establish government ownership.",
+      "catalogue_provenance": {
+        "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
+        "library_version": 1,
+        "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
+        "methodology_library_version": 0,
+        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "reviewed_on": "2026-11-02",
+        "verification_scope": "Organizational evidence review, not article accuracy certification",
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
+      }
+    },
+    {
+      "id": "syria-untold-untoldstories",
+      "source": "syria-untold",
+      "target": "untoldstories",
+      "type": "operated_by",
+      "label": "States operator",
+      "basis": "self-description",
+      "statement": "SyriaUntold: states operator untoldstories.",
+      "evidence": [
+        {
+          "url": "https://syriauntold.com/about-syria-untold/",
+          "locator": "Reviewed organizational / mandate page",
+          "checked_on": "2026-11-02"
+        }
+      ],
+      "checked_on": "2026-11-02",
+      "valid_from": null,
+      "valid_to": null,
+      "caveat": "Institutional relationship only; not evidence of control over any particular report.",
+      "catalogue_provenance": {
+        "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
+        "library_version": 1,
+        "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
+        "methodology_library_version": 0,
+        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "reviewed_on": "2026-11-02",
+        "verification_scope": "Organizational evidence review, not article accuracy certification",
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
+      }
+    },
+    {
+      "id": "north-press-potomac-media",
+      "source": "north-press",
+      "target": "potomac-media",
+      "type": "owned_by",
+      "label": "States legal owner",
+      "basis": "self-description",
+      "statement": "North Press Agency: states legal owner potomac-media.",
+      "evidence": [
+        {
+          "url": "https://npasyria.com/en/about-us/",
+          "locator": "Reviewed organizational / mandate page",
+          "checked_on": "2026-11-02"
+        }
+      ],
+      "checked_on": "2026-11-02",
+      "valid_from": null,
+      "valid_to": null,
+      "caveat": "Institutional relationship only; not evidence of control over any particular report.",
+      "catalogue_provenance": {
+        "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
+        "library_version": 1,
+        "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
+        "methodology_library_version": 0,
+        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "reviewed_on": "2026-11-02",
+        "verification_scope": "Organizational evidence review, not article accuracy certification",
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
+      }
+    },
+    {
+      "id": "rudaw-erbil",
+      "source": "rudaw",
+      "target": "erbil",
+      "type": "operates_in",
+      "label": "Disclosed operating location",
+      "basis": "self-description",
+      "statement": "Rudaw Media Network: disclosed operating location erbil.",
+      "evidence": [
+        {
+          "url": "https://www.rudaw.net/english/about",
+          "locator": "Reviewed organizational / mandate page",
+          "checked_on": "2026-11-02"
+        }
+      ],
+      "checked_on": "2026-11-02",
+      "valid_from": null,
+      "valid_to": null,
+      "caveat": "Headquarters only; geographic proximity does not prove editorial control.",
+      "catalogue_provenance": {
+        "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
+        "library_version": 1,
+        "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
+        "methodology_library_version": 0,
+        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "reviewed_on": "2026-11-02",
+        "verification_scope": "Organizational evidence review, not article accuracy certification",
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
+      }
+    },
+    {
+      "id": "reuters-thomson-reuters",
+      "source": "reuters",
+      "target": "thomson-reuters",
+      "type": "business_unit_of",
+      "label": "Business unit of",
+      "basis": "self-description",
+      "statement": "Reuters: business unit of thomson-reuters.",
+      "evidence": [
+        {
+          "url": "https://www.thomsonreuters.com/en/about-us/trust-principles",
+          "locator": "Reviewed organizational / mandate page",
+          "checked_on": "2026-11-02"
+        }
+      ],
+      "checked_on": "2026-11-02",
+      "valid_from": null,
+      "valid_to": null,
+      "caveat": "Institutional relationship only; not evidence of control over any particular report.",
+      "catalogue_provenance": {
+        "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
+        "library_version": 1,
+        "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
+        "methodology_library_version": 0,
+        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "reviewed_on": "2026-11-02",
+        "verification_scope": "Organizational evidence review, not article accuracy certification",
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
+      }
+    },
+    {
+      "id": "syrian-archive-mnemonic",
+      "source": "syrian-archive",
+      "target": "mnemonic",
+      "type": "operated_by",
+      "label": "States operator",
+      "basis": "self-description",
+      "statement": "Syrian Archive: states operator mnemonic.",
+      "evidence": [
+        {
+          "url": "https://mnemonic.org/en/about/methods/",
+          "locator": "Reviewed organizational / mandate page",
+          "checked_on": "2026-11-02"
+        }
+      ],
+      "checked_on": "2026-11-02",
+      "valid_from": null,
+      "valid_to": null,
+      "caveat": "Institutional relationship only; not evidence of control over any particular report.",
+      "catalogue_provenance": {
+        "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
+        "library_version": 1,
+        "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
+        "methodology_library_version": 0,
+        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "reviewed_on": "2026-11-02",
+        "verification_scope": "Organizational evidence review, not article accuracy certification",
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
+      }
+    },
+    {
+      "id": "ocha-un-secretariat",
+      "source": "ocha",
+      "target": "un-secretariat",
+      "type": "part_of",
+      "label": "Part of institution / group",
+      "basis": "self-description",
+      "statement": "OCHA: part of institution / group un-secretariat.",
+      "evidence": [
+        {
+          "url": "https://www.undp.org/syria/undp-and-un",
+          "locator": "Reviewed organizational / mandate page",
+          "checked_on": "2026-11-02"
+        }
+      ],
+      "checked_on": "2026-11-02",
+      "valid_from": null,
+      "valid_to": null,
+      "caveat": "Institutional relationship only; not evidence of control over any particular report.",
+      "catalogue_provenance": {
+        "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
+        "library_version": 1,
+        "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
+        "methodology_library_version": 0,
+        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "reviewed_on": "2026-11-02",
+        "verification_scope": "Organizational evidence review, not article accuracy certification",
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
+      }
+    },
+    {
+      "id": "arta-fm-arta-organization",
+      "source": "arta-fm",
+      "target": "arta-organization",
+      "type": "operated_by",
+      "label": "States operator",
+      "basis": "self-description",
+      "statement": "ARTA FM: states operator arta-organization.",
+      "evidence": [
+        {
+          "url": "https://www.artaorg.net/our-story",
+          "locator": "Reviewed organizational / mandate page",
+          "checked_on": "2026-11-02"
+        }
+      ],
+      "checked_on": "2026-11-02",
+      "valid_from": null,
+      "valid_to": null,
+      "caveat": "Institutional relationship only; not evidence of control over any particular report.",
+      "catalogue_provenance": {
+        "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
+        "library_version": 1,
+        "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
+        "methodology_library_version": 0,
+        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "reviewed_on": "2026-11-02",
+        "verification_scope": "Organizational evidence review, not article accuracy certification",
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
+      }
+    },
+    {
+      "id": "trt-world-trt",
+      "source": "trt-world",
+      "target": "trt",
+      "type": "part_of",
+      "label": "Part of institution / group",
+      "basis": "self-description",
+      "statement": "TRT World: part of institution / group trt.",
+      "evidence": [
+        {
+          "url": "https://www.trtworld.com/about",
+          "locator": "Reviewed organizational / mandate page",
+          "checked_on": "2026-11-02"
+        }
+      ],
+      "checked_on": "2026-11-02",
+      "valid_from": null,
+      "valid_to": null,
+      "caveat": "Institutional relationship only; not evidence of control over any particular report.",
+      "catalogue_provenance": {
+        "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
+        "library_version": 1,
+        "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
+        "methodology_library_version": 0,
+        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "reviewed_on": "2026-11-02",
+        "verification_scope": "Organizational evidence review, not article accuracy certification",
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
+      }
+    },
+    {
+      "id": "al-majalla-srmg",
+      "source": "al-majalla",
+      "target": "srmg",
+      "type": "part_of",
+      "label": "Part of institution / group",
+      "basis": "self-description",
+      "statement": "Al Majalla: part of institution / group srmg.",
+      "evidence": [
+        {
+          "url": "https://en.majalla.com/node/46066/about-us",
+          "locator": "Reviewed organizational / mandate page",
+          "checked_on": "2026-11-02"
+        }
+      ],
+      "checked_on": "2026-11-02",
+      "valid_from": null,
+      "valid_to": null,
+      "caveat": "Institutional relationship only; not evidence of control over any particular report.",
+      "catalogue_provenance": {
+        "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
+        "library_version": 1,
+        "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
+        "methodology_library_version": 0,
+        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "reviewed_on": "2026-11-02",
+        "verification_scope": "Organizational evidence review, not article accuracy certification",
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
+      }
+    }
+  ]
+}

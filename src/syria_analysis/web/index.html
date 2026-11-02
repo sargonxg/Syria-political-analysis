@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Syria | Source atlas</title>
+    <style>
+      /* ATLAS_CSS */
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#workspace">Skip to research workspace</a>
+    <header class="masthead">
+      <a href="#" class="brand" aria-label="Syria source atlas home"
+        >Syria<span>Political Analysis</span></a
+      >
+      <div class="mast-note">
+        Independent public-source research<br /><span id="checked"></span>
+      </div>
+      <button id="theme" aria-label="Switch to dark theme">Dark theme</button>
+    </header>
+    <main>
+      <section class="intro" aria-labelledby="title">
+        <div>
+          <p class="eyebrow">The source atlas</p>
+          <h1 id="title">
+            A clearer view of<br />Syria’s information landscape.
+          </h1>
+          <p class="lede">
+            Compare reporting, institutional positions and authored analysis.
+            Follow the evidence, understand the limits, and keep your judgment
+            visible.
+          </p>
+        </div>
+        <aside class="scope-note">
+          <span class="edition">Research edition / 01</span>
+          <p>A curated starting point.<br />Not a complete media census.</p>
+          <p>
+            Connections show research provenance and suggested reading. They do
+            not imply political alignment, control or independent corroboration.
+          </p>
+          <a href="#method">Read the method</a>
+        </aside>
+      </section>
+      <section
+        class="metrics"
+        aria-label="Corpus coverage"
+        id="metrics"
+      ></section>
+      <nav class="views" aria-label="Research views">
+        <button data-view="atlas" aria-current="page">Source atlas</button
+        ><button data-view="evidence">Evidence desk</button
+        ><button data-view="queue">Reading queue</button
+        ><button data-view="worksheet">Analyst worksheet</button>
+      </nav>
+      <div id="workspace" tabindex="-1">
+        <section id="view-atlas" class="view">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">01 / Source landscape</p>
+              <h2>Start with the source.</h2>
+            </div>
+            <button id="download-data">Download source data</button>
+          </div>
+          <form class="filters" id="filters" role="search">
+            <label class="search"
+              >Search sources<input
+                id="search"
+                type="search"
+                placeholder="Publisher, subject, language…"
+                autocomplete="off" /></label
+            ><label
+              >Source role<select id="category">
+                <option value="">All roles</option>
+              </select></label
+            ><label
+              >Language<select id="language">
+                <option value="">All languages</option>
+              </select></label
+            ><label
+              >Research theme<select id="topic">
+                <option value="">All themes</option>
+              </select></label
+            ><button type="reset">Clear filters</button>
+          </form>
+          <div class="atlas-bar">
+            <p id="result-count" role="status" aria-live="polite"></p>
+            <label
+              >Graph connections<select id="graph-mode">
+                <option value="themes">Research themes</option>
+                <option value="relationships">Documented relationships</option>
+              </select></label
+            >
+            <div class="segmented" aria-label="Source presentation">
+              <button id="network-view" aria-pressed="true">Network</button
+              ><button id="list-view" aria-pressed="false">Directory</button>
+            </div>
+          </div>
+          <div class="atlas-layout">
+            <div class="visual-column">
+              <div id="network-panel">
+                <div class="graph-caption">
+                  <strong id="graph-heading">Sources & research themes</strong
+                  ><span
+                    >Select a node to inspect its record. Tab, then Enter or
+                    Space also works.</span
+                  >
+                </div>
+                <div
+                  class="graph-scroll"
+                  tabindex="0"
+                  aria-label="Source graph. Scroll horizontally on a small screen, or choose Directory for a text view."
+                >
+                  <svg
+                    id="network"
+                    viewBox="0 0 1000 840"
+                    role="group"
+                    aria-label="Source to research theme network"
+                  ></svg>
+                </div>
+                <p class="legend" id="graph-legend">
+                  <span>□ Source entity</span><span>○ Research theme</span
+                  ><span>Line: suggested reading</span>
+                </p>
+                <p class="graph-note" id="graph-note">
+                  Positions are layout only. Node size is constant; lines are
+                  not reliability, influence or funding scores. Sources without
+                  a theme link remain visible.
+                </p>
+              </div>
+              <div id="directory" hidden></div>
+              <p id="empty" hidden>
+                No sources match these filters. Clear filters or try a broader
+                search.
+              </p>
+            </div>
+            <aside
+              id="inspector"
+              aria-label="Selected record details"
+              aria-live="polite"
+            ></aside>
+          </div>
+          <section class="coverage" aria-labelledby="coverage-heading">
+            <div>
+              <p class="eyebrow">Coverage, not credibility</p>
+              <h2 id="coverage-heading">Whose lens is represented?</h2>
+              <p>
+                Counts describe this selected register. They do not measure
+                audience reach, independence, quality or the balance of Syrian
+                opinion.
+              </p>
+            </div>
+            <div id="coverage-bars"></div>
+          </section>
+        </section>
+        <section id="view-evidence" class="view" hidden>
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">02 / Evidence desk</p>
+              <h2>Keep the chain of evidence intact.</h2>
+            </div>
+          </div>
+          <p class="section-lede">
+            Each entry is an attributed paraphrase of a dated source. A
+            published institutional announcement is evidence of what the
+            institution reported, not proof of every outcome it describes.
+          </p>
+          <div id="claims"></div>
+        </section>
+        <section id="view-queue" class="view" hidden>
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">03 / Reading queue</p>
+              <h2>References awaiting a source check.</h2>
+            </div>
+          </div>
+          <p class="section-lede">
+            Feed titles and links only. No article text has been collected.
+            Publication dates and retrieval dates are distinct; these references
+            do not corroborate the curated claims.
+          </p>
+          <div id="queue"></div>
+        </section>
+        <section id="view-worksheet" class="view" hidden>
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">04 / Analyst worksheet</p>
+              <h2>Separate the record from your assessment.</h2>
+            </div>
+          </div>
+          <p class="section-lede">
+            Build a reviewable brief, not an automatic answer. Choose sources in
+            the atlas. Draft text stays in this open page until you download it;
+            reloading clears it.
+          </p>
+          <div id="comparison"></div>
+          <form id="worksheet">
+            <label
+              >Research question<input
+                id="question"
+                placeholder="What exactly are you trying to establish?" /></label
+            ><label
+              >Source-supported record<textarea
+                id="record"
+                rows="5"
+                placeholder="Include document IDs, dates, original links and relevant passages."
+              ></textarea></label
+            ><label
+              >Analyst assessment<textarea
+                id="assessment"
+                rows="5"
+                placeholder="Explain what follows from the evidence and what remains uncertain."
+              ></textarea></label
+            ><label
+              >Alternative explanations & information gaps<textarea
+                id="gaps"
+                rows="4"
+                placeholder="Which assumptions could be wrong? What would change your assessment?"
+              ></textarea></label
+            ><button type="submit">Download Markdown brief</button>
+            <p id="worksheet-status" role="status"></p>
+          </form>
+        </section>
+      </div>
+      <section id="method" class="method">
+        <p class="eyebrow">Method & boundaries</p>
+        <h2>Qualification is part of the story.</h2>
+        <div class="method-grid">
+          <div>
+            <h3>Identity is not verification</h3>
+            <p>
+              Publisher profiles establish identity and a stated remit.
+              Self-described independence is attributed, not certified.
+              Ownership, funding, editorial stance and reporting access are
+              different questions.
+            </p>
+          </div>
+          <div>
+            <h3>Count the underlying sources</h3>
+            <p>
+              Three outlets repeating one agency, witness or press release are
+              not three independent confirmations. Check original attribution
+              and document the independence assessment.
+            </p>
+          </div>
+          <div>
+            <h3>Preserve time and geography</h3>
+            <p>
+              A publication date is not a reporting period. A source’s remit is
+              not evidence of a live correspondent in every location. This atlas
+              does not map present territorial control.
+            </p>
+          </div>
+          <div>
+            <h3>Make uncertainty inspectable</h3>
+            <p>
+              Open the profile evidence, read the access caveat and retain the
+              last check date. No numerical reliability scores are assigned.
+              Missing disclosure means unknown, not a hidden affiliation.
+            </p>
+          </div>
+        </div>
+        <p class="method-foot">
+          Source data is embedded for offline use. This page has no live feeds,
+          tracking, remote fonts or automatic refresh. Original publishers
+          retain their rights. An independent project by Giulio Catanzariti; not
+          an official UN product.
+        </p>
+      </section>
+    </main>
+    <footer>
+      <span>Syria / Political Analysis</span
+      ><a href="https://github.com/sargonxg/Syria-political-analysis"
+        >Repository & methodology</a
+      ><span id="build-date"></span>
+    </footer>
+    <noscript
+      ><p class="fatal">
+        Enable JavaScript to use the interactive atlas. The source register and
+        methodology remain available in the linked repository.
+      </p></noscript
+    >
+    <script id="atlas-data" type="application/json">
+      /* ATLAS_DATA */
+    </script>
+    <script>
+      /* ATLAS_JS */
+    </script>
+  </body>
+</html>

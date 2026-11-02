@@ -5,7 +5,7 @@
   "publisher": "Giulio Catanzariti — independent research project",
   "automatic_refresh": false,
   "counts": {
-    "sources": 26,
+    "sources": 39,
     "documents": 44,
     "claims": 14,
     "places": 14,
@@ -21,7 +21,7 @@
   "website": "https://giulio-catanzariti-atlas.sargonx6.chatgpt.site/syria",
   "scope": "Country-extensible public-source toolkit. Syria is the current curated corpus, with eight analytical lenses, title-level coverage tags and a dated political ontology exemplar.",
   "graph": {
-    "nodes": 114,
+    "nodes": 127,
     "edges": 137
   },
   "last_feed_collection_at": "2026-11-02T17:12:14.422757Z",
@@ -40,5 +40,16 @@
     "assertion_drafts": 6,
     "human_reviews_recorded": 0,
     "source_statement_day": "2015-12-18"
+  },
+  "catalogue_input": {
+    "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
+    "library_version": 1,
+    "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
+    "methodology_library_version": 0,
+    "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+    "reviewed_on": "2026-11-02",
+    "verification_scope": "Organizational evidence review, not article accuracy certification",
+    "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+    "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
   }
 }

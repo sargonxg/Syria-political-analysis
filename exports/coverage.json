@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "built_at": "2026-11-02T19:13:46.035322Z",
+  "built_at": "2026-11-02T21:18:42.760470Z",
   "title": "Syria source-coverage sample",
   "method": "Deterministic English/Arabic title-keyword matching with recorded matched terms. No article bodies, inferred incidents or causal influence scores.",
   "lexicon_version": 1,
@@ -265,6 +265,20 @@
   ],
   "sources": [
     {
+      "id": "snhr",
+      "name": "Syrian Network for Human Rights",
+      "type": "advocacy_monitoring",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "syrian-archive",
+      "name": "Syrian Archive",
+      "type": "advocacy_monitoring",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
       "id": "ocha",
       "name": "OCHA",
       "type": "official_reporting",
@@ -358,7 +372,7 @@
     {
       "id": "sana",
       "name": "Syrian Arab News Agency — SANA",
-      "type": "syrian_local_media",
+      "type": "state_media",
       "reference_count": 8,
       "status": "Collected references"
     },
@@ -443,6 +457,83 @@
       "id": "un-security-council",
       "name": "UN Security Council",
       "type": "official_reporting",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "syria-untold",
+      "name": "SyriaUntold",
+      "type": "syrian_local_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "syrian-observer",
+      "name": "The Syrian Observer",
+      "type": "syrian_local_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "kurd-online",
+      "name": "Kurd Online",
+      "type": "syrian_local_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "al-jazeera",
+      "name": "Al Jazeera",
+      "type": "regional_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "hrw",
+      "name": "Human Rights Watch",
+      "type": "advocacy_monitoring",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "amnesty",
+      "name": "Amnesty International",
+      "type": "advocacy_monitoring",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "deirezzor24",
+      "name": "DeirEzzor24",
+      "type": "syrian_local_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "rozana",
+      "name": "Rozana",
+      "type": "syrian_local_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "arta-fm",
+      "name": "ARTA FM",
+      "type": "syrian_local_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "trt-world",
+      "name": "TRT World",
+      "type": "regional_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "al-majalla",
+      "name": "Al Majalla",
+      "type": "regional_media",
       "reference_count": 0,
       "status": "Directory only; no references in this sample"
     }
@@ -1416,7 +1507,7 @@
         "id": "sana",
         "type": "source",
         "label": "Syrian Arab News Agency — SANA",
-        "category": "syrian_local_media"
+        "category": "state_media"
       },
       {
         "id": "topic-political-process",

@@ -1,0 +1,22 @@
+# Build/run instructions only. No deployment workflow or external service is enabled.
+services:
+  desk:
+    build: .
+    image: syria-analysis-desk:local
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      SYRIA_DESK_DATABASE: /data/desk.sqlite3
+      SYRIA_DESK_ACCESS_KEY: ${SYRIA_DESK_ACCESS_KEY:?Set a private access key of at least 32 characters}
+      SYRIA_DESK_ALLOWED_HOSTS: ${SYRIA_DESK_ALLOWED_HOSTS:-localhost,127.0.0.1}
+      SYRIA_DESK_SECURE_COOKIE: ${SYRIA_DESK_SECURE_COOKIE:-1}
+    volumes:
+      - desk_data:/data
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+volumes:
+  desk_data:

@@ -16,5 +16,16 @@
     "The independently checked public directory is not a claim that any private research system currently ingests these entities."
   ],
   "automatic_refresh": false,
-  "coverage_note": "26 selected entities, including two additional UN publishing bodies. A directory entry does not establish a live connection."
+  "coverage_note": "39 selected entities; 17 documented organizational/location relationships. Curated coverage, not a live connection or exhaustive catalogue.",
+  "catalogue_input": {
+    "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
+    "library_version": 1,
+    "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
+    "methodology_library_version": 0,
+    "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+    "reviewed_on": "2026-11-02",
+    "verification_scope": "Organizational evidence review, not article accuracy certification",
+    "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+    "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
+  }
 }

@@ -70,14 +70,14 @@ class DataContractTests(unittest.TestCase):
         self.data['sources'][0]['name'] = '=HYPERLINK("https://example.org")'
         with tempfile.TemporaryDirectory() as directory:
             core.csv_exports(self.data, Path(directory))
-            with (Path(directory) / 'sources.csv').open() as file:
+            with (Path(directory) / 'sources.csv').open(encoding='utf-8') as file:
                 self.assertTrue(next(csv.DictReader(file))['name'].startswith("'="))
 
     def test_cli_exports_and_invalid_corpus_return_failure(self):
         with tempfile.TemporaryDirectory() as directory:
             dest = Path(directory)
             self.assertEqual(main(['--root', str(ROOT), 'build-context', '--output', str(dest/'context.json'), '--jsonl', str(dest/'context.jsonl')]), 0)
-            rows = [json.loads(line) for line in (dest/'context.jsonl').read_text().splitlines()]
+            rows = [json.loads(line) for line in (dest/'context.jsonl').read_text(encoding='utf-8').splitlines()]
             self.assertEqual(rows[0]['record_type'], 'manifest')
             self.assertEqual(sum(1 for r in rows if r.get('table') == 'claims'), 14)
             with patch('syria_analysis.cli.load_workspace', return_value=self.data | {'documents': 'invalid'}):

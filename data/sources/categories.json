@@ -12,7 +12,7 @@
   {
     "id": "syrian_local_media",
     "label": "Syrian and regional media",
-    "count": 7
+    "count": 12
   },
   {
     "id": "think_tank",
@@ -23,5 +23,20 @@
     "id": "analyst",
     "label": "Named analysts",
     "count": 4
+  },
+  {
+    "id": "state_media",
+    "label": "State media",
+    "count": 1
+  },
+  {
+    "id": "advocacy_monitoring",
+    "label": "Monitoring and advocacy",
+    "count": 4
+  },
+  {
+    "id": "regional_media",
+    "label": "Regional media",
+    "count": 3
   }
 ]

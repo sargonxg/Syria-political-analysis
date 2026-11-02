@@ -105,7 +105,7 @@ class PoliticalModelTests(unittest.TestCase):
             pack = core.read_json(dest/'context.json')
             self.assertEqual(pack['country']['code'], 'SY')
             self.assertEqual(len(pack['political_context']['assertions']), 6)
-            rows = [json.loads(line) for line in (dest/'context.jsonl').read_text().splitlines()]
+            rows = [json.loads(line) for line in (dest/'context.jsonl').read_text(encoding='utf-8').splitlines()]
             self.assertEqual(sum(row.get('table') == 'political_assertions' for row in rows), 6)
 
 

@@ -8,3 +8,11 @@ __pycache__/
 .DS_Store
 build/
 dist/
+output/
+.playwright-cli/
+var/
+backups/
+*.sqlite3*
+*.db*
+*.key
+*.pem

@@ -2,6 +2,20 @@
   "schema_version": 1,
   "nodes": [
     {
+      "id": "snhr",
+      "type": "source",
+      "label": "Syrian Network for Human Rights",
+      "review_state": null,
+      "url": "https://snhr.org/"
+    },
+    {
+      "id": "syrian-archive",
+      "type": "source",
+      "label": "Syrian Archive",
+      "review_state": null,
+      "url": "https://syrianarchive.org/en/"
+    },
+    {
       "id": "ocha",
       "type": "source",
       "label": "OCHA",
@@ -182,6 +196,83 @@
       "label": "UN Security Council",
       "review_state": null,
       "url": "https://main.un.org/securitycouncil/en"
+    },
+    {
+      "id": "syria-untold",
+      "type": "source",
+      "label": "SyriaUntold",
+      "review_state": null,
+      "url": "https://syriauntold.com/en/"
+    },
+    {
+      "id": "syrian-observer",
+      "type": "source",
+      "label": "The Syrian Observer",
+      "review_state": null,
+      "url": "https://syrianobserver.com/"
+    },
+    {
+      "id": "kurd-online",
+      "type": "source",
+      "label": "Kurd Online",
+      "review_state": null,
+      "url": "https://english.kurd-online.com/"
+    },
+    {
+      "id": "al-jazeera",
+      "type": "source",
+      "label": "Al Jazeera",
+      "review_state": null,
+      "url": "https://www.aljazeera.com/"
+    },
+    {
+      "id": "hrw",
+      "type": "source",
+      "label": "Human Rights Watch",
+      "review_state": null,
+      "url": "https://www.hrw.org/"
+    },
+    {
+      "id": "amnesty",
+      "type": "source",
+      "label": "Amnesty International",
+      "review_state": null,
+      "url": "https://www.amnesty.org/en/"
+    },
+    {
+      "id": "deirezzor24",
+      "type": "source",
+      "label": "DeirEzzor24",
+      "review_state": null,
+      "url": "https://deirezzor24.net/en/"
+    },
+    {
+      "id": "rozana",
+      "type": "source",
+      "label": "Rozana",
+      "review_state": null,
+      "url": "https://www.rozana.fm/"
+    },
+    {
+      "id": "arta-fm",
+      "type": "source",
+      "label": "ARTA FM",
+      "review_state": null,
+      "url": "https://www.artafm.com/"
+    },
+    {
+      "id": "trt-world",
+      "type": "source",
+      "label": "TRT World",
+      "review_state": null,
+      "url": "https://www.trtworld.com/"
+    },
+    {
+      "id": "al-majalla",
+      "type": "source",
+      "label": "Al Majalla",
+      "review_state": null,
+      "url": "https://en.majalla.com/"
     },
     {
       "id": "doc-dc64b0d98ec3337d",
