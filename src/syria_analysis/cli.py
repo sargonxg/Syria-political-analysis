@@ -4,7 +4,8 @@ import argparse
 from pathlib import Path
 import sys
 import xml.etree.ElementTree as ET
-from .core import brief, context_pack, csv_exports, graph, load_workspace, validate, write_json
+from .core import brief, context_pack, csv_exports, graph, load_workspace, validate, write_json, read_json
+from .coverage import build_coverage
 from .feeds import collect
 from .social import import_reference
 
@@ -41,6 +42,8 @@ def main(argv=None):
     network = commands.add_parser('export-graph'); network.add_argument('--format', choices=['json', 'graphml'], default='json')
     network.add_argument('--output', type=Path)
     csv = commands.add_parser('export-csv'); csv.add_argument('--output', type=Path, default=Path('exports/csv'))
+    coverage = commands.add_parser('coverage', help='Build transparent source/title/topic/place-mention coverage data')
+    coverage.add_argument('--output', type=Path, default=Path('exports/coverage.json'))
     args = parser.parse_args(argv)
     try:
         root = args.root.resolve()
@@ -92,6 +95,10 @@ def main(argv=None):
             print(f"Wrote {len(data['nodes'])} nodes and {len(data['edges'])} typed edges to {path}")
         elif args.command == 'export-csv':
             csv_exports(workspace, args.output); print(f'Wrote CSV tables to {args.output}')
+        elif args.command == 'coverage':
+            data = build_coverage(workspace, read_json(root / 'data/coverage/lexicon.json'))
+            write_json(args.output, data)
+            print(f"Wrote coverage for {len(data['references'])} saved references; no event coordinates inferred.")
         return 0
     except (ValueError, OSError, KeyError) as exc:
         print(f'Error: {exc}', file=sys.stderr); return 1

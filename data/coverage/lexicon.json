@@ -1,0 +1,263 @@
+{
+  "version": 1,
+  "scope": "Transparent title-level English/Arabic reading aids; no inferred event locations.",
+  "topics": [
+    {
+      "id": "political-process",
+      "name": "Politics & institutions",
+      "terms": [
+        "diplomacy",
+        "political",
+        "government",
+        "minister",
+        "negotiations",
+        "الحكومة",
+        "الحكومه",
+        "التفاوض",
+        "سياسية",
+        "السياسية",
+        "رئيس"
+      ]
+    },
+    {
+      "id": "protection",
+      "name": "Protection & accountability",
+      "terms": [
+        "protection",
+        "rights",
+        "detention",
+        "civilian",
+        "accountability",
+        "اعتقالات",
+        "انتهاكات",
+        "المدني",
+        "الحماية",
+        "مخلفات الحرب"
+      ]
+    },
+    {
+      "id": "returns",
+      "name": "Displacement & return",
+      "terms": [
+        "return",
+        "returns",
+        "refugees",
+        "displacement",
+        "displaced",
+        "عودة",
+        "المهجرين",
+        "النازحين",
+        "لاجئين"
+      ]
+    },
+    {
+      "id": "services",
+      "name": "Services & recovery",
+      "terms": [
+        "water",
+        "schools",
+        "school",
+        "recovery",
+        "services",
+        "electricity",
+        "reopens",
+        "reconstruction",
+        "schools",
+        "مدارس",
+        "المياه",
+        "الكهرباء",
+        "إعمار",
+        "مشروع"
+      ]
+    },
+    {
+      "id": "economy",
+      "name": "Economy & livelihoods",
+      "terms": [
+        "economy",
+        "economic",
+        "bank",
+        "banking",
+        "financial",
+        "investment",
+        "oil",
+        "trade",
+        "statistics",
+        "الاقتصاد",
+        "اقتصادية",
+        "استثمار",
+        "المنتجات",
+        "صناعة",
+        "العقارية"
+      ]
+    },
+    {
+      "id": "regional",
+      "name": "Regional relations",
+      "terms": [
+        "Washington",
+        "Turkey",
+        "Iran",
+        "US",
+        "Israel",
+        "Israeli",
+        "Saudi",
+        "إسرائيل",
+        "الإسرائيلي",
+        "واشنطن",
+        "إيران",
+        "الإيرانية",
+        "الأميركية",
+        "الاحتلال"
+      ]
+    },
+    {
+      "id": "media",
+      "name": "Media & public debate",
+      "terms": [
+        "media",
+        "journalist",
+        "journalists",
+        "press",
+        "الصحفيين",
+        "إعلام",
+        "الصحافة",
+        "ترخيص",
+        "الاعتماد"
+      ]
+    }
+  ],
+  "places": [
+    {
+      "id": "damascus",
+      "name": "Damascus",
+      "terms": [
+        "Damascus",
+        "دمشق"
+      ]
+    },
+    {
+      "id": "aleppo",
+      "name": "Aleppo",
+      "terms": [
+        "Aleppo",
+        "حلب"
+      ]
+    },
+    {
+      "id": "homs",
+      "name": "Homs",
+      "terms": [
+        "Homs",
+        "حمص"
+      ]
+    },
+    {
+      "id": "daraa",
+      "name": "Daraa",
+      "terms": [
+        "Daraa",
+        "Dera",
+        "درعا"
+      ]
+    },
+    {
+      "id": "suwayda",
+      "name": "Suwayda",
+      "terms": [
+        "Suwayda",
+        "Sweida",
+        "السويداء"
+      ]
+    },
+    {
+      "id": "coast",
+      "name": "Latakia / Tartous",
+      "terms": [
+        "Latakia",
+        "Tartous",
+        "اللاذقية",
+        "طرطوس"
+      ]
+    },
+    {
+      "id": "raqqa",
+      "name": "Raqqa",
+      "terms": [
+        "Raqqa",
+        "الرقة"
+      ]
+    },
+    {
+      "id": "deir-ez-zor",
+      "name": "Deir-ez-Zor",
+      "terms": [
+        "Deir ez-Zor",
+        "Deir Ezzor",
+        "Deir-ez-Zor",
+        "دير الزور"
+      ]
+    },
+    {
+      "id": "hasakeh",
+      "name": "Al-Hasakeh",
+      "terms": [
+        "Hasakeh",
+        "Hasakah",
+        "Hasaka",
+        "الحسكة",
+        "بالحسكة"
+      ]
+    },
+    {
+      "id": "qamishli",
+      "name": "Qamishli",
+      "terms": [
+        "Qamishli",
+        "Qamishlo",
+        "القامشلي"
+      ]
+    },
+    {
+      "id": "idleb",
+      "name": "Idleb",
+      "terms": [
+        "Idleb",
+        "Idlib",
+        "إدلب"
+      ]
+    },
+    {
+      "id": "quneitra",
+      "name": "Quneitra",
+      "terms": [
+        "Quneitra",
+        "القنيطرة"
+      ]
+    },
+    {
+      "id": "al-bab",
+      "name": "Al-Bab",
+      "terms": [
+        "Al-Bab",
+        "الباب"
+      ]
+    },
+    {
+      "id": "douma",
+      "name": "Douma",
+      "terms": [
+        "Douma",
+        "دوما"
+      ]
+    },
+    {
+      "id": "nawa",
+      "name": "Nawa",
+      "terms": [
+        "Nawa",
+        "نوى"
+      ]
+    }
+  ]
+}

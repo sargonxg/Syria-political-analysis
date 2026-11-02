@@ -528,8 +528,15 @@
         "checked_on": "2026-11-02"
       }
     ],
-    "feeds": [],
-    "feed_status": "No feed verified in this check",
+    "feeds": [
+      {
+        "url": "https://www.syria.tv/rss2",
+        "verified_on": "2026-11-02",
+        "discovery_url": "https://www.syria.tv/",
+        "discovery_method": "Publisher HTML alternate RSS link; endpoint fetched and parsed with normal TLS verification."
+      }
+    ],
+    "feed_status": "Verified public RSS endpoint; manually refreshed references only.",
     "checked_on": "2026-11-02"
   },
   {
@@ -570,8 +577,15 @@
         "checked_on": "2026-11-02"
       }
     ],
-    "feeds": [],
-    "feed_status": "No feed verified; attempted English RSS endpoint returned 403.",
+    "feeds": [
+      {
+        "url": "https://npasyria.com/feed/",
+        "verified_on": "2026-11-02",
+        "discovery_url": "https://npasyria.com/",
+        "discovery_method": "Publisher HTML alternate RSS link; endpoint fetched and parsed with normal TLS verification."
+      }
+    ],
+    "feed_status": "Verified public RSS endpoint; manually refreshed references only.",
     "checked_on": "2026-11-02",
     "language_note": "Arabic was verified from the reviewed page; this is not an exhaustive language inventory."
   },
@@ -676,8 +690,15 @@
         "checked_on": "2026-11-02"
       }
     ],
-    "feeds": [],
-    "feed_status": "No feed verified in this check",
+    "feeds": [
+      {
+        "url": "https://sana.sy/en/feed/",
+        "verified_on": "2026-11-02",
+        "discovery_url": "https://sana.sy/en/",
+        "discovery_method": "Publisher HTML alternate RSS link; endpoint fetched and parsed with normal TLS verification."
+      }
+    ],
+    "feed_status": "Verified public RSS endpoint; manually refreshed references only.",
     "checked_on": "2026-11-02"
   },
   {

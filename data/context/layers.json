@@ -1,0 +1,487 @@
+[
+  {
+    "id": "layer-political-process-governance",
+    "title": "Political process and governance",
+    "record_type": "institutional_and_dated_document_context",
+    "purpose": "Follow stated mandates, public commitments and documented participation; keep institutional remit separate from implementation.",
+    "questions": [
+      "Which published commitments identify a responsible institution, consultation process and date?",
+      "Whose participation is documented, and whose participation remains a question for further research?"
+    ],
+    "evidence": [
+      {
+        "document_id": "doc-427ee7a72090ffab",
+        "source_id": "ose-syria",
+        "url": "https://specialenvoysyria.unmissions.org/en/osesg-syria/mandate",
+        "pdf_url": null,
+        "published_on": null,
+        "reporting_period": null,
+        "locator": "Mandate text on the Syrian-led process and Security Council resolution 2254.",
+        "establishes": "The office’s published institutional frame."
+      },
+      {
+        "document_id": "doc-83ad8cbb868c0c88",
+        "source_id": "un-security-council",
+        "url": "https://digitallibrary.un.org/record/814715",
+        "pdf_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+        "published_on": "2015-12-18",
+        "reporting_period": null,
+        "locator": "Resolution metadata and adoption date, 18 December 2015.",
+        "establishes": "A dated Security Council document; not a timetable of current implementation."
+      }
+    ],
+    "map_policy": {
+      "geometry": "Unpinned national or institutional card by default.",
+      "allow": [
+        "Place of a documented meeting if explicitly named and dated."
+      ],
+      "exclude": [
+        "Inferred governance boundaries",
+        "Assumed representation",
+        "Current electoral or constitutional status inferred from the 2015 resolution"
+      ]
+    },
+    "candidate_output": "A dated commitments table with issuer, exact document, affected question and follow-up reference."
+  },
+  {
+    "id": "layer-protection-accountability",
+    "title": "Protection and accountability",
+    "record_type": "dated_document_context",
+    "purpose": "Distinguish humanitarian monitoring, investigative findings, allegations and judicial decisions.",
+    "questions": [
+      "What evidentiary standard and collection method does each source use?",
+      "Does a reference describe service access, an alleged violation, an investigative finding or a court ruling?"
+    ],
+    "evidence": [
+      {
+        "document_id": "doc-195dc9a7e6f261bf",
+        "source_id": "coi-syria",
+        "url": "https://digitallibrary.un.org/record/4039851",
+        "pdf_url": "https://www.ohchr.org/sites/default/files/documents/hrbodies/hrcouncil/sessions-regular/session55/A_HRC_55_64_EN.pdf",
+        "published_on": "2024-02-09",
+        "reporting_period": {
+          "start": "2023-07-01",
+          "end": "2023-12-31"
+        },
+        "locator": "Section I, Mandate and methodology, paragraphs 1–2.",
+        "establishes": "The Commission’s methodology in a 9 February 2024 report covering July–December 2023."
+      },
+      {
+        "document_id": "doc-cf08e229dff034c3",
+        "source_id": "unhcr-syria",
+        "url": "https://data.unhcr.org/en/documents/details/124727",
+        "pdf_url": "https://data.unhcr.org/en/documents/download/124727",
+        "published_on": "2026-11-02",
+        "reporting_period": {
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "label": "PDF header January–September 2026; third-quarter narrative, with year-to-date metrics."
+        },
+        "locator": "PDF pp. 1–2 and 4–6.",
+        "establishes": "Dated protection priorities, legal support and coordination reported by UNHCR."
+      }
+    ],
+    "map_policy": {
+      "geometry": "Reported areas or representative town points with scope labels.",
+      "allow": [
+        "Dated community-service anchors",
+        "Regional monitoring context tied to the report’s methodology"
+      ],
+      "exclude": [
+        "Atrocity intensity heatmaps from mixed references",
+        "Current individual criminal liability",
+        "Unreviewed incident claims as established facts"
+      ]
+    },
+    "candidate_output": "A claim ledger displaying statement type, source, date, scope and review state."
+  },
+  {
+    "id": "layer-displacement-returns",
+    "title": "Displacement and returns",
+    "record_type": "dated_document_context",
+    "purpose": "Connect movement estimates to questions about documentation, housing, services and durable reintegration.",
+    "questions": [
+      "Which figures are estimates, registrations, movements or surveyed households?",
+      "Which conditions of return are actually measured, and which remain unknown?"
+    ],
+    "evidence": [
+      {
+        "document_id": "doc-6a6a58332d921b07",
+        "source_id": "unhcr-syria",
+        "url": "https://data.unhcr.org/en/documents/details/124686",
+        "pdf_url": "https://data.unhcr.org/en/documents/download/124686",
+        "published_on": "2026-10-29",
+        "reporting_period": {
+          "start": "2024-12-08",
+          "end": "2026-10-29"
+        },
+        "locator": "Dashboard title, reference date and estimation note.",
+        "establishes": "National estimates as of 29 October 2026 for movements since 8 December 2024."
+      },
+      {
+        "document_id": "doc-eac2d1b91e1bc5b1",
+        "source_id": "unhcr-syria",
+        "url": "https://data.unhcr.org/en/documents/details/123576",
+        "pdf_url": "https://data.unhcr.org/en/documents/download/123576",
+        "published_on": "2026-08-04",
+        "reporting_period": {
+          "start": "2026-04-01",
+          "end": "2026-06-30"
+        },
+        "locator": "Methodology and regional synthesis sections.",
+        "establishes": "Dated protection monitoring for April–June 2026; governorate coverage and representativeness require the report’s qualifications."
+      },
+      {
+        "document_id": "doc-c0031518de25cb59",
+        "source_id": "unhcr-syria",
+        "url": "https://data.unhcr.org/en/documents/details/124284",
+        "pdf_url": "https://data.unhcr.org/en/documents/download/124284",
+        "published_on": "2026-09-29",
+        "reporting_period": {
+          "start": "2026-08-01",
+          "end": "2026-08-31",
+          "label": "August 2026"
+        },
+        "locator": "PDF p. 2, civil-registry rehabilitation paragraph.",
+        "establishes": "A reported documentation-support initiative in Nawa and Haran Al-Awamid."
+      }
+    ],
+    "map_policy": {
+      "geometry": "National aggregates unpinned; regional findings labelled by their actual coverage.",
+      "allow": [
+        "Documented service or programme locations",
+        "Published aggregate boundaries if a licensed dataset is later obtained"
+      ],
+      "exclude": [
+        "Individual journeys",
+        "Inferred safe-return corridors",
+        "Treating a recorded return as proof of safety, voluntariness or permanence",
+        "Summing overlapping national and local totals"
+      ]
+    },
+    "candidate_output": "A returns-context panel with separate metric definitions and a service-access reading list."
+  },
+  {
+    "id": "layer-services-recovery",
+    "title": "Services and recovery",
+    "record_type": "dated_document_context",
+    "purpose": "Track announced, started and reported-complete projects as distinct stages.",
+    "questions": [
+      "Is the source an announcement, procurement step, implementation update or completion statement?",
+      "What evidence would show continuing access and outcomes after construction?"
+    ],
+    "evidence": [
+      {
+        "document_id": "doc-6a40b33339e9f484",
+        "source_id": "un-syria",
+        "url": "https://syria.un.org/en/324719-alwaleed-philanthropies-global-aleppo-governorate-and-un-habitat-restore-water-supply-600000",
+        "pdf_url": null,
+        "published_on": "2026-10-19",
+        "reporting_period": {
+          "start": null,
+          "end": "2026-10-19",
+          "label": "Project completion announcement published 19 October 2026"
+        },
+        "locator": "Official completion announcement, 19 October 2026.",
+        "establishes": "A reported eastern Aleppo water-supply project completion."
+      },
+      {
+        "document_id": "doc-ee2a7965970efbca",
+        "source_id": "un-syria",
+        "url": "https://syria.un.org/en/320317-launch%C2%A0jpy-1521-billion-project-drive-urban-recovery-and%C2%A0solid-waste-management-homs",
+        "pdf_url": null,
+        "published_on": "2026-07-30",
+        "reporting_period": {
+          "start": null,
+          "end": "2026-07-30",
+          "label": "Project launch announcement published 30 July 2026"
+        },
+        "locator": "Official launch announcement and stated July 2026–July 2028 implementation period.",
+        "establishes": "A Homs urban-recovery and solid-waste project announcement, not completed outcomes."
+      },
+      {
+        "document_id": "doc-dc64b0d98ec3337d",
+        "source_id": "unhcr-syria",
+        "url": "https://data.unhcr.org/en/documents/details/124572",
+        "pdf_url": "https://data.unhcr.org/en/documents/download/124572",
+        "published_on": "2026-10-20",
+        "reporting_period": {
+          "start": "2026-09-01",
+          "end": "2026-09-30"
+        },
+        "locator": "PDF p. 3, Al-Bab Vocational Training Centre paragraph.",
+        "establishes": "Rehabilitation was reported as started."
+      },
+      {
+        "document_id": "doc-cf08e229dff034c3",
+        "source_id": "unhcr-syria",
+        "url": "https://data.unhcr.org/en/documents/details/124727",
+        "pdf_url": "https://data.unhcr.org/en/documents/download/124727",
+        "published_on": "2026-11-02",
+        "reporting_period": {
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "label": "PDF header January–September 2026; third-quarter narrative, with year-to-date metrics."
+        },
+        "locator": "PDF p. 2, community-based organization initiative examples.",
+        "establishes": "A Douma community initiative is described; facility completion is not established."
+      }
+    ],
+    "map_policy": {
+      "geometry": "Town- or city-representative points, not precise facility geotags.",
+      "allow": [
+        "Explicit status badges: announced / started / reported complete / not specified"
+      ],
+      "exclude": [
+        "Projected beneficiaries treated as measured users",
+        "Assumed present operation",
+        "A point implying service coverage across a whole governorate"
+      ]
+    },
+    "candidate_output": "A small project-stage timeline showing what the published source establishes and the missing follow-up."
+  },
+  {
+    "id": "layer-regional-international-diplomacy",
+    "title": "Regional and international diplomacy",
+    "record_type": "institutional_and_dated_document_context",
+    "purpose": "Organize public diplomatic references by issuer, venue, participants, stated aims and subsequent documents.",
+    "questions": [
+      "Which statements report a meeting and which document an agreement?",
+      "Which follow-up sources would show implementation rather than diplomatic intent?"
+    ],
+    "evidence": [
+      {
+        "document_id": "doc-427ee7a72090ffab",
+        "source_id": "ose-syria",
+        "url": "https://specialenvoysyria.unmissions.org/en/osesg-syria/mandate",
+        "pdf_url": null,
+        "published_on": null,
+        "reporting_period": null,
+        "locator": "Published mandate.",
+        "establishes": "An institutional point of departure for political-process research."
+      },
+      {
+        "document_id": "doc-c0031518de25cb59",
+        "source_id": "unhcr-syria",
+        "url": "https://data.unhcr.org/en/documents/details/124284",
+        "pdf_url": "https://data.unhcr.org/en/documents/download/124284",
+        "published_on": "2026-09-29",
+        "reporting_period": {
+          "start": "2026-08-01",
+          "end": "2026-08-31",
+          "label": "August 2026"
+        },
+        "locator": "PDF p. 2, High Commissioner visit and education-coordination reporting.",
+        "establishes": "Dated humanitarian and regional coordination activities reported in the August update."
+      },
+      {
+        "document_id": "doc-dc64b0d98ec3337d",
+        "source_id": "unhcr-syria",
+        "url": "https://data.unhcr.org/en/documents/details/124572",
+        "pdf_url": "https://data.unhcr.org/en/documents/download/124572",
+        "published_on": "2026-10-20",
+        "reporting_period": {
+          "start": "2026-09-01",
+          "end": "2026-09-30"
+        },
+        "locator": "PDF p. 2, European Union representative’s visit and legal-aid clinic reference.",
+        "establishes": "A reported September visit; exact clinic coordinates are not supplied."
+      }
+    ],
+    "map_policy": {
+      "geometry": "Document cards; venue nodes only if the source explicitly names them.",
+      "allow": [
+        "Dated meeting or visit references",
+        "Links from institutions to their own public documents"
+      ],
+      "exclude": [
+        "Arrows implying allegiance, influence or military control",
+        "Equating dialogue with endorsement or agreement"
+      ]
+    },
+    "candidate_output": "A diplomacy reading list linking each stated objective to the public record needed to assess it."
+  },
+  {
+    "id": "layer-media-source-ecology",
+    "title": "Media and source ecology",
+    "record_type": "research_method_and_curated_examples",
+    "purpose": "Show what the selected outlets and institutions have published, where their references point and what topics they mention.",
+    "questions": [
+      "Which topics and places occur in this explicitly bounded collection?",
+      "How does source type, language, document genre and collection method shape what is visible?"
+    ],
+    "evidence": [
+      {
+        "document_id": "doc-dc88677149498a02",
+        "source_id": "sana",
+        "url": "https://sana.sy/en/economic/2354876/",
+        "pdf_url": null,
+        "published_on": "2026-10-31",
+        "reporting_period": null,
+        "locator": "Headline and article body, with bank-statement attribution.",
+        "establishes": "A selected English institutional-news framing."
+      },
+      {
+        "document_id": "doc-ce63e6199295ca73",
+        "source_id": "sana",
+        "url": "https://sana.sy/economy/syrian-economy/2622492/",
+        "pdf_url": null,
+        "published_on": "2026-10-31",
+        "reporting_period": null,
+        "locator": "Headline and article body under the Paris dateline.",
+        "establishes": "A same-publisher Arabic account of the reported meetings."
+      },
+      {
+        "document_id": "doc-f3c467829fc37bbf",
+        "source_id": "syria-direct",
+        "url": "https://syriadirect.org/syria-reconnects-to-global-finance-but-ordinary-syrians-are-still-struggling/",
+        "pdf_url": null,
+        "published_on": "2026-10-23",
+        "reporting_period": null,
+        "locator": "Headline, standfirst and opening interviews.",
+        "establishes": "A reported feature using a household and practical-access lens."
+      }
+    ],
+    "map_policy": {
+      "geometry": "A source → reference → topic/place graph and a coverage table.",
+      "allow": [
+        "An edge that a source published a reference",
+        "A reviewed place mention tied to a field or locator",
+        "Counts of selected references with explicit denominator"
+      ],
+      "exclude": [
+        "Inferred media influence",
+        "Fabricated causal relationships",
+        "Ideological or reliability scores",
+        "Treating language versions as independent corroboration"
+      ]
+    },
+    "candidate_output": "An explorable publication graph with source, language, genre, date and review-state filters."
+  },
+  {
+    "id": "layer-economy-livelihoods",
+    "title": "Economy and livelihoods",
+    "record_type": "dated_document_context_and_research_questions",
+    "purpose": "Keep household conditions, institutional announcements and research hypotheses visible as different kinds of evidence.",
+    "questions": [
+      "What would show whether institutional financial changes reach ordinary households and small firms?",
+      "Which documented barriers concern jobs, prices, documentation, payments or services?",
+      "Which primary legal and regulatory documents would be needed before explaining present banking restrictions?"
+    ],
+    "evidence": [
+      {
+        "document_id": "doc-cf08e229dff034c3",
+        "source_id": "unhcr-syria",
+        "url": "https://data.unhcr.org/en/documents/details/124727",
+        "pdf_url": "https://data.unhcr.org/en/documents/download/124727",
+        "published_on": "2026-11-02",
+        "reporting_period": {
+          "start": "2026-01-01",
+          "end": "2026-09-30",
+          "label": "PDF header January–September 2026; third-quarter narrative, with year-to-date metrics."
+        },
+        "locator": "PDF p. 1, protection overview and economic vulnerability.",
+        "establishes": "A dated humanitarian account of material pressures, not a macroeconomic forecast."
+      },
+      {
+        "document_id": "doc-dc64b0d98ec3337d",
+        "source_id": "unhcr-syria",
+        "url": "https://data.unhcr.org/en/documents/details/124572",
+        "pdf_url": "https://data.unhcr.org/en/documents/download/124572",
+        "published_on": "2026-10-20",
+        "reporting_period": {
+          "start": "2026-09-01",
+          "end": "2026-09-30"
+        },
+        "locator": "PDF p. 3, livelihoods and vocational rehabilitation.",
+        "establishes": "Reported livelihood-support activities."
+      },
+      {
+        "document_id": "doc-dc88677149498a02",
+        "source_id": "sana",
+        "url": "https://sana.sy/en/economic/2354876/",
+        "pdf_url": null,
+        "published_on": "2026-10-31",
+        "reporting_period": null,
+        "locator": "Article body and attribution to the bank.",
+        "establishes": "Institutional aims as presented by SANA."
+      },
+      {
+        "document_id": "doc-f3c467829fc37bbf",
+        "source_id": "syria-direct",
+        "url": "https://syriadirect.org/syria-reconnects-to-global-finance-but-ordinary-syrians-are-still-struggling/",
+        "pdf_url": null,
+        "published_on": "2026-10-23",
+        "reporting_period": null,
+        "locator": "Reported feature’s interviews and household focus.",
+        "establishes": "A contrasting set of selected reported experiences."
+      }
+    ],
+    "map_policy": {
+      "geometry": "National research questions and source cards; programme locations when explicitly sourced.",
+      "allow": [
+        "Dated locally reported livelihood programmes"
+      ],
+      "exclude": [
+        "Invented poverty or growth surfaces",
+        "Current sanctions or banking-law conclusions from news articles",
+        "Anecdotes treated as a representative survey"
+      ]
+    },
+    "candidate_output": "A short research brief tracing one practical payment or business-access question through primary rules and reported experiences."
+  },
+  {
+    "id": "layer-conflict-evidence-civilian-impact",
+    "title": "Conflict evidence and civilian impact",
+    "record_type": "research_method_and_dated_context",
+    "purpose": "Read conflict-related reporting through attribution, date, geography and civilian impact without constructing a tactical picture.",
+    "questions": [
+      "Is a claim about a historical period, a newly reported allegation or a verified document finding?",
+      "What civilian effects are directly documented, and what location precision does the source actually support?"
+    ],
+    "evidence": [
+      {
+        "document_id": "doc-195dc9a7e6f261bf",
+        "source_id": "coi-syria",
+        "url": "https://digitallibrary.un.org/record/4039851",
+        "pdf_url": "https://www.ohchr.org/sites/default/files/documents/hrbodies/hrcouncil/sessions-regular/session55/A_HRC_55_64_EN.pdf",
+        "published_on": "2024-02-09",
+        "reporting_period": {
+          "start": "2023-07-01",
+          "end": "2023-12-31"
+        },
+        "locator": "Section I, paragraphs 1–2; historical reporting period July–December 2023.",
+        "establishes": "A methodology reference, not evidence of present deployments."
+      },
+      {
+        "document_id": "doc-eac2d1b91e1bc5b1",
+        "source_id": "unhcr-syria",
+        "url": "https://data.unhcr.org/en/documents/details/123576",
+        "pdf_url": "https://data.unhcr.org/en/documents/download/123576",
+        "published_on": "2026-08-04",
+        "reporting_period": {
+          "start": "2026-04-01",
+          "end": "2026-06-30"
+        },
+        "locator": "Regional synthesis and methodology sections.",
+        "establishes": "Dated monitoring of protection concerns, with stated sample and geographic limitations."
+      }
+    ],
+    "map_policy": {
+      "geometry": "Source-dated reports and broad civilian-impact context.",
+      "allow": [
+        "Reviewed geographic report mentions",
+        "Historical context explicitly dated",
+        "Separate unreviewed-reference list outside factual map layers"
+      ],
+      "exclude": [
+        "Current frontlines",
+        "Military positions",
+        "Real-time movement or targeting information",
+        "Automatic incident maps built from headlines",
+        "Maps of alleged actor control inferred from outlet coverage"
+      ]
+    },
+    "candidate_output": "A review queue with distinct fields for allegation, attribution, verification status and supported geographic scope."
+  }
+]

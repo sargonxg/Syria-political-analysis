@@ -2,14 +2,19 @@
 
 The register selects official reporting, international wires, Syrian/regional media, think tanks and individual analysts. It documents languages, subject remit, institutional self-description, useful coverage and known limits. These are editorial descriptions with linked evidence, not numerical credibility ratings or claims of political neutrality.
 
-The initial corpus emphasizes primary UN documents on protection, reintegration, return estimates, selected services and the institutional political-process mandate. The nine map-linked paraphrases come from four primary reports or announcements. Other primary references support national or institutional context rather than points on the map.
+The initial corpus emphasizes primary UN documents on protection, reintegration, return estimates, selected services and the institutional political-process mandate. Fourteen map-linked paraphrases retain the scope of their primary reports or announcements. Other primary references support national or institutional context rather than points on the map.
 
 ## Actual connections
 
-Two public RSS endpoints were verified and collected:
+Five public RSS endpoints were verified and collected:
 
 - Syria Direct: `https://syriadirect.org/feed/`
 - Daraa 24: `https://daraa24.org/feed/`
+- Syria TV: `https://www.syria.tv/rss2`
+- North Press: `https://npasyria.com/feed/`
+- SANA English: `https://sana.sy/en/feed/`
+
+The three additional endpoints were discovered through publisher HTML `rel="alternate"` RSS links and successfully fetched and parsed with normal TLS verification. No comment feeds are collected.
 
 Each initial collection is limited to six entries per endpoint. Only short titles, original URLs and feed dates are stored. The feed does not establish the underlying report's accuracy. A publisher present in the directory is not automatically a connected feed. Reuters, AP, AFP, think tanks and UN portals are reading sources here; no private API access is claimed.
 

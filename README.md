@@ -1,8 +1,10 @@
 # Syria · Political Analysis
 
+![Selected source-backed regional navigation anchors](docs/source-map.svg)
+
 An independent, public-source research toolkit by Giulio Catanzariti. Start with a source, preserve what it actually says, and keep the analyst's judgement visible.
 
-The initial corpus contains **26 source profiles, 21 document references, nine attributed report paraphrases, nine regional navigation anchors, eight context themes and two social-account links verified through institutional profiles**. Twelve document references were collected from two verified RSS feeds on 2 November 2026. No social posts have been collected.
+The current corpus contains **26 source profiles, 44 document references, 14 attributed report paraphrases, 14 regional navigation anchors, eight context themes, eight analytical lenses and two social-account links verified through institutional profiles**. Five verified RSS endpoints feed a saved reading sample; the coverage export contains 33 references, including two manually registered SANA language accounts. No social posts have been collected.
 
 This is a working foundation, not comprehensive coverage or a live intelligence service. It does not infer current territorial control, assign coordinates to headlines, or score a publisher's credibility.
 
@@ -23,7 +25,7 @@ Without installing the package, prefix commands with `PYTHONPATH=src python -m s
 ## Workflows
 
 ```sh
-# Explicit refresh of the two registered, verified endpoints; titles and links only.
+# Explicit refresh of the five registered, verified endpoints; titles and links only.
 syria-analysis collect-rss --limit 6
 
 # Select a registered feed rather than scraping an arbitrary site.
@@ -40,11 +42,18 @@ syria-analysis brief --question "What does the Homs project announcement establi
 syria-analysis export-graph --format graphml
 syria-analysis export-graph --format json
 syria-analysis export-csv
+
+# Publisher → reference → explicit title terms, with English/Arabic evidence.
+syria-analysis coverage
 ```
 
 `brief` is deterministic source assembly. The question titles the brief; it does not trigger an AI answer or claim to have answered the question. Add your own assessment with `--analyst-note`, or use the [AI research prompts](prompts/briefing.md) with an explicit model of your choice. No model service or API key is configured here.
 
 To register a public X/Twitter post reference, use `syria-analysis import-post --url PUBLIC_POST_URL --note "Why this needs review"`. Supply a real `/account/status/numeric-id` URL. This records metadata only: no post text is fetched, no publication time is guessed, and no location is inferred. Two account links are documented in [accounts.json](data/social/accounts.json); their institutional-profile provenance does not verify the authorship or content of an individual post.
+
+## Compare coverage
+
+`coverage` builds a graph of publishers, saved references, literal title keywords and explicit place mentions. Every lexical edge keeps the words that matched. This is a tool for reading questions and coverage, not a causal influence model, a bias score or an event geocoder. The lexicon and curated two-language comparisons are in [data/coverage](data/coverage); see [coverage methodology](docs/coverage.md). Eight source-backed analytical lenses in [data/context/layers.json](data/context/layers.json) cover political process, protection, displacement, services, economy, regional relations, security questions and the media environment, each with a mapping policy.
 
 ## From source to brief
 

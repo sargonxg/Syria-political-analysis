@@ -21,7 +21,7 @@ class DataContractTests(unittest.TestCase):
             schema = core.read_json(ROOT / f'schemas/{table}.schema.json')
             Draft202012Validator.check_schema(schema)
             Draft202012Validator(schema, format_checker=FormatChecker()).validate(rows)
-        self.assertEqual(len(self.data['claims']), 9)
+        self.assertEqual(len(self.data['claims']), 14)
         self.assertEqual(self.data['social_references'], [], 'No fabricated collected posts')
 
     def test_reference_cannot_become_a_mapped_event(self):
@@ -79,7 +79,7 @@ class DataContractTests(unittest.TestCase):
             self.assertEqual(main(['--root', str(ROOT), 'build-context', '--output', str(dest/'context.json'), '--jsonl', str(dest/'context.jsonl')]), 0)
             rows = [json.loads(line) for line in (dest/'context.jsonl').read_text().splitlines()]
             self.assertEqual(rows[0]['record_type'], 'manifest')
-            self.assertEqual(sum(1 for r in rows if r.get('table') == 'claims'), 9)
+            self.assertEqual(sum(1 for r in rows if r.get('table') == 'claims'), 14)
             with patch('syria_analysis.cli.load_workspace', return_value=self.data | {'documents': 'invalid'}):
                 self.assertEqual(main(['validate']), 1)
 

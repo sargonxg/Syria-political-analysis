@@ -63,12 +63,13 @@ def load_workspace(root: Path = ROOT) -> dict:
         'context': 'data/context/topics.json',
         'social_accounts': 'data/social/accounts.json',
         'social_references': 'data/social/references.json',
+        'analytical_layers': 'data/context/layers.json',
     }
     return {key: read_json(root / name) for key, name in files.items()}
 
 def validate(workspace: dict) -> list[str]:
     errors = []
-    tables = {name: workspace.get(name, []) for name in ('sources', 'documents', 'claims', 'places', 'context', 'social_accounts', 'social_references')}
+    tables = {name: workspace.get(name, []) for name in ('sources', 'documents', 'claims', 'places', 'context', 'social_accounts', 'social_references', 'analytical_layers')}
     indexes = {}
     for name, records in tables.items():
         if not isinstance(records, list):
@@ -158,6 +159,12 @@ def validate(workspace: dict) -> list[str]:
     for account in tables['social_accounts']:
         if account.get('source_id') not in indexes['sources'] or not account.get('profile_evidence_url'):
             errors.append(f"social account {account.get('id')}: missing source/profile provenance")
+    for layer in tables['analytical_layers']:
+        if not layer.get('evidence') or not layer.get('map_policy'):
+            errors.append(f"layer {layer.get('id')}: missing evidence or map policy")
+        for ref in layer.get('evidence', []):
+            if ref.get('document_id') not in indexes['documents']:
+                errors.append(f"layer {layer.get('id')}: unknown evidence document")
     for post in tables['social_references']:
         if post.get('review_state') != 'unreviewed_reference' or post.get('place_ids'):
             errors.append(f"social {post.get('id')}: social metadata must remain an unmapped, unreviewed reference")
@@ -167,7 +174,7 @@ def validate(workspace: dict) -> list[str]:
 
 def graph(workspace: dict) -> dict:
     nodes, edges = [], []
-    for table, kind, label in [('sources', 'source', 'name'), ('documents', 'document', 'title'), ('claims', 'claim', 'statement'), ('places', 'place', 'name'), ('context', 'context', 'title')]:
+    for table, kind, label in [('sources', 'source', 'name'), ('documents', 'document', 'title'), ('claims', 'claim', 'statement'), ('places', 'place', 'name'), ('context', 'context', 'title'), ('analytical_layers', 'analytical_layer', 'title')]:
         for row in workspace[table]:
             nodes.append({'id': row['id'], 'type': kind, 'label': row[label], 'review_state': row.get('review_state'), 'url': row.get('url')})
     for doc in workspace['documents']:
@@ -182,6 +189,9 @@ def graph(workspace: dict) -> dict:
             edges.append({'source': ref['document_id'], 'target': context['id'], 'relation': 'context_reference', 'locator': ref.get('locator')})
         for sid in context.get('source_ids', []):
             edges.append({'source': context['id'], 'target': sid, 'relation': 'suggested_reading_source'})
+    for layer in workspace['analytical_layers']:
+        for ref in layer['evidence']:
+            edges.append({'source': ref['document_id'], 'target': layer['id'], 'relation': 'analytical_layer_reference', 'locator': ref.get('locator')})
     return {'schema_version': 1, 'nodes': nodes, 'edges': edges, 'semantics': 'Edges describe editorial evidence structure, not affiliations, territorial control, or verified causal relationships.'}
 
 def context_pack(workspace: dict) -> dict:

@@ -1,19 +1,40 @@
 {
-  "collected_at": "2026-11-02T16:12:36.595675Z",
+  "collected_at": "2026-11-02T17:12:14.422757Z",
   "automatic_refresh": false,
   "feeds": [
     {
       "source_id": "syria-direct",
       "url": "https://syriadirect.org/feed/",
       "status": "parsed",
-      "retrieved_at": "2026-11-02T16:12:36.595675Z",
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "item_count": 6
+    },
+    {
+      "source_id": "syria-tv",
+      "url": "https://www.syria.tv/rss2",
+      "status": "parsed",
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "item_count": 6
+    },
+    {
+      "source_id": "north-press",
+      "url": "https://npasyria.com/feed/",
+      "status": "parsed",
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
       "item_count": 6
     },
     {
       "source_id": "daraa24",
       "url": "https://daraa24.org/feed/",
       "status": "parsed",
-      "retrieved_at": "2026-11-02T16:12:36.595675Z",
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
+      "item_count": 6
+    },
+    {
+      "source_id": "sana",
+      "url": "https://sana.sy/en/feed/",
+      "status": "parsed",
+      "retrieved_at": "2026-11-02T17:12:14.422757Z",
       "item_count": 6
     }
   ]
