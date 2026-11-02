@@ -325,6 +325,20 @@ footer {
   stroke-width: 2;
   opacity: 1;
 }
+.graph-edge.location-edge {
+  stroke-dasharray: 7 5;
+}
+.review-details {
+  margin: 20px 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: var(--wash);
+}
+.review-details summary {
+  cursor: pointer;
+  font-weight: 600;
+  min-height: 44px;
+}
 .graph-node {
   cursor: pointer;
 }

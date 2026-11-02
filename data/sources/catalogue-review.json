@@ -1,0 +1,2525 @@
+{
+  "schema_version": 1,
+  "provenance": {
+    "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
+    "library_version": 1,
+    "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
+    "methodology_library_version": 0,
+    "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+    "reviewed_on": "2026-11-02",
+    "verification_scope": "Organizational evidence review, not article accuracy certification",
+    "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+  },
+  "scope": "Curated initial public-source directory; not all Syria media. Organizational documentation review, not an audit of every report.",
+  "sources": [
+    {
+      "id": "sana",
+      "name": "SANA",
+      "url": "https://sana.sy/en/",
+      "category": "official",
+      "languages": [
+        "Arabic",
+        "English"
+      ],
+      "coverage": [
+        "Syria"
+      ],
+      "editorial_focus": "Official statements and national news.",
+      "ownership_funding": {
+        "summary": "Official national agency affiliated with Syria’s Ministry of Information.",
+        "evidenceUrls": [
+          "https://sana.sy/en/contact/"
+        ],
+        "caveat": "Government primary-source role; corroborate contested event claims independently. No Assad-era affiliation is carried forward."
+      },
+      "qualifications": {
+        "transparency": "Ministry affiliation and Damascus headquarters explicitly disclosed.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "Government primary-source role; corroborate contested event claims independently. No Assad-era affiliation is carried forward."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "sana-about",
+          "url": "https://sana.sy/en/contact/",
+          "title": "SANA — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Official statements and national news.",
+          "evidenceIds": [
+            "sana-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Official national agency affiliated with Syria’s Ministry of Information.",
+          "evidenceIds": [
+            "sana-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "sana-about"
+        ],
+        "geographicCoverage": [
+          "sana-about"
+        ],
+        "editorialFocus": [
+          "sana-about"
+        ],
+        "ownershipFunding": [
+          "sana-about"
+        ],
+        "qualifications": [
+          "sana-about"
+        ]
+      }
+    },
+    {
+      "id": "enab-baladi",
+      "name": "Enab Baladi",
+      "url": "https://www.enabbaladi.net/",
+      "category": "syrian-independent",
+      "languages": [
+        "Arabic",
+        "English"
+      ],
+      "coverage": [
+        "Syria",
+        "Syrian diaspora"
+      ],
+      "editorial_focus": "Local affairs, public accountability and investigations.",
+      "ownership_funding": {
+        "summary": "Self-described nonprofit; grants, reader contributions, advertising, sponsorship and occasional production services.",
+        "evidenceUrls": [
+          "https://www.enabbaladi.net/about-us/"
+        ],
+        "caveat": "Independence is a stated mission, not an audited guarantee; current donor shares not verified."
+      },
+      "qualifications": {
+        "transparency": "Current Arabic page describes registrations, 2025 press licence and funding categories. Damascus office reopened December 2024.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "Independence is a stated mission, not an audited guarantee; current donor shares not verified."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "enab-baladi-about",
+          "url": "https://www.enabbaladi.net/about-us/",
+          "title": "Enab Baladi — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Local affairs, public accountability and investigations.",
+          "evidenceIds": [
+            "enab-baladi-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Self-described nonprofit; grants, reader contributions, advertising, sponsorship and occasional production services.",
+          "evidenceIds": [
+            "enab-baladi-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "enab-baladi-about"
+        ],
+        "geographicCoverage": [
+          "enab-baladi-about"
+        ],
+        "editorialFocus": [
+          "enab-baladi-about"
+        ],
+        "ownershipFunding": [
+          "enab-baladi-about"
+        ],
+        "qualifications": [
+          "enab-baladi-about"
+        ]
+      }
+    },
+    {
+      "id": "syria-direct",
+      "name": "Syria Direct",
+      "url": "https://syriadirect.org/",
+      "category": "syrian-independent",
+      "languages": [
+        "Arabic",
+        "English"
+      ],
+      "coverage": [
+        "Syria",
+        "Syrian diaspora"
+      ],
+      "editorial_focus": "Accountability reporting and journalist training.",
+      "ownership_funding": {
+        "summary": "Registered German nonprofit; financed through grants and projects.",
+        "evidenceUrls": [
+          "https://syriadirect.org/about-us/"
+        ],
+        "caveat": "About page updated August 2026; founding in Amman is historical, not evidence of current headquarters."
+      },
+      "qualifications": {
+        "transparency": "Leadership, board and selected partners published; grant proportions not reviewed.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "About page updated August 2026; founding in Amman is historical, not evidence of current headquarters."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "syria-direct-about",
+          "url": "https://syriadirect.org/about-us/",
+          "title": "Syria Direct — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Accountability reporting and journalist training.",
+          "evidenceIds": [
+            "syria-direct-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Registered German nonprofit; financed through grants and projects.",
+          "evidenceIds": [
+            "syria-direct-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "syria-direct-about"
+        ],
+        "geographicCoverage": [
+          "syria-direct-about"
+        ],
+        "editorialFocus": [
+          "syria-direct-about"
+        ],
+        "ownershipFunding": [
+          "syria-direct-about"
+        ],
+        "qualifications": [
+          "syria-direct-about"
+        ]
+      }
+    },
+    {
+      "id": "syria-untold",
+      "name": "SyriaUntold",
+      "url": "https://syriauntold.com/en/",
+      "category": "syrian-independent",
+      "languages": [
+        "English",
+        "Arabic"
+      ],
+      "coverage": [
+        "Syria",
+        "Syrian diaspora"
+      ],
+      "editorial_focus": "Culture, civil society and marginalized perspectives.",
+      "ownership_funding": {
+        "summary": "Registered as UntoldStories e.V., a nonprofit association in Berlin.",
+        "evidenceUrls": [
+          "https://syriauntold.com/about-syria-untold/"
+        ],
+        "caveat": "Editorial mission is self-described as secular, critical and pluralist; current donor breakdown not established."
+      },
+      "qualifications": {
+        "transparency": "Organizational description reviewed; financial detail not audited.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "Editorial mission is self-described as secular, critical and pluralist; current donor breakdown not established."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "syria-untold-about",
+          "url": "https://syriauntold.com/about-syria-untold/",
+          "title": "SyriaUntold — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Culture, civil society and marginalized perspectives.",
+          "evidenceIds": [
+            "syria-untold-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Registered as UntoldStories e.V., a nonprofit association in Berlin.",
+          "evidenceIds": [
+            "syria-untold-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "syria-untold-about"
+        ],
+        "geographicCoverage": [
+          "syria-untold-about"
+        ],
+        "editorialFocus": [
+          "syria-untold-about"
+        ],
+        "ownershipFunding": [
+          "syria-untold-about"
+        ],
+        "qualifications": [
+          "syria-untold-about"
+        ]
+      }
+    },
+    {
+      "id": "syrian-observer",
+      "name": "The Syrian Observer",
+      "url": "https://syrianobserver.com/",
+      "category": "syrian-independent",
+      "languages": [
+        "English"
+      ],
+      "coverage": [
+        "Syria"
+      ],
+      "editorial_focus": "Translation and comparison of Syrian media narratives; original commentary.",
+      "ownership_funding": {
+        "summary": "Donor-funded; names Konrad Adenauer Foundation and Swiss FDFA as current donors.",
+        "evidenceUrls": [
+          "https://syrianobserver.com/about-us"
+        ],
+        "caveat": "States that it does not verify every translated story in detail. Trace translated claims to the original source; translation is not corroboration."
+      },
+      "qualifications": {
+        "transparency": "Editorial selection approach and named donors disclosed.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "States that it does not verify every translated story in detail. Trace translated claims to the original source; translation is not corroboration."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "syrian-observer-about",
+          "url": "https://syrianobserver.com/about-us",
+          "title": "The Syrian Observer — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Translation and comparison of Syrian media narratives; original commentary.",
+          "evidenceIds": [
+            "syrian-observer-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Donor-funded; names Konrad Adenauer Foundation and Swiss FDFA as current donors.",
+          "evidenceIds": [
+            "syrian-observer-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "syrian-observer-about"
+        ],
+        "geographicCoverage": [
+          "syrian-observer-about"
+        ],
+        "editorialFocus": [
+          "syrian-observer-about"
+        ],
+        "ownershipFunding": [
+          "syrian-observer-about"
+        ],
+        "qualifications": [
+          "syrian-observer-about"
+        ]
+      }
+    },
+    {
+      "id": "north-press",
+      "name": "North Press Agency",
+      "url": "https://npasyria.com/en/",
+      "category": "northeast-kurdish",
+      "languages": [
+        "English"
+      ],
+      "coverage": [
+        "Syria",
+        "Middle East"
+      ],
+      "editorial_focus": "Syrian politics, communities and security reporting.",
+      "ownership_funding": {
+        "summary": "About page identifies Potomac Media Production, LLC as owner.",
+        "evidenceUrls": [
+          "https://npasyria.com/en/about-us/"
+        ],
+        "caveat": "Self-described independence does not settle broader political-affiliation questions. No SDF/PYD control edge asserted. Only English edition reviewed."
+      },
+      "qualifications": {
+        "transparency": "Legal owner named; beneficial ownership and funding proportions not established.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "Self-described independence does not settle broader political-affiliation questions. No SDF/PYD control edge asserted. Only English edition reviewed."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "north-press-about",
+          "url": "https://npasyria.com/en/about-us/",
+          "title": "North Press Agency — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Syrian politics, communities and security reporting.",
+          "evidenceIds": [
+            "north-press-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "About page identifies Potomac Media Production, LLC as owner.",
+          "evidenceIds": [
+            "north-press-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "north-press-about"
+        ],
+        "geographicCoverage": [
+          "north-press-about"
+        ],
+        "editorialFocus": [
+          "north-press-about"
+        ],
+        "ownershipFunding": [
+          "north-press-about"
+        ],
+        "qualifications": [
+          "north-press-about"
+        ]
+      }
+    },
+    {
+      "id": "rudaw",
+      "name": "Rudaw",
+      "url": "https://www.rudaw.net/english",
+      "category": "northeast-kurdish",
+      "languages": [
+        "Kurdish",
+        "Arabic",
+        "English",
+        "Turkish"
+      ],
+      "coverage": [
+        "Kurdistan Region of Iraq",
+        "Syria",
+        "Middle East"
+      ],
+      "editorial_focus": "Kurdish and regional affairs.",
+      "ownership_funding": {
+        "summary": "Official page identifies RUDAW Co. for Media Affairs Ltd. as owner and supporter.",
+        "evidenceUrls": [
+          "https://www.rudaw.net/english/about"
+        ],
+        "caveat": "Self-description does not resolve ultimate ownership. A UK September 2026 country note reports political/ultimate-ownership context; review before treating output as independent corroboration."
+      },
+      "qualifications": {
+        "transparency": "Company ownership and Erbil headquarters disclosed.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "Self-description does not resolve ultimate ownership. A UK September 2026 country note reports political/ultimate-ownership context; review before treating output as independent corroboration."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "rudaw-about",
+          "url": "https://www.rudaw.net/english/about",
+          "title": "Rudaw — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "rudaw-external-context",
+          "title": "UK country policy note, September 2026; updated October 6",
+          "url": "https://www.gov.uk/government/publications/iraq-country-policy-and-information-notes/country-policy-and-information-note-opposition-to-the-government-in-the-kurdistan-region-of-iraq-kri-iraq-july-2023-accessible",
+          "reviewedAt": "2026-11-02",
+          "basis": "reported"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Kurdish and regional affairs.",
+          "evidenceIds": [
+            "rudaw-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Official page identifies RUDAW Co. for Media Affairs Ltd. as owner and supporter.",
+          "evidenceIds": [
+            "rudaw-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "rudaw-about",
+          "rudaw-external-context"
+        ],
+        "geographicCoverage": [
+          "rudaw-about",
+          "rudaw-external-context"
+        ],
+        "editorialFocus": [
+          "rudaw-about",
+          "rudaw-external-context"
+        ],
+        "ownershipFunding": [
+          "rudaw-about",
+          "rudaw-external-context"
+        ],
+        "qualifications": [
+          "rudaw-about",
+          "rudaw-external-context"
+        ]
+      }
+    },
+    {
+      "id": "kurd-online",
+      "name": "Kurd Online",
+      "url": "https://english.kurd-online.com/",
+      "category": "northeast-kurdish",
+      "languages": [
+        "English"
+      ],
+      "coverage": [
+        "Northeast Syria"
+      ],
+      "editorial_focus": "Regional news, Kurdish culture and statements from political and rights groups.",
+      "ownership_funding": {
+        "summary": "Describes a volunteer-journalist operation. Legal ownership and donor structure not established.",
+        "evidenceUrls": [
+          "https://english.kurd-online.com/about-us/"
+        ],
+        "caveat": "Publication of submitted statements is not independent verification of their claims. Only English edition reviewed."
+      },
+      "qualifications": {
+        "transparency": "Public mission and volunteer model disclosed; funding detail incomplete.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "Publication of submitted statements is not independent verification of their claims. Only English edition reviewed."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "kurd-online-about",
+          "url": "https://english.kurd-online.com/about-us/",
+          "title": "Kurd Online — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Regional news, Kurdish culture and statements from political and rights groups.",
+          "evidenceIds": [
+            "kurd-online-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Describes a volunteer-journalist operation. Legal ownership and donor structure not established.",
+          "evidenceIds": [
+            "kurd-online-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": true
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "kurd-online-about"
+        ],
+        "geographicCoverage": [
+          "kurd-online-about"
+        ],
+        "editorialFocus": [
+          "kurd-online-about"
+        ],
+        "ownershipFunding": [
+          "kurd-online-about"
+        ],
+        "qualifications": [
+          "kurd-online-about"
+        ]
+      }
+    },
+    {
+      "id": "reuters",
+      "name": "Reuters",
+      "url": "https://www.reuters.com/",
+      "category": "international",
+      "languages": [
+        "English"
+      ],
+      "coverage": [
+        "Global",
+        "Syria"
+      ],
+      "editorial_focus": "International newswire and breaking news.",
+      "ownership_funding": {
+        "summary": "Reuters news business within Thomson Reuters; Trust Principles provide institutional safeguards.",
+        "evidenceUrls": [
+          "https://www.thomsonreuters.com/en/about-us/trust-principles"
+        ],
+        "caveat": "A wire’s institutional safeguards do not verify each Syria claim; inspect sourcing and later updates. Language list records reviewed English edition only."
+      },
+      "qualifications": {
+        "transparency": "Published Trust Principles and journalistic standards.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "A wire’s institutional safeguards do not verify each Syria claim; inspect sourcing and later updates. Language list records reviewed English edition only."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "reuters-about",
+          "url": "https://www.thomsonreuters.com/en/about-us/trust-principles",
+          "title": "Reuters — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "reuters-standards",
+          "title": "Reuters Journalistic Standards",
+          "url": "https://reutersagency.com/about/standards-values/",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "reuters-coverage",
+          "title": "About Reuters",
+          "url": "https://reutersagency.com/about/",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "International newswire and breaking news.",
+          "evidenceIds": [
+            "reuters-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Reuters news business within Thomson Reuters; Trust Principles provide institutional safeguards.",
+          "evidenceIds": [
+            "reuters-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "reuters-about",
+          "reuters-standards",
+          "reuters-coverage"
+        ],
+        "geographicCoverage": [
+          "reuters-about",
+          "reuters-standards",
+          "reuters-coverage"
+        ],
+        "editorialFocus": [
+          "reuters-about",
+          "reuters-standards",
+          "reuters-coverage"
+        ],
+        "ownershipFunding": [
+          "reuters-about",
+          "reuters-standards",
+          "reuters-coverage"
+        ],
+        "qualifications": [
+          "reuters-about",
+          "reuters-standards",
+          "reuters-coverage"
+        ]
+      }
+    },
+    {
+      "id": "ap",
+      "name": "Associated Press",
+      "url": "https://apnews.com/",
+      "category": "international",
+      "languages": [
+        "English"
+      ],
+      "coverage": [
+        "Global",
+        "Syria"
+      ],
+      "editorial_focus": "International newswire, photography and breaking news.",
+      "ownership_funding": {
+        "summary": "Independent news cooperative of US newspapers and broadcasters.",
+        "evidenceUrls": [
+          "https://www.ap.org/about/"
+        ],
+        "caveat": "A wire report may repeat a party’s claim; distinguish attribution from reporter verification. Only English edition reviewed."
+      },
+      "qualifications": {
+        "transparency": "Public organizational description and news-values policy.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "A wire report may repeat a party’s claim; distinguish attribution from reporter verification. Only English edition reviewed."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "ap-about",
+          "url": "https://www.ap.org/about/",
+          "title": "Associated Press — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "ap-standards",
+          "title": "AP news values and principles",
+          "url": "https://www.ap.org/about/news-values-and-principles/",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "ap-syria-coverage",
+          "url": "https://apnews.com/hub/syria",
+          "title": "Published Syria coverage / country resource",
+          "reviewedAt": "2026-11-02",
+          "basis": "observed-publication"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "International newswire, photography and breaking news.",
+          "evidenceIds": [
+            "ap-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Independent news cooperative of US newspapers and broadcasters.",
+          "evidenceIds": [
+            "ap-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "ap-about",
+          "ap-standards"
+        ],
+        "geographicCoverage": [
+          "ap-about",
+          "ap-standards",
+          "ap-syria-coverage"
+        ],
+        "editorialFocus": [
+          "ap-about",
+          "ap-standards"
+        ],
+        "ownershipFunding": [
+          "ap-about",
+          "ap-standards"
+        ],
+        "qualifications": [
+          "ap-about",
+          "ap-standards"
+        ]
+      }
+    },
+    {
+      "id": "afp",
+      "name": "Agence France-Presse",
+      "url": "https://www.afp.com/en",
+      "category": "international",
+      "languages": [
+        "English"
+      ],
+      "coverage": [
+        "Global",
+        "Syria"
+      ],
+      "editorial_focus": "Multimedia newswire and fact checking.",
+      "ownership_funding": {
+        "summary": "Special legal status under French law with statutory independence safeguards.",
+        "evidenceUrls": [
+          "https://factcheck.afp.com/about-afp"
+        ],
+        "caveat": "Statutory safeguards are not an article-level reliability guarantee; full financing mix not audited. Only English pages reviewed."
+      },
+      "qualifications": {
+        "transparency": "Public statute explanation, charter and standards.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "Statutory safeguards are not an article-level reliability guarantee; full financing mix not audited. Only English pages reviewed."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "afp-about",
+          "url": "https://factcheck.afp.com/about-afp",
+          "title": "Agence France-Presse — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "afp-charter",
+          "title": "AFP Charters",
+          "url": "https://www.afp.com/en/afp-charters",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "afp-syria-coverage",
+          "url": "https://www.afp.com/ar/node/3844630",
+          "title": "Published Syria coverage / country resource",
+          "reviewedAt": "2026-11-02",
+          "basis": "observed-publication"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Multimedia newswire and fact checking.",
+          "evidenceIds": [
+            "afp-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Special legal status under French law with statutory independence safeguards.",
+          "evidenceIds": [
+            "afp-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "afp-about",
+          "afp-charter"
+        ],
+        "geographicCoverage": [
+          "afp-about",
+          "afp-charter",
+          "afp-syria-coverage"
+        ],
+        "editorialFocus": [
+          "afp-about",
+          "afp-charter"
+        ],
+        "ownershipFunding": [
+          "afp-about",
+          "afp-charter"
+        ],
+        "qualifications": [
+          "afp-about",
+          "afp-charter"
+        ]
+      }
+    },
+    {
+      "id": "al-jazeera",
+      "name": "Al Jazeera",
+      "url": "https://www.aljazeera.com/",
+      "category": "regional",
+      "languages": [
+        "English",
+        "Arabic"
+      ],
+      "coverage": [
+        "Middle East",
+        "Global",
+        "Syria"
+      ],
+      "editorial_focus": "Regional and international broadcast/digital coverage.",
+      "ownership_funding": {
+        "summary": "Partly Qatari-government funded; network describes its legal form as a private foundation for public benefit.",
+        "evidenceUrls": [
+          "https://network.aljazeera.net/en/more/faq",
+          "https://www.aljazeera.com/about-us"
+        ],
+        "caveat": "Funding and legal form are different from editorial control; no government-control edge inferred. Language services can have different editorial selections."
+      },
+      "qualifications": {
+        "transparency": "Network publishes legal-form explanation and editorial standards.",
+        "corrections": "Published ethics code commits to acknowledging and correcting mistakes.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "Funding and legal form are different from editorial control; no government-control edge inferred. Language services can have different editorial selections."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "al-jazeera-about",
+          "url": "https://network.aljazeera.net/en/more/faq",
+          "title": "Al Jazeera — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "al-jazeera-funding",
+          "title": "About Al Jazeera",
+          "url": "https://www.aljazeera.com/about-us",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "al-jazeera-standards",
+          "title": "Network code of ethics and standards",
+          "url": "https://network.aljazeera.net/en/our-values/standards",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Regional and international broadcast/digital coverage.",
+          "evidenceIds": [
+            "al-jazeera-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Partly Qatari-government funded; network describes its legal form as a private foundation for public benefit.",
+          "evidenceIds": [
+            "al-jazeera-about",
+            "al-jazeera-funding"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "al-jazeera-about",
+          "al-jazeera-funding",
+          "al-jazeera-standards"
+        ],
+        "geographicCoverage": [
+          "al-jazeera-about",
+          "al-jazeera-funding",
+          "al-jazeera-standards"
+        ],
+        "editorialFocus": [
+          "al-jazeera-about",
+          "al-jazeera-funding",
+          "al-jazeera-standards"
+        ],
+        "ownershipFunding": [
+          "al-jazeera-about",
+          "al-jazeera-funding",
+          "al-jazeera-standards"
+        ],
+        "qualifications": [
+          "al-jazeera-about",
+          "al-jazeera-funding",
+          "al-jazeera-standards"
+        ]
+      }
+    },
+    {
+      "id": "snhr",
+      "name": "Syrian Network for Human Rights",
+      "url": "https://snhr.org/",
+      "category": "rights-monitoring",
+      "languages": [
+        "Arabic",
+        "English"
+      ],
+      "coverage": [
+        "Syria"
+      ],
+      "editorial_focus": "Documentation of violations and accountability advocacy.",
+      "ownership_funding": {
+        "summary": "Describes itself as a nongovernmental nonprofit human-rights organization.",
+        "evidenceUrls": [
+          "https://snhr.org/about-us/"
+        ],
+        "caveat": "Advocacy/documentation source, not a general newswire. Caseloads and casualty figures need definitions, reporting period and corroboration. Donor breakdown not established."
+      },
+      "qualifications": {
+        "transparency": "Public mandate and data-sharing description; funding not established here.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "Advocacy/documentation source, not a general newswire. Caseloads and casualty figures need definitions, reporting period and corroboration. Donor breakdown not established."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "snhr-about",
+          "url": "https://snhr.org/about-us/",
+          "title": "Syrian Network for Human Rights — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Documentation of violations and accountability advocacy.",
+          "evidenceIds": [
+            "snhr-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Describes itself as a nongovernmental nonprofit human-rights organization.",
+          "evidenceIds": [
+            "snhr-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "snhr-about"
+        ],
+        "geographicCoverage": [
+          "snhr-about"
+        ],
+        "editorialFocus": [
+          "snhr-about"
+        ],
+        "ownershipFunding": [
+          "snhr-about"
+        ],
+        "qualifications": [
+          "snhr-about"
+        ]
+      }
+    },
+    {
+      "id": "syrian-archive",
+      "name": "Syrian Archive",
+      "url": "https://syrianarchive.org/en/",
+      "category": "rights-monitoring",
+      "languages": [
+        "English"
+      ],
+      "coverage": [
+        "Syria"
+      ],
+      "editorial_focus": "Preservation and analysis of digital evidence of violations.",
+      "ownership_funding": {
+        "summary": "Operated by nonprofit Mnemonic.",
+        "evidenceUrls": [
+          "https://syrianarchive.org/en/about/data-use-policy/"
+        ],
+        "caveat": "Archived material is not automatically authenticated; distinguish preserved items from completed investigations. Only English pages reviewed."
+      },
+      "qualifications": {
+        "transparency": "Operator and data-use policy disclosed; methods published.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "Archived material is not automatically authenticated; distinguish preserved items from completed investigations. Only English pages reviewed."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "syrian-archive-about",
+          "url": "https://syrianarchive.org/en/about/data-use-policy/",
+          "title": "Syrian Archive — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "syrian-archive-methods",
+          "title": "Mnemonic methods",
+          "url": "https://mnemonic.org/en/about/methods/",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "syrian-archive-current",
+          "title": "Mnemonic programmes",
+          "url": "https://mnemonic.org/",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Preservation and analysis of digital evidence of violations.",
+          "evidenceIds": [
+            "syrian-archive-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Operated by nonprofit Mnemonic.",
+          "evidenceIds": [
+            "syrian-archive-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "syrian-archive-about",
+          "syrian-archive-methods",
+          "syrian-archive-current"
+        ],
+        "geographicCoverage": [
+          "syrian-archive-about",
+          "syrian-archive-methods",
+          "syrian-archive-current"
+        ],
+        "editorialFocus": [
+          "syrian-archive-about",
+          "syrian-archive-methods",
+          "syrian-archive-current"
+        ],
+        "ownershipFunding": [
+          "syrian-archive-about",
+          "syrian-archive-methods",
+          "syrian-archive-current"
+        ],
+        "qualifications": [
+          "syrian-archive-about",
+          "syrian-archive-methods",
+          "syrian-archive-current"
+        ]
+      }
+    },
+    {
+      "id": "hrw",
+      "name": "Human Rights Watch",
+      "url": "https://www.hrw.org/",
+      "category": "rights-monitoring",
+      "languages": [
+        "English"
+      ],
+      "coverage": [
+        "Global",
+        "Syria"
+      ],
+      "editorial_focus": "Human-rights investigations and advocacy.",
+      "ownership_funding": {
+        "summary": "States that it refuses government funding and reviews donations.",
+        "evidenceUrls": [
+          "https://www.hrw.org/about-us"
+        ],
+        "caveat": "Rights-advocacy organization; report-specific methodology and access matter. Only English pages reviewed."
+      },
+      "qualifications": {
+        "transparency": "Publishes research/advocacy mission and funding policy.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "Rights-advocacy organization; report-specific methodology and access matter. Only English pages reviewed."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "hrw-about",
+          "url": "https://www.hrw.org/about-us",
+          "title": "Human Rights Watch — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "hrw-syria-coverage",
+          "url": "https://www.hrw.org/middle-east/n-africa/syria",
+          "title": "Published Syria coverage / country resource",
+          "reviewedAt": "2026-11-02",
+          "basis": "observed-publication"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Human-rights investigations and advocacy.",
+          "evidenceIds": [
+            "hrw-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "States that it refuses government funding and reviews donations.",
+          "evidenceIds": [
+            "hrw-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "hrw-about"
+        ],
+        "geographicCoverage": [
+          "hrw-about",
+          "hrw-syria-coverage"
+        ],
+        "editorialFocus": [
+          "hrw-about"
+        ],
+        "ownershipFunding": [
+          "hrw-about"
+        ],
+        "qualifications": [
+          "hrw-about"
+        ]
+      }
+    },
+    {
+      "id": "amnesty",
+      "name": "Amnesty International",
+      "url": "https://www.amnesty.org/en/",
+      "category": "rights-monitoring",
+      "languages": [
+        "English"
+      ],
+      "coverage": [
+        "Global",
+        "Syria"
+      ],
+      "editorial_focus": "Human-rights research and campaigns.",
+      "ownership_funding": {
+        "summary": "Mostly individual contributions; says it does not accept government or party funds for human-rights research.",
+        "evidenceUrls": [
+          "https://www.amnesty.eu/about-our-office/faqs/"
+        ],
+        "caveat": "Rights-advocacy organization; distinguish findings from campaign demands. Review report-specific methods. Only English pages reviewed."
+      },
+      "qualifications": {
+        "transparency": "Research review and funding policies published.",
+        "corrections": "FAQ explicitly states that mistakes receive corrections.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "Rights-advocacy organization; distinguish findings from campaign demands. Review report-specific methods. Only English pages reviewed."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "amnesty-about",
+          "url": "https://www.amnesty.eu/about-our-office/faqs/",
+          "title": "Amnesty International — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "amnesty-syria-coverage",
+          "url": "https://www.amnesty.org/en/location/middle-east-and-north-africa/middle-east/syria/",
+          "title": "Published Syria coverage / country resource",
+          "reviewedAt": "2026-11-02",
+          "basis": "observed-publication"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Human-rights research and campaigns.",
+          "evidenceIds": [
+            "amnesty-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Mostly individual contributions; says it does not accept government or party funds for human-rights research.",
+          "evidenceIds": [
+            "amnesty-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "amnesty-about"
+        ],
+        "geographicCoverage": [
+          "amnesty-about",
+          "amnesty-syria-coverage"
+        ],
+        "editorialFocus": [
+          "amnesty-about"
+        ],
+        "ownershipFunding": [
+          "amnesty-about"
+        ],
+        "qualifications": [
+          "amnesty-about"
+        ]
+      }
+    },
+    {
+      "id": "ocha",
+      "name": "UN OCHA — Syria",
+      "url": "https://www.unocha.org/syria",
+      "category": "un-primary",
+      "languages": [
+        "English"
+      ],
+      "coverage": [
+        "Syria"
+      ],
+      "editorial_focus": "Humanitarian coordination, access and response information.",
+      "ownership_funding": {
+        "summary": "Part of the United Nations Secretariat.",
+        "evidenceUrls": [
+          "https://www.undp.org/syria/undp-and-un"
+        ],
+        "caveat": "Institutional humanitarian source, not independent news media. Needs estimates and operational data require date/method checks."
+      },
+      "qualifications": {
+        "transparency": "Mandate and institutional role described by UNDP.",
+        "corrections": "Not assessed; statistical revisions are not necessarily corrections.",
+        "access": "OCHA country page returned 403 in this review; mandate checked through UNDP and UN Syria.",
+        "caveats": [
+          "Institutional humanitarian source, not independent news media. Needs estimates and operational data require date/method checks."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "ocha-about",
+          "url": "https://www.undp.org/syria/undp-and-un",
+          "title": "UN OCHA — Syria — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "ocha-country-list",
+          "title": "UN entities in Syria",
+          "url": "https://syria.un.org/en/about/un-entities-in-country",
+          "reviewedAt": "2026-11-02",
+          "basis": "documented"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Humanitarian coordination, access and response information.",
+          "evidenceIds": [
+            "ocha-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Part of the United Nations Secretariat.",
+          "evidenceIds": [
+            "ocha-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "partial",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "ocha-about",
+          "ocha-country-list"
+        ],
+        "geographicCoverage": [
+          "ocha-about",
+          "ocha-country-list"
+        ],
+        "editorialFocus": [
+          "ocha-about",
+          "ocha-country-list"
+        ],
+        "ownershipFunding": [
+          "ocha-about",
+          "ocha-country-list"
+        ],
+        "qualifications": [
+          "ocha-about",
+          "ocha-country-list"
+        ]
+      }
+    },
+    {
+      "id": "un-syria-coi",
+      "name": "UN Commission of Inquiry on Syria",
+      "url": "https://www.ohchr.org/en/hr-bodies/hrc/iici-syria/independent-international-commission",
+      "category": "un-primary",
+      "languages": [
+        "English"
+      ],
+      "coverage": [
+        "Syria"
+      ],
+      "editorial_focus": "Investigations of alleged human-rights and humanitarian-law violations.",
+      "ownership_funding": {
+        "summary": "Independent commission mandated by the UN Human Rights Council.",
+        "evidenceUrls": [
+          "https://knowledgegateway.ohchr.org/research-guides/commissions-of-inquiry/pvon8qil4vbrd6d9ji44h2p2"
+        ],
+        "caveat": "Mandate is not a criminal conviction. Use each report’s evidentiary threshold and access limitations."
+      },
+      "qualifications": {
+        "transparency": "Public mandate, reports and renewal history; 2026 mandate reviewed.",
+        "corrections": "Not assessed.",
+        "access": "UN page describes capacity constraints and post-December 2024 access; access varies by investigation.",
+        "caveats": [
+          "Mandate is not a criminal conviction. Use each report’s evidentiary threshold and access limitations."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "un-syria-coi-about",
+          "url": "https://knowledgegateway.ohchr.org/research-guides/commissions-of-inquiry/pvon8qil4vbrd6d9ji44h2p2",
+          "title": "UN Commission of Inquiry on Syria — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Investigations of alleged human-rights and humanitarian-law violations.",
+          "evidenceIds": [
+            "un-syria-coi-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Independent commission mandated by the UN Human Rights Council.",
+          "evidenceIds": [
+            "un-syria-coi-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "un-syria-coi-about"
+        ],
+        "geographicCoverage": [
+          "un-syria-coi-about"
+        ],
+        "editorialFocus": [
+          "un-syria-coi-about"
+        ],
+        "ownershipFunding": [
+          "un-syria-coi-about"
+        ],
+        "qualifications": [
+          "un-syria-coi-about"
+        ]
+      }
+    },
+    {
+      "id": "unhcr",
+      "name": "UNHCR — Syria",
+      "url": "https://www.unhcr.org/sy/",
+      "category": "un-primary",
+      "languages": [
+        "English"
+      ],
+      "coverage": [
+        "Syria",
+        "Refugee-hosting countries"
+      ],
+      "editorial_focus": "Refugee protection, displacement and returns information.",
+      "ownership_funding": {
+        "summary": "United Nations refugee agency.",
+        "evidenceUrls": [
+          "https://syria.un.org/en/about/un-entities-in-country"
+        ],
+        "caveat": "Operational/statistical source, not news media. Registered populations are not necessarily total populations; check definitions and reporting date."
+      },
+      "qualifications": {
+        "transparency": "Institutional mandate confirmed via UN Syria.",
+        "corrections": "Not assessed; distinguish revisions from error corrections.",
+        "access": "Country site returned 429 during review; global Syria emergency page and UN institutional description accessible.",
+        "caveats": [
+          "Operational/statistical source, not news media. Registered populations are not necessarily total populations; check definitions and reporting date."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "unhcr-about",
+          "url": "https://syria.un.org/en/about/un-entities-in-country",
+          "title": "UNHCR — Syria — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "unhcr-syria-coverage",
+          "url": "https://www.unhcr.org/emergencies/syria-emergency",
+          "title": "Published Syria coverage / country resource",
+          "reviewedAt": "2026-11-02",
+          "basis": "observed-publication"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Refugee protection, displacement and returns information.",
+          "evidenceIds": [
+            "unhcr-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "United Nations refugee agency.",
+          "evidenceIds": [
+            "unhcr-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "partial",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "unhcr-about"
+        ],
+        "geographicCoverage": [
+          "unhcr-about",
+          "unhcr-syria-coverage"
+        ],
+        "editorialFocus": [
+          "unhcr-about"
+        ],
+        "ownershipFunding": [
+          "unhcr-about"
+        ],
+        "qualifications": [
+          "unhcr-about"
+        ]
+      }
+    },
+    {
+      "id": "daraa24",
+      "name": "Daraa 24",
+      "url": "https://daraa24.org/",
+      "category": "syrian-independent",
+      "languages": [
+        "Arabic"
+      ],
+      "coverage": [
+        "Daraa",
+        "Southern Syria"
+      ],
+      "editorial_focus": "Local reporting and documentation of violations in southern Syria.",
+      "ownership_funding": {
+        "summary": "Describes itself as independent of political or military entities; legal ownership and funding not established.",
+        "evidenceUrls": [
+          "https://daraa24.org/about-us/"
+        ],
+        "caveat": "Independence is a self-description, not externally audited. Local access does not guarantee completeness."
+      },
+      "qualifications": {
+        "transparency": "Public bilingual institutional page describes origins, coverage and principles.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "Independence is a self-description, not externally audited. Local access does not guarantee completeness."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "daraa24-about",
+          "url": "https://daraa24.org/about-us/",
+          "title": "Daraa 24 — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Local reporting and documentation of violations in southern Syria.",
+          "evidenceIds": [
+            "daraa24-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Describes itself as independent of political or military entities; legal ownership and funding not established.",
+          "evidenceIds": [
+            "daraa24-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": true
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "daraa24-about"
+        ],
+        "geographicCoverage": [
+          "daraa24-about"
+        ],
+        "editorialFocus": [
+          "daraa24-about"
+        ],
+        "ownershipFunding": [
+          "daraa24-about"
+        ],
+        "qualifications": [
+          "daraa24-about"
+        ]
+      }
+    },
+    {
+      "id": "deirezzor24",
+      "name": "DeirEzzor24",
+      "url": "https://deirezzor24.net/en/",
+      "category": "syrian-local",
+      "languages": [
+        "Arabic",
+        "English"
+      ],
+      "coverage": [
+        "Deir Ezzor",
+        "Eastern Syria"
+      ],
+      "editorial_focus": "Local service, security and community reporting.",
+      "ownership_funding": {
+        "summary": "Not established from reviewed public pages.",
+        "evidenceUrls": [
+          "https://deirezzor24.net/en/"
+        ],
+        "caveat": "Profile is based on reviewed publication output, not a verified institutional ownership page. Current ownership and funding remain unknown."
+      },
+      "qualifications": {
+        "transparency": "English/Arabic editions and local coverage observed; institutional disclosure incomplete.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public publication pages reviewed; institutional ownership page not established.",
+        "caveats": [
+          "Profile is based on reviewed publication output, not a verified institutional ownership page. Current ownership and funding remain unknown."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "deirezzor24-about",
+          "url": "https://deirezzor24.net/en/",
+          "title": "DeirEzzor24 — published home page",
+          "reviewedAt": "2026-11-02",
+          "basis": "observed-publication"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Local service, security and community reporting.",
+          "evidenceIds": [
+            "deirezzor24-about"
+          ],
+          "evidenceBasis": "analyst-inference",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Not established from reviewed public pages.",
+          "evidenceIds": [
+            "deirezzor24-about"
+          ],
+          "evidenceBasis": "not-established",
+          "lastReviewed": "2026-11-02",
+          "unresolved": true
+        }
+      ],
+      "evidence_status": "partial",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "deirezzor24-about"
+        ],
+        "geographicCoverage": [
+          "deirezzor24-about"
+        ],
+        "editorialFocus": [
+          "deirezzor24-about"
+        ],
+        "ownershipFunding": [],
+        "qualifications": [
+          "deirezzor24-about"
+        ]
+      }
+    },
+    {
+      "id": "rozana",
+      "name": "Rozana",
+      "url": "https://www.rozana.fm/",
+      "category": "syrian-independent",
+      "languages": [
+        "Arabic"
+      ],
+      "coverage": [
+        "Syria",
+        "Syrian diaspora",
+        "MENA"
+      ],
+      "editorial_focus": "Community, women, marginalized groups, migration and environment.",
+      "ownership_funding": {
+        "summary": "About page lists institutional donors including IMS, Hivos, Asfari Foundation and Free Press Unlimited.",
+        "evidenceUrls": [
+          "https://www.rozana.fm/aboutus"
+        ],
+        "caveat": "Donor list is undated; do not interpret it as current grants, amounts, ownership or editorial control."
+      },
+      "qualifications": {
+        "transparency": "Public mission, ethics and donor list available; funding periods and shares not established.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "Donor list is undated; do not interpret it as current grants, amounts, ownership or editorial control."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "rozana-about",
+          "url": "https://www.rozana.fm/aboutus",
+          "title": "Rozana — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Community, women, marginalized groups, migration and environment.",
+          "evidenceIds": [
+            "rozana-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "About page lists institutional donors including IMS, Hivos, Asfari Foundation and Free Press Unlimited.",
+          "evidenceIds": [
+            "rozana-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "rozana-about"
+        ],
+        "geographicCoverage": [
+          "rozana-about"
+        ],
+        "editorialFocus": [
+          "rozana-about"
+        ],
+        "ownershipFunding": [
+          "rozana-about"
+        ],
+        "qualifications": [
+          "rozana-about"
+        ]
+      }
+    },
+    {
+      "id": "arta-fm",
+      "name": "ARTA FM",
+      "url": "https://www.artafm.com/",
+      "category": "northeast-kurdish",
+      "languages": [
+        "Kurdish",
+        "Arabic",
+        "Syriac",
+        "Armenian"
+      ],
+      "coverage": [
+        "Northeast Syria",
+        "Hasakah"
+      ],
+      "editorial_focus": "Multilingual community radio and local issues.",
+      "ownership_funding": {
+        "summary": "Operated by ARTA for Media and Development, which discloses governmental and nongovernmental media-development support.",
+        "evidenceUrls": [
+          "https://www.artaorg.net/our-story",
+          "https://www.artaorg.net/"
+        ],
+        "caveat": "Detailed language profile last updated December 2022; current schedule and transmission footprint not independently confirmed."
+      },
+      "qualifications": {
+        "transparency": "Parent organization discloses projects, operating areas and broad funding categories.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Station domain returned 403; parent organization pages accessible.",
+        "caveats": [
+          "Detailed language profile last updated December 2022; current schedule and transmission footprint not independently confirmed."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "arta-fm-about",
+          "url": "https://www.artaorg.net/our-story",
+          "title": "ARTA FM — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "arta-fm-languages",
+          "title": "ARTA FM profile, updated December 2022",
+          "url": "https://www.artaorg.net/post/arta-fm",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description",
+          "publishedAt": "2022-12-06"
+        },
+        {
+          "id": "arta-fm-funding",
+          "title": "ARTA parent organization homepage",
+          "url": "https://www.artaorg.net/",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Multilingual community radio and local issues.",
+          "evidenceIds": [
+            "arta-fm-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Operated by ARTA for Media and Development, which discloses governmental and nongovernmental media-development support.",
+          "evidenceIds": [
+            "arta-fm-about",
+            "arta-fm-funding"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "partial",
+      "language_scope": "Four languages self-reported in December 2022 profile; present-day schedule not independently confirmed.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "arta-fm-languages"
+        ],
+        "geographicCoverage": [
+          "arta-fm-about",
+          "arta-fm-languages",
+          "arta-fm-funding"
+        ],
+        "editorialFocus": [
+          "arta-fm-about",
+          "arta-fm-languages",
+          "arta-fm-funding"
+        ],
+        "ownershipFunding": [
+          "arta-fm-about",
+          "arta-fm-languages",
+          "arta-fm-funding"
+        ],
+        "qualifications": [
+          "arta-fm-about",
+          "arta-fm-languages",
+          "arta-fm-funding"
+        ]
+      }
+    },
+    {
+      "id": "trt-world",
+      "name": "TRT World",
+      "url": "https://www.trtworld.com/",
+      "category": "regional",
+      "languages": [
+        "English"
+      ],
+      "coverage": [
+        "Global",
+        "Middle East",
+        "Syria"
+      ],
+      "editorial_focus": "International news and current affairs.",
+      "ownership_funding": {
+        "summary": "Part of TRT, Türkiye’s national public broadcaster.",
+        "evidenceUrls": [
+          "https://www.trtworld.com/about",
+          "https://www.trtworldforum.com/about-trt/"
+        ],
+        "caveat": "Network-wide language claims are not assigned to the English channel. Public-broadcaster status is not proof of control over a particular story."
+      },
+      "qualifications": {
+        "transparency": "Network affiliation published; detailed funding shares not audited.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "Network-wide language claims are not assigned to the English channel. Public-broadcaster status is not proof of control over a particular story."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "trt-world-about",
+          "url": "https://www.trtworld.com/about",
+          "title": "TRT World — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "trt-world-parent",
+          "title": "About TRT",
+          "url": "https://www.trtworldforum.com/about-trt/",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "International news and current affairs.",
+          "evidenceIds": [
+            "trt-world-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "Part of TRT, Türkiye’s national public broadcaster.",
+          "evidenceIds": [
+            "trt-world-about",
+            "trt-world-parent"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "trt-world-about",
+          "trt-world-parent"
+        ],
+        "geographicCoverage": [
+          "trt-world-about",
+          "trt-world-parent"
+        ],
+        "editorialFocus": [
+          "trt-world-about",
+          "trt-world-parent"
+        ],
+        "ownershipFunding": [
+          "trt-world-about",
+          "trt-world-parent"
+        ],
+        "qualifications": [
+          "trt-world-about",
+          "trt-world-parent"
+        ]
+      }
+    },
+    {
+      "id": "al-majalla",
+      "name": "Al Majalla",
+      "url": "https://en.majalla.com/",
+      "category": "regional",
+      "languages": [
+        "Arabic",
+        "English"
+      ],
+      "coverage": [
+        "Middle East",
+        "Syria",
+        "Global"
+      ],
+      "editorial_focus": "Current-affairs reporting, interviews and analysis.",
+      "ownership_funding": {
+        "summary": "An outlet of Saudi Research & Media Group (SRMG).",
+        "evidenceUrls": [
+          "https://en.majalla.com/node/46066/about-us"
+        ],
+        "caveat": "Corporate parent verified; ultimate beneficial ownership and funding mix not audited. Opinion and reported facts require separate treatment."
+      },
+      "qualifications": {
+        "transparency": "Parent group and editorial mission published.",
+        "corrections": "Not established from reviewed pages.",
+        "access": "Public institutional page reviewed; article-level access and field access vary.",
+        "caveats": [
+          "Corporate parent verified; ultimate beneficial ownership and funding mix not audited. Opinion and reported facts require separate treatment."
+        ]
+      },
+      "evidence": [
+        {
+          "id": "al-majalla-about",
+          "url": "https://en.majalla.com/node/46066/about-us",
+          "title": "Al Majalla — institutional description",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        },
+        {
+          "id": "al-majalla-parent",
+          "title": "SRMG brand portfolio",
+          "url": "https://www.srmg.com/en/our-brands",
+          "reviewedAt": "2026-11-02",
+          "basis": "self-description"
+        }
+      ],
+      "assertions": [
+        {
+          "dimension": "editorialFocus",
+          "value": "Current-affairs reporting, interviews and analysis.",
+          "evidenceIds": [
+            "al-majalla-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        },
+        {
+          "dimension": "ownershipFunding",
+          "value": "An outlet of Saudi Research & Media Group (SRMG).",
+          "evidenceIds": [
+            "al-majalla-about"
+          ],
+          "evidenceBasis": "self-description",
+          "lastReviewed": "2026-11-02",
+          "unresolved": false
+        }
+      ],
+      "evidence_status": "institutional-pages-reviewed",
+      "language_scope": "Only listed editions observed or explicitly described in cited institutional pages; not a complete inventory.",
+      "geography_basis": "Publication remit / topic coverage; not headquarters or territorial access.",
+      "qualification_basis": "Analyst review of linked public evidence; not independent certification. Unestablished policies may still exist.",
+      "checked_on": "2026-11-02",
+      "field_evidence": {
+        "languages": [
+          "al-majalla-about",
+          "al-majalla-parent"
+        ],
+        "geographicCoverage": [
+          "al-majalla-about",
+          "al-majalla-parent"
+        ],
+        "editorialFocus": [
+          "al-majalla-about",
+          "al-majalla-parent"
+        ],
+        "ownershipFunding": [
+          "al-majalla-about",
+          "al-majalla-parent"
+        ],
+        "qualifications": [
+          "al-majalla-about",
+          "al-majalla-parent"
+        ]
+      }
+    }
+  ],
+  "entities": [
+    {
+      "id": "sy-information-ministry",
+      "name": "Syrian Ministry of Information",
+      "type": "organization"
+    },
+    {
+      "id": "damascus",
+      "name": "Damascus",
+      "type": "location"
+    },
+    {
+      "id": "untoldstories",
+      "name": "UntoldStories e.V.",
+      "type": "organization"
+    },
+    {
+      "id": "potomac-media",
+      "name": "Potomac Media Production, LLC",
+      "type": "organization"
+    },
+    {
+      "id": "rudaw-company",
+      "name": "RUDAW Co. for Media Affairs Ltd.",
+      "type": "organization"
+    },
+    {
+      "id": "erbil",
+      "name": "Erbil",
+      "type": "location"
+    },
+    {
+      "id": "thomson-reuters",
+      "name": "Thomson Reuters",
+      "type": "organization"
+    },
+    {
+      "id": "mnemonic",
+      "name": "Mnemonic",
+      "type": "organization"
+    },
+    {
+      "id": "un-secretariat",
+      "name": "United Nations Secretariat",
+      "type": "organization"
+    },
+    {
+      "id": "arta-organization",
+      "name": "ARTA for Media and Development",
+      "type": "organization"
+    },
+    {
+      "id": "trt",
+      "name": "Turkish Radio and Television Corporation (TRT)",
+      "type": "organization"
+    },
+    {
+      "id": "srmg",
+      "name": "Saudi Research & Media Group (SRMG)",
+      "type": "organization"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "sana-sy-information-ministry",
+      "source": "sana",
+      "target": "sy-information-ministry",
+      "type": "institutional_affiliation",
+      "evidenceUrls": [
+        "https://sana.sy/en/contact/"
+      ],
+      "evidenceBasis": "self-description",
+      "verifiedAt": "2026-11-02",
+      "caveat": "Institutional relationship only; not evidence of control over any particular report."
+    },
+    {
+      "id": "sana-damascus",
+      "source": "sana",
+      "target": "damascus",
+      "type": "operates_in",
+      "evidenceUrls": [
+        "https://sana.sy/en/contact/"
+      ],
+      "evidenceBasis": "self-description",
+      "verifiedAt": "2026-11-02",
+      "caveat": "Headquarters location, not a control relationship."
+    },
+    {
+      "id": "enab-baladi-damascus",
+      "source": "enab-baladi",
+      "target": "damascus",
+      "type": "operates_in",
+      "evidenceUrls": [
+        "https://www.enabbaladi.net/about-us/"
+      ],
+      "evidenceBasis": "self-description",
+      "verifiedAt": "2026-11-02",
+      "caveat": "Reopened office; Syrian press licence does not establish government ownership."
+    },
+    {
+      "id": "syria-untold-untoldstories",
+      "source": "syria-untold",
+      "target": "untoldstories",
+      "type": "operated_by",
+      "evidenceUrls": [
+        "https://syriauntold.com/about-syria-untold/"
+      ],
+      "evidenceBasis": "self-description",
+      "verifiedAt": "2026-11-02",
+      "caveat": "Institutional relationship only; not evidence of control over any particular report."
+    },
+    {
+      "id": "north-press-potomac-media",
+      "source": "north-press",
+      "target": "potomac-media",
+      "type": "owned_by",
+      "evidenceUrls": [
+        "https://npasyria.com/en/about-us/"
+      ],
+      "evidenceBasis": "self-description",
+      "verifiedAt": "2026-11-02",
+      "caveat": "Institutional relationship only; not evidence of control over any particular report."
+    },
+    {
+      "id": "rudaw-rudaw-company",
+      "source": "rudaw",
+      "target": "rudaw-company",
+      "type": "owned_by",
+      "evidenceUrls": [
+        "https://www.rudaw.net/english/about"
+      ],
+      "evidenceBasis": "self-description",
+      "verifiedAt": "2026-11-02",
+      "caveat": "Institutional relationship only; not evidence of control over any particular report."
+    },
+    {
+      "id": "rudaw-erbil",
+      "source": "rudaw",
+      "target": "erbil",
+      "type": "operates_in",
+      "evidenceUrls": [
+        "https://www.rudaw.net/english/about"
+      ],
+      "evidenceBasis": "self-description",
+      "verifiedAt": "2026-11-02",
+      "caveat": "Headquarters only; geographic proximity does not prove editorial control."
+    },
+    {
+      "id": "reuters-thomson-reuters",
+      "source": "reuters",
+      "target": "thomson-reuters",
+      "type": "business_unit_of",
+      "evidenceUrls": [
+        "https://www.thomsonreuters.com/en/about-us/trust-principles"
+      ],
+      "evidenceBasis": "self-description",
+      "verifiedAt": "2026-11-02",
+      "caveat": "Institutional relationship only; not evidence of control over any particular report."
+    },
+    {
+      "id": "syrian-archive-mnemonic",
+      "source": "syrian-archive",
+      "target": "mnemonic",
+      "type": "operated_by",
+      "evidenceUrls": [
+        "https://mnemonic.org/en/about/methods/"
+      ],
+      "evidenceBasis": "self-description",
+      "verifiedAt": "2026-11-02",
+      "caveat": "Institutional relationship only; not evidence of control over any particular report."
+    },
+    {
+      "id": "ocha-un-secretariat",
+      "source": "ocha",
+      "target": "un-secretariat",
+      "type": "part_of",
+      "evidenceUrls": [
+        "https://www.undp.org/syria/undp-and-un"
+      ],
+      "evidenceBasis": "self-description",
+      "verifiedAt": "2026-11-02",
+      "caveat": "Institutional relationship only; not evidence of control over any particular report."
+    },
+    {
+      "id": "arta-fm-arta-organization",
+      "source": "arta-fm",
+      "target": "arta-organization",
+      "type": "operated_by",
+      "evidenceUrls": [
+        "https://www.artaorg.net/our-story"
+      ],
+      "evidenceBasis": "self-description",
+      "verifiedAt": "2026-11-02",
+      "caveat": "Institutional relationship only; not evidence of control over any particular report."
+    },
+    {
+      "id": "trt-world-trt",
+      "source": "trt-world",
+      "target": "trt",
+      "type": "part_of",
+      "evidenceUrls": [
+        "https://www.trtworld.com/about"
+      ],
+      "evidenceBasis": "self-description",
+      "verifiedAt": "2026-11-02",
+      "caveat": "Institutional relationship only; not evidence of control over any particular report."
+    },
+    {
+      "id": "al-majalla-srmg",
+      "source": "al-majalla",
+      "target": "srmg",
+      "type": "part_of",
+      "evidenceUrls": [
+        "https://en.majalla.com/node/46066/about-us"
+      ],
+      "evidenceBasis": "self-description",
+      "verifiedAt": "2026-11-02",
+      "caveat": "Institutional relationship only; not evidence of control over any particular report."
+    }
+  ],
+  "methodology": {
+    "noUniversalReliabilityScore": true,
+    "graphMeaning": "Only documented institutional relationships or operating locations. Grouping is a navigation aid, not an allegiance or control claim.",
+    "languageScope": "Languages list the editions checked or explicitly named by an institutional page; not a complete inventory.",
+    "assertionCaveat": "Institutional self-description is attributed evidence, not independent certification. Unknown is not adverse evidence.",
+    "unverifiedCoverage": [
+      "Many local Arabic-only outlets",
+      "Television and radio networks not yet reviewed",
+      "Independent claims about ultimate beneficial ownership",
+      "Complete donor amounts and current funding proportions",
+      "Systematic article-level corrections audit",
+      "Suwayda24 current institutional/account continuity pending verification; domain inaccessible in this review",
+      "Coastal Syria dedicated local outlets not yet institutionally verified",
+      "ARTA current broadcast schedule beyond older still-published profiles"
+    ]
+  }
+}

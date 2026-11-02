@@ -2,10 +2,10 @@
   "schema_version": 1,
   "created_at": "2026-11-02T16:05:37.068108Z",
   "checked_on": "2026-11-02",
-  "publisher": "Giulio Catanzariti \u2014 independent research project",
+  "publisher": "Giulio Catanzariti — independent research project",
   "automatic_refresh": false,
   "counts": {
-    "sources": 28,
+    "sources": 39,
     "documents": 21,
     "claims": 9,
     "places": 9,
@@ -18,8 +18,18 @@
   "website": "https://giulio-catanzariti-atlas.sargonx6.chatgpt.site/syria",
   "scope": "Bounded starter corpus. No claim of comprehensive or real-time coverage; no current territorial control map.",
   "graph": {
-    "nodes": 75,
+    "nodes": 86,
     "edges": 81
   },
-  "last_feed_collection_at": "2026-11-02T16:12:36.595675Z"
+  "last_feed_collection_at": "2026-11-02T16:12:36.595675Z",
+  "catalogue_input": {
+    "library_file_id": "libfile_0211ef194c9c8191a2f218bbfdab8547",
+    "library_version": 1,
+    "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
+    "methodology_library_version": 0,
+    "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+    "reviewed_on": "2026-11-02",
+    "verification_scope": "Organizational evidence review, not article accuracy certification",
+    "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+  }
 }

@@ -17,7 +17,8 @@ def validate_relationships(workspace: dict, network: dict) -> None:
         known.add(entity['id'])
     ids = set()
     allowed = {'ministry_affiliation', 'listed_group_company', 'stated_legal_owner',
-               'research_programme_of', 'institutional_role'}
+               'research_programme_of', 'institutional_role', 'institutional_affiliation',
+               'operates_in', 'operated_by', 'owned_by', 'business_unit_of', 'part_of'}
     for edge in network.get('relationships', []):
         if not edge.get('id') or edge['id'] in ids:
             raise ValueError('Relationship IDs must be unique')

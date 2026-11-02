@@ -2,7 +2,7 @@
 
 An independent, public-source research toolkit by Giulio Catanzariti. Start with a source, preserve what it actually says, and keep the analyst's judgement visible.
 
-The corpus contains **28 source profiles, 21 document references, nine attributed report paraphrases, nine regional navigation anchors, eight context themes and two social-account links verified through institutional profiles**. Twelve document references were collected from two verified RSS feeds on 2 November 2026. No social posts have been collected. Six selected institutional relationships have separately cited profile evidence.
+The corpus contains **39 source profiles, 21 document references, nine attributed report paraphrases, nine regional navigation anchors, eight context themes and two social-account links verified through institutional profiles**. Twelve document references were collected from two verified RSS feeds on 2 November 2026. No social posts have been collected. Seventeen selected organizational and operating-location relationships have separately cited profile evidence.
 
 This is a working foundation, not comprehensive coverage or a live intelligence service. It does not infer current territorial control, assign coordinates to headlines, or score a publisher's credibility.
 
@@ -41,7 +41,9 @@ The atlas provides:
 - Up to three source comparisons and a Markdown worksheet export separating evidence, analyst assessment, alternative explanations and gaps. Drafts are held only in the open page and cleared by reload.
 - Light/dark themes and a responsive directory alternative to the horizontally scrollable graph.
 
-Relationship records in [relationships.json](data/sources/relationships.json) contain the exact relation, basis, original profile evidence, review date and caveat. Unknown start/end dates remain null. A first-party disclosure is not an independent audit; no missing edge establishes independence. See [atlas documentation](docs/atlas.md) for graph semantics and checks.
+Relationship records in [relationships.json](data/sources/relationships.json) contain the exact relation, basis, original profile evidence, review date and caveat. Dashed operating-location links are distinct from solid organizational links. Unknown start/end dates remain null. A first-party disclosure is not an independent audit; no missing edge establishes independence. See [atlas documentation](docs/atlas.md) for graph semantics and checks.
+
+The additional [catalogue review](data/sources/catalogue-review.json) was read in full through Library's text interface and normalized into this repository with the original Library IDs and versions preserved. It adds 11 sources and supplementary qualifications to 14 existing profiles, including corrections-policy review, funding disclosures and access limits. It is semantic ingestion, not a claim that original file bytes were materialized. The [input methodology](docs/catalogue-methodology.md) travels with the data. `field_evidence` is a relevant-source navigation index, not certified field-level corroboration.
 
 On Windows, use `$env:PYTHONPATH='src'` then `python -m syria_analysis build-atlas` if the package is not installed. The generated file opens directly from Explorer. For browser automation tools that prohibit `file:` URLs, run `python -m http.server 8766 --bind 127.0.0.1` and visit `http://127.0.0.1:8766/exports/atlas/index.html`.
 

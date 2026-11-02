@@ -10,6 +10,7 @@
     advocacy_monitoring: "Monitoring & advocacy",
     think_tank: "Research institutes",
     analyst: "Named analysts",
+    regional_media: "Regional media",
   };
   const shortNames = {
     "unhcr-syria": "UNHCR Syria",
@@ -124,6 +125,7 @@
             s.ownership_or_perspective,
             s.strengths,
             s.limits,
+            s.catalogue_review,
           ])
             .toLocaleLowerCase()
             .includes(query)),
@@ -306,7 +308,7 @@
     root.setAttribute("viewBox", `0 0 1000 ${height}`);
     $("graph-heading").textContent = "Documented institutional relationships";
     $("graph-legend").textContent =
-      "□ Source / institution   Solid line: direct profile documentation   Select a relation label for evidence";
+      "□ Source / institution   Solid: organizational relation   Dashed: operating location   Select a label for evidence";
     $("graph-note").textContent =
       "No edge means no relationship documented here, not proof of independence. Profile checks establish what was described on that date. Unknown start and end dates remain unknown. Layout is not geography or influence.";
     if (!rows.length) {
@@ -344,7 +346,7 @@
       root.append(
         svg("path", {
           d: `M 255 ${y} L 745 ${y}`,
-          class: `graph-edge${selected ? " highlight" : ""}`,
+          class: `graph-edge${selected ? " highlight" : ""}${r.type === "operates_in" ? " location-edge" : ""}`,
         }),
       );
       for (const [id, x] of [
@@ -363,6 +365,8 @@
           svg("rect", { x: -115, y: -27, width: 230, height: 54, rx: 3 }),
         );
         const lines = wrap(shortNames[id] || e.name, 30);
+        if (e.type === "location" && lines.length === 1)
+          lines.push("Location / not political control");
         lines.slice(0, 2).forEach((t, j) =>
           g.append(
             svg(
@@ -563,6 +567,56 @@
       el("p", s.ownership_or_perspective.summary),
       el("p", s.ownership_or_perspective.attribution, "record-meta"),
     );
+    if (s.ownership_update_note)
+      root.append(el("p", s.ownership_update_note, "qualifier"));
+    if (s.catalogue_review) {
+      const review = s.catalogue_review;
+      const reviewRoot = el("details", undefined, "review-details");
+      reviewRoot.append(
+        el("summary", "Funding, corrections, access & review evidence"),
+      );
+      root.append(reviewRoot);
+      reviewRoot.append(
+        el("p", review.ownership_funding.summary),
+        el("p", review.ownership_funding.caveat, "qualifier"),
+      );
+      const fields = [
+        ["Transparency", review.qualifications.transparency],
+        ["Corrections policy", review.qualifications.corrections],
+        ["Access", review.qualifications.access],
+        ["Evidence status", title(review.evidence_status)],
+        ["Language scope", review.language_scope],
+        ["Coverage basis", review.geography_basis],
+      ];
+      for (const [label, value] of fields)
+        reviewRoot.append(el("h4", label), el("p", value));
+      reviewRoot.append(
+        list(review.qualifications.caveats),
+        el("p", review.qualification_basis, "record-meta"),
+      );
+      heading(reviewRoot, "Evidence for the additional review");
+      for (const e of review.evidence)
+        reviewRoot.append(
+          link(e.title, e.url),
+          el(
+            "p",
+            `${title(e.basis)} · Reviewed ${date(e.reviewedAt)}${e.publishedAt ? " · Published " + date(e.publishedAt) : " · Page publication date not supplied"}`,
+            "record-meta",
+          ),
+        );
+      reviewRoot.append(
+        el(
+          "p",
+          `Catalogue ${s.catalogue_provenance.library_file_id}, version ${s.catalogue_provenance.library_version}. Read through the text interface; organizational review, not accuracy certification.`,
+          "record-meta",
+        ),
+        el(
+          "p",
+          "Field evidence is a relevant-source navigation index, not certified field-level corroboration.",
+          "record-meta",
+        ),
+      );
+    }
     heading(root, "Useful for");
     root.append(list(s.strengths));
     heading(root, "Read with these limits");
@@ -737,6 +791,14 @@
         el("p", `Checked ${date(s.checked_on)}`, "record-meta"),
       );
       const b = el("button", `Remove ${s.name}`);
+      if (s.catalogue_review) {
+        card.append(
+          el("h4", "Funding & corrections review"),
+          el("p", s.catalogue_review.ownership_funding.summary),
+          el("p", s.catalogue_review.ownership_funding.caveat),
+          el("p", s.catalogue_review.qualifications.corrections),
+        );
+      }
       b.addEventListener("click", () => toggleCompare(id));
       card.append(b);
       grid.append(card);
@@ -745,7 +807,7 @@
   }
   const checked = [...new Set(data.sources.map((s) => s.checked_on))].sort();
   $("checked").textContent =
-    `Profiles checked ${checked.length === 1 ? checked[0] : checked[0] + " to " + checked.at(-1)}`;
+    `Profiles reviewed ${checked.length === 1 ? checked[0] : checked[0] + " to " + checked.at(-1)}`;
   $("build-date").textContent =
     `Built ${date(data.built_at)} · Offline snapshot`;
   for (const [n, label] of [
@@ -806,23 +868,41 @@
       dark ? "Switch to light theme" : "Switch to dark theme",
     );
   });
-  $("download-data").addEventListener("click", () =>
+  $("download-data").addEventListener("click", () => {
+    const selected = matches();
+    const ids = new Set(selected.map((s) => s.id));
+    const edges = network.relationships.filter((r) => ids.has(r.source));
+    const targets = new Set(edges.map((r) => r.target));
     download(
       "syria-source-register.json",
       JSON.stringify(
         {
           built_at: data.built_at,
           scope: "Curated research snapshot; not comprehensive or live",
-          sources: data.sources,
-          context: data.context,
-          relationships: network,
+          filters: {
+            query: $("search").value,
+            role: $("category").value,
+            language: $("language").value,
+            theme: $("topic").value,
+          },
+          sources: selected,
+          related_sources: data.sources.filter(
+            (s) => targets.has(s.id) && !ids.has(s.id),
+          ),
+          relationships: {
+            ...network,
+            entities: network.entities.filter((e) => targets.has(e.id)),
+            relationships: edges,
+          },
+          export_note:
+            "The sources array matches the current filters. Related institutional source profiles are included separately to preserve relationship endpoints. For full context and document data use the repository exports.",
         },
         null,
         2,
       ),
       "application/json",
-    ),
-  );
+    );
+  });
   $("worksheet").addEventListener("submit", (e) => {
     e.preventDefault();
     if (!$("question").value.trim()) {
@@ -851,7 +931,7 @@
       "",
       "## Selected source profiles (not independent corroboration)",
     ];
-    for (const s of selected)
+    for (const s of selected) {
       lines.push(
         "",
         `### ${s.name}`,
@@ -864,6 +944,14 @@
           (e) => `- Profile evidence: ${e.url} (${e.checked_on})`,
         ),
       );
+      if (s.catalogue_review)
+        lines.push(
+          `Additional funding review: ${s.catalogue_review.ownership_funding.summary}`,
+          `Qualification: ${s.catalogue_review.ownership_funding.caveat}`,
+          `Corrections: ${s.catalogue_review.qualifications.corrections}`,
+          `Review input: ${s.catalogue_provenance.library_file_id}, version ${s.catalogue_provenance.library_version}`,
+        );
+    }
     if (!selected.length) lines.push("[No source profiles selected]");
     download(
       "syria-research-brief.md",
