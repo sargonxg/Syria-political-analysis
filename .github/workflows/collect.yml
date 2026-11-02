@@ -17,6 +17,8 @@ jobs:
       - run: syria-analysis build-context
       - run: syria-analysis export-graph --format json
       - run: syria-analysis coverage
+      - run: policy-analysis --country SY ontology
+      - run: policy-analysis --country SY ontology --format jsonld
       - uses: actions/upload-artifact@v4
         with:
           name: reviewed-before-commit-source-refresh
@@ -26,4 +28,6 @@ jobs:
             exports/context.jsonl
             exports/evidence.json
             exports/coverage.json
+            exports/political-context.json
+            exports/political-context.jsonld
           retention-days: 14

@@ -1,6 +1,6 @@
-# Source briefing: What does the Homs project announcement establish?
+# Source briefing: What does the Homs announcement establish?
 
-Built: 2026-11-02T17:22:35.516479Z
+Built: 2026-11-02T19:13:46.242810Z
 
 ## Scope
 

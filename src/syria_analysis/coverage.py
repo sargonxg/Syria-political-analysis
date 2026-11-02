@@ -38,11 +38,12 @@ def build_coverage(workspace: dict, lexicon: dict) -> dict:
     nodes += [{'id': s['id'], 'type': 'source', 'label': s['name'], 'category': s['type']} for s in summary if s['reference_count']]
     nodes += [{'id': 'topic-' + t['id'], 'type': 'topic', 'label': t['name']} for t in lexicon['topics'] if t['id'] in used_topics]
     nodes += [{'id': 'mention-' + p['id'], 'type': 'place_mention', 'label': p['name']} for p in lexicon['places'] if p['id'] in used_places]
-    return {'schema_version': 1, 'built_at': now_utc(), 'title': 'Syria source-coverage sample',
+    country_name = lexicon.get('country_name', 'Syria')
+    return {'schema_version': 1, 'built_at': now_utc(), 'title': f'{country_name} source-coverage sample',
         'method': 'Deterministic English/Arabic title-keyword matching with recorded matched terms. No article bodies, inferred incidents or causal influence scores.',
         'lexicon_version': lexicon['version'], 'topics': lexicon['topics'], 'places': lexicon['places'],
         'sources': summary, 'references': refs, 'graph': {'nodes': nodes, 'edges': edges},
-        'limits': ['This bounded feed/reference sample is not a representative sample of Syrian media or opinion.',
+        'limits': [f'This bounded feed/reference sample is not a representative sample of {country_name} media or opinion.',
             'Different sources and collection windows have unequal coverage; counts cannot measure importance or bias.',
             'A title may mention a place without describing an event there. No event coordinates are inferred.',
             'Keyword matches can miss context, negation, synonyms and morphology; a human must read the original.',

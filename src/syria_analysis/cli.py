@@ -8,6 +8,8 @@ from .core import brief, context_pack, csv_exports, graph, load_workspace, valid
 from .coverage import build_coverage
 from .feeds import collect
 from .social import import_reference
+from .countries import registry, resolve, initialise
+from .ontology import build_model, jsonld
 
 def graphml(data: dict) -> str:
     ns = 'http://graphml.graphdrawing.org/xmlns'
@@ -27,8 +29,16 @@ def graphml(data: dict) -> str:
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', type=Path, default=Path.cwd(), help='Repository/data workspace root (default: current directory)')
+    parser.add_argument('--country', help='Registered two-letter country code; defaults to the registry default')
     commands = parser.add_subparsers(dest='command', required=True)
     commands.add_parser('validate', help='Validate IDs, provenance and review/location boundaries')
+    commands.add_parser('countries', help='List registered countries and actual collection status')
+    country = commands.add_parser('init-country', help='Create an empty isolated country workspace; no research is copied')
+    country.add_argument('--code', required=True); country.add_argument('--name', required=True)
+    country.add_argument('--region', required=True)
+    political = commands.add_parser('ontology', help='Export controlled terms and qualified political assertions')
+    political.add_argument('--format', choices=['json', 'jsonld'], default='json')
+    political.add_argument('--output', type=Path)
     feeds = commands.add_parser('collect-rss', help='Refresh verified RSS/Atom references; preserves reviewed records')
     feeds.add_argument('--source', action='append', help='Source id; repeat to select several')
     feeds.add_argument('--limit', type=int, default=6)
@@ -46,12 +56,29 @@ def main(argv=None):
     coverage.add_argument('--output', type=Path, default=Path('exports/coverage.json'))
     args = parser.parse_args(argv)
     try:
-        root = args.root.resolve()
+        repository = args.root.resolve()
+        if args.command == 'countries':
+            for row in registry(repository)['countries']:
+                print(f"{row['code']}\t{row['name']}\t{row.get('region', '')}\t{row.get('status', 'unknown')}")
+            return 0
+        if args.command == 'init-country':
+            target = initialise(repository, args.code, args.name, args.region)
+            print(f'Created empty framework at {target}; no sources, claims or political facts were copied.')
+            return 0
+        root, country = resolve(repository, args.country)
+        # Relative exports stay inside the selected country's workspace.
+        for name in ('output', 'jsonl'):
+            path = getattr(args, name, None)
+            if path is not None and not path.is_absolute():
+                setattr(args, name, root / path)
         workspace = load_workspace(root)
         errors = validate(workspace)
         if errors: raise ValueError('\n'.join(errors))
+        model = build_model(repository, root, workspace, country)
         if args.command == 'validate':
-            print('Valid: ' + ', '.join(f'{len(rows)} {name}' for name, rows in workspace.items()))
+            print(f"Valid {country['code']}: " + ', '.join(f'{len(rows)} {name}' for name, rows in workspace.items()))
+            if model:
+                print(f"Political model: {len(model['entities'])} entities, {len(model['assertions'])} qualified assertions, {len(model['module']['concepts'])} concepts")
         elif args.command == 'collect-rss':
             if not 1 <= args.limit <= 30: raise ValueError('Limit must be between 1 and 30 per endpoint')
             known = {s['id'] for s in workspace['sources']}
@@ -76,10 +103,23 @@ def main(argv=None):
             print(f"Registered {row['id']}; no content fetched or geographic inference made.")
         elif args.command == 'build-context':
             import json
-            pack = context_pack(workspace); write_json(args.output, pack)
+            pack = context_pack(workspace, country)
+            if model:
+                pack['political_context'] = model
+            write_json(args.output, pack)
             args.jsonl.parent.mkdir(parents=True, exist_ok=True)
-            lines = [{'record_type': 'manifest', **{k: pack[k] for k in ('schema_version', 'generated_at', 'use_rules', 'limitations')}}]
+            lines = [{'record_type': 'manifest', **{k: pack[k] for k in ('schema_version', 'generated_at', 'country', 'use_rules', 'limitations')}}]
             lines += [{'table': table, 'record': row} for table, rows in workspace.items() for row in rows]
+            if model:
+                lines[0]['political_use_rules'] = model['use_rules']
+                lines[0]['ontology_version'] = model['core']['version']
+                lines[0]['political_module'] = {k: model['module'][k] for k in ('version', 'country_code', 'title', 'status')}
+                lines += [{'table': 'ontology_' + table, 'record': row}
+                          for table in ('classes', 'relations') for row in model['core'][table]]
+                lines += [{'table': 'political_concepts', 'country_code': country['code'], 'record': row}
+                          for row in model['module']['concepts']]
+                lines += [{'table': 'political_' + table, 'country_code': country['code'], 'record': row}
+                          for table in ('entities', 'assertions') for row in model[table]]
             args.jsonl.write_text(''.join(json.dumps(line, ensure_ascii=False) + '\n' for line in lines), encoding='utf-8')
             print(f'Wrote context to {args.output} and {args.jsonl}')
         elif args.command == 'brief':
@@ -87,7 +127,7 @@ def main(argv=None):
             args.output.write_text(brief(workspace, args.question, args.place, args.analyst_note), encoding='utf-8')
             print(f'Wrote source assembly to {args.output}; analyst assessment remains separate.')
         elif args.command == 'export-graph':
-            path = args.output or Path('exports/evidence.' + ('json' if args.format == 'json' else 'graphml'))
+            path = args.output or root / ('exports/evidence.' + ('json' if args.format == 'json' else 'graphml'))
             data = graph(workspace)
             if args.format == 'json': write_json(path, data)
             else:
@@ -99,6 +139,12 @@ def main(argv=None):
             data = build_coverage(workspace, read_json(root / 'data/coverage/lexicon.json'))
             write_json(args.output, data)
             print(f"Wrote coverage for {len(data['references'])} saved references; no event coordinates inferred.")
+        elif args.command == 'ontology':
+            if model is None:
+                raise ValueError('No political module in this legacy workspace; register a country module first')
+            path = args.output or root / ('exports/political-context.' + args.format)
+            write_json(path, jsonld(model) if args.format == 'jsonld' else model)
+            print(f"Wrote {len(model['assertions'])} qualified political assertions to {path}; no bare political fact triples emitted.")
         return 0
     except (ValueError, OSError, KeyError) as exc:
         print(f'Error: {exc}', file=sys.stderr); return 1

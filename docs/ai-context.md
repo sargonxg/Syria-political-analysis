@@ -25,3 +25,6 @@ Suggested output contract:
 ```
 
 An automated answer must not change canonical review states. Promote or dispute a record only through an explicit human-reviewed data change. Do not expose personal data or infer the identities or precise locations of vulnerable people.
+# Country and political context
+
+Read the country envelope before combining records. Political assertions retain source verbs, dates, modality and qualifications. A requested negotiation or supported election objective in a historical instrument is not proof of an event, current mandate or implementation. The political model's review states and human-review flags must travel into any generated brief. Use the inline-context JSON-LD export when graph interchange is required; it names qualified statements without emitting bare political fact triples. JSONL also carries the shared class/relation definitions and country concepts.

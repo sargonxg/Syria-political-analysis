@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "built_at": "2026-11-02T17:13:08.091976Z",
+  "built_at": "2026-11-02T19:13:46.035322Z",
   "title": "Syria source-coverage sample",
   "method": "Deterministic English/Arabic title-keyword matching with recorded matched terms. No article bodies, inferred incidents or causal influence scores.",
   "lexicon_version": 1,
@@ -1986,7 +1986,7 @@
     ]
   },
   "limits": [
-    "This bounded feed/reference sample is not a representative sample of Syrian media or opinion.",
+    "This bounded feed/reference sample is not a representative sample of Syria media or opinion.",
     "Different sources and collection windows have unequal coverage; counts cannot measure importance or bias.",
     "A title may mention a place without describing an event there. No event coordinates are inferred.",
     "Keyword matches can miss context, negation, synonyms and morphology; a human must read the original.",

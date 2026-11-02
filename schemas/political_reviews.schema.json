@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Recorded political assertion review activities",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "assertion_id",
+      "agent_kind",
+      "reviewer",
+      "reviewed_on",
+      "rationale"
+    ],
+    "properties": {
+      "id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "assertion_id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "reviewer": {
+        "type": "string",
+        "minLength": 1
+      },
+      "rationale": {
+        "type": "string",
+        "minLength": 1
+      },
+      "agent_kind": {
+        "enum": [
+          "human",
+          "software"
+        ]
+      },
+      "reviewed_on": {
+        "type": "string",
+        "format": "date"
+      }
+    }
+  }
+}

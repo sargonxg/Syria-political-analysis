@@ -1,0 +1,349 @@
+[
+  {
+    "id": "norm-2254-op2-convening",
+    "record_type": "dated_normative_assertion",
+    "statement": "In operative paragraph 2, the Council requests the Secretary-General, through his good offices and the efforts of his Special Envoy for Syria, to convene representatives for formal negotiations on political transition.",
+    "attributed_to": "United Nations Security Council, in resolution 2254 (2015)",
+    "modality": {
+      "kind": "normative_expression",
+      "source_verb": "requests",
+      "implementation_asserted": false
+    },
+    "addressee_or_role_context": {
+      "requested_actor": "Secretary-General",
+      "means_described": "His good offices and the efforts of his Special Envoy for Syria",
+      "participants_as_described_in_2015": "Representatives of the Syrian government and the opposition"
+    },
+    "qualifications": [
+      "The request is dated 18 December 2015. It does not establish that talks occurred or that particular representatives hold a present mandate."
+    ],
+    "temporal_scope": {
+      "kind": "document_expression_at_adoption",
+      "source_statement_on": "2015-12-18",
+      "implementation_period_verified": false,
+      "source_target_expression": "Target of early January 2016 for the initiation of talks; source wording retained without calculating a new deadline.",
+      "current_applicability_assessed": false
+    },
+    "evidence": [
+      {
+        "document_id": "doc-83ad8cbb868c0c88",
+        "source_id": "un-security-council",
+        "source_uri": "https://digitallibrary.un.org/record/814715",
+        "source_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+        "published_on": "2015-12-18",
+        "locator": "Operative paragraph 2, printed page 2/4",
+        "page": 2,
+        "operative_paragraph": 2,
+        "relation": "supports_paraphrase",
+        "verification_method": "Full primary PDF read; no claim implementation inferred."
+      }
+    ],
+    "concept_ids": [
+      "good-offices",
+      "formal-negotiations",
+      "political-process"
+    ],
+    "review_state": "needs_source_check",
+    "primary_text_checked_on": "2026-11-02",
+    "human_review_recorded": false,
+    "review_note": "Draft for an explicit repository review decision. Source text was checked by the research agent; this is not a claim of completed human review.",
+    "geographic_scope": {
+      "country_pack": "sy",
+      "level": "national normative objective in the 2015 instrument",
+      "map_geometry": null,
+      "note": "No territorial-control or present-implementation claim."
+    },
+    "country_code": "SY",
+    "title": "Convening negotiations",
+    "subject_id": "instrument-unsc-2254-2015",
+    "relation_id": "requests",
+    "object_id": "objective-norm-2254-op2-convening",
+    "status": "source_checked_draft",
+    "coordinates": null
+  },
+  {
+    "id": "norm-2254-op4-process",
+    "record_type": "dated_normative_assertion",
+    "statement": "Operative paragraph 4 expresses support for a Syrian-led political process facilitated by the United Nations.",
+    "attributed_to": "United Nations Security Council, in resolution 2254 (2015)",
+    "modality": {
+      "kind": "normative_expression",
+      "source_verb": "expresses its support for",
+      "implementation_asserted": false
+    },
+    "addressee_or_role_context": null,
+    "qualifications": [
+      "This is the Council’s expressed support in the 2015 instrument, not a description of a current operating process."
+    ],
+    "temporal_scope": {
+      "kind": "document_expression_at_adoption",
+      "source_statement_on": "2015-12-18",
+      "implementation_period_verified": false,
+      "source_target_expression": null,
+      "current_applicability_assessed": false
+    },
+    "evidence": [
+      {
+        "document_id": "doc-83ad8cbb868c0c88",
+        "source_id": "un-security-council",
+        "source_uri": "https://digitallibrary.un.org/record/814715",
+        "source_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+        "published_on": "2015-12-18",
+        "locator": "Operative paragraph 4, printed page 2/4",
+        "page": 2,
+        "operative_paragraph": 4,
+        "relation": "supports_paraphrase",
+        "verification_method": "Full primary PDF read; no claim implementation inferred."
+      }
+    ],
+    "concept_ids": [
+      "political-process",
+      "syrian-led-owned"
+    ],
+    "review_state": "needs_source_check",
+    "primary_text_checked_on": "2026-11-02",
+    "human_review_recorded": false,
+    "review_note": "Draft for an explicit repository review decision. Source text was checked by the research agent; this is not a claim of completed human review.",
+    "geographic_scope": {
+      "country_pack": "sy",
+      "level": "national normative objective in the 2015 instrument",
+      "map_geometry": null,
+      "note": "No territorial-control or present-implementation claim."
+    },
+    "country_code": "SY",
+    "title": "A Syrian-led political process",
+    "subject_id": "instrument-unsc-2254-2015",
+    "relation_id": "expresses_support_for",
+    "object_id": "objective-norm-2254-op4-process",
+    "status": "source_checked_draft",
+    "coordinates": null
+  },
+  {
+    "id": "norm-2254-op4-governance",
+    "record_type": "dated_normative_assertion",
+    "statement": "Within the process described in operative paragraph 4, the Council expresses support for establishing credible, inclusive and non-sectarian governance.",
+    "attributed_to": "United Nations Security Council, in resolution 2254 (2015)",
+    "modality": {
+      "kind": "normative_expression",
+      "source_verb": "expresses its support for",
+      "implementation_asserted": false
+    },
+    "addressee_or_role_context": null,
+    "qualifications": [
+      "This objective belongs to the process supported in the paragraph; no governance arrangement is asserted to have been established."
+    ],
+    "temporal_scope": {
+      "kind": "document_expression_at_adoption",
+      "source_statement_on": "2015-12-18",
+      "implementation_period_verified": false,
+      "source_target_expression": "Within a target of six months, as stated in operative paragraph 4; no implementation date or outcome is inferred.",
+      "current_applicability_assessed": false
+    },
+    "evidence": [
+      {
+        "document_id": "doc-83ad8cbb868c0c88",
+        "source_id": "un-security-council",
+        "source_uri": "https://digitallibrary.un.org/record/814715",
+        "source_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+        "published_on": "2015-12-18",
+        "locator": "Operative paragraph 4, printed page 2/4",
+        "page": 2,
+        "operative_paragraph": 4,
+        "relation": "supports_paraphrase",
+        "verification_method": "Full primary PDF read; no claim implementation inferred."
+      }
+    ],
+    "concept_ids": [
+      "governance",
+      "inclusion"
+    ],
+    "review_state": "needs_source_check",
+    "primary_text_checked_on": "2026-11-02",
+    "human_review_recorded": false,
+    "review_note": "Draft for an explicit repository review decision. Source text was checked by the research agent; this is not a claim of completed human review.",
+    "geographic_scope": {
+      "country_pack": "sy",
+      "level": "national normative objective in the 2015 instrument",
+      "map_geometry": null,
+      "note": "No territorial-control or present-implementation claim."
+    },
+    "country_code": "SY",
+    "title": "Inclusive governance",
+    "subject_id": "instrument-unsc-2254-2015",
+    "relation_id": "expresses_support_for",
+    "object_id": "objective-norm-2254-op4-governance",
+    "status": "source_checked_draft",
+    "coordinates": null
+  },
+  {
+    "id": "norm-2254-op4-constitution",
+    "record_type": "dated_normative_assertion",
+    "statement": "Within the same supported process, operative paragraph 4 envisages setting a schedule and process for drafting a new constitution.",
+    "attributed_to": "United Nations Security Council, in resolution 2254 (2015)",
+    "modality": {
+      "kind": "normative_expression",
+      "source_verb": "expresses its support for",
+      "implementation_asserted": false
+    },
+    "addressee_or_role_context": null,
+    "qualifications": [
+      "The object is the proposed schedule and drafting process, not an adopted constitution."
+    ],
+    "temporal_scope": {
+      "kind": "document_expression_at_adoption",
+      "source_statement_on": "2015-12-18",
+      "implementation_period_verified": false,
+      "source_target_expression": "Within a target of six months applies to the process language in the paragraph; no adopted timetable is asserted.",
+      "current_applicability_assessed": false
+    },
+    "evidence": [
+      {
+        "document_id": "doc-83ad8cbb868c0c88",
+        "source_id": "un-security-council",
+        "source_uri": "https://digitallibrary.un.org/record/814715",
+        "source_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+        "published_on": "2015-12-18",
+        "locator": "Operative paragraph 4, printed page 2/4",
+        "page": 2,
+        "operative_paragraph": 4,
+        "relation": "supports_paraphrase",
+        "verification_method": "Full primary PDF read; no claim implementation inferred."
+      }
+    ],
+    "concept_ids": [
+      "constitutional-process",
+      "political-process"
+    ],
+    "review_state": "needs_source_check",
+    "primary_text_checked_on": "2026-11-02",
+    "human_review_recorded": false,
+    "review_note": "Draft for an explicit repository review decision. Source text was checked by the research agent; this is not a claim of completed human review.",
+    "geographic_scope": {
+      "country_pack": "sy",
+      "level": "national normative objective in the 2015 instrument",
+      "map_geometry": null,
+      "note": "No territorial-control or present-implementation claim."
+    },
+    "country_code": "SY",
+    "title": "Constitutional drafting",
+    "subject_id": "instrument-unsc-2254-2015",
+    "relation_id": "expresses_support_for",
+    "object_id": "objective-norm-2254-op4-constitution",
+    "status": "source_checked_draft",
+    "coordinates": null
+  },
+  {
+    "id": "norm-2254-op4-elections",
+    "record_type": "dated_normative_assertion",
+    "statement": "Operative paragraph 4 further expresses support for free and fair elections pursuant to a new constitution, under United Nations supervision, with participation including the diaspora.",
+    "attributed_to": "United Nations Security Council, in resolution 2254 (2015)",
+    "modality": {
+      "kind": "normative_expression",
+      "source_verb": "expresses its support for",
+      "implementation_asserted": false
+    },
+    "addressee_or_role_context": null,
+    "qualifications": [
+      "The paragraph also specifies transparency and accountability standards.",
+      "Eligibility and supervision are objectives in the 2015 text, not statements of present electoral law or arrangements."
+    ],
+    "temporal_scope": {
+      "kind": "document_expression_at_adoption",
+      "source_statement_on": "2015-12-18",
+      "implementation_period_verified": false,
+      "source_target_expression": "To be held within 18 months, as stated in the source; no new deadline or current election date is calculated.",
+      "current_applicability_assessed": false
+    },
+    "evidence": [
+      {
+        "document_id": "doc-83ad8cbb868c0c88",
+        "source_id": "un-security-council",
+        "source_uri": "https://digitallibrary.un.org/record/814715",
+        "source_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+        "published_on": "2015-12-18",
+        "locator": "Operative paragraph 4, printed page 2/4",
+        "page": 2,
+        "operative_paragraph": 4,
+        "relation": "supports_paraphrase",
+        "verification_method": "Full primary PDF read; no claim implementation inferred."
+      }
+    ],
+    "concept_ids": [
+      "electoral-process",
+      "inclusion"
+    ],
+    "review_state": "needs_source_check",
+    "primary_text_checked_on": "2026-11-02",
+    "human_review_recorded": false,
+    "review_note": "Draft for an explicit repository review decision. Source text was checked by the research agent; this is not a claim of completed human review.",
+    "geographic_scope": {
+      "country_pack": "sy",
+      "level": "national normative objective in the 2015 instrument",
+      "map_geometry": null,
+      "note": "No territorial-control or present-implementation claim."
+    },
+    "country_code": "SY",
+    "title": "Elections",
+    "subject_id": "instrument-unsc-2254-2015",
+    "relation_id": "expresses_support_for",
+    "object_id": "objective-norm-2254-op4-elections",
+    "status": "source_checked_draft",
+    "coordinates": null
+  },
+  {
+    "id": "norm-2254-op5-ceasefire",
+    "record_type": "dated_normative_assertion",
+    "statement": "Operative paragraph 5 expresses support for a nationwide ceasefire, linked in the text to initial steps by representatives toward a political transition under United Nations auspices.",
+    "attributed_to": "United Nations Security Council, in resolution 2254 (2015)",
+    "modality": {
+      "kind": "normative_expression",
+      "source_verb": "expresses its support for",
+      "implementation_asserted": false
+    },
+    "addressee_or_role_context": null,
+    "qualifications": [
+      "The source’s conditional linkage is retained. No ceasefire in force, current party commitment or present compliance is asserted."
+    ],
+    "temporal_scope": {
+      "kind": "document_expression_at_adoption",
+      "source_statement_on": "2015-12-18",
+      "implementation_period_verified": false,
+      "source_target_expression": "To come into effect as soon as the described initial steps toward a political transition begin; this is a condition in the 2015 document.",
+      "current_applicability_assessed": false
+    },
+    "evidence": [
+      {
+        "document_id": "doc-83ad8cbb868c0c88",
+        "source_id": "un-security-council",
+        "source_uri": "https://digitallibrary.un.org/record/814715",
+        "source_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+        "published_on": "2015-12-18",
+        "locator": "Operative paragraph 5, printed page 3/4",
+        "page": 3,
+        "operative_paragraph": 5,
+        "relation": "supports_paraphrase",
+        "verification_method": "Full primary PDF read; no claim implementation inferred."
+      }
+    ],
+    "concept_ids": [
+      "political-process"
+    ],
+    "review_state": "needs_source_check",
+    "primary_text_checked_on": "2026-11-02",
+    "human_review_recorded": false,
+    "review_note": "Draft for an explicit repository review decision. Source text was checked by the research agent; this is not a claim of completed human review.",
+    "geographic_scope": {
+      "country_pack": "sy",
+      "level": "national normative objective in the 2015 instrument",
+      "map_geometry": null,
+      "note": "No territorial-control or present-implementation claim."
+    },
+    "country_code": "SY",
+    "title": "A condition-linked ceasefire",
+    "subject_id": "instrument-unsc-2254-2015",
+    "relation_id": "expresses_support_for",
+    "object_id": "objective-norm-2254-op5-ceasefire",
+    "status": "source_checked_draft",
+    "coordinates": null
+  }
+]

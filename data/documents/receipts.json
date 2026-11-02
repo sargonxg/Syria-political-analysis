@@ -167,8 +167,14 @@
     "place_ids": [],
     "original_passage": null,
     "full_text_collected": false,
-    "source_verification": "Adoption date, symbol and title checked against indexed UN Digital Library metadata and the Security Council's 2015 resolution list.",
-    "checked_on": "2026-11-02"
+    "source_verification": "Adoption date, symbol and title checked against indexed UN Digital Library metadata and the Security Council's 2015 resolution list. Full official English PDF checked for operative paragraphs 2–5 on 2 November 2026; locators and normative wording retained in the separate political assertion drafts. Human review remains pending for those drafts.",
+    "checked_on": "2026-11-02",
+    "primary_text_check": {
+      "checked_on": "2026-11-02",
+      "method": "Automated research assistant read the official four-page PDF",
+      "sha256": "932c9614e588e910c5c23a82b4df67679aba7bbe2c47ef2edd1d02970f0faa62",
+      "human_review_recorded": false
+    }
   },
   {
     "id": "doc-195dc9a7e6f261bf",
