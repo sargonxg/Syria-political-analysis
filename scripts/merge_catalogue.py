@@ -1,4 +1,4 @@
-"""Merge the reviewed Library text input without replacing existing research records.
+"""Merge the committed catalogue review without replacing existing research records.
 
 Run from the repository with PYTHONPATH=src. This is an explicit, offline maintenance
 operation; it does not retrieve files or certify the input's assertions.
