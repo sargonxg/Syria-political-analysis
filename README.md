@@ -1,5 +1,15 @@
 # Middle East · Political Analysis
 
+Build a research notebook that keeps sources, exact passages, attributed claims and analyst judgments connected.
+
+**[Beginner quickstart](docs/quickstart.md)** · [Fictional worked case](examples/README.md) · [Cloud/container instructions](docs/deployment.md) · [Contribute](CONTRIBUTING.md)
+
+The public code and sample corpus can be read, cloned and run locally. The optional private desk is a single-operator notebook: all holders of its access key can access all cases. There is no hosted public service or automatic deployment.
+
+![Private desk using synthetic test records](docs/images/desk-desktop.png)
+
+The screenshot uses fictional browser-test records only. [Mobile view](docs/images/desk-mobile.png).
+
 ![Selected source-backed regional navigation anchors](docs/source-map.svg)
 
 An independent, public-source research toolkit by Giulio Catanzariti. Start with a source, preserve what it actually says, and keep the analyst's judgement visible.

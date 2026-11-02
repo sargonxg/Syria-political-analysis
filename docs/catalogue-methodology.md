@@ -1,6 +1,6 @@
 # Provenance of this research input
 
-Read in full through the Library text interface. Original catalogue: `libfile_0211ef194c9c8191a2f218bbfdab8547`, version 1. Original methodology: `libfile_9ebb7d73f2e48191a4e5599513a06a1c`, version 0. This is semantic ingestion, not a claim that the original files were materialized. The source catalogue's counts below describe that 25-profile input, not the larger merged repository register.
+The reviewed input is committed in `data/sources/catalogue-review.json`; public supporting citations and the merged directory are in `data/sources/registry.json`. Historical private input identifiers are optional archival metadata, not publicly accessible dependencies. Counts below describe the 25-profile input rather than the merged register.
 
 # Syria source atlas — evidence and interpretation
 

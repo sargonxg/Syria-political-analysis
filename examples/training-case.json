@@ -1,0 +1,607 @@
+{
+  "schema_version": 1,
+  "exported_at": "2026-11-02T22:25:10.006122+00:00",
+  "case": {
+    "id": "training-announcement-versus-outcome",
+    "title": "TRAINING ONLY / Does an announcement establish an outcome?",
+    "created_at": "2026-11-02T22:25:09.928856+00:00"
+  },
+  "records": [
+    {
+      "kind": "actor",
+      "title": "TRAINING / Example Council (fictional)",
+      "body": "Fictional institution used in the training document. This record does not assert a real organizational role.",
+      "url": "",
+      "source_id": null,
+      "document_id": null,
+      "excerpt": "",
+      "locator": "",
+      "published_on": null,
+      "reviewed_on": null,
+      "event_on": null,
+      "confidence": "unassessed",
+      "confidence_reason": "",
+      "tags": [
+        "training",
+        "synthetic"
+      ],
+      "links": [],
+      "provenance": {
+        "synthetic": true,
+        "real_world_evidence": false,
+        "purpose": "Fictional training material for evidence handling. No real actor, incident or source text is represented."
+      },
+      "id": "training-actor",
+      "case_id": "training-announcement-versus-outcome",
+      "revision": 1,
+      "created_at": "2026-11-02T22:25:09.957263+00:00",
+      "updated_at": "2026-11-02T22:25:09.957263+00:00"
+    },
+    {
+      "kind": "note",
+      "title": "TRAINING / Assessment, alternatives and next evidence",
+      "body": "Question: does this announcement establish a completed facility?\n\nEvidence: the fictional notice records a proposal and explicitly leaves milestones unconfirmed.\n\nJudgment: this document alone is insufficient to establish implementation.\n\nAssumption: the stored notice is complete. If it is only an extract, omitted passages may matter.\n\nAlternative: funding and work may be recorded in another document. Lack of confirmation is not proof of absence.\n\nContrary evidence to seek: a dated budget decision, work record or independently sourced opening report.\n\nWhat would change the assessment: attributable records establishing the relevant milestone.\n\nTRAINING ONLY. This is a worked reasoning example, not an assessment of a real place.",
+      "url": "",
+      "source_id": null,
+      "document_id": null,
+      "excerpt": "",
+      "locator": "",
+      "published_on": null,
+      "reviewed_on": null,
+      "event_on": null,
+      "confidence": "unassessed",
+      "confidence_reason": "",
+      "tags": [
+        "training",
+        "synthetic",
+        "alternatives"
+      ],
+      "links": [
+        "training-claim-proposal",
+        "training-claim-limit",
+        "training-event",
+        "training-theme"
+      ],
+      "provenance": {
+        "synthetic": true,
+        "real_world_evidence": false,
+        "purpose": "Fictional training material for evidence handling. No real actor, incident or source text is represented."
+      },
+      "id": "training-assessment",
+      "case_id": "training-announcement-versus-outcome",
+      "revision": 1,
+      "created_at": "2026-11-02T22:25:09.995741+00:00",
+      "updated_at": "2026-11-02T22:25:09.995741+00:00"
+    },
+    {
+      "kind": "claim",
+      "title": "TRAINING / Budget and opening date are not confirmed",
+      "body": "The absence of confirmation in this fictional notice does not prove that no funding or work exists elsewhere.",
+      "url": "",
+      "source_id": null,
+      "document_id": "training-document",
+      "excerpt": "The notice did not confirm a budget, construction start or opening date.",
+      "locator": "Training document, paragraph 2, sentence 2",
+      "published_on": null,
+      "reviewed_on": null,
+      "event_on": null,
+      "confidence": "unassessed",
+      "confidence_reason": "",
+      "tags": [
+        "training",
+        "synthetic",
+        "information-gap"
+      ],
+      "links": [],
+      "citation_provenance": {
+        "document_id": "training-document",
+        "document_revision": 1,
+        "document_url": "",
+        "source_id": "training-source",
+        "published_on": "2020-01-15",
+        "reviewed_on": null,
+        "excerpt": "The notice did not confirm a budget, construction start or opening date.",
+        "locator": "Training document, paragraph 2, sentence 2"
+      },
+      "provenance": {
+        "synthetic": true,
+        "real_world_evidence": false,
+        "purpose": "Fictional training material for evidence handling. No real actor, incident or source text is represented."
+      },
+      "id": "training-claim-limit",
+      "case_id": "training-announcement-versus-outcome",
+      "revision": 1,
+      "created_at": "2026-11-02T22:25:09.987805+00:00",
+      "updated_at": "2026-11-02T22:25:09.987805+00:00"
+    },
+    {
+      "kind": "claim",
+      "title": "TRAINING / The notice describes a proposal",
+      "body": "Attributed reading of the fictional notice. It does not establish that a facility opened.",
+      "url": "",
+      "source_id": null,
+      "document_id": "training-document",
+      "excerpt": "the Example Council proposed opening a community centre.",
+      "locator": "Training document, paragraph 2, sentence 1",
+      "published_on": null,
+      "reviewed_on": null,
+      "event_on": null,
+      "confidence": "unassessed",
+      "confidence_reason": "",
+      "tags": [
+        "training",
+        "synthetic",
+        "proposal"
+      ],
+      "links": [],
+      "citation_provenance": {
+        "document_id": "training-document",
+        "document_revision": 1,
+        "document_url": "",
+        "source_id": "training-source",
+        "published_on": "2020-01-15",
+        "reviewed_on": null,
+        "excerpt": "the Example Council proposed opening a community centre.",
+        "locator": "Training document, paragraph 2, sentence 1"
+      },
+      "provenance": {
+        "synthetic": true,
+        "real_world_evidence": false,
+        "purpose": "Fictional training material for evidence handling. No real actor, incident or source text is represented."
+      },
+      "id": "training-claim-proposal",
+      "case_id": "training-announcement-versus-outcome",
+      "revision": 1,
+      "created_at": "2026-11-02T22:25:09.980506+00:00",
+      "updated_at": "2026-11-02T22:25:09.980506+00:00"
+    },
+    {
+      "kind": "document",
+      "title": "TRAINING / A proposed community centre",
+      "body": "FICTIONAL TRAINING DOCUMENT. No real incident is described.\n\nOn 15 January 2020, the Example Council proposed opening a community centre. The notice did not confirm a budget, construction start or opening date. The proposal will be reviewed at a later meeting.\n\nThis invented notice is supplied only to practise exact excerpts, uncertainty and revision history.",
+      "url": "",
+      "source_id": "training-source",
+      "document_id": null,
+      "excerpt": "",
+      "locator": "",
+      "published_on": "2020-01-15",
+      "reviewed_on": null,
+      "event_on": null,
+      "confidence": "unassessed",
+      "confidence_reason": "",
+      "tags": [
+        "training",
+        "synthetic",
+        "announcement"
+      ],
+      "links": [],
+      "provenance": {
+        "synthetic": true,
+        "real_world_evidence": false,
+        "purpose": "Fictional training material for evidence handling. No real actor, incident or source text is represented."
+      },
+      "id": "training-document",
+      "case_id": "training-announcement-versus-outcome",
+      "revision": 1,
+      "created_at": "2026-11-02T22:25:09.950225+00:00",
+      "updated_at": "2026-11-02T22:25:09.950225+00:00"
+    },
+    {
+      "kind": "event",
+      "title": "TRAINING / A proposal is announced",
+      "body": "Fictional announcement only. The event day is different from the creation time of this training record.",
+      "url": "",
+      "source_id": null,
+      "document_id": null,
+      "excerpt": "",
+      "locator": "",
+      "published_on": null,
+      "reviewed_on": null,
+      "event_on": "2020-01-15",
+      "confidence": "unassessed",
+      "confidence_reason": "",
+      "tags": [
+        "training",
+        "synthetic"
+      ],
+      "links": [
+        "training-actor",
+        "training-document"
+      ],
+      "provenance": {
+        "synthetic": true,
+        "real_world_evidence": false,
+        "purpose": "Fictional training material for evidence handling. No real actor, incident or source text is represented."
+      },
+      "id": "training-event",
+      "case_id": "training-announcement-versus-outcome",
+      "revision": 1,
+      "created_at": "2026-11-02T22:25:09.972059+00:00",
+      "updated_at": "2026-11-02T22:25:09.972059+00:00"
+    },
+    {
+      "kind": "source",
+      "title": "TRAINING / Example Council notices",
+      "body": "Fictional publisher. example.org is a reserved example domain; this is not an actual council or a verified news source.",
+      "url": "https://example.org/",
+      "source_id": null,
+      "document_id": null,
+      "excerpt": "",
+      "locator": "",
+      "published_on": null,
+      "reviewed_on": null,
+      "event_on": null,
+      "confidence": "unassessed",
+      "confidence_reason": "",
+      "tags": [
+        "training",
+        "synthetic"
+      ],
+      "links": [],
+      "provenance": {
+        "synthetic": true,
+        "real_world_evidence": false,
+        "purpose": "Fictional training material for evidence handling. No real actor, incident or source text is represented."
+      },
+      "id": "training-source",
+      "case_id": "training-announcement-versus-outcome",
+      "revision": 1,
+      "created_at": "2026-11-02T22:25:09.928856+00:00",
+      "updated_at": "2026-11-02T22:25:09.928856+00:00"
+    },
+    {
+      "kind": "theme",
+      "title": "TRAINING / Public announcements and implementation",
+      "body": "Research question: which separate records would establish funding, work begun, completion and use?",
+      "url": "",
+      "source_id": null,
+      "document_id": null,
+      "excerpt": "",
+      "locator": "",
+      "published_on": null,
+      "reviewed_on": null,
+      "event_on": null,
+      "confidence": "unassessed",
+      "confidence_reason": "",
+      "tags": [
+        "training",
+        "synthetic",
+        "governance"
+      ],
+      "links": [],
+      "provenance": {
+        "synthetic": true,
+        "real_world_evidence": false,
+        "purpose": "Fictional training material for evidence handling. No real actor, incident or source text is represented."
+      },
+      "id": "training-theme",
+      "case_id": "training-announcement-versus-outcome",
+      "revision": 1,
+      "created_at": "2026-11-02T22:25:09.965060+00:00",
+      "updated_at": "2026-11-02T22:25:09.965060+00:00"
+    }
+  ],
+  "relationships": [
+    {
+      "source": "training-assessment",
+      "target": "training-claim-limit",
+      "relation": "references"
+    },
+    {
+      "source": "training-assessment",
+      "target": "training-claim-proposal",
+      "relation": "references"
+    },
+    {
+      "source": "training-assessment",
+      "target": "training-event",
+      "relation": "references"
+    },
+    {
+      "source": "training-assessment",
+      "target": "training-theme",
+      "relation": "references"
+    },
+    {
+      "source": "training-claim-limit",
+      "target": "training-document",
+      "relation": "cites_excerpt_from"
+    },
+    {
+      "source": "training-claim-proposal",
+      "target": "training-document",
+      "relation": "cites_excerpt_from"
+    },
+    {
+      "source": "training-document",
+      "target": "training-source",
+      "relation": "published_by"
+    },
+    {
+      "source": "training-event",
+      "target": "training-actor",
+      "relation": "references"
+    },
+    {
+      "source": "training-event",
+      "target": "training-document",
+      "relation": "references"
+    }
+  ],
+  "revisions": [
+    {
+      "kind": "actor",
+      "title": "TRAINING / Example Council (fictional)",
+      "body": "Fictional institution used in the training document. This record does not assert a real organizational role.",
+      "url": "",
+      "source_id": null,
+      "document_id": null,
+      "excerpt": "",
+      "locator": "",
+      "published_on": null,
+      "reviewed_on": null,
+      "event_on": null,
+      "confidence": "unassessed",
+      "confidence_reason": "",
+      "tags": [
+        "training",
+        "synthetic"
+      ],
+      "links": [],
+      "provenance": {
+        "synthetic": true,
+        "real_world_evidence": false,
+        "purpose": "Fictional training material for evidence handling. No real actor, incident or source text is represented."
+      },
+      "id": "training-actor",
+      "case_id": "training-announcement-versus-outcome",
+      "revision": 1,
+      "created_at": "2026-11-02T22:25:09.957263+00:00",
+      "updated_at": "2026-11-02T22:25:09.957263+00:00"
+    },
+    {
+      "kind": "note",
+      "title": "TRAINING / Assessment, alternatives and next evidence",
+      "body": "Question: does this announcement establish a completed facility?\n\nEvidence: the fictional notice records a proposal and explicitly leaves milestones unconfirmed.\n\nJudgment: this document alone is insufficient to establish implementation.\n\nAssumption: the stored notice is complete. If it is only an extract, omitted passages may matter.\n\nAlternative: funding and work may be recorded in another document. Lack of confirmation is not proof of absence.\n\nContrary evidence to seek: a dated budget decision, work record or independently sourced opening report.\n\nWhat would change the assessment: attributable records establishing the relevant milestone.\n\nTRAINING ONLY. This is a worked reasoning example, not an assessment of a real place.",
+      "url": "",
+      "source_id": null,
+      "document_id": null,
+      "excerpt": "",
+      "locator": "",
+      "published_on": null,
+      "reviewed_on": null,
+      "event_on": null,
+      "confidence": "unassessed",
+      "confidence_reason": "",
+      "tags": [
+        "training",
+        "synthetic",
+        "alternatives"
+      ],
+      "links": [
+        "training-claim-proposal",
+        "training-claim-limit",
+        "training-event",
+        "training-theme"
+      ],
+      "provenance": {
+        "synthetic": true,
+        "real_world_evidence": false,
+        "purpose": "Fictional training material for evidence handling. No real actor, incident or source text is represented."
+      },
+      "id": "training-assessment",
+      "case_id": "training-announcement-versus-outcome",
+      "revision": 1,
+      "created_at": "2026-11-02T22:25:09.995741+00:00",
+      "updated_at": "2026-11-02T22:25:09.995741+00:00"
+    },
+    {
+      "kind": "claim",
+      "title": "TRAINING / Budget and opening date are not confirmed",
+      "body": "The absence of confirmation in this fictional notice does not prove that no funding or work exists elsewhere.",
+      "url": "",
+      "source_id": null,
+      "document_id": "training-document",
+      "excerpt": "The notice did not confirm a budget, construction start or opening date.",
+      "locator": "Training document, paragraph 2, sentence 2",
+      "published_on": null,
+      "reviewed_on": null,
+      "event_on": null,
+      "confidence": "unassessed",
+      "confidence_reason": "",
+      "tags": [
+        "training",
+        "synthetic",
+        "information-gap"
+      ],
+      "links": [],
+      "citation_provenance": {
+        "document_id": "training-document",
+        "document_revision": 1,
+        "document_url": "",
+        "source_id": "training-source",
+        "published_on": "2020-01-15",
+        "reviewed_on": null,
+        "excerpt": "The notice did not confirm a budget, construction start or opening date.",
+        "locator": "Training document, paragraph 2, sentence 2"
+      },
+      "provenance": {
+        "synthetic": true,
+        "real_world_evidence": false,
+        "purpose": "Fictional training material for evidence handling. No real actor, incident or source text is represented."
+      },
+      "id": "training-claim-limit",
+      "case_id": "training-announcement-versus-outcome",
+      "revision": 1,
+      "created_at": "2026-11-02T22:25:09.987805+00:00",
+      "updated_at": "2026-11-02T22:25:09.987805+00:00"
+    },
+    {
+      "kind": "claim",
+      "title": "TRAINING / The notice describes a proposal",
+      "body": "Attributed reading of the fictional notice. It does not establish that a facility opened.",
+      "url": "",
+      "source_id": null,
+      "document_id": "training-document",
+      "excerpt": "the Example Council proposed opening a community centre.",
+      "locator": "Training document, paragraph 2, sentence 1",
+      "published_on": null,
+      "reviewed_on": null,
+      "event_on": null,
+      "confidence": "unassessed",
+      "confidence_reason": "",
+      "tags": [
+        "training",
+        "synthetic",
+        "proposal"
+      ],
+      "links": [],
+      "citation_provenance": {
+        "document_id": "training-document",
+        "document_revision": 1,
+        "document_url": "",
+        "source_id": "training-source",
+        "published_on": "2020-01-15",
+        "reviewed_on": null,
+        "excerpt": "the Example Council proposed opening a community centre.",
+        "locator": "Training document, paragraph 2, sentence 1"
+      },
+      "provenance": {
+        "synthetic": true,
+        "real_world_evidence": false,
+        "purpose": "Fictional training material for evidence handling. No real actor, incident or source text is represented."
+      },
+      "id": "training-claim-proposal",
+      "case_id": "training-announcement-versus-outcome",
+      "revision": 1,
+      "created_at": "2026-11-02T22:25:09.980506+00:00",
+      "updated_at": "2026-11-02T22:25:09.980506+00:00"
+    },
+    {
+      "kind": "document",
+      "title": "TRAINING / A proposed community centre",
+      "body": "FICTIONAL TRAINING DOCUMENT. No real incident is described.\n\nOn 15 January 2020, the Example Council proposed opening a community centre. The notice did not confirm a budget, construction start or opening date. The proposal will be reviewed at a later meeting.\n\nThis invented notice is supplied only to practise exact excerpts, uncertainty and revision history.",
+      "url": "",
+      "source_id": "training-source",
+      "document_id": null,
+      "excerpt": "",
+      "locator": "",
+      "published_on": "2020-01-15",
+      "reviewed_on": null,
+      "event_on": null,
+      "confidence": "unassessed",
+      "confidence_reason": "",
+      "tags": [
+        "training",
+        "synthetic",
+        "announcement"
+      ],
+      "links": [],
+      "provenance": {
+        "synthetic": true,
+        "real_world_evidence": false,
+        "purpose": "Fictional training material for evidence handling. No real actor, incident or source text is represented."
+      },
+      "id": "training-document",
+      "case_id": "training-announcement-versus-outcome",
+      "revision": 1,
+      "created_at": "2026-11-02T22:25:09.950225+00:00",
+      "updated_at": "2026-11-02T22:25:09.950225+00:00"
+    },
+    {
+      "kind": "event",
+      "title": "TRAINING / A proposal is announced",
+      "body": "Fictional announcement only. The event day is different from the creation time of this training record.",
+      "url": "",
+      "source_id": null,
+      "document_id": null,
+      "excerpt": "",
+      "locator": "",
+      "published_on": null,
+      "reviewed_on": null,
+      "event_on": "2020-01-15",
+      "confidence": "unassessed",
+      "confidence_reason": "",
+      "tags": [
+        "training",
+        "synthetic"
+      ],
+      "links": [
+        "training-actor",
+        "training-document"
+      ],
+      "provenance": {
+        "synthetic": true,
+        "real_world_evidence": false,
+        "purpose": "Fictional training material for evidence handling. No real actor, incident or source text is represented."
+      },
+      "id": "training-event",
+      "case_id": "training-announcement-versus-outcome",
+      "revision": 1,
+      "created_at": "2026-11-02T22:25:09.972059+00:00",
+      "updated_at": "2026-11-02T22:25:09.972059+00:00"
+    },
+    {
+      "kind": "source",
+      "title": "TRAINING / Example Council notices",
+      "body": "Fictional publisher. example.org is a reserved example domain; this is not an actual council or a verified news source.",
+      "url": "https://example.org/",
+      "source_id": null,
+      "document_id": null,
+      "excerpt": "",
+      "locator": "",
+      "published_on": null,
+      "reviewed_on": null,
+      "event_on": null,
+      "confidence": "unassessed",
+      "confidence_reason": "",
+      "tags": [
+        "training",
+        "synthetic"
+      ],
+      "links": [],
+      "provenance": {
+        "synthetic": true,
+        "real_world_evidence": false,
+        "purpose": "Fictional training material for evidence handling. No real actor, incident or source text is represented."
+      },
+      "id": "training-source",
+      "case_id": "training-announcement-versus-outcome",
+      "revision": 1,
+      "created_at": "2026-11-02T22:25:09.928856+00:00",
+      "updated_at": "2026-11-02T22:25:09.928856+00:00"
+    },
+    {
+      "kind": "theme",
+      "title": "TRAINING / Public announcements and implementation",
+      "body": "Research question: which separate records would establish funding, work begun, completion and use?",
+      "url": "",
+      "source_id": null,
+      "document_id": null,
+      "excerpt": "",
+      "locator": "",
+      "published_on": null,
+      "reviewed_on": null,
+      "event_on": null,
+      "confidence": "unassessed",
+      "confidence_reason": "",
+      "tags": [
+        "training",
+        "synthetic",
+        "governance"
+      ],
+      "links": [],
+      "provenance": {
+        "synthetic": true,
+        "real_world_evidence": false,
+        "purpose": "Fictional training material for evidence handling. No real actor, incident or source text is represented."
+      },
+      "id": "training-theme",
+      "case_id": "training-announcement-versus-outcome",
+      "revision": 1,
+      "created_at": "2026-11-02T22:25:09.965060+00:00",
+      "updated_at": "2026-11-02T22:25:09.965060+00:00"
+    }
+  ],
+  "qualification": "Analyst-authored workspace; confidence is a documented judgment, not an outlet reliability score. Export excludes login sessions."
+}

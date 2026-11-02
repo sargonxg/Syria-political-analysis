@@ -7,6 +7,7 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 from pydantic import ValidationError
 
+from syria_analysis.core import read_json
 from syria_analysis.desk.app import Settings, create_app
 from syria_analysis.desk.manage import import_public
 from syria_analysis.desk.models import RecordWrite
@@ -225,6 +226,43 @@ class DeskTests(unittest.TestCase):
                 invalid["records"][0]["url"] = "javascript:alert(1)"
             clean = Store(Path(self.temp.name) / (mutate + ".sqlite3"))
             with self.assertRaises(ValueError):
+                restore_case(clean, invalid)
+            self.assertEqual(clean.cases(), [])
+
+    def test_public_training_case_is_fictional_and_round_trips(self):
+        fixture = read_json(ROOT / "examples/training-case.json")
+        self.assertEqual(len(fixture["records"]), 8)
+        self.assertEqual(
+            {r["kind"] for r in fixture["records"]},
+            {"source", "document", "claim", "note", "actor", "event", "theme"},
+        )
+        self.assertTrue(
+            all(
+                r["provenance"]["synthetic"] is True
+                and r["provenance"]["real_world_evidence"] is False
+                for r in fixture["records"]
+            )
+        )
+        restore_case(self.store, fixture)
+        restored = self.store.export(fixture["case"]["id"])
+        for key in ("case", "records", "relationships", "revisions"):
+            self.assertEqual(restored[key], fixture[key])
+
+    def test_import_rejects_forged_citation_identity_url_publisher_and_dates(self):
+        fixture = read_json(ROOT / "examples/training-case.json")
+        for field, value in [
+            ("document_id", "another-document"),
+            ("document_url", "https://example.org/forged"),
+            ("source_id", "another-publisher"),
+            ("published_on", "1900-01-01"),
+            ("reviewed_on", "1900-01-01"),
+        ]:
+            invalid = deepcopy(fixture)
+            for row in invalid["records"] + invalid["revisions"]:
+                if row["kind"] == "claim":
+                    row["citation_provenance"][field] = value
+            clean = Store(Path(self.temp.name) / (field + ".sqlite3"))
+            with self.subTest(field=field), self.assertRaises(ValueError):
                 restore_case(clean, invalid)
             self.assertEqual(clean.cases(), [])
 

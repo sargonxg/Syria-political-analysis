@@ -124,11 +124,23 @@ def restore_case(store, bundle):
     for row in revisions:
         if row["kind"] == "claim":
             citation = row.get("citation_provenance") or {}
+            if (
+                not isinstance(citation, dict)
+                or type(citation.get("document_revision")) is not int
+            ):
+                raise ValueError(
+                    "Claim history needs a structured document-revision citation"
+                )
             version = history.get(
                 (row["document_id"], citation.get("document_revision"))
             )
             if (
                 not version
+                or citation.get("document_id") != row["document_id"]
+                or citation.get("document_url") != version.get("url")
+                or citation.get("source_id") != version.get("source_id")
+                or citation.get("published_on") != version.get("published_on")
+                or citation.get("reviewed_on") != version.get("reviewed_on")
                 or row["excerpt"] not in version["body"]
                 or citation.get("excerpt") != row["excerpt"]
                 or citation.get("locator") != row["locator"]

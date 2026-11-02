@@ -25,6 +25,7 @@
     "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
     "reviewed_on": "2026-11-02",
     "verification_scope": "Organizational evidence review, not article accuracy certification",
-    "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+    "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+    "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
   }
 }

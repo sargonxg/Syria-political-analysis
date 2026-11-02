@@ -27,9 +27,7 @@ Checked locally on Windows with Python 3.12 and an isolated Chromium session on 
 
 No remote deployment, GitHub push, merge, live collection or companion-website change was performed. Browser checks were run locally; no axe or screen-reader audit is claimed. Coverage is curated and incomplete, particularly dedicated coastal and Suwayda reporting.
 
-Original Library byte materialization failed because `os.setxattr` is unavailable on Windows. The integration gap was subsequently resolved through complete supported paged text reads of catalogue `libfile_0211ef194c9c8191a2f218bbfdab8547` version 1 and methodology `libfile_9ebb7d73f2e48191a4e5599513a06a1c` version 0. The normalized evidence is committed with those identities. All 25 input profiles are represented: 11 additions, 14 supplements. Canonical ID/homepage/name resolution prevents duplicate outlets. Two overlapping relationships retain both sets of evidence. No transfer helper was patched or bypassed; no claim of original-byte materialization is made.
-
-The portable standalone `Syria-Source-Atlas.html` was successfully uploaded to Library as `libfile_2b4bafd8358c8191bf5f1ca1cdafe46d`, version 0. The metadata helper could not persist local extended attributes for the same Windows reason; the upload itself succeeded and is not pending. The original local file and its Library identity are retained here.
+The reviewed catalogue is committed as `data/sources/catalogue-review.json`. All 25 input profiles are represented: 11 additions and 14 supplements. Canonical ID/homepage/name resolution prevents duplicate outlets. Two overlapping relationships retain both evidence sets. Historical private input identifiers are optional archival metadata, not dependencies. Rebuild the portable atlas using the documented CLI and committed public citations.
 
 GitHub main is not empty: its confirmed base commit is `29fa097cfe4077518a26b458ed8a534ed56f6dbd`. This local branch extends it; the metadata size-zero value was stale.
 
