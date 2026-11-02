@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-02T21:07:08.545793Z",
+  "generated_at": "2026-11-02T22:53:09.046018Z",
   "purpose": "Evidence-oriented context for a human or AI analyst",
   "country": {
     "code": "SY",
@@ -145,10 +145,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -329,10 +330,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -493,10 +495,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -655,10 +658,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -838,10 +842,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -1074,10 +1079,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -1254,10 +1260,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -1440,10 +1447,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -1586,10 +1594,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -1740,10 +1749,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -1948,10 +1958,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       },
       "prior_ownership_description": {
         "summary": "The Arabic About page describes nationwide Syrian coverage through a correspondent network; it does not identify legal ownership or funders.",
@@ -2096,10 +2107,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -2258,10 +2270,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -2419,10 +2432,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -3056,10 +3070,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -3186,10 +3201,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -3316,10 +3332,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -3496,10 +3513,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -3645,10 +3663,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -3794,10 +3813,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -3926,10 +3946,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -4060,10 +4081,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -4241,10 +4263,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -4398,10 +4421,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     },
     {
@@ -4555,10 +4579,11 @@
         "library_version": 1,
         "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
         "methodology_library_version": 0,
-        "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+        "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
         "reviewed_on": "2026-11-02",
         "verification_scope": "Organizational evidence review, not article accuracy certification",
-        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration."
+        "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
+        "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
       }
     }
   ],
@@ -8513,7 +8538,7 @@
   ],
   "political_context": {
     "schema_version": 1,
-    "built_at": "2026-11-02T21:07:08.542788Z",
+    "built_at": "2026-11-02T22:53:09.046018Z",
     "country": {
       "code": "SY",
       "name": "Syria",

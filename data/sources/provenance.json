@@ -22,7 +22,7 @@
     "library_version": 1,
     "methodology_library_file_id": "libfile_9ebb7d73f2e48191a4e5599513a06a1c",
     "methodology_library_version": 0,
-    "access_route": "Complete paged Library text read; semantic normalization, not byte materialization",
+    "access_route": "Committed data/sources/catalogue-review.json, docs/catalogue-methodology.md and public evidence URLs; historical private input identifiers are optional archival metadata only.",
     "reviewed_on": "2026-11-02",
     "verification_scope": "Organizational evidence review, not article accuracy certification",
     "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
