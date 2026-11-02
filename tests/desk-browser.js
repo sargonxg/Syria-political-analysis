@@ -255,6 +255,7 @@ async function testDesk(page) {
     "Dark theme works",
   );
   await page.locator("#theme").click();
+  await page.setViewportSize({ width: 390, height: 844 });
   await page.screenshot({ path: "output/playwright/desk-mobile.png" });
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.screenshot({ path: "output/playwright/desk-desktop.png" });
