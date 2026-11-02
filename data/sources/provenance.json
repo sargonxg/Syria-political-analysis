@@ -16,5 +16,5 @@
     "The independently checked public directory is not a claim that any private research system currently ingests these entities."
   ],
   "automatic_refresh": false,
-  "coverage_note": "26 selected entities, including two additional UN publishing bodies. A directory entry does not establish a live connection."
+  "coverage_note": "28 selected entities, including two additional UN publishing bodies and two monitoring/advocacy organizations. A directory entry does not establish a live connection. Six selected institutional relationships are separately documented in relationships.json."
 }

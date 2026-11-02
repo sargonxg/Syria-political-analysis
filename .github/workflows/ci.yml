@@ -17,4 +17,5 @@ jobs:
       - run: python -m unittest discover -s tests -v
       - run: syria-analysis build-context --output /tmp/context.json --jsonl /tmp/context.jsonl
       - run: syria-analysis export-graph --format graphml --output /tmp/evidence.graphml
+      - run: syria-analysis build-atlas --output /tmp/atlas/index.html
       - run: syria-analysis brief --question "What does the Homs announcement establish?" --place area-homs-urban-recovery --output /tmp/brief.md

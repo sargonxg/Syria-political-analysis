@@ -2,6 +2,20 @@
   "schema_version": 1,
   "nodes": [
     {
+      "id": "snhr",
+      "type": "source",
+      "label": "Syrian Network for Human Rights",
+      "review_state": null,
+      "url": "https://snhr.org/"
+    },
+    {
+      "id": "syrian-archive",
+      "type": "source",
+      "label": "Syrian Archive",
+      "review_state": null,
+      "url": "https://syrianarchive.org/en/"
+    },
+    {
       "id": "ocha",
       "type": "source",
       "label": "OCHA",

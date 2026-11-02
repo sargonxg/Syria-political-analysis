@@ -1,5 +1,39 @@
 [
   {
+    "id": "snhr",
+    "name": "Syrian Network for Human Rights",
+    "url": "https://snhr.org/",
+    "type": "advocacy_monitoring",
+    "entity_kind": "organization",
+    "languages": ["Arabic", "English"],
+    "scope": ["Syria", "Human rights", "Accountability"],
+    "description": "Human rights documentation and advocacy organization.",
+    "ownership_or_perspective": {"summary": "SNHR describes itself as independent, with documentation and accountability goals. This profile does not establish a current funding breakdown.", "attribution": "First-party description, not an independent audit."},
+    "strengths": ["Thematic reporting and published documentation methods."],
+    "limits": ["Advocacy and monitoring are distinct from judicial findings.", "Check each report's methods, definitions and underlying evidence; citation by another institution is not blanket endorsement."],
+    "evidence": [{"title": "About SNHR", "url": "https://snhr.org/about-us/", "basis": "Describes its documentation, reporting and advocacy remit.", "kind": "self_description", "access": "read", "checked_on": "2026-11-02"}],
+    "checked_on": "2026-11-02",
+    "feeds": [],
+    "feed_status": "No feed verified in this check"
+  },
+  {
+    "id": "syrian-archive",
+    "name": "Syrian Archive",
+    "url": "https://syrianarchive.org/en/",
+    "type": "advocacy_monitoring",
+    "entity_kind": "organization",
+    "languages": ["Arabic", "English"],
+    "scope": ["Syria", "Digital evidence", "Human rights", "Accountability"],
+    "description": "Preservation and investigation of digital human rights documentation.",
+    "ownership_or_perspective": {"summary": "Describes a Syrian-led documentation project for advocacy and accountability. Current funding proportions were not established.", "attribution": "First-party description, not an independent audit."},
+    "strengths": ["Published collection, preservation and verification workflow."],
+    "limits": ["An archived item is not automatically verified or legally adjudicated.", "Check investigation-specific methods and provenance. The About page's funding logos were not interpreted as evidence of current funding amounts."],
+    "evidence": [{"title": "Syrian Archive: About and research methodology", "url": "https://syrianarchive.org/en/about/", "basis": "Describes its purpose and preservation-to-investigation workflow.", "kind": "self_description", "access": "read", "checked_on": "2026-11-02"}],
+    "checked_on": "2026-11-02",
+    "feeds": [],
+    "feed_status": "No feed verified in this check"
+  },
+  {
     "id": "ocha",
     "name": "OCHA",
     "url": "https://www.unocha.org/",
@@ -630,7 +664,7 @@
     "id": "sana",
     "name": "Syrian Arab News Agency — SANA",
     "url": "https://sana.sy/en/",
-    "type": "syrian_local_media",
+    "type": "state_media",
     "entity_kind": "organization",
     "languages": [
       "Arabic",

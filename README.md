@@ -2,7 +2,7 @@
 
 An independent, public-source research toolkit by Giulio Catanzariti. Start with a source, preserve what it actually says, and keep the analyst's judgement visible.
 
-The initial corpus contains **26 source profiles, 21 document references, nine attributed report paraphrases, nine regional navigation anchors, eight context themes and two social-account links verified through institutional profiles**. Twelve document references were collected from two verified RSS feeds on 2 November 2026. No social posts have been collected.
+The corpus contains **28 source profiles, 21 document references, nine attributed report paraphrases, nine regional navigation anchors, eight context themes and two social-account links verified through institutional profiles**. Twelve document references were collected from two verified RSS feeds on 2 November 2026. No social posts have been collected. Six selected institutional relationships have separately cited profile evidence.
 
 This is a working foundation, not comprehensive coverage or a live intelligence service. It does not infer current territorial control, assign coordinates to headlines, or score a publisher's credibility.
 
@@ -21,6 +21,31 @@ python -m unittest discover -s tests -v
 Without installing the package, prefix commands with `PYTHONPATH=src python -m syria_analysis` in place of `syria-analysis`.
 
 ## Workflows
+
+### Interactive source atlas
+
+Open [the built atlas](exports/atlas/index.html) in a browser, or rebuild it from the current validated corpus:
+
+```sh
+syria-analysis build-atlas
+```
+
+The result is one self-contained HTML file. It works offline without a server, remote scripts, tracking, credentials or runtime dependencies. It is a curated research snapshot, not a live intelligence feed.
+
+The atlas provides:
+
+- A source-to-theme network and a separate documented-relationship graph, with keyboard-selectable records and evidence inspectors.
+- Search and combined role, language and theme filters; a complete text directory; visible strengths, limits, access caveats and profile check dates.
+- Distinct state-media and monitoring/advocacy categories, alongside local reporting, wires, research institutions, analysts and official primary sources.
+- A dated evidence desk and an explicitly unreviewed reading queue.
+- Up to three source comparisons and a Markdown worksheet export separating evidence, analyst assessment, alternative explanations and gaps. Drafts are held only in the open page and cleared by reload.
+- Light/dark themes and a responsive directory alternative to the horizontally scrollable graph.
+
+Relationship records in [relationships.json](data/sources/relationships.json) contain the exact relation, basis, original profile evidence, review date and caveat. Unknown start/end dates remain null. A first-party disclosure is not an independent audit; no missing edge establishes independence. See [atlas documentation](docs/atlas.md) for graph semantics and checks.
+
+On Windows, use `$env:PYTHONPATH='src'` then `python -m syria_analysis build-atlas` if the package is not installed. The generated file opens directly from Explorer. For browser automation tools that prohibit `file:` URLs, run `python -m http.server 8766 --bind 127.0.0.1` and visit `http://127.0.0.1:8766/exports/atlas/index.html`.
+
+### Command-line research
 
 ```sh
 # Explicit refresh of the two registered, verified endpoints; titles and links only.
@@ -59,7 +84,7 @@ flowchart LR
   R --> Q[Unreviewed reading queue]
 ```
 
-The graph records provenance, not political affiliations or causal relationships. A line means something specific: a publisher issued a record, a document supports an attributed paraphrase, or a context theme suggests further reading.
+The exported evidence graph records provenance, not political affiliations or causal relationships. A line means something specific: a publisher issued a record, a document supports an attributed paraphrase, or a context theme suggests further reading. The atlas's separate documented-relationship view uses explicitly cited institutional profile records; those edges are not added to the evidence graph or treated as corroboration.
 
 | Material | Location | What it contains |
 | --- | --- | --- |

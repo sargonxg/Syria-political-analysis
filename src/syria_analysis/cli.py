@@ -41,6 +41,8 @@ def main(argv=None):
     network = commands.add_parser('export-graph'); network.add_argument('--format', choices=['json', 'graphml'], default='json')
     network.add_argument('--output', type=Path)
     csv = commands.add_parser('export-csv'); csv.add_argument('--output', type=Path, default=Path('exports/csv'))
+    atlas = commands.add_parser('build-atlas', help='Build a self-contained offline interactive source atlas')
+    atlas.add_argument('--output', type=Path, default=Path('exports/atlas/index.html'))
     args = parser.parse_args(argv)
     try:
         root = args.root.resolve()
@@ -92,6 +94,13 @@ def main(argv=None):
             print(f"Wrote {len(data['nodes'])} nodes and {len(data['edges'])} typed edges to {path}")
         elif args.command == 'export-csv':
             csv_exports(workspace, args.output); print(f'Wrote CSV tables to {args.output}')
+        elif args.command == 'build-atlas':
+            from .atlas import build_atlas
+            from .core import read_json
+            relationships_path = root / 'data/sources/relationships.json'
+            relationships = read_json(relationships_path) if relationships_path.exists() else None
+            path = build_atlas(workspace, args.output, relationships)
+            print(f'Wrote offline source atlas to {path}; open it in a browser. No live collection is enabled.')
         return 0
     except (ValueError, OSError, KeyError) as exc:
         print(f'Error: {exc}', file=sys.stderr); return 1

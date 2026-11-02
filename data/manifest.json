@@ -5,7 +5,7 @@
   "publisher": "Giulio Catanzariti \u2014 independent research project",
   "automatic_refresh": false,
   "counts": {
-    "sources": 26,
+    "sources": 28,
     "documents": 21,
     "claims": 9,
     "places": 9,
@@ -18,7 +18,7 @@
   "website": "https://giulio-catanzariti-atlas.sargonx6.chatgpt.site/syria",
   "scope": "Bounded starter corpus. No claim of comprehensive or real-time coverage; no current territorial control map.",
   "graph": {
-    "nodes": 73,
+    "nodes": 75,
     "edges": 81
   },
   "last_feed_collection_at": "2026-11-02T16:12:36.595675Z"

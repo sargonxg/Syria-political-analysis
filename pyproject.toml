@@ -19,3 +19,6 @@ syria-analysis = "syria_analysis.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+syria_analysis = ["web/*.html", "web/*.css", "web/*.js"]
