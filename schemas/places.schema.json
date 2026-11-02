@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sargonxg/Syria-political-analysis/blob/main/schemas/places.schema.json",
+  "title": "Places",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "name",
+      "coordinates",
+      "coordinate_basis",
+      "precision",
+      "geographic_scope",
+      "geometry_role",
+      "not_an_incident_geotag"
+    ],
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "coordinates": {
+        "type": "array",
+        "prefixItems": [
+          {
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          },
+          {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          }
+        ],
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "coordinate_basis": {
+        "type": "string"
+      },
+      "precision": {
+        "type": "string"
+      },
+      "geographic_scope": {
+        "type": "string"
+      },
+      "geometry_role": {
+        "const": "regional_navigation_anchor"
+      },
+      "not_an_incident_geotag": {
+        "const": true
+      }
+    },
+    "additionalProperties": true
+  }
+}

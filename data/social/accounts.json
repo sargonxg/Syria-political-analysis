@@ -1,0 +1,28 @@
+[
+  {
+    "id": "account-aron-lund",
+    "source_id": "aron-lund",
+    "name": "Aron Lund",
+    "platform": "X",
+    "url": "https://twitter.com/aronlund",
+    "profile_evidence_url": "https://tcf.org/experts/aron-lund/",
+    "profile_locator": "Social link immediately below Aron Lund / Contributor heading",
+    "checked_on": "2026-11-02",
+    "verification_status": "official_profile_link_verified",
+    "destination_status": "403 to automated access; active account status and destination content were not verified.",
+    "content_collected": false
+  },
+  {
+    "id": "account-haid-haid",
+    "source_id": "haid-haid",
+    "name": "Haid Haid",
+    "platform": "X",
+    "url": "https://twitter.com/HaidHaid22",
+    "profile_evidence_url": "https://www.chathamhouse.org/about-us/our-people/haid-haid",
+    "profile_locator": "Contact/social links above the Biography heading",
+    "checked_on": "2026-11-02",
+    "verification_status": "official_profile_link_verified",
+    "destination_status": "403 to automated access; active account status and destination content were not verified.",
+    "content_collected": false
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "checked_on": "2026-11-02",
+  "purpose": "A curated directory for comparing reporting, institutional positions and authored analysis about Syria.",
+  "editorial_policy": [
+    "Publisher self-descriptions are attributed, not certifications of neutrality or accuracy.",
+    "Strengths and limits are editorial reading guidance, not reliability scores.",
+    "No political affiliation is inferred from geography, language, access or an article's subjects.",
+    "Distinguish an official statement, independently reported event and analyst judgment.",
+    "These are source entities, not a representative sample of Syrian opinion.",
+    "Only successfully parsed RSS endpoints appear in feeds. Endpoint verification does not mean continuous collection or republishing rights."
+  ],
+  "verification_notes": [
+    "Public publisher About pages or institutional profiles supplied identity, mission and disclosed ownership context.",
+    "Where direct retrieval was blocked, evidence records explicitly say indexed_primary. Public organizational identity is corroborated separately where available.",
+    "No full articles, private source dumps, user comments or social-media posts are included.",
+    "The independently checked public directory is not a claim that any private research system currently ingests these entities."
+  ],
+  "automatic_refresh": false,
+  "coverage_note": "26 selected entities, including two additional UN publishing bodies. A directory entry does not establish a live connection."
+}

@@ -1,0 +1,27 @@
+[
+  {
+    "id": "official_reporting",
+    "label": "Official reporting",
+    "count": 7
+  },
+  {
+    "id": "international_wire",
+    "label": "International wires",
+    "count": 3
+  },
+  {
+    "id": "syrian_local_media",
+    "label": "Syrian and regional media",
+    "count": 7
+  },
+  {
+    "id": "think_tank",
+    "label": "Research institutes",
+    "count": 5
+  },
+  {
+    "id": "analyst",
+    "label": "Named analysts",
+    "count": 4
+  }
+]

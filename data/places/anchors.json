@@ -1,0 +1,128 @@
+[
+  {
+    "id": "area-damascus-legal-access",
+    "name": "Damascus",
+    "region": "Damascus",
+    "coordinates": [
+      36.29,
+      33.51
+    ],
+    "coordinate_basis": "City centre used for navigation; this does not locate the clinic or identify any beneficiary.",
+    "precision": "Approximate editorial map point, rounded to 0.01 degree; not a geotag supplied by the report.",
+    "geographic_scope": "City-specific visit within a national operational update",
+    "geometry_role": "regional_navigation_anchor",
+    "not_an_incident_geotag": true
+  },
+  {
+    "id": "area-aleppo-water",
+    "name": "Eastern Aleppo",
+    "region": "Aleppo",
+    "coordinates": [
+      37.19,
+      36.19
+    ],
+    "coordinate_basis": "Representative point in eastern Aleppo; no pipeline, facility, or household coordinates are mapped.",
+    "precision": "Approximate editorial map point, rounded to 0.01 degree; not a geotag supplied by the report.",
+    "geographic_scope": "Eastern part of Aleppo city",
+    "geometry_role": "regional_navigation_anchor",
+    "not_an_incident_geotag": true
+  },
+  {
+    "id": "area-homs-urban-recovery",
+    "name": "Homs",
+    "region": "Homs",
+    "coordinates": [
+      36.71,
+      34.73
+    ],
+    "coordinate_basis": "City-centre marker represents the wider programme, not a work site or disposal facility.",
+    "precision": "Approximate editorial map point, rounded to 0.01 degree; not a geotag supplied by the report.",
+    "geographic_scope": "Homs city",
+    "geometry_role": "regional_navigation_anchor",
+    "not_an_incident_geotag": true
+  },
+  {
+    "id": "area-suwayda-protection",
+    "name": "As-Sweida / Suwayda area",
+    "region": "As-Sweida",
+    "coordinates": [
+      36.57,
+      32.71
+    ],
+    "coordinate_basis": "Governorate-capital point is a navigation anchor for broader regional findings; it is not an incident coordinate.",
+    "precision": "Approximate editorial map point, rounded to 0.01 degree; not a geotag supplied by the report.",
+    "geographic_scope": "Southern regional findings covering As-Sweida, Daraa and Quneitra; not a city incident",
+    "geometry_role": "regional_navigation_anchor",
+    "not_an_incident_geotag": true
+  },
+  {
+    "id": "area-syrian-coast-community-protection",
+    "name": "Syrian coast: Latakia and Tartous",
+    "region": "Latakia and Tartous",
+    "coordinates": [
+      36.0,
+      35.2
+    ],
+    "coordinate_basis": "Broad coastal navigation point near Baniyas; the report concerns Latakia and Tartous regionally, not this town specifically.",
+    "precision": "Approximate editorial map point, rounded to 0.01 degree; not a geotag supplied by the report.",
+    "geographic_scope": "Coastal region spanning two governorates",
+    "geometry_role": "regional_navigation_anchor",
+    "not_an_incident_geotag": true
+  },
+  {
+    "id": "area-al-shaddadi-community-services",
+    "name": "Al-Shaddadi",
+    "region": "Al-Hasakeh",
+    "coordinates": [
+      40.73,
+      36.06
+    ],
+    "coordinate_basis": "Approximate town-centre point; this is not the location of the centre.",
+    "precision": "Approximate editorial map point, rounded to 0.01 degree; not a geotag supplied by the report.",
+    "geographic_scope": "Named town in Al-Hasakeh governorate",
+    "geometry_role": "regional_navigation_anchor",
+    "not_an_incident_geotag": true
+  },
+  {
+    "id": "area-raqqa-community-accountability",
+    "name": "Ar-Raqqa area",
+    "region": "Ar-Raqqa",
+    "coordinates": [
+      39.02,
+      35.95
+    ],
+    "coordinate_basis": "Point near the governorate capital represents the reported area, not the training venue.",
+    "precision": "Approximate editorial map point, rounded to 0.01 degree; not a geotag supplied by the report.",
+    "geographic_scope": "Governorate-level activity reported alongside Qamishli; precise training locations not given",
+    "geometry_role": "regional_navigation_anchor",
+    "not_an_incident_geotag": true
+  },
+  {
+    "id": "area-deir-ez-zor-supported-returns",
+    "name": "Deir-ez-Zor governorate",
+    "region": "Deir-ez-Zor",
+    "coordinates": [
+      40.14,
+      35.33
+    ],
+    "coordinate_basis": "Capital-area navigation point only; no camps, routes, departures or destinations are geolocated.",
+    "precision": "Approximate editorial map point, rounded to 0.01 degree; not a geotag supplied by the report.",
+    "geographic_scope": "Governorate; source mentions six displacement sites without placing them at the capital",
+    "geometry_role": "regional_navigation_anchor",
+    "not_an_incident_geotag": true
+  },
+  {
+    "id": "area-idleb-northwest-reintegration",
+    "name": "Idleb / north-west",
+    "region": "Idleb and Aleppo",
+    "coordinates": [
+      36.63,
+      35.93
+    ],
+    "coordinate_basis": "Idleb city is a navigation anchor for regional findings that also cover Aleppo.",
+    "precision": "Approximate editorial map point, rounded to 0.01 degree; not a geotag supplied by the report.",
+    "geographic_scope": "North-west regional findings covering Aleppo and Idleb",
+    "geometry_role": "regional_navigation_anchor",
+    "not_an_incident_geotag": true
+  }
+]

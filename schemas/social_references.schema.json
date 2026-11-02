@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sargonxg/Syria-political-analysis/blob/main/schemas/social_references.schema.json",
+  "title": "Social References",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "url",
+      "platform",
+      "account_id",
+      "published_at",
+      "review_state",
+      "place_ids",
+      "content_retrieved"
+    ],
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "url": {
+        "type": "string",
+        "format": "uri",
+        "pattern": "^https?://"
+      },
+      "platform": {
+        "const": "X"
+      },
+      "account_id": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "published_at": {
+        "type": "null"
+      },
+      "review_state": {
+        "const": "unreviewed_reference"
+      },
+      "place_ids": {
+        "type": "array",
+        "maxItems": 0
+      },
+      "content_retrieved": {
+        "const": false
+      }
+    },
+    "additionalProperties": true
+  }
+}

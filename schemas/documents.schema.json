@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sargonxg/Syria-political-analysis/blob/main/schemas/documents.schema.json",
+  "title": "Documents",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "source_id",
+      "title",
+      "url",
+      "published_at",
+      "retrieved_at",
+      "review_state",
+      "place_ids",
+      "original_passage",
+      "full_text_collected"
+    ],
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^doc-[a-f0-9]{16}$"
+      },
+      "source_id": {
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      },
+      "url": {
+        "type": "string",
+        "format": "uri",
+        "pattern": "^https?://"
+      },
+      "published_at": {
+        "anyOf": [
+          {
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "published_on": {
+        "anyOf": [
+          {
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "retrieved_at": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "review_state": {
+        "enum": [
+          "unreviewed_reference",
+          "needs_source_check",
+          "curated_paraphrase",
+          "corroborated",
+          "disputed",
+          "superseded"
+        ]
+      },
+      "place_ids": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "original_passage": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "full_text_collected": {
+        "const": false
+      }
+    },
+    "additionalProperties": true
+  }
+}

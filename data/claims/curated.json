@@ -1,0 +1,245 @@
+[
+  {
+    "id": "claim-damascus-legal-access",
+    "statement": "UNHCR reported an EU High Representative visit to a partner-supported legal clinic in Damascus, including meetings with displaced people and returnees.",
+    "theme": "diplomacy",
+    "evidence": [
+      {
+        "document_id": "doc-dc64b0d98ec3337d",
+        "locator": "PDF p.2",
+        "original_passage": null,
+        "passage_note": "Attributed editorial paraphrase; no verbatim source passage included."
+      }
+    ],
+    "place_ids": [
+      "area-damascus-legal-access"
+    ],
+    "review_state": "curated_paraphrase",
+    "geographic_scope": "City-specific visit within a national operational update",
+    "qualification": "The visit is described in the September 2026 update, published 20 October. The clinic visit itself is not given a separate exact day. Later service availability is not established.",
+    "reporting_period": {
+      "start": "2026-09-01",
+      "end": "2026-09-30",
+      "label": "September 2026"
+    },
+    "source_published_on": "2026-10-20",
+    "independence_assessment": null,
+    "checked_on": "2026-11-02"
+  },
+  {
+    "id": "claim-aleppo-water",
+    "statement": "UN-Habitat and partners announced completion of work to restore water access and repair associated urban infrastructure in eastern Aleppo.",
+    "theme": "humanitarian",
+    "evidence": [
+      {
+        "document_id": "doc-6a40b33339e9f484",
+        "locator": "Named project announcement; document-level reference",
+        "original_passage": null,
+        "passage_note": "Attributed editorial paraphrase; no verbatim source passage included."
+      }
+    ],
+    "place_ids": [
+      "area-aleppo-water"
+    ],
+    "review_state": "curated_paraphrase",
+    "geographic_scope": "Eastern part of Aleppo city",
+    "qualification": "A project completion announcement dated 19 October 2026; this is not a live water-supply monitor.",
+    "reporting_period": {
+      "start": null,
+      "end": "2026-10-19",
+      "label": "Project completion announcement published 19 October 2026"
+    },
+    "source_published_on": "2026-10-19",
+    "independence_assessment": null,
+    "checked_on": "2026-11-02"
+  },
+  {
+    "id": "claim-homs-urban-recovery",
+    "statement": "Japan and UN-Habitat announced a programme for public-space renewal and municipal waste management in Homs.",
+    "theme": "humanitarian",
+    "evidence": [
+      {
+        "document_id": "doc-ee2a7965970efbca",
+        "locator": "Named project announcement; document-level reference",
+        "original_passage": null,
+        "passage_note": "Attributed editorial paraphrase; no verbatim source passage included."
+      }
+    ],
+    "place_ids": [
+      "area-homs-urban-recovery"
+    ],
+    "review_state": "curated_paraphrase",
+    "geographic_scope": "Homs city",
+    "qualification": "Announced 30 July 2026 with planned work through July 2028. Do not describe the programme as completed.",
+    "reporting_period": {
+      "start": null,
+      "end": "2026-07-30",
+      "label": "Project launch announcement published 30 July 2026"
+    },
+    "source_published_on": "2026-07-30",
+    "independence_assessment": null,
+    "checked_on": "2026-11-02"
+  },
+  {
+    "id": "claim-suwayda-protection",
+    "statement": "UNHCR’s April–June monitoring recorded conflict-related safety concerns in As-Sweida and access constraints across the southern region.",
+    "theme": "civilian protection",
+    "evidence": [
+      {
+        "document_id": "doc-eac2d1b91e1bc5b1",
+        "locator": "PDF p.13, 24",
+        "original_passage": null,
+        "passage_note": "Attributed editorial paraphrase; no verbatim source passage included."
+      }
+    ],
+    "place_ids": [
+      "area-suwayda-protection"
+    ],
+    "review_state": "curated_paraphrase",
+    "geographic_scope": "Southern regional findings covering As-Sweida, Daraa and Quneitra; not a city incident",
+    "qualification": "Published 4 August 2026. Survey and consultation findings describe the second quarter, not current conditions in the city.",
+    "reporting_period": {
+      "start": "2026-04-01",
+      "end": "2026-06-30",
+      "label": "April–June 2026"
+    },
+    "source_published_on": "2026-08-04",
+    "independence_assessment": null,
+    "checked_on": "2026-11-02"
+  },
+  {
+    "id": "claim-syrian-coast-community-protection",
+    "statement": "Community consultations described psychosocial distress, social-cohesion concerns and difficult living conditions in the coastal region.",
+    "theme": "civilian protection",
+    "evidence": [
+      {
+        "document_id": "doc-eac2d1b91e1bc5b1",
+        "locator": "PDF p.23",
+        "original_passage": null,
+        "passage_note": "Attributed editorial paraphrase; no verbatim source passage included."
+      }
+    ],
+    "place_ids": [
+      "area-syrian-coast-community-protection"
+    ],
+    "review_state": "curated_paraphrase",
+    "geographic_scope": "Coastal region spanning two governorates",
+    "qualification": "April–June 2026 consultations, published 4 August. The source does not identify a single coastal incident or classify a present hotspot.",
+    "reporting_period": {
+      "start": "2026-04-01",
+      "end": "2026-06-30",
+      "label": "April–June 2026"
+    },
+    "source_published_on": "2026-08-04",
+    "independence_assessment": null,
+    "checked_on": "2026-11-02"
+  },
+  {
+    "id": "claim-al-shaddadi-community-services",
+    "statement": "UNHCR reported opening a community centre in Al-Shaddadi to support protection and returnee reintegration.",
+    "theme": "civilian protection",
+    "evidence": [
+      {
+        "document_id": "doc-dc64b0d98ec3337d",
+        "locator": "PDF p.2",
+        "original_passage": null,
+        "passage_note": "Attributed editorial paraphrase; no verbatim source passage included."
+      }
+    ],
+    "place_ids": [
+      "area-al-shaddadi-community-services"
+    ],
+    "review_state": "curated_paraphrase",
+    "geographic_scope": "Named town in Al-Hasakeh governorate",
+    "qualification": "Activity reported for September 2026; update published 20 October. No claim is made about current opening hours or capacity.",
+    "reporting_period": {
+      "start": "2026-09-01",
+      "end": "2026-09-30",
+      "label": "September 2026"
+    },
+    "source_published_on": "2026-10-20",
+    "independence_assessment": null,
+    "checked_on": "2026-11-02"
+  },
+  {
+    "id": "claim-raqqa-community-accountability",
+    "statement": "UNHCR reported partner training in community engagement, feedback and complaints mechanisms in Qamishli and Ar-Raqqa.",
+    "theme": "civilian protection",
+    "evidence": [
+      {
+        "document_id": "doc-dc64b0d98ec3337d",
+        "locator": "PDF p.2",
+        "original_passage": null,
+        "passage_note": "Attributed editorial paraphrase; no verbatim source passage included."
+      }
+    ],
+    "place_ids": [
+      "area-raqqa-community-accountability"
+    ],
+    "review_state": "curated_paraphrase",
+    "geographic_scope": "Governorate-level activity reported alongside Qamishli; precise training locations not given",
+    "qualification": "September 2026 activity, published 20 October. The report gives a combined activity total; none is attributed exclusively to Ar-Raqqa here.",
+    "reporting_period": {
+      "start": "2026-09-01",
+      "end": "2026-09-30",
+      "label": "September 2026"
+    },
+    "source_published_on": "2026-10-20",
+    "independence_assessment": null,
+    "checked_on": "2026-11-02"
+  },
+  {
+    "id": "claim-deir-ez-zor-supported-returns",
+    "statement": "UNHCR reported assisting returns from six displacement sites in Deir-ez-Zor as part of a programme spanning several governorates.",
+    "theme": "displacement",
+    "evidence": [
+      {
+        "document_id": "doc-dc64b0d98ec3337d",
+        "locator": "PDF p.4",
+        "original_passage": null,
+        "passage_note": "Attributed editorial paraphrase; no verbatim source passage included."
+      }
+    ],
+    "place_ids": [
+      "area-deir-ez-zor-supported-returns"
+    ],
+    "review_state": "curated_paraphrase",
+    "geographic_scope": "Governorate; source mentions six displacement sites without placing them at the capital",
+    "qualification": "Reported in the September update, published 20 October. National programme totals must not be assigned to this governorate.",
+    "reporting_period": {
+      "start": "2026-09-01",
+      "end": "2026-09-30",
+      "label": "September 2026"
+    },
+    "source_published_on": "2026-10-20",
+    "independence_assessment": null,
+    "checked_on": "2026-11-02"
+  },
+  {
+    "id": "claim-idleb-northwest-reintegration",
+    "statement": "UNHCR’s north-west findings connect return movements with pressure on housing, livelihoods, documentation and essential services.",
+    "theme": "displacement",
+    "evidence": [
+      {
+        "document_id": "doc-eac2d1b91e1bc5b1",
+        "locator": "PDF p.23",
+        "original_passage": null,
+        "passage_note": "Attributed editorial paraphrase; no verbatim source passage included."
+      }
+    ],
+    "place_ids": [
+      "area-idleb-northwest-reintegration"
+    ],
+    "review_state": "curated_paraphrase",
+    "geographic_scope": "North-west regional findings covering Aleppo and Idleb",
+    "qualification": "April–June 2026 monitoring, published 4 August. This is a regional synthesis, not a quantified city assessment.",
+    "reporting_period": {
+      "start": "2026-04-01",
+      "end": "2026-06-30",
+      "label": "April–June 2026"
+    },
+    "source_published_on": "2026-08-04",
+    "independence_assessment": null,
+    "checked_on": "2026-11-02"
+  }
+]

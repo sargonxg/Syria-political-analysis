@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sargonxg/Syria-political-analysis/blob/main/schemas/sources.schema.json",
+  "title": "Sources",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "name",
+      "url",
+      "type",
+      "languages",
+      "scope",
+      "description",
+      "ownership_or_perspective",
+      "strengths",
+      "limits",
+      "evidence",
+      "feeds",
+      "checked_on"
+    ],
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "url": {
+        "type": "string",
+        "format": "uri",
+        "pattern": "^https?://"
+      },
+      "type": {
+        "enum": [
+          "official_reporting",
+          "international_wire",
+          "syrian_local_media",
+          "think_tank",
+          "analyst"
+        ]
+      },
+      "languages": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "scope": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "description": {
+        "type": "string"
+      },
+      "strengths": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "limits": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "evidence": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "required": [
+            "url",
+            "basis",
+            "checked_on"
+          ],
+          "properties": {
+            "url": {
+              "type": "string",
+              "format": "uri",
+              "pattern": "^https?://"
+            },
+            "basis": {
+              "type": "string"
+            },
+            "checked_on": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        }
+      },
+      "feeds": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "url",
+            "verified_on"
+          ],
+          "properties": {
+            "url": {
+              "type": "string",
+              "format": "uri",
+              "pattern": "^https?://"
+            },
+            "verified_on": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        }
+      },
+      "checked_on": {
+        "type": "string",
+        "format": "date"
+      }
+    },
+    "additionalProperties": true
+  }
+}

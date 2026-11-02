@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-11-02T16:05:37.068108Z",
+  "checked_on": "2026-11-02",
+  "publisher": "Giulio Catanzariti \u2014 independent research project",
+  "automatic_refresh": false,
+  "counts": {
+    "sources": 26,
+    "documents": 21,
+    "claims": 9,
+    "places": 9,
+    "context_topics": 8,
+    "verified_profile_social_links": 2,
+    "social_posts_collected": 0
+  },
+  "provenance": "Original source profiles, attributed paraphrases and typed research questions assembled from public linked material. Publisher text and copyrighted reports are not republished.",
+  "license": "MIT for code; CC BY 4.0 for original annotations and compilation; publisher rights retained for linked material.",
+  "website": "https://giulio-catanzariti-atlas.sargonx6.chatgpt.site/syria",
+  "scope": "Bounded starter corpus. No claim of comprehensive or real-time coverage; no current territorial control map.",
+  "graph": {
+    "nodes": 73,
+    "edges": 81
+  },
+  "last_feed_collection_at": "2026-11-02T16:12:36.595675Z"
+}

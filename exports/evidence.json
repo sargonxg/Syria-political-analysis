@@ -1,0 +1,953 @@
+{
+  "schema_version": 1,
+  "nodes": [
+    {
+      "id": "ocha",
+      "type": "source",
+      "label": "OCHA",
+      "review_state": null,
+      "url": "https://www.unocha.org/"
+    },
+    {
+      "id": "unhcr-syria",
+      "type": "source",
+      "label": "UNHCR Syria Operational Data Portal",
+      "review_state": null,
+      "url": "https://data.unhcr.org/en/country/syr"
+    },
+    {
+      "id": "ose-syria",
+      "type": "source",
+      "label": "Office of the UN Special Envoy for Syria",
+      "review_state": null,
+      "url": "https://specialenvoysyria.unmissions.org/en"
+    },
+    {
+      "id": "coi-syria",
+      "type": "source",
+      "label": "UN Commission of Inquiry on Syria",
+      "review_state": null,
+      "url": "https://www.ohchr.org/en/hr-bodies/hrc/iici-syria/independent-international-commission"
+    },
+    {
+      "id": "iom-dtm-syria",
+      "type": "source",
+      "label": "IOM Displacement Tracking Matrix — Syria",
+      "review_state": null,
+      "url": "https://dtm.iom.int/syria"
+    },
+    {
+      "id": "reuters",
+      "type": "source",
+      "label": "Reuters",
+      "review_state": null,
+      "url": "https://www.reuters.com/"
+    },
+    {
+      "id": "associated-press",
+      "type": "source",
+      "label": "Associated Press",
+      "review_state": null,
+      "url": "https://apnews.com/"
+    },
+    {
+      "id": "afp",
+      "type": "source",
+      "label": "Agence France-Presse",
+      "review_state": null,
+      "url": "https://www.afp.com/en"
+    },
+    {
+      "id": "enab-baladi",
+      "type": "source",
+      "label": "Enab Baladi",
+      "review_state": null,
+      "url": "https://english.enabbaladi.net/"
+    },
+    {
+      "id": "syria-direct",
+      "type": "source",
+      "label": "Syria Direct",
+      "review_state": null,
+      "url": "https://syriadirect.org/"
+    },
+    {
+      "id": "syria-tv",
+      "type": "source",
+      "label": "Syria Television",
+      "review_state": null,
+      "url": "https://www.syria.tv/"
+    },
+    {
+      "id": "north-press",
+      "type": "source",
+      "label": "North Press Agency",
+      "review_state": null,
+      "url": "https://npasyria.com/"
+    },
+    {
+      "id": "daraa24",
+      "type": "source",
+      "label": "Daraa 24",
+      "review_state": null,
+      "url": "https://daraa24.org/"
+    },
+    {
+      "id": "sana",
+      "type": "source",
+      "label": "Syrian Arab News Agency — SANA",
+      "review_state": null,
+      "url": "https://sana.sy/en/"
+    },
+    {
+      "id": "rudaw",
+      "type": "source",
+      "label": "Rudaw Media Network",
+      "review_state": null,
+      "url": "https://www.rudaw.net/english"
+    },
+    {
+      "id": "crisis-group",
+      "type": "source",
+      "label": "International Crisis Group",
+      "review_state": null,
+      "url": "https://www.crisisgroup.org/"
+    },
+    {
+      "id": "carnegie-middle-east",
+      "type": "source",
+      "label": "Malcolm H. Kerr Carnegie Middle East Center",
+      "review_state": null,
+      "url": "https://carnegieendowment.org/middle-east"
+    },
+    {
+      "id": "mei",
+      "type": "source",
+      "label": "Middle East Institute — Syria Initiative",
+      "review_state": null,
+      "url": "https://mei.edu/projects/syria-initiative/"
+    },
+    {
+      "id": "chatham-house",
+      "type": "source",
+      "label": "Chatham House",
+      "review_state": null,
+      "url": "https://www.chathamhouse.org/"
+    },
+    {
+      "id": "omran",
+      "type": "source",
+      "label": "Omran Center for Strategic Studies",
+      "review_state": null,
+      "url": "https://omrandirasat.org/en/"
+    },
+    {
+      "id": "charles-lister",
+      "type": "source",
+      "label": "Charles Lister",
+      "review_state": null,
+      "url": "https://mei.edu/person/charles-lister/"
+    },
+    {
+      "id": "haid-haid",
+      "type": "source",
+      "label": "Haid Haid",
+      "review_state": null,
+      "url": "https://www.chathamhouse.org/about-us/our-people/haid-haid"
+    },
+    {
+      "id": "aron-lund",
+      "type": "source",
+      "label": "Aron Lund",
+      "review_state": null,
+      "url": "https://tcf.org/experts/aron-lund/"
+    },
+    {
+      "id": "karam-shaar",
+      "type": "source",
+      "label": "Karam Shaar",
+      "review_state": null,
+      "url": "https://karamshaar.com/info/karam-shaar/"
+    },
+    {
+      "id": "un-syria",
+      "type": "source",
+      "label": "United Nations in Syria",
+      "review_state": null,
+      "url": "https://syria.un.org/"
+    },
+    {
+      "id": "un-security-council",
+      "type": "source",
+      "label": "UN Security Council",
+      "review_state": null,
+      "url": "https://main.un.org/securitycouncil/en"
+    },
+    {
+      "id": "doc-dc64b0d98ec3337d",
+      "type": "document",
+      "label": "Operational Update — Syria, September 2026",
+      "review_state": "curated_paraphrase",
+      "url": "https://data.unhcr.org/en/documents/details/124572"
+    },
+    {
+      "id": "doc-eac2d1b91e1bc5b1",
+      "type": "document",
+      "label": "Syria: Protection and Reintegration Insights — Voices of returnees and host communities across Syria, April–June 2026",
+      "review_state": "curated_paraphrase",
+      "url": "https://data.unhcr.org/en/documents/details/123576"
+    },
+    {
+      "id": "doc-6a40b33339e9f484",
+      "type": "document",
+      "label": "Alwaleed Philanthropies (Global), Aleppo Governorate and UN-Habitat Restore Water Supply for 600,000 Residents in Eastern Aleppo",
+      "review_state": "curated_paraphrase",
+      "url": "https://syria.un.org/en/324719-alwaleed-philanthropies-global-aleppo-governorate-and-un-habitat-restore-water-supply-600000"
+    },
+    {
+      "id": "doc-ee2a7965970efbca",
+      "type": "document",
+      "label": "Launch JPY 1.521 billion Project to Drive Urban Recovery and Solid Waste Management in Homs",
+      "review_state": "curated_paraphrase",
+      "url": "https://syria.un.org/en/320317-launch%C2%A0jpy-1521-billion-project-drive-urban-recovery-and%C2%A0solid-waste-management-homs"
+    },
+    {
+      "id": "doc-6a6a58332d921b07",
+      "type": "document",
+      "label": "Comprehensive Overview of Refugee Returns Dashboard — Syrian Arab Republic, as of 29 October 2026",
+      "review_state": "curated_paraphrase",
+      "url": "https://data.unhcr.org/en/documents/details/124686"
+    },
+    {
+      "id": "doc-427ee7a72090ffab",
+      "type": "document",
+      "label": "Mandate — Office of the Special Envoy of the Secretary-General for Syria",
+      "review_state": "curated_paraphrase",
+      "url": "https://specialenvoysyria.unmissions.org/en/osesg-syria/mandate"
+    },
+    {
+      "id": "doc-83ad8cbb868c0c88",
+      "type": "document",
+      "label": "Resolution 2254 (2015), adopted by the Security Council on 18 December 2015",
+      "review_state": "curated_paraphrase",
+      "url": "https://digitallibrary.un.org/record/814715"
+    },
+    {
+      "id": "doc-195dc9a7e6f261bf",
+      "type": "document",
+      "label": "Report of the Independent International Commission of Inquiry on the Syrian Arab Republic",
+      "review_state": "curated_paraphrase",
+      "url": "https://digitallibrary.un.org/record/4039851"
+    },
+    {
+      "id": "doc-cbd0bcfb486a0fc4",
+      "type": "document",
+      "label": "United Nations Office for the Coordination of Humanitarian Affairs — UN Geneva organizational profile",
+      "review_state": "curated_paraphrase",
+      "url": "https://www.ungeneva.org/en/about/organizations/unocha"
+    },
+    {
+      "id": "doc-fa2f1d6631839bff",
+      "type": "document",
+      "label": "اعتقالات وتهديدات وتوغلات لقوات الاحتلال الإسرائيلي في الجنوب السوري يوم 1 تشرين الثاني 2026",
+      "review_state": "unreviewed_reference",
+      "url": "https://daraa24.org/%d8%a7%d8%b9%d8%aa%d9%82%d8%a7%d9%84%d8%a7%d8%aa-%d9%88%d8%aa%d9%88%d8%ba%d9%84%d8%a7%d8%aa-%d8%a7%d9%84%d8%a7%d8%ad%d8%aa%d9%84%d8%a7%d9%84-%d8%a7%d9%84%d8%ac%d9%86%d9%88%d8%a8-1-%d8%aa%d8%b4%d8%b1/"
+    },
+    {
+      "id": "doc-6b34c80d2a35b578",
+      "type": "document",
+      "label": "العثور على شاب متوفى في مدينة إنخل شمالي درعا",
+      "review_state": "unreviewed_reference",
+      "url": "https://daraa24.org/%d8%a7%d9%84%d8%b9%d8%ab%d9%88%d8%b1-%d8%b9%d9%84%d9%89-%d8%a7%d9%84%d8%b4%d8%a7%d8%a8-%d8%ae%d8%a7%d9%84%d8%af-%d8%a7%d9%84%d8%b9%d9%8a%d8%af-%d9%85%d8%b4%d9%86%d9%88%d9%82%d8%a7%d9%8b-%d9%81%d9%8a/"
+    },
+    {
+      "id": "doc-2ad8fd328258c527",
+      "type": "document",
+      "label": "مقتل يافع طعناً إثر مشاجرة في مدينة نوى",
+      "review_state": "unreviewed_reference",
+      "url": "https://daraa24.org/%d9%85%d9%82%d8%aa%d9%84-%d8%a7%d9%84%d9%8a%d8%a7%d9%81%d8%b9-%d8%ad%d8%b3%d9%86-%d8%ae%d9%84%d8%af%d9%88%d9%86-%d8%a7%d9%84%d8%ac%d9%87%d9%85%d8%a7%d9%86%d9%8a-%d8%b7%d8%b9%d9%86%d8%a7%d9%8b-%d8%a5/"
+    },
+    {
+      "id": "doc-cc13dc3f2e304261",
+      "type": "document",
+      "label": "توثيق الانتهاكات والأحداث الأمنية – تشرين الأول 2026",
+      "review_state": "unreviewed_reference",
+      "url": "https://daraa24.org/%d8%a7%d9%84%d8%a3%d8%ad%d8%af%d8%a7%d8%ab-%d8%a7%d9%84%d8%a3%d9%85%d9%86%d9%8a%d8%a9-%d9%88%d8%a7%d9%84%d8%a7%d9%86%d8%aa%d9%87%d8%a7%d9%83%d8%a7%d8%aa-%d8%aa%d8%b4%d8%b1%d9%8a%d9%86-%d8%a7/"
+    },
+    {
+      "id": "doc-2b0c275512ba255c",
+      "type": "document",
+      "label": "Syria can speak freely, but is its government listening?",
+      "review_state": "unreviewed_reference",
+      "url": "https://syriadirect.org/syria-can-speak-freely-but-is-its-government-listening/"
+    },
+    {
+      "id": "doc-d59c2c5f02b34266",
+      "type": "document",
+      "label": "إحباط تهريب مخدرات على الحدود السورية الأردنية",
+      "review_state": "unreviewed_reference",
+      "url": "https://daraa24.org/%d8%a5%d8%ad%d8%a8%d8%a7%d8%b7-%d8%aa%d9%87%d8%b1%d9%8a%d8%a8-%d9%85%d8%ae%d8%af%d8%b1%d8%a7%d8%aa-%d8%b9%d9%84%d9%89-%d8%a7%d9%84%d8%ad%d8%af%d9%88%d8%af-%d8%a7%d9%84%d8%b3%d9%88%d8%b1%d9%8a%d8%a9/"
+    },
+    {
+      "id": "doc-8a9ce24774fbb4ab",
+      "type": "document",
+      "label": "وفاة شاب شرقي درعا إثر خلاف عائلي",
+      "review_state": "unreviewed_reference",
+      "url": "https://daraa24.org/%d9%88%d9%81%d8%a7%d8%a9-%d8%a7%d9%84%d8%b4%d8%a7%d8%a8-%d9%88%d9%84%d9%8a%d8%af-%d8%a8%d8%b4%d8%a7%d8%b1-%d8%a7%d9%84%d8%b3%d9%84%d8%a7%d9%85%d8%a7%d8%aa-%d8%b4%d8%b1%d9%82%d9%8a-%d8%af%d8%b1%d8%b9/"
+    },
+    {
+      "id": "doc-89a9514a0659bcc1",
+      "type": "document",
+      "label": "The Book of Damascus: My complicated love affair",
+      "review_state": "unreviewed_reference",
+      "url": "https://syriadirect.org/the-book-of-damascus-my-complicated-love-affair/"
+    },
+    {
+      "id": "doc-f3c467829fc37bbf",
+      "type": "document",
+      "label": "Syria reconnects to global finance, but ordinary Syrians are still struggling",
+      "review_state": "unreviewed_reference",
+      "url": "https://syriadirect.org/syria-reconnects-to-global-finance-but-ordinary-syrians-are-still-struggling/"
+    },
+    {
+      "id": "doc-5325024bfc3b8e38",
+      "type": "document",
+      "label": "Syria’s Kurds fight to keep their language alive in the classroom",
+      "review_state": "unreviewed_reference",
+      "url": "https://syriadirect.org/syrias-kurds-fight-to-keep-their-language-alive-in-the-classroom/"
+    },
+    {
+      "id": "doc-db20ae6e7b5492ec",
+      "type": "document",
+      "label": "What Syria’s revolution can teach the world about democracy",
+      "review_state": "unreviewed_reference",
+      "url": "https://syriadirect.org/what-syrias-revolution-can-teach-the-world-about-democracy/"
+    },
+    {
+      "id": "doc-87c0d09ebd3625b5",
+      "type": "document",
+      "label": "The Damascus oud maker fighting to keep a generations-old craft alive",
+      "review_state": "unreviewed_reference",
+      "url": "https://syriadirect.org/the-damascus-oud-maker-fighting-to-keep-a-generations-old-craft-alive/"
+    },
+    {
+      "id": "claim-damascus-legal-access",
+      "type": "claim",
+      "label": "UNHCR reported an EU High Representative visit to a partner-supported legal clinic in Damascus, including meetings with displaced people and returnees.",
+      "review_state": "curated_paraphrase",
+      "url": null
+    },
+    {
+      "id": "claim-aleppo-water",
+      "type": "claim",
+      "label": "UN-Habitat and partners announced completion of work to restore water access and repair associated urban infrastructure in eastern Aleppo.",
+      "review_state": "curated_paraphrase",
+      "url": null
+    },
+    {
+      "id": "claim-homs-urban-recovery",
+      "type": "claim",
+      "label": "Japan and UN-Habitat announced a programme for public-space renewal and municipal waste management in Homs.",
+      "review_state": "curated_paraphrase",
+      "url": null
+    },
+    {
+      "id": "claim-suwayda-protection",
+      "type": "claim",
+      "label": "UNHCR’s April–June monitoring recorded conflict-related safety concerns in As-Sweida and access constraints across the southern region.",
+      "review_state": "curated_paraphrase",
+      "url": null
+    },
+    {
+      "id": "claim-syrian-coast-community-protection",
+      "type": "claim",
+      "label": "Community consultations described psychosocial distress, social-cohesion concerns and difficult living conditions in the coastal region.",
+      "review_state": "curated_paraphrase",
+      "url": null
+    },
+    {
+      "id": "claim-al-shaddadi-community-services",
+      "type": "claim",
+      "label": "UNHCR reported opening a community centre in Al-Shaddadi to support protection and returnee reintegration.",
+      "review_state": "curated_paraphrase",
+      "url": null
+    },
+    {
+      "id": "claim-raqqa-community-accountability",
+      "type": "claim",
+      "label": "UNHCR reported partner training in community engagement, feedback and complaints mechanisms in Qamishli and Ar-Raqqa.",
+      "review_state": "curated_paraphrase",
+      "url": null
+    },
+    {
+      "id": "claim-deir-ez-zor-supported-returns",
+      "type": "claim",
+      "label": "UNHCR reported assisting returns from six displacement sites in Deir-ez-Zor as part of a programme spanning several governorates.",
+      "review_state": "curated_paraphrase",
+      "url": null
+    },
+    {
+      "id": "claim-idleb-northwest-reintegration",
+      "type": "claim",
+      "label": "UNHCR’s north-west findings connect return movements with pressure on housing, livelihoods, documentation and essential services.",
+      "review_state": "curated_paraphrase",
+      "url": null
+    },
+    {
+      "id": "area-damascus-legal-access",
+      "type": "place",
+      "label": "Damascus",
+      "review_state": null,
+      "url": null
+    },
+    {
+      "id": "area-aleppo-water",
+      "type": "place",
+      "label": "Eastern Aleppo",
+      "review_state": null,
+      "url": null
+    },
+    {
+      "id": "area-homs-urban-recovery",
+      "type": "place",
+      "label": "Homs",
+      "review_state": null,
+      "url": null
+    },
+    {
+      "id": "area-suwayda-protection",
+      "type": "place",
+      "label": "As-Sweida / Suwayda area",
+      "review_state": null,
+      "url": null
+    },
+    {
+      "id": "area-syrian-coast-community-protection",
+      "type": "place",
+      "label": "Syrian coast: Latakia and Tartous",
+      "review_state": null,
+      "url": null
+    },
+    {
+      "id": "area-al-shaddadi-community-services",
+      "type": "place",
+      "label": "Al-Shaddadi",
+      "review_state": null,
+      "url": null
+    },
+    {
+      "id": "area-raqqa-community-accountability",
+      "type": "place",
+      "label": "Ar-Raqqa area",
+      "review_state": null,
+      "url": null
+    },
+    {
+      "id": "area-deir-ez-zor-supported-returns",
+      "type": "place",
+      "label": "Deir-ez-Zor governorate",
+      "review_state": null,
+      "url": null
+    },
+    {
+      "id": "area-idleb-northwest-reintegration",
+      "type": "place",
+      "label": "Idleb / north-west",
+      "review_state": null,
+      "url": null
+    },
+    {
+      "id": "context-political-process-mandate",
+      "type": "context",
+      "label": "The UN political-process mandate",
+      "review_state": null,
+      "url": null
+    },
+    {
+      "id": "context-inclusion-research-question",
+      "type": "context",
+      "label": "How can participation be examined?",
+      "review_state": null,
+      "url": null
+    },
+    {
+      "id": "context-pluralism-community-protection",
+      "type": "context",
+      "label": "Community relations and protection needs",
+      "review_state": null,
+      "url": null
+    },
+    {
+      "id": "context-returns-estimates-and-reintegration",
+      "type": "context",
+      "label": "Return movements and sustainable reintegration",
+      "review_state": null,
+      "url": null
+    },
+    {
+      "id": "context-protection-accountability-method",
+      "type": "context",
+      "label": "Investigation, attribution and accountability",
+      "review_state": null,
+      "url": null
+    },
+    {
+      "id": "context-services-and-recovery-record",
+      "type": "context",
+      "label": "Services as part of reintegration",
+      "review_state": null,
+      "url": null
+    },
+    {
+      "id": "context-economy-research-agenda",
+      "type": "context",
+      "label": "What makes recovery durable?",
+      "review_state": null,
+      "url": null
+    },
+    {
+      "id": "context-humanitarian-coordination-role",
+      "type": "context",
+      "label": "Humanitarian coordination has a distinct mandate",
+      "review_state": null,
+      "url": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "unhcr-syria",
+      "target": "doc-dc64b0d98ec3337d",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "unhcr-syria",
+      "target": "doc-eac2d1b91e1bc5b1",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "un-syria",
+      "target": "doc-6a40b33339e9f484",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "un-syria",
+      "target": "doc-ee2a7965970efbca",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "unhcr-syria",
+      "target": "doc-6a6a58332d921b07",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "ose-syria",
+      "target": "doc-427ee7a72090ffab",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "un-security-council",
+      "target": "doc-83ad8cbb868c0c88",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "coi-syria",
+      "target": "doc-195dc9a7e6f261bf",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "ocha",
+      "target": "doc-cbd0bcfb486a0fc4",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "daraa24",
+      "target": "doc-fa2f1d6631839bff",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "daraa24",
+      "target": "doc-6b34c80d2a35b578",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "daraa24",
+      "target": "doc-2ad8fd328258c527",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "daraa24",
+      "target": "doc-cc13dc3f2e304261",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "syria-direct",
+      "target": "doc-2b0c275512ba255c",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "daraa24",
+      "target": "doc-d59c2c5f02b34266",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "daraa24",
+      "target": "doc-8a9ce24774fbb4ab",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "syria-direct",
+      "target": "doc-89a9514a0659bcc1",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "syria-direct",
+      "target": "doc-f3c467829fc37bbf",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "syria-direct",
+      "target": "doc-5325024bfc3b8e38",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "syria-direct",
+      "target": "doc-db20ae6e7b5492ec",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "syria-direct",
+      "target": "doc-87c0d09ebd3625b5",
+      "relation": "publisher_of_record"
+    },
+    {
+      "source": "doc-dc64b0d98ec3337d",
+      "target": "claim-damascus-legal-access",
+      "relation": "basis_for_attributed_paraphrase",
+      "locator": "PDF p.2"
+    },
+    {
+      "source": "claim-damascus-legal-access",
+      "target": "area-damascus-legal-access",
+      "relation": "describes_region",
+      "scope": "City-specific visit within a national operational update"
+    },
+    {
+      "source": "doc-6a40b33339e9f484",
+      "target": "claim-aleppo-water",
+      "relation": "basis_for_attributed_paraphrase",
+      "locator": "Named project announcement; document-level reference"
+    },
+    {
+      "source": "claim-aleppo-water",
+      "target": "area-aleppo-water",
+      "relation": "describes_region",
+      "scope": "Eastern part of Aleppo city"
+    },
+    {
+      "source": "doc-ee2a7965970efbca",
+      "target": "claim-homs-urban-recovery",
+      "relation": "basis_for_attributed_paraphrase",
+      "locator": "Named project announcement; document-level reference"
+    },
+    {
+      "source": "claim-homs-urban-recovery",
+      "target": "area-homs-urban-recovery",
+      "relation": "describes_region",
+      "scope": "Homs city"
+    },
+    {
+      "source": "doc-eac2d1b91e1bc5b1",
+      "target": "claim-suwayda-protection",
+      "relation": "basis_for_attributed_paraphrase",
+      "locator": "PDF p.13, 24"
+    },
+    {
+      "source": "claim-suwayda-protection",
+      "target": "area-suwayda-protection",
+      "relation": "describes_region",
+      "scope": "Southern regional findings covering As-Sweida, Daraa and Quneitra; not a city incident"
+    },
+    {
+      "source": "doc-eac2d1b91e1bc5b1",
+      "target": "claim-syrian-coast-community-protection",
+      "relation": "basis_for_attributed_paraphrase",
+      "locator": "PDF p.23"
+    },
+    {
+      "source": "claim-syrian-coast-community-protection",
+      "target": "area-syrian-coast-community-protection",
+      "relation": "describes_region",
+      "scope": "Coastal region spanning two governorates"
+    },
+    {
+      "source": "doc-dc64b0d98ec3337d",
+      "target": "claim-al-shaddadi-community-services",
+      "relation": "basis_for_attributed_paraphrase",
+      "locator": "PDF p.2"
+    },
+    {
+      "source": "claim-al-shaddadi-community-services",
+      "target": "area-al-shaddadi-community-services",
+      "relation": "describes_region",
+      "scope": "Named town in Al-Hasakeh governorate"
+    },
+    {
+      "source": "doc-dc64b0d98ec3337d",
+      "target": "claim-raqqa-community-accountability",
+      "relation": "basis_for_attributed_paraphrase",
+      "locator": "PDF p.2"
+    },
+    {
+      "source": "claim-raqqa-community-accountability",
+      "target": "area-raqqa-community-accountability",
+      "relation": "describes_region",
+      "scope": "Governorate-level activity reported alongside Qamishli; precise training locations not given"
+    },
+    {
+      "source": "doc-dc64b0d98ec3337d",
+      "target": "claim-deir-ez-zor-supported-returns",
+      "relation": "basis_for_attributed_paraphrase",
+      "locator": "PDF p.4"
+    },
+    {
+      "source": "claim-deir-ez-zor-supported-returns",
+      "target": "area-deir-ez-zor-supported-returns",
+      "relation": "describes_region",
+      "scope": "Governorate; source mentions six displacement sites without placing them at the capital"
+    },
+    {
+      "source": "doc-eac2d1b91e1bc5b1",
+      "target": "claim-idleb-northwest-reintegration",
+      "relation": "basis_for_attributed_paraphrase",
+      "locator": "PDF p.23"
+    },
+    {
+      "source": "claim-idleb-northwest-reintegration",
+      "target": "area-idleb-northwest-reintegration",
+      "relation": "describes_region",
+      "scope": "North-west regional findings covering Aleppo and Idleb"
+    },
+    {
+      "source": "doc-427ee7a72090ffab",
+      "target": "context-political-process-mandate",
+      "relation": "context_reference",
+      "locator": "Mandate text on the Syrian-led process and resolution 2254"
+    },
+    {
+      "source": "doc-83ad8cbb868c0c88",
+      "target": "context-political-process-mandate",
+      "relation": "context_reference",
+      "locator": "UN resolution metadata and adoption date"
+    },
+    {
+      "source": "context-political-process-mandate",
+      "target": "ose-syria",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-political-process-mandate",
+      "target": "crisis-group",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-political-process-mandate",
+      "target": "carnegie-middle-east",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "doc-427ee7a72090ffab",
+      "target": "context-inclusion-research-question",
+      "relation": "context_reference",
+      "locator": "Mandate discussion of Syrian ownership and meaningful participation of women"
+    },
+    {
+      "source": "context-inclusion-research-question",
+      "target": "ose-syria",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-inclusion-research-question",
+      "target": "syria-direct",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-inclusion-research-question",
+      "target": "enab-baladi",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-inclusion-research-question",
+      "target": "haid-haid",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-inclusion-research-question",
+      "target": "omran",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "doc-eac2d1b91e1bc5b1",
+      "target": "context-pluralism-community-protection",
+      "relation": "context_reference",
+      "locator": "p.23 §9.3 Coastal Region; p.24 §9.5 Southern Region; p.4 methodology"
+    },
+    {
+      "source": "context-pluralism-community-protection",
+      "target": "unhcr-syria",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-pluralism-community-protection",
+      "target": "coi-syria",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-pluralism-community-protection",
+      "target": "daraa24",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-pluralism-community-protection",
+      "target": "syria-direct",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "doc-6a6a58332d921b07",
+      "target": "context-returns-estimates-and-reintegration",
+      "relation": "context_reference",
+      "locator": "Dashboard title, key-figure estimation note and governorate overview"
+    },
+    {
+      "source": "doc-eac2d1b91e1bc5b1",
+      "target": "context-returns-estimates-and-reintegration",
+      "relation": "context_reference",
+      "locator": "Executive summary and methodology, pp.3–4"
+    },
+    {
+      "source": "context-returns-estimates-and-reintegration",
+      "target": "unhcr-syria",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-returns-estimates-and-reintegration",
+      "target": "iom-dtm-syria",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-returns-estimates-and-reintegration",
+      "target": "syria-direct",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-returns-estimates-and-reintegration",
+      "target": "reuters",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "doc-195dc9a7e6f261bf",
+      "target": "context-protection-accountability-method",
+      "relation": "context_reference",
+      "locator": "Section I, Mandate and methodology, paragraphs 1–2"
+    },
+    {
+      "source": "context-protection-accountability-method",
+      "target": "coi-syria",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-protection-accountability-method",
+      "target": "ose-syria",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-protection-accountability-method",
+      "target": "associated-press",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "doc-dc64b0d98ec3337d",
+      "target": "context-services-and-recovery-record",
+      "relation": "context_reference",
+      "locator": "pp.2–4: protection, shelter, livelihoods and return support"
+    },
+    {
+      "source": "context-services-and-recovery-record",
+      "target": "unhcr-syria",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-services-and-recovery-record",
+      "target": "ocha",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-services-and-recovery-record",
+      "target": "enab-baladi",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-services-and-recovery-record",
+      "target": "daraa24",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "doc-eac2d1b91e1bc5b1",
+      "target": "context-economy-research-agenda",
+      "relation": "context_reference",
+      "locator": "Executive summary and regional findings, pp.3 and 23–24"
+    },
+    {
+      "source": "doc-dc64b0d98ec3337d",
+      "target": "context-economy-research-agenda",
+      "relation": "context_reference",
+      "locator": "Operational context and livelihoods, pp.2–3"
+    },
+    {
+      "source": "context-economy-research-agenda",
+      "target": "karam-shaar",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-economy-research-agenda",
+      "target": "carnegie-middle-east",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-economy-research-agenda",
+      "target": "omran",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-economy-research-agenda",
+      "target": "unhcr-syria",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "doc-cbd0bcfb486a0fc4",
+      "target": "context-humanitarian-coordination-role",
+      "relation": "context_reference",
+      "locator": "Institutional mission paragraph"
+    },
+    {
+      "source": "context-humanitarian-coordination-role",
+      "target": "ocha",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-humanitarian-coordination-role",
+      "target": "ose-syria",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-humanitarian-coordination-role",
+      "target": "unhcr-syria",
+      "relation": "suggested_reading_source"
+    },
+    {
+      "source": "context-humanitarian-coordination-role",
+      "target": "coi-syria",
+      "relation": "suggested_reading_source"
+    }
+  ],
+  "semantics": "Edges describe editorial evidence structure, not affiliations, territorial control, or verified causal relationships."
+}

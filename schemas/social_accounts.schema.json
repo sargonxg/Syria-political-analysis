@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sargonxg/Syria-political-analysis/blob/main/schemas/social_accounts.schema.json",
+  "title": "Social Accounts",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "source_id",
+      "url",
+      "profile_evidence_url",
+      "verification_status",
+      "content_collected"
+    ],
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "source_id": {
+        "type": "string"
+      },
+      "url": {
+        "type": "string",
+        "format": "uri",
+        "pattern": "^https?://"
+      },
+      "profile_evidence_url": {
+        "type": "string",
+        "format": "uri",
+        "pattern": "^https?://"
+      },
+      "verification_status": {
+        "const": "official_profile_link_verified"
+      },
+      "content_collected": {
+        "const": false
+      }
+    },
+    "additionalProperties": true
+  }
+}
