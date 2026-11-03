@@ -39,6 +39,11 @@ def main(argv=None):
     political = commands.add_parser('ontology', help='Export controlled terms and qualified political assertions')
     political.add_argument('--format', choices=['json', 'jsonld'], default='json')
     political.add_argument('--output', type=Path)
+    layered = commands.add_parser('context-layers', help='Assemble seven evidence/ontology/method layers and an offline explorer')
+    layered.add_argument('--question', required=True)
+    layered.add_argument('--publication-cutoff', help='Publication date only, YYYY-MM-DD; not a historical knowledge cutoff')
+    layered.add_argument('--format', choices=['json', 'html', 'markdown'], default='json')
+    layered.add_argument('--output', type=Path)
     feeds = commands.add_parser('collect-rss', help='Refresh verified RSS/Atom references; preserves reviewed records')
     feeds.add_argument('--source', action='append', help='Source id; repeat to select several')
     feeds.add_argument('--limit', type=int, default=6)
@@ -81,6 +86,19 @@ def main(argv=None):
             print(f"Valid {country['code']}: " + ', '.join(f'{len(rows)} {name}' for name, rows in workspace.items()))
             if model:
                 print(f"Political model: {len(model['entities'])} entities, {len(model['assertions'])} qualified assertions, {len(model['module']['concepts'])} concepts")
+        elif args.command == 'context-layers':
+            from .context_layers import assemble, build_explorer, markdown
+            pack = assemble(workspace, model, country, args.question, args.publication_cutoff)
+            suffix = {'json': 'json', 'html': 'html', 'markdown': 'md'}[args.format]
+            path = args.output or root / ('exports/context-layers.' + suffix)
+            if args.format == 'html':
+                build_explorer(pack, path)
+            elif args.format == 'markdown':
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(markdown(pack), encoding='utf-8')
+            else:
+                write_json(path, pack)
+            print(f"Wrote {len(pack['records'])} source-qualified records in seven layers to {path}")
         elif args.command == 'collect-rss':
             if not 1 <= args.limit <= 30: raise ValueError('Limit must be between 1 and 30 per endpoint')
             known = {s['id'] for s in workspace['sources']}

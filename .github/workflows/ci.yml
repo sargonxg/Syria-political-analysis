@@ -26,6 +26,8 @@ jobs:
       - run: policy-analysis --country SY ontology --format jsonld --output /tmp/political-context.jsonld
       - run: syria-analysis export-graph --format graphml --output /tmp/evidence.graphml
       - run: syria-analysis build-atlas --output /tmp/atlas/index.html
+      - run: python scripts/build_showcase.py --output output/context-site
+      - run: node --check src/syria_analysis/web/context.js
       - run: syria-analysis brief --question "What does the Homs announcement establish?" --place area-homs-urban-recovery --output /tmp/brief.md
   container:
     runs-on: ubuntu-latest
@@ -64,6 +66,14 @@ jobs:
           curl --fail --silent http://127.0.0.1:8770/healthz
       - run: node /tmp/desk-browser/node_modules/@playwright/cli/playwright-cli.js -s=desk-ci open http://127.0.0.1:8770 --browser=chrome
       - run: node /tmp/desk-browser/node_modules/@playwright/cli/playwright-cli.js -s=desk-ci run-code --filename=tests/desk-browser.js
+      - name: Build and serve public context snapshot
+        run: |
+          python scripts/build_showcase.py
+          python -m http.server 8766 --bind 127.0.0.1 --directory dist > /tmp/context-server.log 2>&1 &
+          for i in $(seq 1 30); do curl --fail --silent http://127.0.0.1:8766/ > /dev/null && break || sleep 1; done
+          curl --fail --silent http://127.0.0.1:8766/ > /dev/null
+      - run: node /tmp/desk-browser/node_modules/@playwright/cli/playwright-cli.js -s=context-ci open http://127.0.0.1:8766 --browser=chrome
+      - run: node /tmp/desk-browser/node_modules/@playwright/cli/playwright-cli.js -s=context-ci run-code --filename=tests/context-browser.js
       - run: node --check src/syria_analysis/desk/web/desk.js
       - run: npx --yes prettier@3.9.9 --check src/syria_analysis/desk/web tests/desk-browser.js
       - uses: actions/upload-artifact@v4

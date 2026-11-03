@@ -1,0 +1,240 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sargonxg/Syria-political-analysis/blob/main/schemas/context_layers.schema.json",
+  "title": "Source-qualified policy context layers",
+  "type": "object",
+  "required": [
+    "format",
+    "built_at",
+    "question",
+    "country",
+    "publication_cutoff",
+    "snapshot",
+    "layers",
+    "records",
+    "edges",
+    "omissions",
+    "assessment",
+    "use_rules"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "const": "policy-context-layers/1"
+    },
+    "built_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "exported_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "question": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "country": {
+      "type": "object",
+      "required": ["code", "name"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "publication_cutoff": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "snapshot": {
+      "type": "object",
+      "required": ["sha256", "scope"],
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "scope": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "layers": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "description", "record_count"],
+        "properties": {
+          "id": {
+            "enum": [
+              "sources",
+              "evidence",
+              "political",
+              "ontology",
+              "temporal",
+              "method",
+              "assessment"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "record_count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "layer", "kind", "title", "data"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "layer": {
+            "enum": [
+              "sources",
+              "evidence",
+              "political",
+              "ontology",
+              "temporal",
+              "method",
+              "assessment"
+            ]
+          },
+          "kind": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object"
+          },
+          "document_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "review_state": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "target", "relation"],
+        "properties": {
+          "source": {
+            "type": "string",
+            "minLength": 1
+          },
+          "target": {
+            "type": "string",
+            "minLength": 1
+          },
+          "relation": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "omissions": {
+      "type": "object",
+      "required": [
+        "publication_cutoff_document_ids",
+        "unknown_publication_date_ids"
+      ],
+      "properties": {
+        "publication_cutoff_document_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unknown_publication_date_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "assessment": {
+      "type": "object",
+      "required": [
+        "interpretation",
+        "alternative",
+        "option",
+        "gaps",
+        "selected_record_ids",
+        "authorship"
+      ],
+      "properties": {
+        "interpretation": {
+          "type": "string"
+        },
+        "alternative": {
+          "type": "string"
+        },
+        "option": {
+          "type": "string"
+        },
+        "gaps": {
+          "type": "string"
+        },
+        "authorship": {
+          "type": "string"
+        },
+        "selected_record_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "use_rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -2,6 +2,20 @@
 
 Build a research notebook that keeps sources, exact passages, attributed claims and analyst judgments connected.
 
+**[Explore the context desk](docs/context-layers.md)** · [Seven-layer JSON snapshot](exports/context-layers.json)
+
+![Context desk: political assertion, primary evidence and ontology inspected together](docs/images/context-desktop.png)
+
+The context desk connects the curated source collection to a seven-layer graph. Inspect a resolution's scope, distinguish a normative request from an implementation finding, select source-linked material and write your own assessment. Download a cited brief or a complete, schema-described JSON context. The screenshot is the actual public research snapshot. [Mobile view](docs/images/context-mobile.png).
+
+```sh
+python -m pip install -e .
+python scripts/build_showcase.py
+python -m http.server 8766 --bind 127.0.0.1 --directory dist
+```
+
+Open `http://127.0.0.1:8766`. The build contains only public country records. It runs offline and deploys as static assets on Cloudflare; [run and deployment instructions](docs/context-layers.md). The separate authenticated notebook below adds durable private cases.
+
 **[Beginner quickstart](docs/quickstart.md)** · [Fictional worked case](examples/README.md) · [Cloud/container instructions](docs/deployment.md) · [Contribute](CONTRIBUTING.md)
 
 The public code and sample corpus can be read, cloned and run locally. The optional private desk is a single-operator notebook: all holders of its access key can access all cases. There is no hosted public service or automatic deployment.

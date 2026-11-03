@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Middle East | Context desk</title>
+  <style>/* CONTEXT_CSS */</style>
+</head>
+<body>
+  <a class="skip" href="#workspace">Skip to context</a>
+  <header><a class="brand" href="#workspace">Research<span>Middle East</span></a><span id="edition"></span><a href="https://github.com/sargonxg/Syria-political-analysis" target="_blank" rel="noreferrer">Code & run locally ↗</a></header>
+  <main>
+    <section class="introduction"><div><h1>Middle East context desk</h1><p>Inspect sources, political concepts and dates together. Write your assessment separately, then export the context for a colleague or an AI workflow.</p></div><aside><strong id="collection"></strong><p id="scope"></p><span id="snapshot"></span></aside></section>
+    <nav aria-label="Workspace view"><button data-view="layers" aria-pressed="true">Explore layers</button><button data-view="brief" aria-pressed="false">Build a brief</button><button data-view="method" aria-pressed="false">Method & run options</button></nav>
+    <div id="workspace" tabindex="-1">
+      <section id="view-layers">
+        <div class="workspace-bar"><label>Find a record<input id="search" type="search" placeholder="An actor, concept, document or source"></label><p id="graph-status" role="status"></p><button id="reset-view">Reset view</button></div>
+        <div class="desk"><aside class="layer-list" aria-label="Context layers" id="layers"></aside><div class="graph-column"><div class="graph-scroll" tabindex="0" role="group" aria-label="Layer graph; scroll horizontally to inspect"><svg id="graph" viewBox="0 0 920 590" role="group" aria-label="Seven context layers and their documented relationships"></svg></div><div class="graph-key"><span>A line means the named record relationship.</span><label><input id="surroundings" type="checkbox">Show surrounding records</label></div><div id="record-list" aria-label="Record directory"></div></div><aside class="inspector" id="inspector" aria-label="Selected context record" aria-live="polite"></aside></div>
+      </section>
+      <section id="view-brief" hidden>
+        <div class="brief-layout"><div><h2>Your research question</h2><label class="question-label">Question<input id="question" maxlength="2000"></label><p>The question labels your context; it does not generate an answer.</p><label>Your interpretation<textarea id="interpretation" maxlength="10000" placeholder="What do the selected sources establish?"></textarea></label><label>An alternative explanation<textarea id="alternative" maxlength="10000" placeholder="What else could account for the evidence?"></textarea></label><label>A policy option to examine<textarea id="option" maxlength="10000" placeholder="An action, its assumptions and the trade-offs to test."></textarea></label><label>Missing evidence<textarea id="gaps" maxlength="10000" placeholder="What would change your assessment?"></textarea></label></div><aside><h2>Selected material</h2><div id="selection"></div><p>Notes stay in this tab until you download. Source review states are preserved.</p><button id="download-brief" class="primary">Download cited brief</button><button id="download-context">Download full context JSON</button><p id="export-status" role="status"></p></aside></div>
+      </section>
+      <section id="view-method" hidden><div class="method-layout"><div><h2>Seven layers, different jobs.</h2><div id="method-layers"></div></div><div><h2>Use this beyond the browser</h2><p>The public toolkit builds this self-contained explorer from validated records. It works offline, on a local server or as static Cloudflare assets.</p><pre>pip install -e '.[dev]'
+policy-analysis --country SY context-layers \
+  --question "Your research question" \
+  --format html --output dist/index.html
+python -m http.server 8766 --directory dist</pre><a href="https://github.com/sargonxg/Syria-political-analysis/blob/main/docs/context-layers.md" target="_blank" rel="noreferrer">Local, container and Cloudflare instructions ↗</a><h3>Reading rules</h3><ul id="rules"></ul></div></div></section>
+    </div>
+  </main>
+  <footer><span>Independent research software · Giulio Catanzariti</span><span>Source text, attributed claims and your assessment remain separate.</span></footer>
+  <script id="context-data" type="application/json">/* CONTEXT_DATA */</script>
+  <script>/* CONTEXT_JS */</script>
+</body></html>
