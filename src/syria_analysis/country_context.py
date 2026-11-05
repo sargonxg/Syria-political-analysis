@@ -740,7 +740,7 @@ def collect_snapshot(
             "automatic_refresh": False,
         }
         manifest["files"] = {
-            str(path.relative_to(staging)): {
+            path.relative_to(staging).as_posix(): {
                 "sha256": _sha(path.read_bytes()),
                 "bytes": path.stat().st_size,
             }
