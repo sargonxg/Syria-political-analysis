@@ -1,0 +1,20 @@
+{
+  "url": "https://ucdp.uu.se/downloads/",
+  "final_url": "https://ucdp.uu.se/downloads/",
+  "status": 200,
+  "checked_at": "2026-11-05T17:55:51.451247+00:00",
+  "bytes": 138438,
+  "sha256": "3e0b317ba88e84b2796efa445c82e1668349086e258c2591f5d98093f8c97346",
+  "headers": {
+    "content-length": "138438",
+    "content-type": "text/html",
+    "last-modified": "Tue, 20 Oct 2026 20:40:07 GMT",
+    "etag": "\"1dd60d331253146\""
+  },
+  "selected_links": [
+    "https://creativecommons.org/licenses/by/4.0/",
+    "https://ucdp.uu.se/downloads/ged/ged261-csv.zip",
+    "https://ucdp.uu.se/downloads/ged/ged261-xlsx.zip",
+    "https://ucdp.uu.se/downloads/ged/ged261.pdf"
+  ]
+}

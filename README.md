@@ -1,6 +1,24 @@
 # Middle East · Political Analysis
 
-Build a research notebook that keeps sources, exact passages, attributed claims and analyst judgments connected.
+Explore historical conflict data and build source-qualified policy context. Keep provider records, exact passages and analyst judgments distinct.
+
+**[Historical research atlas](docs/historical-atlas.md)** · [Real worked selections](examples/historical-research/) · [Data contracts](schemas/research_selection.schema.json)
+
+Explore **113,656 UCDP GED records for 2011–2025** and **15,272 annual World Bank values** across 32 indicators. A linked map and timeline, recorded-sides view and exact source inspector let you investigate a geography or period, inspect precision and export a bounded research selection. Compact map partitions load first; all 49 original event fields load on selection. Annual series retain units, missing years and source qualifications.
+
+![Historical research atlas using actual provider records](docs/images/historical-atlas-desktop.png)
+
+```sh
+git clone https://github.com/sargonxg/Syria-political-analysis.git
+cd Syria-political-analysis
+python -m pip install -e .
+python scripts/build_showcase.py
+python -m http.server 8766 --bind 127.0.0.1 --directory dist
+```
+
+Open **http://127.0.0.1:8766/observations/**. No API key, model account or Rust build is needed. The committed, licensed snapshots build without live collection. [Query from Python/CLI, prepare a brief and reopen a selection in Workbench](docs/historical-atlas.md). A static build can be hosted on Cloudflare; the separately authenticated notebook below is a different workflow.
+
+The historical collection has nine UCDP provider country categories; the annual series cover ten World Bank economies. Provider geography is retained, without an independent border determination. This is historical research coverage, not a live event feed, current control map or causal model. Syria remains the first curated political-ontology collection.
 
 **[Assess media framing](docs/media-assessment.md)** · [Research/data resources](data/sources/resources.json)
 
@@ -36,7 +54,7 @@ The screenshot uses fictional browser-test records only. [Mobile view](docs/imag
 
 An independent, public-source research toolkit by Giulio Catanzariti. Start with a source, preserve what it actually says, and keep the analyst's judgement visible.
 
-**Syria is the first curated country collection.** Shared evidence contracts, collection tools and exports now support isolated country workspaces. The repository URL and `syria-analysis` command remain compatible; `policy-analysis` is the regional command alias. Other countries begin as empty frameworks, with no copied Syria claims or invented coverage.
+**Syria is the first curated country collection.** Shared evidence contracts, collection tools and exports now support isolated country workspaces. The repository URL and `syria-analysis` command remain compatible; `policy-analysis` is the regional command alias. Other countries’ curated source/ontology workspaces begin empty, with no copied Syria claims. The separate historical-data layer has the explicitly documented regional coverage above.
 
 The reconciled corpus contains **55 source profiles, 44 document references, 14 attributed report paraphrases, 14 regional navigation anchors, eight context themes, eight analytical lenses and two social-account links verified through institutional profiles**. The atlas adds 17 explicitly qualified organizational/location relationships. Eight verified RSS endpoints are registered; five publishers supply the existing saved reading sample; the coverage export contains 33 references, including two manually registered SANA language accounts. No social posts have been collected.
 

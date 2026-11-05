@@ -1,0 +1,68 @@
+{
+  "assets": [
+    {
+      "url": "https://ucdp.uu.se/downloads/ged/ged261-csv.zip",
+      "final_url": "https://ucdp.uu.se/downloads/ged/ged261-csv.zip",
+      "filename": "ged261-csv.zip",
+      "http_status": 200,
+      "retrieved_at": "2026-11-05T17:57:05.028935+00:00",
+      "bytes": 39122522,
+      "sha256": "8c941d84954e555ee2e54f40fa04d9203bf1e2f962203d0a9930966c4947c667",
+      "response_headers": {
+        "content-length": "39122522",
+        "content-type": "application/x-zip-compressed",
+        "last-modified": "Mon, 08 Jun 2026 19:54:24 GMT",
+        "etag": "\"1dcf780988cee5a\""
+      },
+      "credentials_used": false,
+      "source_bytes_modified": false
+    },
+    {
+      "url": "https://ucdp.uu.se/downloads/ged/ged261.pdf",
+      "final_url": "https://ucdp.uu.se/downloads/ged/ged261.pdf",
+      "filename": "ged261.pdf",
+      "http_status": 200,
+      "retrieved_at": "2026-11-05T17:57:06.332619+00:00",
+      "bytes": 917038,
+      "sha256": "f767380ebbf365aec7586f98b6d100cafb69fb54010a908604d53bd9ad655972",
+      "response_headers": {
+        "content-length": "917038",
+        "content-type": "application/pdf",
+        "last-modified": "Wed, 20 May 2026 09:54:52 GMT",
+        "etag": "\"1dce83eb40ec02e\""
+      },
+      "credentials_used": false,
+      "source_bytes_modified": false
+    },
+    {
+      "url": "https://creativecommons.org/licenses/by/4.0/",
+      "final_url": "https://creativecommons.org/licenses/by/4.0/",
+      "filename": "cc-by-4.0-deed.html",
+      "http_status": 200,
+      "retrieved_at": "2026-11-05T17:57:06.510761+00:00",
+      "bytes": 31950,
+      "sha256": "8dda1ccec4be91fc80821d4e4fd5c568072b9a3a74b2fdc07c249a27e920ef01",
+      "response_headers": {
+        "content-type": "text/html",
+        "last-modified": "Thu, 01 Oct 2026 17:09:56 GMT"
+      },
+      "credentials_used": false,
+      "source_bytes_modified": false
+    },
+    {
+      "url": "https://creativecommons.org/licenses/by/4.0/legalcode.en",
+      "final_url": "https://creativecommons.org/licenses/by/4.0/legalcode.en",
+      "filename": "cc-by-4.0-legalcode.html",
+      "http_status": 200,
+      "retrieved_at": "2026-11-05T17:57:06.799893+00:00",
+      "bytes": 48742,
+      "sha256": "58230517b7895aa219ff46a6ed63e67057a1582fb9ea054b16728a8c13525650",
+      "response_headers": {
+        "content-type": "text/html",
+        "last-modified": "Thu, 01 Oct 2026 17:09:56 GMT"
+      },
+      "credentials_used": false,
+      "source_bytes_modified": false
+    }
+  ]
+}

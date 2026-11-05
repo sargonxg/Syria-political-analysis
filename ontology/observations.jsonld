@@ -1,0 +1,26 @@
+{
+  "@context": {
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "obs": "https://tacitus.me/vocabulary/observations/"
+  },
+  "@id": "obs:v1",
+  "rdfs:label": "Source-qualified observation vocabulary",
+  "rdfs:comment": "Documentation of the observation layer. No automatic event-to-claim extraction, native-capsule conversion or causal inference is implemented by this vocabulary.",
+  "@graph": [
+    {"@id": "obs:DatasetSnapshot", "@type": "rdfs:Class", "rdfs:subClassOf": {"@id": "prov:Entity"}, "rdfs:comment": "A dated source release or archived API snapshot with its licence and byte identity."},
+    {"@id": "obs:ReportedEventRecord", "@type": "rdfs:Class", "rdfs:comment": "A provider-coded record of an event; not independent proof that every reported field is accurate."},
+    {"@id": "obs:AnnualCountryValue", "@type": "rdfs:Class", "rdfs:comment": "A numeric provider value indexed by economy, series and annual period; may be estimated or modelled."},
+    {"@id": "obs:PrecisionQualifier", "@type": "rdfs:Class", "rdfs:comment": "A provider-defined geographic, temporal or event-clarity code tied to its codebook version."},
+    {"@id": "obs:AnalystAssessment", "@type": "rdfs:Class", "rdfs:comment": "A separately authored interpretation, alternatives and evidence gaps. Not a provider field or automatically generated conclusion."},
+    {"@id": "obs:derivedFromSnapshot", "@type": "rdf:Property", "rdfs:subPropertyOf": {"@id": "prov:wasDerivedFrom"}},
+    {"@id": "obs:providerRecordIdentifier", "@type": "rdf:Property", "rdfs:comment": "The original record identifier within the named dataset release."},
+    {"@id": "obs:canonicalRecordDigest", "@type": "rdf:Property", "rdfs:comment": "SHA-256 over the documented canonical original-field JSON, distinct from the archive/file hash."},
+    {"@id": "obs:hasPrecisionQualifier", "@type": "rdf:Property"},
+    {"@id": "obs:providerDateInterval", "@type": "rdf:Property", "rdfs:comment": "Provider event start/end, retaining its date-precision code; not a publication or retrieval timestamp."},
+    {"@id": "obs:annualPeriod", "@type": "rdf:Property", "rdfs:comment": "An annual source label. Display boundaries do not imply an exact measurement day."},
+    {"@id": "obs:providerActorLabel", "@type": "rdf:Property", "rdfs:comment": "An attributed side/actor string from the source record, without an inferred present-day affiliation."},
+    {"@id": "obs:hasAssessment", "@type": "rdf:Property", "rdfs:comment": "Links a bounded research selection to separately authored analyst notes."}
+  ]
+}

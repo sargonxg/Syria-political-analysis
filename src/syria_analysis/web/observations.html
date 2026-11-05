@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A source-qualified historical research atlas. Explore recorded conflict events and separate annual country indicators, inspect provenance and export a bounded research selection."
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; base-uri 'self'; form-action 'none'; object-src 'none'"
+    />
+    <title>Historical research atlas · TACITUS</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./observations.css" />
+    <script type="module" src="./observations.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#filters">Skip to research controls</a>
+    <header class="masthead">
+      <a class="wordmark" href="../"
+        >TACITUS<span>Independent research tools</span></a
+      >
+      <nav aria-label="Research tools">
+        <a href="../">Context desk</a>
+        <a href="../sources/">Source directory</a>
+        <a
+          href="https://github.com/sargonxg/Syria-political-analysis"
+          target="_blank"
+          rel="noreferrer"
+          >Code & method</a
+        >
+      </nav>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Middle East / Historical evidence</p>
+          <h1 id="page-title">Middle East historical atlas</h1>
+          <p class="intro-copy">
+            Inspect historical UCDP event records alongside separate World Bank
+            country indicators. Filter the evidence, read original provider
+            fields, and export an attributed research selection.
+          </p>
+        </div>
+        <aside class="edition">
+          <span class="edition-label">Historical research atlas</span>
+          <p id="edition-coverage">Reading the dataset manifest…</p>
+          <span>Published snapshots. No live event feed.</span>
+        </aside>
+      </section>
+
+      <section class="filter-panel" id="filters" aria-label="Research filters">
+        <div class="filter-top">
+          <label class="country-label"
+            >Country / provider geography
+            <select id="country" disabled>
+              <option>Loading countries…</option>
+            </select>
+          </label>
+          <fieldset class="year-fields">
+            <legend>Event period · overlapping dates</legend>
+            <label
+              >From year<input
+                id="year-from"
+                type="number"
+                inputmode="numeric"
+                min="1900"
+                max="2100"
+                value="2020"
+                disabled
+            /></label>
+            <span aria-hidden="true">—</span>
+            <label
+              >To year<input
+                id="year-to"
+                type="number"
+                inputmode="numeric"
+                min="1900"
+                max="2100"
+                value="2025"
+                disabled
+            /></label>
+          </fieldset>
+          <label
+            >Location precision
+            <select id="location-precision" disabled>
+              <option value="">All provider codes</option>
+            </select>
+          </label>
+          <label
+            >Provider category
+            <select id="event-type" disabled>
+              <option value="">All categories</option>
+            </select>
+          </label>
+          <label class="search-label"
+            >Find in loaded event records
+            <input
+              id="event-search"
+              type="search"
+              placeholder="A place, recorded side or event ID"
+              maxlength="200"
+              disabled
+            />
+          </label>
+        </div>
+        <div class="load-line">
+          <p id="load-status" role="status" aria-live="polite">
+            Loading the public manifest.
+          </p>
+          <button id="retry-load" class="text-button" hidden>
+            Retry loading
+          </button>
+          <a href="#method">How to read this</a>
+        </div>
+      </section>
+
+      <section class="atlas-layout" aria-label="Historical events">
+        <div class="visual-column">
+          <div class="map-card" id="map-card" aria-busy="true">
+            <div class="map-heading">
+              <div>
+                <span class="eyebrow">Recorded events</span>
+                <h2 id="map-title">Syria</h2>
+              </div>
+              <div class="view-switch" role="group" aria-label="Event view">
+                <button id="map-view" aria-pressed="true">Geography</button>
+                <button id="network-view" aria-pressed="false">
+                  Recorded sides
+                </button>
+              </div>
+            </div>
+            <div id="geography-view">
+              <div class="canvas-frame" id="map-frame">
+                <canvas
+                  id="event-map"
+                  tabindex="0"
+                  role="img"
+                  aria-label="Historical event map"
+                  aria-describedby="map-help map-key"
+                  >Use the event table below to inspect the same
+                  records.</canvas
+                >
+                <div class="map-tools" role="group" aria-label="Map controls">
+                  <button id="zoom-in" aria-label="Zoom map in">+</button>
+                  <button id="zoom-out" aria-label="Zoom map out">−</button>
+                  <button id="fit-map" aria-label="Fit map to loaded country">
+                    Fit
+                  </button>
+                </div>
+                <div id="map-empty" class="map-empty">
+                  Loading historical records…
+                </div>
+                <div id="map-tooltip" class="map-tooltip" hidden></div>
+                <div
+                  class="map-coordinate"
+                  id="map-coordinate"
+                  aria-hidden="true"
+                ></div>
+              </div>
+              <div class="map-caption">
+                <p id="map-key">
+                  <span class="point-key" aria-hidden="true"></span>One dataset
+                  event. Overlapping points form density.
+                </p>
+                <span id="mapped-count">—</span>
+              </div>
+              <div
+                id="map-category-key"
+                class="category-key"
+                role="group"
+                aria-label="Provider event categories"
+              ></div>
+              <p class="interaction-hint" id="map-help">
+                Drag to pan; scroll or use + / − to zoom; select a point to
+                inspect. With the map focused, arrow keys pan and + / − zoom.
+                The event table provides a keyboard and touch alternative.
+                Locations retain provider precision codes; a point is not an
+                exact position claim.
+              </p>
+            </div>
+            <div id="sides-view" hidden>
+              <div class="network-frame">
+                <canvas
+                  id="sides-network"
+                  role="img"
+                  aria-label="Recorded opposing sides in the filtered event records"
+                ></canvas>
+              </div>
+              <p class="network-rule">
+                A line counts records naming both sides in the provider’s side A
+                / side B fields. It does not mean affiliation, influence,
+                present-day status or causation. The view shows at most 18
+                names.
+              </p>
+              <div id="network-pairs" class="network-pairs"></div>
+            </div>
+            <section class="timeline" aria-labelledby="timeline-title">
+              <div class="section-heading">
+                <h3 id="timeline-title">Time, in perspective</h3>
+                <span id="period-label">2020–2025</span>
+              </div>
+              <canvas
+                id="timeline"
+                role="img"
+                aria-label="Annual recorded event counts; change the period with the year inputs above"
+              ></canvas>
+              <p id="timeline-note">
+                Each bar counts dataset records by provider year. Drag a period,
+                or enter years above. This is recorded coverage, not a measure
+                of all violence.
+              </p>
+            </section>
+          </div>
+
+          <section class="event-directory" aria-labelledby="directory-title">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">The same evidence, in rows</p>
+                <h2 id="directory-title">Event directory</h2>
+              </div>
+              <label class="compact-label"
+                >Order<select id="event-order">
+                  <option value="newest">Newest first</option>
+                  <option value="oldest">Oldest first</option>
+                </select></label
+              >
+            </div>
+            <p id="table-summary" class="muted">
+              Records appear here when a country and period have loaded.
+            </p>
+            <div
+              class="table-scroll"
+              tabindex="0"
+              role="region"
+              aria-label="Event directory table"
+            >
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Date / interval</th>
+                    <th scope="col">Place / event</th>
+                    <th scope="col">Recorded sides</th>
+                    <th scope="col">Inspect</th>
+                  </tr>
+                </thead>
+                <tbody id="event-rows"></tbody>
+              </table>
+            </div>
+            <div class="pagination">
+              <button id="previous-page" disabled>Previous</button
+              ><span id="page-status">Page 0 of 0</span
+              ><button id="next-page" disabled>Next</button>
+            </div>
+          </section>
+        </div>
+
+        <aside class="inspector" aria-labelledby="inspector-title">
+          <p class="eyebrow">Source inspector</p>
+          <h2 id="inspector-title">Event record</h2>
+          <div id="event-inspector" aria-live="polite">
+            <p>
+              Select an event on the map or in the directory. Its provider ID,
+              date and geographic precision, original fields and dataset
+              provenance will appear here.
+            </p>
+            <p class="muted">
+              Dataset observations are attributed records, not independently
+              corroborated findings.
+            </p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="country-context" aria-labelledby="indicator-title">
+        <div class="context-intro">
+          <p class="eyebrow">A separate scale</p>
+          <h2 id="indicator-title">Country context.</h2>
+          <p>
+            Annual indicators provide a different view. Units, missing
+            observations and source dates stay attached to each series. Sharing
+            a country and year does not establish a causal relationship with
+            recorded events.
+          </p>
+          <p id="indicator-status" role="status">
+            Loading the country indicator catalogue.
+          </p>
+        </div>
+        <div class="indicator-panel">
+          <label
+            >Indicator<select id="indicator-select" disabled>
+              <option>No series loaded</option>
+            </select></label
+          >
+          <div class="indicator-meta">
+            <strong id="indicator-unit">—</strong
+            ><span id="indicator-coverage"></span>
+          </div>
+          <canvas
+            id="indicator-chart"
+            role="img"
+            aria-label="Selected annual country indicator; values and missing observations are also available in the table below"
+          ></canvas>
+          <p id="indicator-source" class="muted"></p>
+          <p id="indicator-reading" class="small-note"></p>
+          <details>
+            <summary>Inspect annual values and original fields</summary>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Year</th>
+                    <th scope="col">Value</th>
+                    <th scope="col">Observation status</th>
+                    <th scope="col">Original fields</th>
+                  </tr>
+                </thead>
+                <tbody id="indicator-rows"></tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section class="export-section" aria-labelledby="export-title">
+        <div>
+          <p class="eyebrow">A working research selection</p>
+          <h2 id="export-title">Build a research selection.</h2>
+          <p>
+            Download a bounded, attributed selection for further analysis.
+            Source data and your assessment remain separate. This is a
+            research-selection format, distinct from native TACITUS knowledge
+            contexts.
+          </p>
+          <p class="small-note">
+            Notes stay in this tab. Download before leaving. No model generation
+            or automatic assessment runs here.
+          </p>
+        </div>
+        <div class="export-controls">
+          <label
+            >Research question<input
+              id="brief-question"
+              maxlength="2000"
+              placeholder="What do these records help me investigate?"
+          /></label>
+          <label
+            >Include<select id="export-kind">
+              <option value="events">Matching conflict-event records</option>
+              <option value="selected">
+                The event in the source inspector
+              </option>
+              <option value="indicators">
+                The selected country-indicator series
+              </option>
+              <option value="both">
+                Matching events + selected series, separately typed
+              </option>
+            </select></label
+          >
+          <details class="analyst-notes">
+            <summary>
+              Add your assessment, alternatives and evidence gaps
+            </summary>
+            <label
+              >Your assessment<textarea
+                id="note-assessment"
+                rows="3"
+                maxlength="6000"
+              ></textarea></label
+            ><label
+              >Alternative explanations<textarea
+                id="note-alternatives"
+                rows="3"
+                maxlength="6000"
+              ></textarea></label
+            ><label
+              >Missing evidence / next questions<textarea
+                id="note-gaps"
+                rows="3"
+                maxlength="6000"
+              ></textarea>
+            </label>
+          </details>
+          <p id="export-preview">
+            At most 200 records and 1 MiB per JSON selection. Original provider
+            fields are preserved.
+          </p>
+          <div class="button-row">
+            <button id="export-json" class="primary" disabled>
+              Download selection JSON</button
+            ><button id="export-markdown" disabled>
+              Download research brief
+            </button>
+          </div>
+          <p id="export-status" role="status"></p>
+        </div>
+      </section>
+
+      <section class="method" id="method" aria-labelledby="method-title">
+        <div>
+          <p class="eyebrow">Scope & provenance</p>
+          <h2 id="method-title">Definitions & limits.</h2>
+          <p>
+            Definitions, inclusion thresholds and coding practices shape these
+            datasets. Inspect the original codebook and release details before
+            comparing records.
+          </p>
+          <p>
+            <a href="./data/manifest.json" download
+              >Download this build’s dataset manifest</a
+            >
+          </p>
+        </div>
+        <div>
+          <div id="dataset-provenance"></div>
+          <details>
+            <summary>Source definitions and limits</summary>
+            <ul id="dataset-limitations">
+              <li>
+                This is a historical research snapshot, not a live intelligence
+                feed.
+              </li>
+            </ul>
+            <p class="small-note">
+              Public-source geographic context: Natural Earth, public domain.
+              Country labels and event locations follow the attributed dataset;
+              display does not imply a position on sovereignty or boundaries.
+            </p>
+          </details>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <span>TACITUS · Independent research software</span
+      ><a
+        href="https://github.com/sargonxg/Syria-political-analysis"
+        target="_blank"
+        rel="noreferrer"
+        >Code, data method and source rights</a
+      ><span id="build-date"></span>
+    </footer>
+    <noscript
+      ><p class="noscript">
+        The interactive atlas needs JavaScript. You can still download its
+        <a href="./data/manifest.json">dataset manifest</a> and run the open
+        research toolkit locally.
+      </p></noscript
+    >
+  </body>
+</html>

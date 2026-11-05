@@ -26,7 +26,7 @@
     "edges": 137
   },
   "last_feed_collection_at": "2026-11-02T17:12:14.422757Z",
-  "toolkit_version": "0.3.1",
+  "toolkit_version": "0.4.0",
   "country_registry": "data/countries.json",
   "default_country": "SY",
   "region": "Middle East",
@@ -53,5 +53,24 @@
     "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
     "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
   },
-  "check_calendar": "UTC"
+  "check_calendar": "UTC",
+  "historical_research": {
+    "event_dataset": "UCDP GED 26.1",
+    "event_records": 113656,
+    "event_years": [
+      2011,
+      2025
+    ],
+    "event_country_categories": 9,
+    "country_context": "World Development Indicators",
+    "annual_non_null_values": 15272,
+    "indicator_count": 32,
+    "economy_count": 10,
+    "formats": [
+      "policy-observation-atlas/1",
+      "policy-research-selection/1"
+    ],
+    "automatic_refresh": false,
+    "scope": "Separate attributed data layers; not reviewed political assertions or a live feed."
+  }
 }

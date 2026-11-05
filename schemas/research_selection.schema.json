@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sargonxg/Syria-political-analysis/schemas/research_selection.schema.json",
+  "title": "Bounded political research selection",
+  "description": "A separate record-selection format, not a native TACITUS capsule. Maximum encoded size 1 MiB; exact id resolution, count/truncation agreement, real ordered dates, bounded JSON depth and finite primitive attributes are additionally checked by syria_analysis.research_selection. Provider metadata is attributed, not independently certified.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "created_at",
+    "question",
+    "datasets",
+    "filters",
+    "counts",
+    "records",
+    "notes",
+    "limitations"
+  ],
+  "properties": {
+    "format": {
+      "const": "policy-research-selection/1"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "question": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "datasets": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "version",
+          "publisher",
+          "url",
+          "license",
+          "sha256"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1
+          },
+          "version": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1
+          },
+          "publisher": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1
+          },
+          "url": {
+            "type": "string",
+            "maxLength": 4096,
+            "minLength": 1,
+            "format": "uri",
+            "pattern": "^https://"
+          },
+          "license": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[A-Fa-f0-9]{64}$"
+          }
+        }
+      }
+    },
+    "filters": {
+      "type": "object",
+      "description": "Bounded to depth5 and500 JSON values by the import validator."
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "matched",
+        "exported",
+        "truncated",
+        "limit"
+      ],
+      "properties": {
+        "matched": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "exported": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 200
+        },
+        "truncated": {
+          "type": "boolean"
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200
+        }
+      }
+    },
+    "records": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "dataset_id",
+          "label",
+          "country_code",
+          "date_start",
+          "date_end",
+          "source_locator",
+          "attributes"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "conflict_event",
+              "country_indicator"
+            ]
+          },
+          "dataset_id": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 1
+          },
+          "country_code": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          },
+          "date_start": {
+            "type": "string",
+            "format": "date"
+          },
+          "date_end": {
+            "type": "string",
+            "format": "date"
+          },
+          "source_locator": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1
+          },
+          "attributes": {
+            "type": "object",
+            "maxProperties": 128,
+            "propertyNames": {
+              "type": "string",
+              "maxLength": 120,
+              "minLength": 1,
+              "not": {
+                "enum": [
+                  "__proto__",
+                  "prototype",
+                  "constructor"
+                ]
+              }
+            },
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "maxLength": 20000
+                },
+                {
+                  "type": "number",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assessment",
+        "alternatives",
+        "gaps"
+      ],
+      "properties": {
+        "assessment": {
+          "type": "string",
+          "maxLength": 10000
+        },
+        "alternatives": {
+          "type": "string",
+          "maxLength": 10000
+        },
+        "gaps": {
+          "type": "string",
+          "maxLength": 10000
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "type": "string",
+        "maxLength": 4000,
+        "minLength": 1
+      }
+    }
+  }
+}

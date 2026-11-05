@@ -7,6 +7,7 @@ from pathlib import Path
 from syria_analysis import core, countries, ontology
 from syria_analysis.atlas import build_atlas
 from syria_analysis.context_layers import assemble, build_explorer
+from syria_analysis.observations import build_observation_atlas
 
 
 def main():
@@ -39,8 +40,23 @@ def main():
     resources_path = workspace_root / "data/sources/resources.json"
     resources = core.read_json(resources_path) if resources_path.exists() else None
     build_atlas(workspace, output / "sources" / "index.html", relationships, resources)
+    observation_manifest = build_observation_atlas(root, output / "observations")
+    for page, url in (
+        (output / "index.html", "observations/index.html"),
+        (output / "sources/index.html", "../observations/index.html"),
+    ):
+        html = page.read_text(encoding="utf-8")
+        link = f'<a href="{url}">Historical research atlas ↗</a>'
+        page.write_text(
+            html.replace("</header>", link + "</header>", 1), encoding="utf-8"
+        )
     print(
         f"Built public snapshot in {output}: {len(pack['records'])} records; no private cases included."
+    )
+    print(
+        "Historical atlas: "
+        f"{sum(s['count'] for s in observation_manifest['event_shards']):,} event records; "
+        f"{sum(s['count'] for s in observation_manifest['indicator_shards']):,} annual country values."
     )
 
 

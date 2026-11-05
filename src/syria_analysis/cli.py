@@ -29,9 +29,25 @@ def graphml(data: dict) -> str:
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', type=Path, default=Path.cwd(), help='Repository/data workspace root (default: current directory)')
-    parser.add_argument('--country', help='Registered two-letter country code; defaults to the registry default')
+    parser.add_argument('--country', help='Two-letter country code; curated commands use the registry, research-query uses the atlas snapshot')
     commands = parser.add_subparsers(dest='command', required=True)
     commands.add_parser('validate', help='Validate IDs, provenance and review/location boundaries')
+    observation = commands.add_parser('build-observations', help='Build a static historical event and country-context atlas from committed snapshots')
+    observation.add_argument('--output', type=Path, default=Path('dist/observations'))
+    selection = commands.add_parser('research-query', help='Export a bounded, attributed research selection from a built historical atlas')
+    selection.add_argument('--atlas', type=Path, default=Path('dist/observations'))
+    selection.add_argument('--from-year', type=int, default=2011)
+    selection.add_argument('--to-year', type=int, default=2025)
+    selection.add_argument('--actor', default='')
+    selection.add_argument('--violence-type', type=int, choices=[1, 2, 3])
+    selection.add_argument('--geography-precision', type=int, choices=range(1, 8))
+    selection.add_argument('--indicator', help='WDI indicator code; switches to annual country values')
+    selection.add_argument('--limit', type=int, default=200)
+    selection.add_argument('--question', default='')
+    selection.add_argument('--analyst-note', default='')
+    selection.add_argument('--output', type=Path, default=Path('output/research-selection.json'))
+    selection_check = commands.add_parser('validate-selection', help='Validate the bounded research-selection interchange contract')
+    selection_check.add_argument('input', type=Path)
     commands.add_parser('countries', help='List registered countries and actual collection status')
     country = commands.add_parser('init-country', help='Create an empty isolated country workspace; no research is copied')
     country.add_argument('--code', required=True); country.add_argument('--name', required=True)
@@ -69,6 +85,35 @@ def main(argv=None):
     args = parser.parse_args(argv)
     try:
         repository = args.root.resolve()
+        if args.command == 'build-observations':
+            from .observations import build_observation_atlas
+            target = args.output if args.output.is_absolute() else repository / args.output
+            data = build_observation_atlas(repository, target)
+            print(f"Built historical atlas at {target}: {sum(s['count'] for s in data['event_shards']):,} events")
+            return 0
+        if args.command == 'research-query':
+            from .observations import query_observations
+            from .research_selection import selection_bytes
+            atlas_path = args.atlas if args.atlas.is_absolute() else repository / args.atlas
+            result = query_observations(
+                atlas_path, country=(args.country or 'SY').upper(),
+                from_year=args.from_year, to_year=args.to_year, actor=args.actor,
+                violence_type=args.violence_type, geography_precision=args.geography_precision,
+                indicator=args.indicator, limit=args.limit, question=args.question,
+                notes={'assessment': args.analyst_note},
+            )
+            target = args.output if args.output.is_absolute() else repository / args.output
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(selection_bytes(result))
+            counts = result['counts']
+            print(f"Wrote {counts['exported']} of {counts['matched']} matching source records to {target}; truncated={counts['truncated']}")
+            return 0
+        if args.command == 'validate-selection':
+            from .research_selection import load_selection
+            source_path = args.input if args.input.is_absolute() else repository / args.input
+            result = load_selection(source_path.read_bytes())
+            print(f"Valid research selection: {len(result['records'])} records; format distinct from native TACITUS Context JSON")
+            return 0
         if args.command == 'countries':
             for row in registry(repository)['countries']:
                 print(f"{row['code']}\t{row['name']}\t{row.get('region', '')}\t{row.get('status', 'unknown')}")

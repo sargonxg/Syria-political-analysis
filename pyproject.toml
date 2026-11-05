@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "syria-political-analysis"
-version = "0.3.1"
+version = "0.4.0"
 description = "Country-extensible public-source political analysis, beginning with Syria and the Middle East"
 requires-python = ">=3.11"
 license = {text = "MIT"}

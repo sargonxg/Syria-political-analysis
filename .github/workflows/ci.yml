@@ -29,6 +29,9 @@ jobs:
       - run: python scripts/build_showcase.py --output output/context-site
       - run: node --check src/syria_analysis/web/context.js
       - run: node --check src/syria_analysis/web/media-assessment.js
+      - run: node --check src/syria_analysis/web/observations.js
+      - run: policy-analysis validate-selection examples/historical-research/syria-events.json
+      - run: policy-analysis validate-selection examples/historical-research/syria-country-context.json
       - run: syria-analysis brief --question "What does the Homs announcement establish?" --place area-homs-urban-recovery --output /tmp/brief.md
   container:
     runs-on: ubuntu-latest
@@ -76,6 +79,7 @@ jobs:
       - run: node /tmp/desk-browser/node_modules/@playwright/cli/playwright-cli.js -s=context-ci open http://127.0.0.1:8766 --browser=chrome
       - run: node /tmp/desk-browser/node_modules/@playwright/cli/playwright-cli.js -s=context-ci run-code --filename=tests/context-browser.js
       - run: node /tmp/desk-browser/node_modules/@playwright/cli/playwright-cli.js -s=context-ci run-code --filename=tests/media-browser.js
+      - run: node /tmp/desk-browser/node_modules/@playwright/cli/playwright-cli.js -s=context-ci run-code --filename=tests/observations-browser.js
       - run: node --check src/syria_analysis/desk/web/desk.js
       - run: npx --yes prettier@3.9.9 --check src/syria_analysis/desk/web tests/desk-browser.js src/syria_analysis/web/media-assessment.js src/syria_analysis/web/media-assessment.css tests/media-browser.js
       - uses: actions/upload-artifact@v4
