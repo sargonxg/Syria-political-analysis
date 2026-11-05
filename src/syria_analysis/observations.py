@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+import gzip
 import hashlib
+import io
 import json
 import shutil
+import zlib
 from datetime import UTC, datetime
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -104,11 +107,32 @@ def _load_shard(root, shard):
     payload = _file(root, shard["path"]).read_bytes()
     if len(payload) > 2 * 1024 * 1024:
         raise ValueError("Shard exceeds the 2 MiB read boundary")
+    if "bytes" in shard and (
+        type(shard["bytes"]) is not int or len(payload) != shard["bytes"]
+    ):
+        raise ValueError("Snapshot shard byte count does not match its manifest")
     if hashlib.sha256(payload).hexdigest() != shard["sha256"]:
         raise ValueError("Snapshot shard checksum does not match: " + shard["path"])
+    encoding = shard.get("encoding")
+    if encoding == "gzip":
+        decoded_bytes = shard.get("decoded_bytes")
+        if type(decoded_bytes) is not int or not 0 <= decoded_bytes <= 2 * 1024 * 1024:
+            raise ValueError("Decoded shard exceeds the 2 MiB boundary")
+        try:
+            with gzip.GzipFile(fileobj=io.BytesIO(payload), mode="rb") as stream:
+                decoded = stream.read(2 * 1024 * 1024 + 1)
+        except (OSError, EOFError, zlib.error):
+            raise ValueError("Snapshot raw shard is not valid gzip") from None
+        if len(decoded) != decoded_bytes or len(decoded) > 2 * 1024 * 1024:
+            raise ValueError("Decoded shard size does not match its manifest")
+        if hashlib.sha256(decoded).hexdigest() != shard.get("decoded_sha256"):
+            raise ValueError("Decoded shard checksum does not match its manifest")
+        payload = decoded
+    elif encoding not in (None, "identity"):
+        raise ValueError("Unsupported snapshot shard encoding")
     data = json.loads(payload)
     rows = data if isinstance(data, list) else data["records"]
-    if len(rows) != shard["count"]:
+    if type(shard["count"]) is not int or len(rows) != shard["count"]:
         raise ValueError("Shard row count does not match its manifest")
     return rows
 

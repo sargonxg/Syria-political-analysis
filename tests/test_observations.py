@@ -1,5 +1,6 @@
 """Practical query behavior and compact-to-original provenance boundaries."""
 
+import gzip
 import hashlib
 import json
 import tempfile
@@ -7,7 +8,7 @@ import unittest
 from pathlib import Path
 
 from syria_analysis.historical_events import raw_record_sha256
-from syria_analysis.observations import query_observations
+from syria_analysis.observations import _load_shard, query_observations
 
 
 class ObservationQueryTests(unittest.TestCase):
@@ -155,6 +156,63 @@ class ObservationQueryTests(unittest.TestCase):
             self.save_manifest()
             with self.assertRaises(ValueError):
                 query_observations(self.root)
+
+    def gzip_partners(self):
+        name = "./data/raw.json.gz"
+        for row in self.full:
+            row["raw_shard"] = name
+        for row in self.compact:
+            row["raw_shard"] = name
+        self.manifest["event_shards"] = [
+            self.write_shard("./data/compact.json", self.compact)
+        ]
+        raw = json.dumps({"records": self.full}, ensure_ascii=False).encode()
+        encoded = gzip.compress(raw, mtime=0)
+        (self.root / name).write_bytes(encoded)
+        item = {
+            **self.manifest["raw_shards"][0],
+            "path": name,
+            "encoding": "gzip",
+            "bytes": len(encoded),
+            "sha256": hashlib.sha256(encoded).hexdigest(),
+            "decoded_bytes": len(raw),
+            "decoded_sha256": hashlib.sha256(raw).hexdigest(),
+        }
+        self.manifest["raw_shards"] = [item]
+        self.save_manifest()
+        return item
+
+    def test_gzip_keeps_original_fields_and_query_counts(self):
+        plain = query_observations(self.root)
+        self.gzip_partners()
+        packed = query_observations(self.root)
+        self.assertEqual(packed["records"], plain["records"])
+        self.assertEqual(packed["counts"], plain["counts"])
+
+    def test_gzip_decoded_digest_and_size_are_verified(self):
+        for key, value in [("decoded_sha256", "0" * 64), ("decoded_bytes", 1)]:
+            item = self.gzip_partners()
+            item[key] = value
+            with self.assertRaisesRegex(ValueError, "Decoded shard"):
+                _load_shard(self.root, item)
+
+    def test_gzip_encoded_length_is_verified(self):
+        item = self.gzip_partners()
+        item["bytes"] += 1
+        with self.assertRaisesRegex(ValueError, "byte count"):
+            _load_shard(self.root, item)
+
+    def test_gzip_expansion_is_bounded_even_with_a_false_declared_length(self):
+        item = self.gzip_partners()
+        encoded = gzip.compress(b" " * (2 * 1024 * 1024 + 100), mtime=0)
+        (self.root / item["path"]).write_bytes(encoded)
+        item.update(
+            sha256=hashlib.sha256(encoded).hexdigest(),
+            bytes=len(encoded),
+            decoded_bytes=1,
+        )
+        with self.assertRaisesRegex(ValueError, "Decoded shard size"):
+            _load_shard(self.root, item)
 
 
 if __name__ == "__main__":

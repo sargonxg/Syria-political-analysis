@@ -98,28 +98,49 @@ no political allegiance, control or confidence score is inferred.
 The snapshot is `data/historical/ucdp-ged-26.1/`. It contains `manifest.json`, 228
 compact parts under `events/`, 228 matching full parts under `events-raw/`, and
 archival-only `provenance/`. Country/year parts are sorted by numeric provider ID.
-Every JSON asset is at most **1,572,864 bytes**; the actual largest is 1,572,830 bytes.
-Compact records total 92,641,480 bytes; full records total 216,297,693 bytes.
+Every source JSON asset is at most **1,572,864 bytes**; the actual largest is
+1,572,830 bytes. Source compact records total 92,641,480 bytes; full records total
+216,297,693 bytes. These immutable source parts remain uncompressed in the
+repository, independently of the smaller static hosting package.
 
 `build_static_bundle(repository: Path, output: Path)` in
 `src/syria_analysis/historical_events.py` validates every compact/full join and
-copies only verified event JSON into the atlas. It returns a
+publishes compact JSON plus **gzip-compressed full-record parts**. It returns a
 `policy-observation-atlas/1` manifest fragment for the main builder. It does not
 copy the global ZIP, codebook, HTML or provenance documents.
+
+Gzip uses an empty filename, zero modification time and a fixed compression level
+through `GzipFile`; identical input produces identical asset bytes without a
+platform-specific OS header. There is no uncompressed duplicate of the served
+full-record parts. Country/year pairs are repartitioned if the longer `.gz`
+references would exceed the byte budget, so served part counts may differ from
+the immutable source. Every served compact JSON part and every decoded full JSON
+part remains at most 1,572,864 bytes. Record count, source values and record digests
+are unchanged. Build into a fresh output directory; a legacy uncompressed evidence
+part or a changed existing asset is refused rather than overwritten.
 
 Each event has a versioned stable `id`, original `provider_id`, dataset ID,
 provider country label, lookup code, original date window, coordinates,
 `source_locator`, `raw_record_sha256`, `quality_flags` and `raw_shard`.
 Compact `attributes` contain 15 plotting/interpretation fields. The matching full
 record contains all 49 original CSV fields. `raw_shard` resolves relative to the
-atlas root, e.g. `./data/events-raw/SY/2020-001.json`; join on `id` and verify
+atlas root, e.g. `./data/events-raw/SY/2020-001.json.gz`; join on `id` and verify
 `raw_record_sha256`. The digest uses sorted-key, compact UTF-8 JSON of all 49
 original string values, with `ensure_ascii=False`.
 
-The manifest lists every part's count, byte size, SHA-256, country, provider-year
-partition and actual date bounds. Parts have explicit `event_shards` and
-`raw_shards` lists. Initial Syria 2020–2025 plot loading is 5,263 records in ten
-parts, 4,264,217 bytes; full records can be fetched only for inspection/export.
+The served manifest lists every part's count, byte size, SHA-256, country,
+provider-year partition and actual date bounds. Compact `event_shards` hashes
+describe the amended JSON bytes. Each `raw_shards` entry has `encoding: "gzip"`;
+its `bytes` and `sha256` describe the compressed asset, and `decoded_bytes` and
+`decoded_sha256` describe the exact uncompressed wrapper. Verify compressed bytes
+before decoding, bound decompression to the declared limit, then verify decoded
+bytes and hash before parsing. The `.json.gz` files are explicit data assets, not
+an HTTP `Content-Encoding` instruction. The per-record canonical digest still
+checks the original 49 attributes after decoding.
+
+Initial Syria 2020–2025 plot loading contains 5,263 records, about 4.3 MB of compact
+JSON; full evidence can be fetched only for inspection/export. Compression changes
+the hosting package, not the historical selection or its uncertainty.
 
 ## Reproduce and refresh
 

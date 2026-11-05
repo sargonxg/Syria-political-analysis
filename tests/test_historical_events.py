@@ -1,9 +1,11 @@
+import gzip
 import hashlib
 import json
 import tempfile
 import unittest
 from copy import deepcopy
 from pathlib import Path
+from unittest.mock import patch
 
 from syria_analysis import historical_events as ged
 
@@ -78,9 +80,9 @@ class HistoricalEventsTests(unittest.TestCase):
             self.assertEqual(manifest["selection"]["retained_records"], 1)
             self.assertEqual(manifest["selection"]["excluded_whole_records"], 1)
             raw = ged.validate_snapshot(output)["raw_shards"][0]
-            saved = json.loads(ged._snapshot_file(output, raw).read_text(encoding="utf-8"))["records"][
-                0
-            ]
+            saved = json.loads(
+                ged._snapshot_file(output, raw).read_text(encoding="utf-8")
+            )["records"][0]
             self.assertEqual(saved["attributes"], self.aggregate)
 
     def test_partitions_are_deterministic_bounded_and_exactly_joinable(self):
@@ -109,16 +111,18 @@ class HistoricalEventsTests(unittest.TestCase):
                 two = ged._snapshot_file(second, item)
                 self.assertEqual(one.read_bytes(), two.read_bytes())
             point = json.loads(
-                ged._snapshot_file(first, a["event_shards"][0]).read_text(encoding="utf-8")
+                ged._snapshot_file(first, a["event_shards"][0]).read_text(
+                    encoding="utf-8"
+                )
             )["records"][0]
             self.assertEqual(set(point["attributes"]), set(ged.COMPACT_COLUMNS))
             self.assertNotIn("source_article", point["attributes"])
             raw_item = next(
                 item for item in a["raw_shards"] if item["path"] == point["raw_shard"]
             )
-            full = json.loads(ged._snapshot_file(first, raw_item).read_text(encoding="utf-8"))[
-                "records"
-            ][0]
+            full = json.loads(
+                ged._snapshot_file(first, raw_item).read_text(encoding="utf-8")
+            )["records"][0]
             self.assertEqual(point["id"], full["id"])
             self.assertEqual(
                 point["raw_record_sha256"], ged.raw_record_sha256(full["attributes"])
@@ -185,15 +189,134 @@ class HistoricalEventsTests(unittest.TestCase):
                 ged.build_static_bundle(root, output)
             self.assertEqual(target.read_text(encoding="utf-8"), "changed")
 
+    def test_served_gzip_is_deterministic_and_preserves_every_original_value(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            snapshot = root / ged.SNAPSHOT_DIRECTORY
+            source_manifest = self.snapshot(snapshot)
+            before = {
+                path.relative_to(snapshot): path.read_bytes()
+                for path in snapshot.rglob("*.json")
+            }
+            first, second = root / "one", root / "two"
+            a = ged.build_static_bundle(root, first)
+            b = ged.build_static_bundle(root, second)
+            self.assertEqual(a, b)
+            original = {row["id"]: row for row in self.rows}
+            seen = set()
+            for compact_meta, raw_meta in zip(
+                a["event_shards"], a["raw_shards"], strict=True
+            ):
+                path = raw_meta["path"].removeprefix("./")
+                encoded = (first / path).read_bytes()
+                self.assertEqual(encoded, (second / path).read_bytes())
+                self.assertEqual(encoded[:4], b"\x1f\x8b\x08\x00")
+                self.assertEqual(encoded[4:8], b"\x00\x00\x00\x00")
+                self.assertEqual(encoded[9], 255)
+                self.assertEqual(raw_meta["encoding"], "gzip")
+                self.assertTrue(path.endswith(".json.gz"))
+                self.assertEqual(raw_meta["bytes"], len(encoded))
+                self.assertEqual(
+                    raw_meta["sha256"], hashlib.sha256(encoded).hexdigest()
+                )
+                decoded = gzip.decompress(encoded)
+                self.assertEqual(raw_meta["decoded_bytes"], len(decoded))
+                self.assertEqual(
+                    raw_meta["decoded_sha256"], hashlib.sha256(decoded).hexdigest()
+                )
+                self.assertLessEqual(len(decoded), ged.MAX_SHARD_BYTES)
+                compact_body = (
+                    first / compact_meta["path"].removeprefix("./")
+                ).read_bytes()
+                self.assertEqual(
+                    compact_meta["sha256"], hashlib.sha256(compact_body).hexdigest()
+                )
+                self.assertEqual(compact_meta["bytes"], len(compact_body))
+                points = json.loads(compact_body)["records"]
+                full = json.loads(decoded)["records"]
+                self.assertEqual(len(points), raw_meta["count"])
+                for point, record in zip(points, full, strict=True):
+                    seen.add(record["provider_id"])
+                    self.assertEqual(
+                        record["attributes"], original[record["provider_id"]]
+                    )
+                    self.assertEqual(record["raw_shard"], raw_meta["path"])
+                    self.assertEqual(point["raw_shard"], record["raw_shard"])
+                    self.assertEqual(point["id"], record["id"])
+                    self.assertEqual(
+                        record["raw_record_sha256"],
+                        ged.raw_record_sha256(record["attributes"]),
+                    )
+            self.assertEqual(seen, set(original))
+            self.assertEqual(
+                before,
+                {
+                    path.relative_to(snapshot): path.read_bytes()
+                    for path in snapshot.rglob("*.json")
+                },
+            )
+            self.assertEqual(ged.validate_snapshot(snapshot), source_manifest)
+            self.assertFalse(list((first / "data/events-raw").rglob("*.json")))
+
+    def test_longer_served_references_repartition_without_exceeding_decoded_bound(self):
+        rows = [row for row in self.rows if row["id"] in {"46208", "46218", "46221"}]
+        old_path = "./data/events-raw/SY/2012-001.json"
+        original_bodies = [
+            ged._encoded_pair(ged.normalize_record(row), old_path)[1] for row in rows
+        ]
+        limit = len(ged._PART_PREFIX + b",".join(original_bodies) + ged._PART_SUFFIX)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            snapshot = root / ged.SNAPSHOT_DIRECTORY
+            manifest = self.snapshot(snapshot, rows=rows, max_shard_bytes=limit)
+            self.assertEqual(len(manifest["raw_shards"]), 1)
+            with patch.object(ged, "MAX_SHARD_BYTES", limit):
+                served = ged.build_static_bundle(root, root / "dist")
+            self.assertGreater(len(served["raw_shards"]), 1)
+            self.assertEqual(sum(row["count"] for row in served["raw_shards"]), 3)
+            self.assertTrue(
+                all(row["decoded_bytes"] <= limit for row in served["raw_shards"])
+            )
+            self.assertTrue(
+                all(row["bytes"] <= limit for row in served["event_shards"])
+            )
+            self.assertEqual(ged.validate_snapshot(snapshot), manifest)
+
+    def test_changed_gzip_asset_is_refused_and_not_replaced(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.snapshot(root / ged.SNAPSHOT_DIRECTORY)
+            output = root / "dist"
+            manifest = ged.build_static_bundle(root, output)
+            raw = output / manifest["raw_shards"][0]["path"].removeprefix("./")
+            encoded = raw.read_bytes()
+            changed = encoded[:-1] + bytes([encoded[-1] ^ 1])
+            raw.write_bytes(changed)
+            with self.assertRaises(ValueError):
+                ged.build_static_bundle(root, output)
+            self.assertEqual(raw.read_bytes(), changed)
+
+    def test_legacy_uncompressed_evidence_requires_fresh_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = self.snapshot(root / ged.SNAPSHOT_DIRECTORY)
+            output = root / "dist"
+            legacy = output / source["raw_shards"][0]["path"].removeprefix("./")
+            legacy.parent.mkdir(parents=True)
+            legacy.write_bytes(b"previous evidence asset")
+            with self.assertRaisesRegex(ValueError, "fresh static output"):
+                ged.build_static_bundle(root, output)
+            self.assertEqual(legacy.read_bytes(), b"previous evidence asset")
+
     def test_official_receipts_and_codebook_hash_are_preserved(self):
         provenance = ROOT / ged.SNAPSHOT_DIRECTORY / "provenance"
         codebook = provenance / "ged261.pdf"
         self.assertEqual(
             hashlib.sha256(codebook.read_bytes()).hexdigest(), ged.CODEBOOK_SHA256
         )
-        receipts = json.loads((provenance / "download-receipts.json").read_text(encoding="utf-8"))[
-            "assets"
-        ]
+        receipts = json.loads(
+            (provenance / "download-receipts.json").read_text(encoding="utf-8")
+        )["assets"]
         archive = next(row for row in receipts if row["url"] == ged.ARCHIVE_URL)
         self.assertEqual(archive["http_status"], 200)
         self.assertFalse(archive["credentials_used"])

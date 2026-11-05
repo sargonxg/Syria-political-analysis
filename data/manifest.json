@@ -26,7 +26,7 @@
     "edges": 137
   },
   "last_feed_collection_at": "2026-11-02T17:12:14.422757Z",
-  "toolkit_version": "0.4.0",
+  "toolkit_version": "0.4.1",
   "country_registry": "data/countries.json",
   "default_country": "SY",
   "region": "Middle East",

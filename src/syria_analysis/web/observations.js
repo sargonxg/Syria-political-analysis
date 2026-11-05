@@ -118,6 +118,83 @@ function shardKey(shard) {
   return `${shard.path}#${shard.sha256}`;
 }
 
+async function decodeGzip(bytes, expected, signal) {
+  const limit = 5 * 1024 * 1024;
+  if (typeof DecompressionStream !== "function")
+    throw new Error(
+      "This browser cannot open the gzip-packaged original fields. Use a current browser with DecompressionStream support or download the source partition for local analysis.",
+    );
+  if (
+    !Number.isSafeInteger(expected.decoded_bytes) ||
+    expected.decoded_bytes < 1 ||
+    expected.decoded_bytes > limit ||
+    !/^[a-f0-9]{64}$/i.test(expected.decoded_sha256 || "")
+  )
+    throw new Error(
+      "The gzip source partition has invalid decoded-size or decoded-hash metadata. Original fields cannot be verified.",
+    );
+  if (
+    !Number.isSafeInteger(expected.bytes) ||
+    expected.bytes !== bytes.byteLength
+  )
+    throw new Error(
+      "The gzip asset length does not match its manifest. Original fields will not be displayed or exported.",
+    );
+
+  const reader = new Blob([bytes])
+    .stream()
+    .pipeThrough(new DecompressionStream("gzip"))
+    .getReader();
+  const chunks = [];
+  let length = 0;
+  const onAbort = () => {
+    reader.cancel().catch(() => {});
+  };
+  signal?.addEventListener("abort", onAbort, { once: true });
+  try {
+    while (true) {
+      if (signal?.aborted)
+        throw new DOMException("Cancelled", "AbortError");
+      const { value, done } = await reader.read();
+      if (done) break;
+      length += value.byteLength;
+      if (length > limit) {
+        await reader.cancel();
+        throw new Error(
+          "The decoded source partition exceeds the atlas’s 5 MiB per-file limit.",
+        );
+      }
+      chunks.push(value);
+    }
+    if (signal?.aborted)
+      throw new DOMException("Cancelled", "AbortError");
+  } catch (error) {
+    await reader.cancel().catch(() => {});
+    if (error.name === "AbortError") throw error;
+    throw new Error(
+      `The gzip source partition could not be decoded. ${error.message}`,
+    );
+  } finally {
+    signal?.removeEventListener("abort", onAbort);
+    reader.releaseLock();
+  }
+  if (length !== expected.decoded_bytes)
+    throw new Error(
+      "Decoded source length does not match the manifest. Original fields will not be displayed or exported.",
+    );
+  const decoded = new Uint8Array(length);
+  let offset = 0;
+  for (const chunk of chunks) {
+    decoded.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  if ((await sha256(decoded)) !== expected.decoded_sha256.toLowerCase())
+    throw new Error(
+      "Decoded source integrity check failed. Its JSON bytes do not match the manifest SHA-256. Original fields will not be displayed or exported.",
+    );
+  return decoded;
+}
+
 async function fetchJSON(path, signal, cache = "force-cache", expected = null) {
   const url = localURL(path);
   if (expected) {
@@ -144,9 +221,14 @@ async function fetchJSON(path, signal, cache = "force-cache", expected = null) {
       `Source integrity check failed for ${url.pathname}. Its bytes do not match the manifest SHA-256. Retry after a complete dataset build.`,
     );
   }
+  let jsonBytes = bytes;
+  if (expected?.encoding === "gzip")
+    jsonBytes = await decodeGzip(bytes, expected, signal);
+  else if (expected?.encoding)
+    throw new Error(`Unsupported source encoding: ${expected.encoding}.`);
   let value;
   try {
-    value = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
+    value = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(jsonBytes));
   } catch {
     throw new Error(
       "The requested asset is not valid JSON. An authentication page or incomplete build may have been returned.",
@@ -2018,7 +2100,7 @@ function renderProvenance() {
           const item = element("li");
           const link = element(
             "a",
-            `${shard.year_start}${shard.year_end !== shard.year_start ? `–${shard.year_end}` : ""}, part ${shard.part || "1"} · ${number.format(shard.count)} records`,
+            `${shard.year_start}${shard.year_end !== shard.year_start ? `–${shard.year_end}` : ""}, part ${shard.part || "1"} · ${number.format(shard.count)} records${shard.encoding === "gzip" ? " · gzip JSON" : ""}`,
           );
           try {
             link.href = localURL(shard.path);

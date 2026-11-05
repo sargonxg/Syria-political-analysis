@@ -6,13 +6,13 @@ No API keys, current-event polling, inferred affiliations or model calls.
 from __future__ import annotations
 
 import csv
+import gzip
 import hashlib
 import html
 import io
 import json
 import math
 import re
-import shutil
 import sqlite3
 import tempfile
 import unicodedata
@@ -634,20 +634,124 @@ def validate_snapshot(snapshot: Path) -> dict:
 
 
 def build_static_bundle(repository: Path, output: Path) -> dict:
-    """Copy only verified screened event JSON, never raw archives or source PDFs."""
+    """Publish compact JSON and deterministic gzip evidence, never source archives.
+
+    The immutable input remains ordinary JSON. Served pairs are repartitioned only
+    when their longer gzip references would exceed the decoded asset byte budget.
+    """
     snapshot = repository / SNAPSHOT_DIRECTORY
     manifest = validate_snapshot(snapshot)
-    for item in [*manifest["event_shards"], *manifest["raw_shards"]]:
-        source = _snapshot_file(snapshot, item)
-        destination = output / item["path"].removeprefix("./")
+    event_shards, raw_shards = [], []
+
+    def write_asset(path: str, body: bytes) -> None:
+        destination = output / path.removeprefix("./")
         if not destination.resolve().is_relative_to(output.resolve()):
             raise ValueError("Static event path escapes the output directory")
+        if destination.is_symlink():
+            raise ValueError("Refusing a symbolic-link static event asset")
         if destination.exists():
-            if destination.is_symlink() or _sha256(destination) != item["sha256"]:
+            if _sha256(destination) != hashlib.sha256(body).hexdigest():
                 raise ValueError("Refusing to overwrite a changed static event asset")
-            continue
+            return
         destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(source, destination)
+        destination.write_bytes(body)
+
+    def new_part(country_code: str, year: int, number: int) -> dict:
+        part = _new_part(country_code, year, number)
+        part["raw_path"] += ".gz"
+        return part
+
+    def publish_part(part: dict) -> None:
+        if not part["raw"]:
+            return
+        compact_body = _PART_PREFIX + b",".join(part["compact"]) + _PART_SUFFIX
+        raw_body = _PART_PREFIX + b",".join(part["raw"]) + _PART_SUFFIX
+        if max(len(compact_body), len(raw_body)) > MAX_SHARD_BYTES:
+            raise ValueError("Served historical part exceeds its decoded byte budget")
+        compressed = io.BytesIO()
+        # GzipFile gives a fixed OS header across Python platforms; gzip.compress
+        # with mtime=0 can instead delegate an OS-specific header to zlib.
+        with gzip.GzipFile(
+            filename="", mode="wb", fileobj=compressed, compresslevel=9, mtime=0
+        ) as stream:
+            stream.write(raw_body)
+        raw_gzip = compressed.getvalue()
+        if len(raw_gzip) > MAX_SHARD_BYTES:
+            raise ValueError("Compressed historical part exceeds its byte budget")
+        common = {
+            "dataset_id": DATASET_ID,
+            "country_code": part["country_code"],
+            "year_start": int(part["start"][:4]),
+            "year_end": int(part["end"][:4]),
+            "partition_year": part["year"],
+            "part": part["number"],
+            "count": len(part["raw"]),
+            "date_start": part["start"],
+            "date_end": part["end"],
+        }
+        compact_path = part["raw_path"].replace("/events-raw/", "/events/")[:-3]
+        # Do not leave a second, uncompressed full-record copy in an old build.
+        legacy_raw = output / part["raw_path"].removeprefix("./")[:-3]
+        if legacy_raw.exists() or legacy_raw.is_symlink():
+            raise ValueError("Use a fresh static output: uncompressed evidence remains")
+        write_asset(compact_path, compact_body)
+        write_asset(part["raw_path"], raw_gzip)
+        event_shards.append(
+            {
+                **common,
+                "path": compact_path,
+                "bytes": len(compact_body),
+                "sha256": hashlib.sha256(compact_body).hexdigest(),
+            }
+        )
+        raw_shards.append(
+            {
+                **common,
+                "path": part["raw_path"],
+                "encoding": "gzip",
+                "bytes": len(raw_gzip),
+                "sha256": hashlib.sha256(raw_gzip).hexdigest(),
+                "decoded_bytes": len(raw_body),
+                "decoded_sha256": hashlib.sha256(raw_body).hexdigest(),
+            }
+        )
+
+    part = None
+    for source_item in manifest["raw_shards"]:
+        country_code, year = source_item["country_code"], source_item["partition_year"]
+        if part is None or (part["country_code"], part["year"]) != (
+            country_code,
+            year,
+        ):
+            if part is not None:
+                publish_part(part)
+            part = new_part(country_code, year, 1)
+        source = _snapshot_file(snapshot, source_item)
+        for original in json.loads(source.read_text(encoding="utf-8"))["records"]:
+            compact, full = _encoded_pair(original, part["raw_path"])
+            sizes = (
+                _PART_OVERHEAD + part["raw_size"] + len(full) + len(part["raw"]),
+                _PART_OVERHEAD
+                + part["compact_size"]
+                + len(compact)
+                + len(part["compact"]),
+            )
+            if part["raw"] and max(sizes) > MAX_SHARD_BYTES:
+                publish_part(part)
+                part = new_part(country_code, year, part["number"] + 1)
+                compact, full = _encoded_pair(original, part["raw_path"])
+            if max(len(compact), len(full)) + _PART_OVERHEAD > MAX_SHARD_BYTES:
+                raise ValueError("One served historical record exceeds the byte budget")
+            part["compact"].append(compact)
+            part["raw"].append(full)
+            part["compact_size"] += len(compact)
+            part["raw_size"] += len(full)
+            part["start"] = min(
+                part["start"] or original["date_start"], original["date_start"]
+            )
+            part["end"] = max(part["end"] or original["date_end"], original["date_end"])
+    if part is not None:
+        publish_part(part)
     return {
         "format": "policy-observation-atlas/1",
         "built_at": manifest["built_at"],
@@ -656,13 +760,13 @@ def build_static_bundle(repository: Path, output: Path) -> dict:
             for key in (
                 "datasets",
                 "countries",
-                "event_shards",
-                "raw_shards",
                 "indicator_shards",
                 "limitations",
                 "quality_flag_counts",
                 "precision_counts",
             )
         },
+        "event_shards": event_shards,
+        "raw_shards": raw_shards,
         "selection": manifest["selection"],
     }
