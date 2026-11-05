@@ -278,7 +278,7 @@ class DeskTests(unittest.TestCase):
         self.assertFalse(import_public(self.store, ROOT))
         self.assertEqual(self.store.get(imported["id"])["title"], "My annotation")
         bundle = self.store.export("public-syria-research")
-        self.assertEqual(sum(r["kind"] == "source" for r in bundle["records"]), 39)
+        self.assertEqual(sum(r["kind"] == "source" for r in bundle["records"]), 55)
         self.assertFalse(
             any(r["kind"] == "claim" for r in bundle["records"]),
             "Do not invent exact source excerpts for old paraphrases",

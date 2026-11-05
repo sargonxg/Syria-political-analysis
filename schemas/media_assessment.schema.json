@@ -1,0 +1,284 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sargonxg/Syria-political-analysis/blob/main/schemas/media_assessment.schema.json",
+  "type": "object",
+  "required": [
+    "format",
+    "created_at",
+    "question",
+    "source_snapshot_sha256",
+    "hash_scope",
+    "source_profiles",
+    "human_review_recorded",
+    "use_rules",
+    "reports",
+    "assessment"
+  ],
+  "properties": {
+    "format": {
+      "const": "media-framing-assessment/1"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "question": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "source_snapshot_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "hash_scope": {
+      "type": "string"
+    },
+    "source_profiles": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "url",
+          "ownership_or_perspective",
+          "evidence"
+        ]
+      }
+    },
+    "human_review_recorded": {
+      "const": false
+    },
+    "use_rules": {
+      "type": "array",
+      "minItems": 7,
+      "items": {
+        "type": "string"
+      }
+    },
+    "reports": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": [
+          "source_id",
+          "url",
+          "published_at",
+          "genre",
+          "upstream_url",
+          "selection_basis",
+          "evidence"
+        ],
+        "properties": {
+          "source_id": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "published_at": {
+            "type": "string"
+          },
+          "genre": {
+            "type": "string"
+          },
+          "upstream_url": {
+            "type": "string"
+          },
+          "selection_basis": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "object",
+            "required": [
+              "attribution",
+              "framing",
+              "evidence",
+              "lineage",
+              "scope",
+              "language"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "attribution": {
+                "type": "object",
+                "required": [
+                  "passage",
+                  "locator",
+                  "note"
+                ],
+                "properties": {
+                  "passage": {
+                    "type": "string",
+                    "maxLength": 2000
+                  },
+                  "locator": {
+                    "type": "string",
+                    "maxLength": 2000
+                  },
+                  "note": {
+                    "type": "string",
+                    "maxLength": 2000
+                  }
+                },
+                "additionalProperties": false
+              },
+              "framing": {
+                "type": "object",
+                "required": [
+                  "passage",
+                  "locator",
+                  "note"
+                ],
+                "properties": {
+                  "passage": {
+                    "type": "string",
+                    "maxLength": 2000
+                  },
+                  "locator": {
+                    "type": "string",
+                    "maxLength": 2000
+                  },
+                  "note": {
+                    "type": "string",
+                    "maxLength": 2000
+                  }
+                },
+                "additionalProperties": false
+              },
+              "evidence": {
+                "type": "object",
+                "required": [
+                  "passage",
+                  "locator",
+                  "note"
+                ],
+                "properties": {
+                  "passage": {
+                    "type": "string",
+                    "maxLength": 2000
+                  },
+                  "locator": {
+                    "type": "string",
+                    "maxLength": 2000
+                  },
+                  "note": {
+                    "type": "string",
+                    "maxLength": 2000
+                  }
+                },
+                "additionalProperties": false
+              },
+              "lineage": {
+                "type": "object",
+                "required": [
+                  "passage",
+                  "locator",
+                  "note"
+                ],
+                "properties": {
+                  "passage": {
+                    "type": "string",
+                    "maxLength": 2000
+                  },
+                  "locator": {
+                    "type": "string",
+                    "maxLength": 2000
+                  },
+                  "note": {
+                    "type": "string",
+                    "maxLength": 2000
+                  }
+                },
+                "additionalProperties": false
+              },
+              "scope": {
+                "type": "object",
+                "required": [
+                  "passage",
+                  "locator",
+                  "note"
+                ],
+                "properties": {
+                  "passage": {
+                    "type": "string",
+                    "maxLength": 2000
+                  },
+                  "locator": {
+                    "type": "string",
+                    "maxLength": 2000
+                  },
+                  "note": {
+                    "type": "string",
+                    "maxLength": 2000
+                  }
+                },
+                "additionalProperties": false
+              },
+              "language": {
+                "type": "object",
+                "required": [
+                  "passage",
+                  "locator",
+                  "note"
+                ],
+                "properties": {
+                  "passage": {
+                    "type": "string",
+                    "maxLength": 2000
+                  },
+                  "locator": {
+                    "type": "string",
+                    "maxLength": 2000
+                  },
+                  "note": {
+                    "type": "string",
+                    "maxLength": 2000
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "assessment": {
+      "type": "object",
+      "required": [
+        "status",
+        "interpretation",
+        "alternative",
+        "missing_evidence"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "not_assessed",
+            "unreviewed_analyst_draft"
+          ]
+        },
+        "interpretation": {
+          "type": "string",
+          "maxLength": 10000
+        },
+        "alternative": {
+          "type": "string",
+          "maxLength": 10000
+        },
+        "missing_evidence": {
+          "type": "string",
+          "maxLength": 10000
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

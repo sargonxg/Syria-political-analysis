@@ -2,6 +2,14 @@
 
 Build a research notebook that keeps sources, exact passages, attributed claims and analyst judgments connected.
 
+**[Assess media framing](docs/media-assessment.md)** · [Research/data resources](data/sources/resources.json)
+
+![Actual source atlas: publisher records, research themes and qualified institutional context](docs/images/source-atlas-desktop.png)
+
+Navigate 55 publisher and institutional profiles. Compare specific reports across attribution, framing, support, information lineage, scope and language. The worksheet exports selected passages and a separate analyst assessment; it does not turn ownership or funding into a political-bias score. Eight data/research resources retain their access prerequisites. [Comparison on mobile](docs/images/source-comparison-mobile.png).
+
+![Two selected publisher profiles with attributed ownership/funding notes and explicit limits](docs/images/source-comparison-desktop.png)
+
 **[Explore the context desk](docs/context-layers.md)** · [Seven-layer JSON snapshot](exports/context-layers.json)
 
 ![Context desk: political assertion, primary evidence and ontology inspected together](docs/images/context-desktop.png)
@@ -30,7 +38,7 @@ An independent, public-source research toolkit by Giulio Catanzariti. Start with
 
 **Syria is the first curated country collection.** Shared evidence contracts, collection tools and exports now support isolated country workspaces. The repository URL and `syria-analysis` command remain compatible; `policy-analysis` is the regional command alias. Other countries begin as empty frameworks, with no copied Syria claims or invented coverage.
 
-The reconciled corpus contains **39 source profiles, 44 document references, 14 attributed report paraphrases, 14 regional navigation anchors, eight context themes, eight analytical lenses and two social-account links verified through institutional profiles**. The atlas adds 17 explicitly qualified organizational/location relationships. Five verified RSS endpoints feed a saved reading sample; the coverage export contains 33 references, including two manually registered SANA language accounts. No social posts have been collected.
+The reconciled corpus contains **55 source profiles, 44 document references, 14 attributed report paraphrases, 14 regional navigation anchors, eight context themes, eight analytical lenses and two social-account links verified through institutional profiles**. The atlas adds 17 explicitly qualified organizational/location relationships. Eight verified RSS endpoints are registered; five publishers supply the existing saved reading sample; the coverage export contains 33 references, including two manually registered SANA language accounts. No social posts have been collected.
 
 The **Syria political ontology** adds 17 entity types, 15 qualified relationship types and 18 source-scoped concepts. Seven entity records and six dated normative assertion drafts provide a working example from Security Council resolution 2254 (2015). Every assertion retains its original source verb, paragraph/page locator, date, modality, qualifications and review state. These historical objectives are not current implementation findings. No human review is claimed for the drafts. [Inspect the model](docs/political-ontology.md).
 
@@ -62,7 +70,7 @@ Without installing the package, prefix commands with `PYTHONPATH=src python -m s
 
 ## Workflows
 
-### Interactive source atlas
+### Regional source atlas and comparison worksheet
 
 Open [the built atlas](exports/atlas/index.html) in a browser, or rebuild it from the current validated corpus:
 

@@ -17,7 +17,7 @@
   {
     "id": "think_tank",
     "label": "Research institutes",
-    "count": 5
+    "count": 8
   },
   {
     "id": "analyst",
@@ -32,11 +32,11 @@
   {
     "id": "advocacy_monitoring",
     "label": "Monitoring and advocacy",
-    "count": 4
+    "count": 6
   },
   {
     "id": "regional_media",
     "label": "Regional media",
-    "count": 3
+    "count": 14
   }
 ]

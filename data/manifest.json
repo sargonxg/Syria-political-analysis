@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "created_at": "2026-11-02T16:05:37.068108Z",
-  "checked_on": "2026-11-02",
+  "checked_on": "2026-11-05",
   "publisher": "Giulio Catanzariti — independent research project",
   "automatic_refresh": false,
   "counts": {
-    "sources": 39,
+    "sources": 55,
     "documents": 44,
     "claims": 14,
     "places": 14,
@@ -14,18 +14,19 @@
     "social_posts_collected": 0,
     "analytical_layers": 8,
     "coverage_references": 33,
-    "verified_rss_endpoints": 5
+    "verified_rss_endpoints": 8,
+    "research_resources": 8
   },
   "provenance": "Original source profiles, attributed paraphrases and typed research questions assembled from public linked material. Publisher text and copyrighted reports are not republished.",
   "license": "MIT for code; CC BY 4.0 for original annotations and compilation; publisher rights retained for linked material.",
   "website": "https://giulio-catanzariti-atlas.sargonx6.chatgpt.site/syria",
-  "scope": "Country-extensible public-source toolkit. Syria is the current curated corpus, with eight analytical lenses, title-level coverage tags and a dated political ontology exemplar.",
+  "scope": "Middle East source directory and country-extensible political research. Syria remains the first curated evidence and ontology collection; regional publisher profiles do not establish country-level events.",
   "graph": {
-    "nodes": 127,
+    "nodes": 143,
     "edges": 137
   },
   "last_feed_collection_at": "2026-11-02T17:12:14.422757Z",
-  "toolkit_version": "0.2.0",
+  "toolkit_version": "0.3.0",
   "country_registry": "data/countries.json",
   "default_country": "SY",
   "region": "Middle East",
@@ -51,5 +52,6 @@
     "verification_scope": "Organizational evidence review, not article accuracy certification",
     "field_evidence_note": "Relevant-source navigation index, not certified field-level corroboration.",
     "reproduction": "Use committed data/sources/catalogue-review.json and public evidence URLs. Historical private file identifiers are optional archival metadata, not publicly accessible dependencies."
-  }
+  },
+  "check_calendar": "UTC"
 }

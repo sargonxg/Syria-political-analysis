@@ -36,7 +36,7 @@ def validate_relationships(workspace: dict, network: dict) -> None:
                 date.fromisoformat(edge[key])
 
 
-def build_atlas(workspace: dict, output: Path, relationships: dict | None = None) -> Path:
+def build_atlas(workspace: dict, output: Path, relationships: dict | None = None, resources: dict | None = None) -> Path:
     """Embed data and assets; opening the result makes no network requests."""
     errors = validate(workspace)
     if errors:
@@ -45,12 +45,14 @@ def build_atlas(workspace: dict, output: Path, relationships: dict | None = None
     validate_relationships(workspace, relationships)
     assets = Path(__file__).parent / 'web'
     payload = {'schema_version': 1, 'built_at': now_utc(), **workspace,
-               'graph': graph(workspace), 'relationships': relationships}
+               'graph': graph(workspace), 'relationships': relationships,
+               'resources': resources or {'profiles': []}}
     # Script-data contexts require escaping '<', including hostile closing tags.
     data = json.dumps(payload, ensure_ascii=False).replace('<', '\\u003c').replace('\u2028', '\\u2028').replace('\u2029', '\\u2029')
     html = (assets / 'index.html').read_text(encoding='utf-8')
-    html = html.replace('/* ATLAS_CSS */', (assets / 'atlas.css').read_text(encoding='utf-8'))
-    html = html.replace('/* ATLAS_JS */', (assets / 'atlas.js').read_text(encoding='utf-8'))
+    html = html.replace('<!-- MEDIA_ASSESSMENT -->', (assets / 'media-assessment.html').read_text(encoding='utf-8'))
+    html = html.replace('/* ATLAS_CSS */', (assets / 'atlas.css').read_text(encoding='utf-8') + '\n' + (assets / 'media-assessment.css').read_text(encoding='utf-8'))
+    html = html.replace('/* ATLAS_JS */', (assets / 'atlas.js').read_text(encoding='utf-8') + '\n' + (assets / 'media-assessment.js').read_text(encoding='utf-8'))
     html = html.replace('/* ATLAS_DATA */', data)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(html, encoding='utf-8')

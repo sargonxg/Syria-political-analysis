@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "built_at": "2026-11-02T21:18:42.760470Z",
+  "built_at": "2026-11-05T01:06:57.135755Z",
   "title": "Syria source-coverage sample",
   "method": "Deterministic English/Arabic title-keyword matching with recorded matched terms. No article bodies, inferred incidents or causal influence scores.",
   "lexicon_version": 1,
@@ -533,6 +533,118 @@
     {
       "id": "al-majalla",
       "name": "Al Majalla",
+      "type": "regional_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "asharq-al-awsat",
+      "name": "Asharq Al-Awsat",
+      "type": "regional_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "lorient-today",
+      "name": "L’Orient Today / Groupe L’Orient-Le Jour",
+      "type": "regional_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "daraj",
+      "name": "Daraj",
+      "type": "regional_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "megaphone",
+      "name": "Megaphone",
+      "type": "regional_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "mada-masr",
+      "name": "Mada Masr",
+      "type": "regional_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "972mag",
+      "name": "+972 Magazine",
+      "type": "regional_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "times-of-israel",
+      "name": "The Times of Israel",
+      "type": "regional_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "shafaq-news",
+      "name": "Shafaq News",
+      "type": "regional_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "kirkuknow",
+      "name": "KirkukNow",
+      "type": "regional_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "sanaa-center",
+      "name": "Sana’a Center for Strategic Studies",
+      "type": "think_tank",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "ecfr",
+      "name": "European Council on Foreign Relations",
+      "type": "think_tank",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "merip",
+      "name": "Middle East Research and Information Project",
+      "type": "regional_media",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "scpr",
+      "name": "Syrian Center for Policy Research",
+      "type": "think_tank",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "sjac",
+      "name": "Syria Justice and Accountability Centre",
+      "type": "advocacy_monitoring",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "airwars",
+      "name": "Airwars",
+      "type": "advocacy_monitoring",
+      "reference_count": 0,
+      "status": "Directory only; no references in this sample"
+    },
+    {
+      "id": "bbc-arabic",
+      "name": "BBC News Arabic / World Service",
       "type": "regional_media",
       "reference_count": 0,
       "status": "Directory only; no references in this sample"

@@ -1,0 +1,247 @@
+{
+  "checked_at": "2026-11-05T00:28:16.094508+00:00",
+  "scope": "Endpoint reachability and parser checks only; no continuous connection, rights permission, completeness or factual accuracy implied. No article bodies persisted.",
+  "checks": [
+    {
+      "request_url": "https://daraj.media/en/",
+      "checked_at": "2026-11-05T00:28:16.094508+00:00",
+      "method": "GET",
+      "body_persisted": false,
+      "http_status": 200,
+      "final_url": "https://daraj.media/en/",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes_read": 203333,
+      "sha256": "b463112951b584de5151ff5bdcbc80bb70f2bb6f835979b740b6e8de3847b284",
+      "bounded_read": false,
+      "discovered_feed_links": [
+        {
+          "href": "https://daraj.media/en/feed/",
+          "type": "application/rss+xml",
+          "title": "Daraj » Feed"
+        },
+        {
+          "href": "https://daraj.media/en/comments/feed/",
+          "type": "application/rss+xml",
+          "title": "Daraj » Comments Feed"
+        }
+      ],
+      "source_id": "daraj",
+      "purpose": "publisher-disclosed-feed-discovery"
+    },
+    {
+      "request_url": "https://megaphone.news/",
+      "checked_at": "2026-11-05T00:28:16.094508+00:00",
+      "method": "GET",
+      "body_persisted": false,
+      "http_status": 200,
+      "final_url": "https://megaphone.news/",
+      "content_type": "text/html; charset=utf-8",
+      "bytes_read": 524393,
+      "sha256": "516f03bc083cc027c5637ed211fb7a46c352075280ec7677c2b94145d98bb79e",
+      "bounded_read": false,
+      "discovered_feed_links": [],
+      "source_id": "megaphone",
+      "purpose": "publisher-disclosed-feed-discovery"
+    },
+    {
+      "request_url": "https://www.972mag.com/",
+      "checked_at": "2026-11-05T00:28:16.094508+00:00",
+      "method": "GET",
+      "body_persisted": false,
+      "http_status": 200,
+      "final_url": "https://www.972mag.com/",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes_read": 61308,
+      "sha256": "fa6c1664f566102ef45b2fcf78e95afc5377d99a2830fba9361182586c22eef7",
+      "bounded_read": false,
+      "discovered_feed_links": [],
+      "source_id": "972mag",
+      "purpose": "publisher-disclosed-feed-discovery"
+    },
+    {
+      "request_url": "https://www.timesofisrael.com/",
+      "checked_at": "2026-11-05T00:28:16.094508+00:00",
+      "method": "GET",
+      "body_persisted": false,
+      "http_status": 200,
+      "final_url": "https://www.timesofisrael.com/",
+      "content_type": "text/html",
+      "bytes_read": 364223,
+      "sha256": "8581e544a980f6fab544916c78944315215d86a93b8390d45bbc8baf701811e3",
+      "bounded_read": false,
+      "discovered_feed_links": [],
+      "source_id": "times-of-israel",
+      "purpose": "publisher-disclosed-feed-discovery"
+    },
+    {
+      "request_url": "https://www.merip.org/",
+      "checked_at": "2026-11-05T00:28:16.094508+00:00",
+      "method": "GET",
+      "body_persisted": false,
+      "http_status": 200,
+      "final_url": "https://www.merip.org/",
+      "content_type": "text/html; charset=utf-8",
+      "bytes_read": 101442,
+      "sha256": "2f0ed87c08291402aa91563afb22f10e761828c4c55a0d73211e0c34bf2b123a",
+      "bounded_read": false,
+      "discovered_feed_links": [
+        {
+          "href": "https://www.merip.org/rss/",
+          "type": "application/rss+xml",
+          "title": "Middle East Research and Information Project"
+        }
+      ],
+      "source_id": "merip",
+      "purpose": "publisher-disclosed-feed-discovery"
+    },
+    {
+      "request_url": "https://sanaacenter.org/",
+      "checked_at": "2026-11-05T00:28:16.094508+00:00",
+      "method": "GET",
+      "body_persisted": false,
+      "http_status": 200,
+      "final_url": "https://sanaacenter.org/",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes_read": 310760,
+      "sha256": "018cfeeec5566ec255b6d44f61eb0e207b1f980fc16e326eec9c56957ecefc91",
+      "bounded_read": false,
+      "discovered_feed_links": [],
+      "source_id": "sanaa-center",
+      "purpose": "publisher-disclosed-feed-discovery"
+    },
+    {
+      "request_url": "https://syriaaccountability.org/",
+      "checked_at": "2026-11-05T00:28:16.094508+00:00",
+      "method": "GET",
+      "body_persisted": false,
+      "http_status": 200,
+      "final_url": "https://syriaaccountability.org/",
+      "content_type": "text/html; charset=utf-8",
+      "bytes_read": 79074,
+      "sha256": "76a1845cdc536db5a4f3fa02d37af2a1532bb26174543f68e04626883c612e7d",
+      "bounded_read": false,
+      "discovered_feed_links": [
+        {
+          "href": "https://syriaaccountability.org/rss/",
+          "type": "application/rss+xml",
+          "title": "Syria Justice & Accountability Centre"
+        }
+      ],
+      "source_id": "sjac",
+      "purpose": "publisher-disclosed-feed-discovery"
+    },
+    {
+      "request_url": "https://ecfr.eu/",
+      "checked_at": "2026-11-05T00:28:16.094508+00:00",
+      "method": "GET",
+      "body_persisted": false,
+      "http_status": 200,
+      "final_url": "https://ecfr.eu/",
+      "content_type": "text/html; charset=UTF-8",
+      "bytes_read": 217389,
+      "sha256": "1336543fb631cc21e238c6406bcb591a60271427ae62c7fec90e9ddde9322b3a",
+      "bounded_read": false,
+      "discovered_feed_links": [
+        {
+          "href": "https://ecfr.eu/feed/",
+          "type": "application/rss+xml",
+          "title": "European Council on Foreign Relations » Feed"
+        }
+      ],
+      "source_id": "ecfr",
+      "purpose": "publisher-disclosed-feed-discovery"
+    },
+    {
+      "request_url": "https://daraj.media/en/feed/",
+      "checked_at": "2026-11-05T00:28:16.094508+00:00",
+      "method": "GET",
+      "body_persisted": false,
+      "http_status": 200,
+      "final_url": "https://daraj.media/en/feed/",
+      "content_type": "text/xml;charset=UTF-8",
+      "bytes_read": 13060,
+      "sha256": "d105ce42cb412d153f6c63179493b62277f85f87068de41d7ee255cb98a6bc3c",
+      "bounded_read": false,
+      "xml_root": "rss",
+      "entry_count": 10,
+      "source_id": "daraj",
+      "purpose": "verify-publisher-disclosed-feed"
+    },
+    {
+      "request_url": "https://www.merip.org/rss/",
+      "checked_at": "2026-11-05T00:28:16.094508+00:00",
+      "method": "GET",
+      "body_persisted": false,
+      "http_status": 200,
+      "final_url": "https://www.merip.org/rss/",
+      "content_type": "application/rss+xml; charset=utf-8",
+      "bytes_read": 131856,
+      "sha256": "a929cef5186d90ef42cb5898582ec2ba78645b1521d6551a407bedb1ec06ed2f",
+      "bounded_read": false,
+      "xml_root": "rss",
+      "entry_count": 15,
+      "source_id": "merip",
+      "purpose": "verify-publisher-disclosed-feed"
+    },
+    {
+      "request_url": "https://syriaaccountability.org/rss/",
+      "checked_at": "2026-11-05T00:28:16.094508+00:00",
+      "method": "GET",
+      "body_persisted": false,
+      "http_status": 200,
+      "final_url": "https://syriaaccountability.org/rss/",
+      "content_type": "application/rss+xml; charset=utf-8",
+      "bytes_read": 105267,
+      "sha256": "fe3ad31a36259a3acd4efdb49ab725c09a4ffeaf4017aedc00a0b3dc34e2703c",
+      "bounded_read": false,
+      "xml_root": "rss",
+      "entry_count": 15,
+      "source_id": "sjac",
+      "purpose": "verify-publisher-disclosed-feed"
+    },
+    {
+      "request_url": "https://ecfr.eu/feed/",
+      "checked_at": "2026-11-05T00:28:16.094508+00:00",
+      "method": "GET",
+      "body_persisted": false,
+      "http_status": 403,
+      "final_url": "https://ecfr.eu/feed/",
+      "error_reason": "Forbidden",
+      "source_id": "ecfr",
+      "purpose": "verify-publisher-disclosed-feed"
+    },
+    {
+      "request_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=syria&mode=artlist&format=json&maxrecords=1",
+      "checked_at": "2026-11-05T00:28:16.094508+00:00",
+      "method": "GET",
+      "body_persisted": false,
+      "http_status": 503,
+      "final_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=syria&mode=artlist&format=json&maxrecords=1",
+      "error_reason": "Service Unavailable",
+      "source_id": "gdelt",
+      "purpose": "bounded-metadata-endpoint-check"
+    },
+    {
+      "request_url": "https://data.humdata.org/api/3/action/package_search?q=groups:syr&rows=0",
+      "checked_at": "2026-11-05T00:28:16.094508+00:00",
+      "method": "GET",
+      "body_persisted": false,
+      "http_status": 200,
+      "final_url": "https://data.humdata.org/api/3/action/package_search?q=groups:syr&rows=0",
+      "content_type": "application/json;charset=utf-8",
+      "bytes_read": 296,
+      "sha256": "83e99136bd4df0acac43521951cc725057f6a914e57f58883cb46b077cac2e7c",
+      "bounded_read": false,
+      "json_top_level": "dict",
+      "json_keys": [
+        "help",
+        "success",
+        "result"
+      ],
+      "declared_success": true,
+      "article_metadata_count": null,
+      "source_id": "hdx",
+      "purpose": "bounded-metadata-endpoint-check"
+    }
+  ]
+}

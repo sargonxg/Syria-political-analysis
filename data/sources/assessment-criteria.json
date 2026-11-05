@@ -1,0 +1,215 @@
+{
+  "schema": "media-assessment-criteria/1",
+  "purpose": "Navigable research worksheet, not numeric outlet ranking.",
+  "reviewed_on": "2026-11-05",
+  "views": [
+    "source_directory",
+    "compare_reports",
+    "evidence_trail"
+  ],
+  "case_fields": [
+    "research_question",
+    "case_id",
+    "event_time",
+    "publication_window",
+    "languages_reviewed",
+    "search_terms",
+    "selection_protocol",
+    "genre_comparability",
+    "unresolved_scope"
+  ],
+  "dimensions": [
+    {
+      "id": "ownership",
+      "label": "Operator and ownership",
+      "questions": [
+        "Who legally operates the publication?",
+        "Is beneficial ownership actually documented?",
+        "What dates and records support the relationship?"
+      ],
+      "required_fields": [
+        "statement",
+        "evidence_ids",
+        "basis",
+        "reviewed_on",
+        "valid_from",
+        "valid_to",
+        "unknowns"
+      ]
+    },
+    {
+      "id": "funding",
+      "label": "Funding",
+      "questions": [
+        "Which revenue categories or grants are disclosed?",
+        "What accounting period and denominator support a share?",
+        "Are partner, donor and owner roles kept distinct?"
+      ],
+      "required_fields": [
+        "statement",
+        "evidence_ids",
+        "accounting_period",
+        "funding_role",
+        "unknowns"
+      ]
+    },
+    {
+      "id": "editorial_remit",
+      "label": "Editorial remit",
+      "questions": [
+        "What purpose and audience does the source state?",
+        "Is the statement attributed rather than certified?"
+      ],
+      "required_fields": [
+        "attributed_statement",
+        "evidence_ids",
+        "audience",
+        "publication_genre"
+      ]
+    },
+    {
+      "id": "sourcing",
+      "label": "Sourcing and support",
+      "questions": [
+        "What precise claim is being made?",
+        "Is the support observation, statement, document, image, inference or secondhand report?",
+        "Where are the source and stable locator?"
+      ],
+      "required_fields": [
+        "claim_paraphrase",
+        "claim_modality",
+        "source_role",
+        "evidence_ids",
+        "locator",
+        "event_time",
+        "qualifications"
+      ]
+    },
+    {
+      "id": "dependency",
+      "label": "Source dependence",
+      "questions": [
+        "Do reports share an original wire, statement or translation?",
+        "Which evidence lineages are genuinely separate?"
+      ],
+      "required_fields": [
+        "lineage_edges",
+        "original_source_ids",
+        "dependency_unknowns"
+      ]
+    },
+    {
+      "id": "framing",
+      "label": "Framing",
+      "questions": [
+        "Which actor/action/consequence leads?",
+        "How are agency, labels, context and uncertainty expressed?",
+        "Are compared items similar genres and publication stages?"
+      ],
+      "required_fields": [
+        "headline_focus",
+        "lead_focus",
+        "actor_labels",
+        "agency",
+        "context_frame",
+        "attribution_pattern",
+        "comparison_qualification"
+      ]
+    },
+    {
+      "id": "omissions",
+      "label": "Unaddressed questions",
+      "questions": [
+        "Which relevant question is absent from this selected report?",
+        "Was the information available at publication time?",
+        "Is absence bounded to the sample rather than attributed intent?"
+      ],
+      "required_fields": [
+        "unaddressed_question",
+        "comparison_basis",
+        "availability_at_publication",
+        "scope_limit"
+      ]
+    },
+    {
+      "id": "corrections",
+      "label": "Changes and corrections",
+      "questions": [
+        "Is a policy linked?",
+        "Was an actual correction or update observed?",
+        "Are earlier and later versions preserved as separate records?"
+      ],
+      "required_fields": [
+        "policy_evidence_ids",
+        "observed_change",
+        "version_ids",
+        "effective_time",
+        "review_status"
+      ]
+    },
+    {
+      "id": "rights",
+      "label": "Rights and access",
+      "questions": [
+        "Who owns the original material?",
+        "What permission or licence supports collection/reuse?",
+        "Is metadata sufficient?"
+      ],
+      "required_fields": [
+        "original_url",
+        "rights_statement",
+        "rights_basis",
+        "access_outcome",
+        "body_collection_allowed",
+        "public_export_scope"
+      ]
+    }
+  ],
+  "institutional_statuses": [
+    "documented",
+    "self_disclosed",
+    "not_established",
+    "conflicting_evidence",
+    "needs_review"
+  ],
+  "claim_assessments": [
+    "attributed_only",
+    "directly_evidenced",
+    "independently_corroborated",
+    "contested",
+    "analyst_inference",
+    "not_assessed"
+  ],
+  "claim_assessment_rule": "Every assessment needs a scoped rationale and evidence; it is not an outlet score or probability.",
+  "lineage_edge_types": [
+    "cites",
+    "quotes_statement",
+    "syndicated_from",
+    "translated_from",
+    "summarizes",
+    "corroborates_claim",
+    "disputes_claim"
+  ],
+  "institutional_edge_rule": "Documented legal/institutional relationships belong in a distinct layer; no control edge from shared donors, geography, language or identity.",
+  "review_fields": [
+    "reviewer",
+    "reviewed_on",
+    "version",
+    "rationale",
+    "disagreements",
+    "unresolved_questions"
+  ],
+  "rights_default": {
+    "article_body_collection": false,
+    "image_republication": false,
+    "preserve_original_url": true,
+    "preserve_original_rights": true,
+    "short_original_paraphrases_only": true
+  },
+  "references": [
+    {
+      "title": "Berkeley Protocol",
+      "url": "https://humanrights.berkeley.edu/publications/berkeley-protocol-on-digital-open-source-investigations/"
+    }
+  ]
+}

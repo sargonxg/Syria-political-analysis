@@ -1,0 +1,738 @@
+{
+  "reviewed_on": "2026-11-05",
+  "scope": "Research and data resources, separate from publishers. Endpoint checks are dated observations, not live connections.",
+  "profiles": [
+    {
+      "id": "bellingcat",
+      "name": "Bellingcat",
+      "url": "https://www.bellingcat.com/",
+      "source_kind": "open_source_investigations",
+      "candidate_status": "curated_resource_reference",
+      "review_status": "institutional_evidence_reviewed",
+      "reviewed_on": "2026-11-05",
+      "languages": {
+        "reviewed_or_explicitly_described": [
+          "English"
+        ],
+        "scope": "Reviewed editions or explicit institutional description only; not a complete service inventory.",
+        "evidence_ids": [
+          "bellingcat-toolkit"
+        ]
+      },
+      "geographic_remit": {
+        "values": [
+          "Global open-source investigations",
+          "Middle East cases",
+          "Verification methods"
+        ],
+        "meaning": "Publication/data remit, not newsroom location, unrestricted field access, or political affiliation.",
+        "evidence_ids": [
+          "bellingcat-toolkit"
+        ]
+      },
+      "remit": {
+        "statement": "Public-interest open-source investigations and methodology; useful as a methods source rather than an exhaustive regional newswire.",
+        "evidence_ids": [
+          "bellingcat-toolkit"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "operator_or_legal_identity": {
+        "statement": "Identifies a Dutch charitable foundation and US charitable organization; public registration and annual-account documents are listed.",
+        "evidence_ids": [
+          "bellingcat-funding",
+          "bellingcat-general"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "funding": {
+        "statement": "Funding page describes workshops, paid presentations and foundation grants and lists supporters; disclosed percentages are undated page claims and are not treated as a fresh audited budget.",
+        "evidence_ids": [
+          "bellingcat-funding"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "suggested_use": "Verification training, reproducible research trails and tool selection for geolocation and evidence review.",
+      "cautions": [
+        "A published investigation’s finding is separate from the availability of a tool.",
+        "No tool or self-description establishes universal verification quality."
+      ],
+      "evidence": [
+        {
+          "id": "bellingcat-funding",
+          "url": "https://www.bellingcat.com/about/funding-and-how-to-support-bellingcat/",
+          "title": "Bellingcat — Funding",
+          "supports": [
+            "operator",
+            "funding"
+          ],
+          "basis": "first_party_self_description",
+          "access": "direct_page_read",
+          "reviewed_on": "2026-11-05"
+        },
+        {
+          "id": "bellingcat-general",
+          "url": "https://www.bellingcat.com/about/general-information",
+          "title": "Bellingcat — General information",
+          "supports": [
+            "operator"
+          ],
+          "basis": "first_party_self_description",
+          "access": "direct_page_read",
+          "reviewed_on": "2026-11-05"
+        },
+        {
+          "id": "bellingcat-toolkit",
+          "url": "https://github.com/bellingcat/toolkit",
+          "title": "Bellingcat — Official toolkit repository",
+          "supports": [
+            "remit",
+            "languages"
+          ],
+          "basis": "first_party_repository_readme",
+          "access": "direct_page_read",
+          "reviewed_on": "2026-11-05"
+        }
+      ],
+      "ingestion": {
+        "mode": "link_only_pending_review",
+        "article_bodies": "Not collected or redistributed.",
+        "rights": "Retain publisher links and rights; a public page/feed is not a republication licence.",
+        "feeds": []
+      },
+      "review_actor_type": "automated_research_assistance"
+    },
+    {
+      "id": "acled",
+      "name": "ACLED",
+      "url": "https://acleddata.com/",
+      "source_kind": "conflict_dataset",
+      "candidate_status": "curated_resource_reference",
+      "review_status": "institutional_evidence_reviewed",
+      "reviewed_on": "2026-11-05",
+      "languages": {
+        "reviewed_or_explicitly_described": [
+          "English"
+        ],
+        "scope": "Reviewed editions or explicit institutional description only; not a complete service inventory.",
+        "evidence_ids": [
+          "acled-about"
+        ]
+      },
+      "geographic_remit": {
+        "values": [
+          "Global",
+          "Middle East",
+          "Syria",
+          "Political violence",
+          "Protest"
+        ],
+        "meaning": "Publication/data remit, not newsroom location, unrestricted field access, or political affiliation.",
+        "evidence_ids": [
+          "acled-about"
+        ]
+      },
+      "remit": {
+        "statement": "Research/data organization providing coded political-violence and protest information; use dataset definitions and methodology rather than a generic incident label.",
+        "evidence_ids": [
+          "acled-about"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "operator_or_legal_identity": {
+        "statement": "About page identifies a US 501(c)(3) nonprofit.",
+        "evidence_ids": [
+          "acled-about"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "funding": {
+        "statement": "About page names support from the UN Complex Risk Analytics Fund; the reviewed page does not establish a complete donor-share breakdown.",
+        "evidence_ids": [
+          "acled-about"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "suggested_use": "An additional coded-conflict layer with explicit event, actor and source definitions; keep it separate from UCDP counts.",
+      "cautions": [
+        "Current API uses authenticated/OAuth access; no credentials or successful data request were supplied in this task.",
+        "Do not redistribute data or claim a connection before reviewing current access and licence terms."
+      ],
+      "evidence": [
+        {
+          "id": "acled-about",
+          "url": "https://acleddata.com/about-acled",
+          "title": "ACLED — About",
+          "supports": [
+            "operator",
+            "funding",
+            "remit",
+            "languages"
+          ],
+          "basis": "first_party_self_description",
+          "access": "direct_page_read",
+          "reviewed_on": "2026-11-05"
+        },
+        {
+          "id": "acled-api",
+          "url": "https://acleddata.com/acled-api-documentation",
+          "title": "ACLED — API documentation",
+          "supports": [
+            "technical_access"
+          ],
+          "basis": "first_party_self_description",
+          "access": "direct_page_read",
+          "reviewed_on": "2026-11-05"
+        }
+      ],
+      "ingestion": {
+        "mode": "link_only_pending_review",
+        "article_bodies": "Not collected or redistributed.",
+        "rights": "Retain publisher links and rights; a public page/feed is not a republication licence.",
+        "feeds": []
+      },
+      "review_actor_type": "automated_research_assistance"
+    },
+    {
+      "id": "ucdp",
+      "name": "Uppsala Conflict Data Program",
+      "url": "https://ucdp.uu.se/",
+      "source_kind": "conflict_dataset",
+      "candidate_status": "curated_resource_reference",
+      "review_status": "institutional_evidence_reviewed",
+      "reviewed_on": "2026-11-05",
+      "languages": {
+        "reviewed_or_explicitly_described": [
+          "English"
+        ],
+        "scope": "Reviewed editions or explicit institutional description only; not a complete service inventory.",
+        "evidence_ids": [
+          "ucdp-about"
+        ]
+      },
+      "geographic_remit": {
+        "values": [
+          "Global organized violence",
+          "Syria",
+          "Middle East"
+        ],
+        "meaning": "Publication/data remit, not newsroom location, unrestricted field access, or political affiliation.",
+        "evidence_ids": [
+          "ucdp-about"
+        ]
+      },
+      "remit": {
+        "statement": "University research programme producing versioned organized-violence datasets and a conflict encyclopedia.",
+        "evidence_ids": [
+          "ucdp-about"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "operator_or_legal_identity": {
+        "statement": "Uppsala University’s Department of Peace and Conflict Research houses UCDP.",
+        "evidence_ids": [
+          "ucdp-about"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "funding": {
+        "statement": "Not established as a complete current funding breakdown. University affiliation is not a substitute for programme grant accounts.",
+        "evidence_ids": [],
+        "status": "not_established"
+      },
+      "suggested_use": "Version-pinned conflict-event research and explicit alternative operational definitions.",
+      "cautions": [
+        "Current API documentation requires an issued token in x-ucdp-access-token; it is free but not anonymous access.",
+        "A codebook/version is essential; do not add UCDP and ACLED totals or interpret event dots as a complete battlefield picture."
+      ],
+      "evidence": [
+        {
+          "id": "ucdp-about",
+          "url": "https://www.uu.se/en/department/peace-and-conflict-research/research/ucdp/about-ucdp.html",
+          "title": "Uppsala University — About UCDP",
+          "supports": [
+            "operator",
+            "remit",
+            "languages"
+          ],
+          "basis": "first_party_self_description",
+          "access": "direct_page_read",
+          "reviewed_on": "2026-11-05"
+        },
+        {
+          "id": "ucdp-api",
+          "url": "https://ucdp.uu.se/apidocs/",
+          "title": "UCDP — API documentation",
+          "supports": [
+            "technical_access"
+          ],
+          "basis": "first_party_self_description",
+          "access": "direct_page_read",
+          "reviewed_on": "2026-11-05"
+        }
+      ],
+      "ingestion": {
+        "mode": "link_only_pending_review",
+        "article_bodies": "Not collected or redistributed.",
+        "rights": "Retain publisher links and rights; a public page/feed is not a republication licence.",
+        "feeds": []
+      },
+      "review_actor_type": "automated_research_assistance"
+    },
+    {
+      "id": "gdelt",
+      "name": "GDELT Project",
+      "url": "https://www.gdeltproject.org/",
+      "source_kind": "media_research_infrastructure",
+      "candidate_status": "curated_resource_reference",
+      "review_status": "institutional_evidence_reviewed",
+      "reviewed_on": "2026-11-05",
+      "languages": {
+        "reviewed_or_explicitly_described": [
+          "English documentation",
+          "Multilingual indexed content"
+        ],
+        "scope": "Reviewed editions or explicit institutional description only; not a complete service inventory.",
+        "evidence_ids": [
+          "gdelt-about"
+        ]
+      },
+      "geographic_remit": {
+        "values": [
+          "Global news coverage",
+          "Middle East media framing"
+        ],
+        "meaning": "Publication/data remit, not newsroom location, unrestricted field access, or political affiliation.",
+        "evidence_ids": [
+          "gdelt-about",
+          "gdelt-doc-api"
+        ]
+      },
+      "remit": {
+        "statement": "Automated global news monitoring and research datasets; DOC API supports article discovery and coverage timelines.",
+        "evidence_ids": [
+          "gdelt-about",
+          "gdelt-doc-api"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "operator_or_legal_identity": {
+        "statement": "About page identifies creator Kalev Leetaru; present legal operator or beneficial ownership was not established.",
+        "evidence_ids": [
+          "gdelt-about"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "funding": {
+        "statement": "About page acknowledges organizations and historic contributors; those acknowledgements do not establish current sponsorship, amounts or control.",
+        "evidence_ids": [
+          "gdelt-about"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "suggested_use": "Discover coverage clusters, language distribution and agenda changes, then inspect the original reports.",
+      "cautions": [
+        "Coverage volume and automated tone do not measure truth, public opinion or outlet reliability.",
+        "Documentation includes historical window/language claims; verify actual current response behavior.",
+        "Metadata endpoint returned 503 in this task; no active connection is claimed."
+      ],
+      "evidence": [
+        {
+          "id": "gdelt-about",
+          "url": "https://www.gdeltproject.org/about.html",
+          "title": "GDELT — About and use statement",
+          "supports": [
+            "operator",
+            "funding",
+            "remit",
+            "languages"
+          ],
+          "basis": "first_party_self_description",
+          "access": "direct_page_read",
+          "reviewed_on": "2026-11-05"
+        },
+        {
+          "id": "gdelt-doc-api",
+          "url": "https://blog.gdeltproject.org/gdelt-doc-2-0-api-debuts/",
+          "title": "GDELT — DOC 2.0 API documentation",
+          "supports": [
+            "technical_access",
+            "remit"
+          ],
+          "basis": "first_party_self_description",
+          "access": "direct_page_read",
+          "reviewed_on": "2026-11-05"
+        }
+      ],
+      "ingestion": {
+        "mode": "link_only_pending_review",
+        "article_bodies": "Not collected or redistributed.",
+        "rights": "Retain publisher links and rights; a public page/feed is not a republication licence.",
+        "feeds": []
+      },
+      "review_actor_type": "automated_research_assistance"
+    },
+    {
+      "id": "reliefweb",
+      "name": "ReliefWeb",
+      "url": "https://reliefweb.int/",
+      "source_kind": "humanitarian_aggregation_service",
+      "candidate_status": "curated_resource_reference",
+      "review_status": "institutional_evidence_reviewed",
+      "reviewed_on": "2026-11-05",
+      "languages": {
+        "reviewed_or_explicitly_described": [
+          "English documentation",
+          "Multilingual original publications"
+        ],
+        "scope": "Reviewed editions or explicit institutional description only; not a complete service inventory.",
+        "evidence_ids": [
+          "reliefweb-api"
+        ]
+      },
+      "geographic_remit": {
+        "values": [
+          "Global humanitarian response",
+          "Middle East",
+          "Syria"
+        ],
+        "meaning": "Publication/data remit, not newsroom location, unrestricted field access, or political affiliation.",
+        "evidence_ids": [
+          "reliefweb-api",
+          "reliefweb-ocha-identity"
+        ]
+      },
+      "remit": {
+        "statement": "Aggregates humanitarian reports, disasters, jobs and related metadata; published material retains original-source provenance.",
+        "evidence_ids": [
+          "reliefweb-api",
+          "reliefweb-ocha-identity"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "operator_or_legal_identity": {
+        "statement": "OCHA humanitarian information service. This service is not another independent source alongside its contributing publishers.",
+        "evidence_ids": [
+          "reliefweb-ocha-identity"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "funding": {
+        "statement": "Not established as a service-specific current funding breakdown.",
+        "evidence_ids": [],
+        "status": "not_established"
+      },
+      "suggested_use": "Discover and filter primary humanitarian publications by source, country, date and format.",
+      "cautions": [
+        "Current read requests require a pre-approved appname. No appname was invented or borrowed.",
+        "An aggregated report and its publisher’s original are one lineage, not independent corroboration.",
+        "API availability does not transfer rights to third-party reports."
+      ],
+      "evidence": [
+        {
+          "id": "reliefweb-api",
+          "url": "https://apidoc.reliefweb.int/",
+          "title": "ReliefWeb — Official API documentation",
+          "supports": [
+            "remit",
+            "languages",
+            "technical_access"
+          ],
+          "basis": "first_party_self_description",
+          "access": "direct_page_read",
+          "reviewed_on": "2026-11-05",
+          "note": "Official OCHA-service documentation; About page direct retrieval returned 403."
+        },
+        {
+          "id": "reliefweb-ocha-identity",
+          "url": "https://knowledge.base.unocha.org/wiki/spaces/imtoolbox/pages/4174250007/ReliefWeb",
+          "title": "OCHA Knowledge Base — ReliefWeb",
+          "supports": [
+            "operator",
+            "remit"
+          ],
+          "basis": "first_party_institutional_record",
+          "access": "indexed_first_party_text",
+          "reviewed_on": "2026-11-05",
+          "note": "Institutional page updated 26 September 2025 identifies ReliefWeb as an OCHA service."
+        }
+      ],
+      "ingestion": {
+        "mode": "link_only_pending_review",
+        "article_bodies": "Not collected or redistributed.",
+        "rights": "Retain publisher links and rights; a public page/feed is not a republication licence.",
+        "feeds": []
+      },
+      "review_actor_type": "automated_research_assistance"
+    },
+    {
+      "id": "hdx",
+      "name": "Humanitarian Data Exchange",
+      "url": "https://data.humdata.org/",
+      "source_kind": "humanitarian_data_catalogue",
+      "candidate_status": "curated_resource_reference",
+      "review_status": "institutional_evidence_reviewed",
+      "reviewed_on": "2026-11-05",
+      "languages": {
+        "reviewed_or_explicitly_described": [
+          "English metadata",
+          "Dataset languages vary"
+        ],
+        "scope": "Reviewed editions or explicit institutional description only; not a complete service inventory.",
+        "evidence_ids": [
+          "hdx-centre"
+        ]
+      },
+      "geographic_remit": {
+        "values": [
+          "Global humanitarian operations",
+          "Syria",
+          "Middle East"
+        ],
+        "meaning": "Publication/data remit, not newsroom location, unrestricted field access, or political affiliation.",
+        "evidence_ids": [
+          "hdx-centre"
+        ]
+      },
+      "remit": {
+        "statement": "Humanitarian dataset discovery/catalogue operated through OCHA’s Centre for Humanitarian Data; includes many contributing organizations.",
+        "evidence_ids": [
+          "hdx-centre"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "operator_or_legal_identity": {
+        "statement": "The Centre states that it is managed by OCHA and identifies the HDX platform as part of its work.",
+        "evidence_ids": [
+          "hdx-centre",
+          "hdx-data-management"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "funding": {
+        "statement": "Not established as a complete current platform-funding breakdown from reviewed pages.",
+        "evidence_ids": [],
+        "status": "not_established"
+      },
+      "suggested_use": "Dataset-level geospatial, displacement, services and socioeconomic layers with publisher/license/date metadata.",
+      "cautions": [
+        "A catalogue listing is not independent validation or a common data licence.",
+        "Resource licences, reference dates, methodology and sensitive-data handling must be checked per dataset.",
+        "Syria CKAN metadata query returned success=true; no dataset body was downloaded."
+      ],
+      "evidence": [
+        {
+          "id": "hdx-centre",
+          "url": "https://centre.humdata.org/what-we-do/",
+          "title": "OCHA Centre — What we do",
+          "supports": [
+            "operator",
+            "remit",
+            "languages"
+          ],
+          "basis": "first_party_self_description",
+          "access": "direct_page_read",
+          "reviewed_on": "2026-11-05"
+        },
+        {
+          "id": "hdx-data-management",
+          "url": "https://centre.humdata.org/ufaqs/data-management/",
+          "title": "HDX — Data management",
+          "supports": [
+            "operator",
+            "technical_access"
+          ],
+          "basis": "first_party_self_description",
+          "access": "direct_page_read",
+          "reviewed_on": "2026-11-05"
+        },
+        {
+          "id": "hdx-client",
+          "url": "https://github.com/OCHA-DAP/hdx-python-api",
+          "title": "OCHA-DAP — HDX Python API",
+          "supports": [
+            "technical_access"
+          ],
+          "basis": "first_party_repository_readme",
+          "access": "direct_page_read",
+          "reviewed_on": "2026-11-05"
+        }
+      ],
+      "ingestion": {
+        "mode": "link_only_pending_review",
+        "article_bodies": "Not collected or redistributed.",
+        "rights": "Retain publisher links and rights; a public page/feed is not a republication licence.",
+        "feeds": []
+      },
+      "review_actor_type": "automated_research_assistance"
+    },
+    {
+      "id": "unosat",
+      "name": "United Nations Satellite Centre — UNOSAT",
+      "url": "https://unosat.org/",
+      "source_kind": "institutional_geospatial_analysis",
+      "candidate_status": "curated_resource_reference",
+      "review_status": "institutional_evidence_reviewed",
+      "reviewed_on": "2026-11-05",
+      "languages": {
+        "reviewed_or_explicitly_described": [
+          "English reviewed material"
+        ],
+        "scope": "Reviewed editions or explicit institutional description only; not a complete service inventory.",
+        "evidence_ids": [
+          "unosat-about"
+        ]
+      },
+      "geographic_remit": {
+        "values": [
+          "Global emergency mapping",
+          "Syria",
+          "Middle East"
+        ],
+        "meaning": "Publication/data remit, not newsroom location, unrestricted field access, or political affiliation.",
+        "evidence_ids": [
+          "unosat-about",
+          "unitar-unosat"
+        ]
+      },
+      "remit": {
+        "statement": "Satellite analysis, training and capacity development for UN entities and Member States; humanitarian and peace/security applications.",
+        "evidence_ids": [
+          "unosat-about",
+          "unitar-unosat"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "operator_or_legal_identity": {
+        "statement": "UNOSAT is part of UNITAR, confirmed by UNITAR’s institutional announcement and UNOSAT’s indexed About text.",
+        "evidence_ids": [
+          "unosat-about",
+          "unitar-unosat"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "funding": {
+        "statement": "Not established as a current programme-funding breakdown.",
+        "evidence_ids": [],
+        "status": "not_established"
+      },
+      "suggested_use": "Dated satellite assessments and geospatial context, with image acquisition date and methods preserved.",
+      "cautions": [
+        "A damage classification is an analyst product; satellite appearance alone does not identify a perpetrator or legal conclusion.",
+        "No current ArcGIS/data endpoint or geospatial download was verified in this task."
+      ],
+      "evidence": [
+        {
+          "id": "unosat-about",
+          "url": "https://unosat.org/about-us/",
+          "title": "UNOSAT — About",
+          "supports": [
+            "operator",
+            "remit",
+            "languages"
+          ],
+          "basis": "first_party_self_description",
+          "access": "indexed_first_party_text",
+          "reviewed_on": "2026-11-05",
+          "note": "Direct page yielded only a JavaScript shell; substantive institutional text was available in the first-party search index."
+        },
+        {
+          "id": "unitar-unosat",
+          "url": "https://unitar.org/about/news-stories/news/unosat-becomes-united-nations-satellite-centre",
+          "title": "UNITAR — UNOSAT recognition",
+          "supports": [
+            "operator",
+            "remit"
+          ],
+          "basis": "first_party_self_description",
+          "access": "direct_page_read",
+          "reviewed_on": "2026-11-05"
+        }
+      ],
+      "ingestion": {
+        "mode": "link_only_pending_review",
+        "article_bodies": "Not collected or redistributed.",
+        "rights": "Retain publisher links and rights; a public page/feed is not a republication licence.",
+        "feeds": []
+      },
+      "review_actor_type": "automated_research_assistance"
+    },
+    {
+      "id": "escwa",
+      "name": "UN Economic and Social Commission for Western Asia",
+      "url": "https://www.unescwa.org/",
+      "source_kind": "institutional_primary",
+      "candidate_status": "curated_resource_reference",
+      "review_status": "institutional_evidence_reviewed",
+      "reviewed_on": "2026-11-05",
+      "languages": {
+        "reviewed_or_explicitly_described": [
+          "English reviewed material"
+        ],
+        "scope": "Reviewed editions or explicit institutional description only; not a complete service inventory.",
+        "evidence_ids": [
+          "escwa-plan"
+        ]
+      },
+      "geographic_remit": {
+        "values": [
+          "Arab region",
+          "Development",
+          "Regional cooperation",
+          "Economic and social policy"
+        ],
+        "meaning": "Publication/data remit, not newsroom location, unrestricted field access, or political affiliation.",
+        "evidence_ids": [
+          "escwa-plan"
+        ]
+      },
+      "remit": {
+        "statement": "UN regional commission promoting inclusive and sustainable development in the Arab region.",
+        "evidence_ids": [
+          "escwa-plan"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "operator_or_legal_identity": {
+        "statement": "UN commission with a mandate derived from General Assembly/ECOSOC decisions, documented in its proposed programme plan for 2026.",
+        "evidence_ids": [
+          "escwa-plan"
+        ],
+        "status": "attributed_or_documented"
+      },
+      "funding": {
+        "statement": "Not established as a current regular-budget/project-financing breakdown from the reviewed programme plan.",
+        "evidence_ids": [],
+        "status": "not_established"
+      },
+      "suggested_use": "Structural economic, social and governance context rather than a breaking-news layer.",
+      "cautions": [
+        "Use the period, methodology and publication status of each report.",
+        "A proposed programme plan is not proof of completed outputs or the current full budget."
+      ],
+      "evidence": [
+        {
+          "id": "escwa-plan",
+          "url": "https://www.unescwa.org/sites/default/files/event/materials/15-%20Proposed%20programme%20plan%20for%202026%202400704E.pdf",
+          "title": "ESCWA — Proposed programme plan for 2026",
+          "supports": [
+            "operator",
+            "remit",
+            "languages"
+          ],
+          "basis": "first_party_self_description",
+          "access": "indexed_first_party_document",
+          "reviewed_on": "2026-11-05",
+          "note": "General About page returned 403; the official document’s indexed text was read."
+        }
+      ],
+      "ingestion": {
+        "mode": "link_only_pending_review",
+        "article_bodies": "Not collected or redistributed.",
+        "rights": "Retain publisher links and rights; a public page/feed is not a republication licence.",
+        "feeds": []
+      },
+      "review_actor_type": "automated_research_assistance"
+    }
+  ]
+}

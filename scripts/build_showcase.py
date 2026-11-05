@@ -36,7 +36,9 @@ def main():
     relationships = (
         core.read_json(relationships_path) if relationships_path.exists() else None
     )
-    build_atlas(workspace, output / "sources" / "index.html", relationships)
+    resources_path = workspace_root / "data/sources/resources.json"
+    resources = core.read_json(resources_path) if resources_path.exists() else None
+    build_atlas(workspace, output / "sources" / "index.html", relationships, resources)
     print(
         f"Built public snapshot in {output}: {len(pack['records'])} records; no private cases included."
     )

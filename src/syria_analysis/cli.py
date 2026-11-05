@@ -59,6 +59,11 @@ def main(argv=None):
     csv = commands.add_parser('export-csv'); csv.add_argument('--output', type=Path, default=Path('exports/csv'))
     atlas = commands.add_parser('build-atlas', help='Build a self-contained offline interactive source atlas')
     atlas.add_argument('--output', type=Path, default=Path('exports/atlas/index.html'))
+    compare = commands.add_parser('compare-sources', help='Build a source-qualified media framing worksheet, without outlet scores')
+    compare.add_argument('--left', required=True); compare.add_argument('--right', required=True)
+    compare.add_argument('--question', required=True); compare.add_argument('--format', choices=['json','markdown'], default='json')
+    compare.add_argument('--output', type=Path, default=Path('output/comparison.json'))
+    commands.add_parser('resources', help='List dated research resource references and access prerequisites')
     coverage = commands.add_parser('coverage', help='Build transparent source/title/topic/place-mention coverage data')
     coverage.add_argument('--output', type=Path, default=Path('exports/coverage.json'))
     args = parser.parse_args(argv)
@@ -159,8 +164,22 @@ def main(argv=None):
             from .atlas import build_atlas
             relationships_path = root / 'data/sources/relationships.json'
             relationships = read_json(relationships_path) if relationships_path.exists() else None
-            path = build_atlas(workspace, args.output, relationships)
+            resources_path = root / 'data/sources/resources.json'
+            resources = read_json(resources_path) if resources_path.exists() else None
+            path = build_atlas(workspace, args.output, relationships, resources)
             print(f'Wrote offline source atlas to {path}; open it in a browser. No live collection is enabled.')
+        elif args.command == 'compare-sources':
+            from .media_assessment import comparison, markdown
+            pack = comparison(workspace, args.left, args.right, args.question)
+            if args.format == 'json': write_json(args.output, pack)
+            else:
+                args.output.parent.mkdir(parents=True, exist_ok=True)
+                args.output.write_text(markdown(pack), encoding='utf-8')
+            print(f'Wrote unreviewed media comparison to {args.output}; no outlet score generated.')
+        elif args.command == 'resources':
+            import json
+            path = root / 'data/sources/resources.json'
+            print(json.dumps(read_json(path) if path.exists() else {'profiles': []}, ensure_ascii=False, indent=2))
         elif args.command == 'coverage':
             data = build_coverage(workspace, read_json(root / 'data/coverage/lexicon.json'))
             write_json(args.output, data)

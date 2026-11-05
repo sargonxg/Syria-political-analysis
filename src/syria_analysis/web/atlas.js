@@ -807,7 +807,7 @@
   }
   const checked = [...new Set(data.sources.map((s) => s.checked_on))].sort();
   $("checked").textContent =
-    `Profiles reviewed ${checked.length === 1 ? checked[0] : checked[0] + " to " + checked.at(-1)}`;
+    `Profile reference dates ${checked.length === 1 ? checked[0] : checked[0] + " to " + checked.at(-1)}`;
   $("build-date").textContent =
     `Built ${date(data.built_at)} · Offline snapshot`;
   for (const [n, label] of [

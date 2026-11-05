@@ -1,0 +1,86 @@
+<section id="view-assessment" class="view" hidden>
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Compare reports</p>
+      <h2>Investigate political framing.</h2>
+    </div>
+    <button id="assessment-json">Export context JSON</button>
+  </div>
+  <p class="section-lede">
+    Compare a specific claim, publication stage and genre. Keep institutional
+    context, selected wording and your interpretation separate. This worksheet
+    creates no outlet ranking.
+  </p>
+  <label class="assessment-question"
+    >Comparison question<input
+      id="assessment-question"
+      maxlength="2000"
+      placeholder="How is the same political issue described?"
+  /></label>
+  <div class="assessment-selectors">
+    <label>Source A<select id="assessment-source-a"></select></label
+    ><label>Source B<select id="assessment-source-b"></select></label>
+  </div>
+  <div id="assessment-profiles" class="assessment-profiles"></div>
+  <p class="assessment-note">
+    Notes remain in this tab. Download before closing. Changing a selected
+    source clears that report's fields so earlier quotations cannot silently
+    move to another publisher.
+  </p>
+  <div id="assessment-reports" class="assessment-reports"></div>
+  <p id="assessment-lineage" role="status"></p>
+  <div class="assessment-conclusion">
+    <label
+      >Your interpretation<textarea
+        id="assessment-interpretation"
+        maxlength="10000"
+        rows="4"
+      ></textarea></label
+    ><label
+      >An alternative explanation<textarea
+        id="assessment-alternative"
+        maxlength="10000"
+        rows="3"
+      ></textarea></label
+    ><label
+      >What evidence is missing?<textarea
+        id="assessment-gaps"
+        maxlength="10000"
+        rows="3"
+      ></textarea>
+    </label>
+  </div>
+  <button id="assessment-markdown">Download comparison brief</button>
+  <p id="assessment-status" role="status"></p>
+</section>
+<section id="view-resources" class="view" hidden>
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Research infrastructure</p>
+      <h2>Data, methods and tools.</h2>
+    </div>
+    <button id="resources-json">Download resource directory</button>
+  </div>
+  <p class="section-lede">
+    Platforms, datasets and verification tools have a different role from
+    publishers. Access prerequisites, dated endpoint checks and rights stay
+    attached. These references are not live integrations.
+  </p>
+  <div id="resource-directory" class="resource-directory"></div>
+  <div class="resource-build">
+    <h3>Build locally or deploy a static research snapshot</h3>
+    <pre>
+python -m pip install -e .
+python scripts/build_showcase.py
+python -m http.server 8766 --bind 127.0.0.1 --directory dist
+
+policy-analysis compare-sources --left syria-direct --right sana \
+  --question "Your bounded comparison question" --output output/comparison.json</pre>
+    <a
+      href="https://github.com/sargonxg/Syria-political-analysis/blob/main/docs/media-assessment.md"
+      target="_blank"
+      rel="noreferrer"
+      >Contracts, pipeline and Cloudflare instructions ↗</a
+    >
+  </div>
+</section>

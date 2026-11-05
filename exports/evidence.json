@@ -275,6 +275,118 @@
       "url": "https://en.majalla.com/"
     },
     {
+      "id": "asharq-al-awsat",
+      "type": "source",
+      "label": "Asharq Al-Awsat",
+      "review_state": null,
+      "url": "https://english.aawsat.com/"
+    },
+    {
+      "id": "lorient-today",
+      "type": "source",
+      "label": "L’Orient Today / Groupe L’Orient-Le Jour",
+      "review_state": null,
+      "url": "https://today.lorientlejour.com/"
+    },
+    {
+      "id": "daraj",
+      "type": "source",
+      "label": "Daraj",
+      "review_state": null,
+      "url": "https://daraj.media/en/"
+    },
+    {
+      "id": "megaphone",
+      "type": "source",
+      "label": "Megaphone",
+      "review_state": null,
+      "url": "https://megaphone.news/"
+    },
+    {
+      "id": "mada-masr",
+      "type": "source",
+      "label": "Mada Masr",
+      "review_state": null,
+      "url": "https://www.madamasr.com/en/"
+    },
+    {
+      "id": "972mag",
+      "type": "source",
+      "label": "+972 Magazine",
+      "review_state": null,
+      "url": "https://www.972mag.com/"
+    },
+    {
+      "id": "times-of-israel",
+      "type": "source",
+      "label": "The Times of Israel",
+      "review_state": null,
+      "url": "https://www.timesofisrael.com/"
+    },
+    {
+      "id": "shafaq-news",
+      "type": "source",
+      "label": "Shafaq News",
+      "review_state": null,
+      "url": "https://shafaq.com/en"
+    },
+    {
+      "id": "kirkuknow",
+      "type": "source",
+      "label": "KirkukNow",
+      "review_state": null,
+      "url": "https://kirkuknow.com/en"
+    },
+    {
+      "id": "sanaa-center",
+      "type": "source",
+      "label": "Sana’a Center for Strategic Studies",
+      "review_state": null,
+      "url": "https://sanaacenter.org/"
+    },
+    {
+      "id": "ecfr",
+      "type": "source",
+      "label": "European Council on Foreign Relations",
+      "review_state": null,
+      "url": "https://ecfr.eu/"
+    },
+    {
+      "id": "merip",
+      "type": "source",
+      "label": "Middle East Research and Information Project",
+      "review_state": null,
+      "url": "https://www.merip.org/"
+    },
+    {
+      "id": "scpr",
+      "type": "source",
+      "label": "Syrian Center for Policy Research",
+      "review_state": null,
+      "url": "https://scpr-syria.org/"
+    },
+    {
+      "id": "sjac",
+      "type": "source",
+      "label": "Syria Justice and Accountability Centre",
+      "review_state": null,
+      "url": "https://syriaaccountability.org/"
+    },
+    {
+      "id": "airwars",
+      "type": "source",
+      "label": "Airwars",
+      "review_state": null,
+      "url": "https://airwars.org/"
+    },
+    {
+      "id": "bbc-arabic",
+      "type": "source",
+      "label": "BBC News Arabic / World Service",
+      "review_state": null,
+      "url": "https://www.bbc.com/arabic"
+    },
+    {
       "id": "doc-dc64b0d98ec3337d",
       "type": "document",
       "label": "Operational Update — Syria, September 2026",
