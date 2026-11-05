@@ -1,0 +1,4 @@
+# Snapshot identities cover exact UTF-8 bytes on every checkout platform.
+data/historical/** -text
+data/observations/** -text
+tests/fixtures/** -text

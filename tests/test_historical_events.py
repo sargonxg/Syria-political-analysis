@@ -78,7 +78,7 @@ class HistoricalEventsTests(unittest.TestCase):
             self.assertEqual(manifest["selection"]["retained_records"], 1)
             self.assertEqual(manifest["selection"]["excluded_whole_records"], 1)
             raw = ged.validate_snapshot(output)["raw_shards"][0]
-            saved = json.loads(ged._snapshot_file(output, raw).read_text())["records"][
+            saved = json.loads(ged._snapshot_file(output, raw).read_text(encoding="utf-8"))["records"][
                 0
             ]
             self.assertEqual(saved["attributes"], self.aggregate)
@@ -109,14 +109,14 @@ class HistoricalEventsTests(unittest.TestCase):
                 two = ged._snapshot_file(second, item)
                 self.assertEqual(one.read_bytes(), two.read_bytes())
             point = json.loads(
-                ged._snapshot_file(first, a["event_shards"][0]).read_text()
+                ged._snapshot_file(first, a["event_shards"][0]).read_text(encoding="utf-8")
             )["records"][0]
             self.assertEqual(set(point["attributes"]), set(ged.COMPACT_COLUMNS))
             self.assertNotIn("source_article", point["attributes"])
             raw_item = next(
                 item for item in a["raw_shards"] if item["path"] == point["raw_shard"]
             )
-            full = json.loads(ged._snapshot_file(first, raw_item).read_text())[
+            full = json.loads(ged._snapshot_file(first, raw_item).read_text(encoding="utf-8"))[
                 "records"
             ][0]
             self.assertEqual(point["id"], full["id"])
@@ -140,7 +140,7 @@ class HistoricalEventsTests(unittest.TestCase):
             marker.write_text("preserve")
             with self.assertRaises(ValueError):
                 self.snapshot(output)
-            self.assertEqual(marker.read_text(), "preserve")
+            self.assertEqual(marker.read_text(encoding="utf-8"), "preserve")
 
     def test_unpinned_archive_is_rejected_before_output_creation(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -183,7 +183,7 @@ class HistoricalEventsTests(unittest.TestCase):
             target.write_text("changed")
             with self.assertRaises(ValueError):
                 ged.build_static_bundle(root, output)
-            self.assertEqual(target.read_text(), "changed")
+            self.assertEqual(target.read_text(encoding="utf-8"), "changed")
 
     def test_official_receipts_and_codebook_hash_are_preserved(self):
         provenance = ROOT / ged.SNAPSHOT_DIRECTORY / "provenance"
@@ -191,7 +191,7 @@ class HistoricalEventsTests(unittest.TestCase):
         self.assertEqual(
             hashlib.sha256(codebook.read_bytes()).hexdigest(), ged.CODEBOOK_SHA256
         )
-        receipts = json.loads((provenance / "download-receipts.json").read_text())[
+        receipts = json.loads((provenance / "download-receipts.json").read_text(encoding="utf-8"))[
             "assets"
         ]
         archive = next(row for row in receipts if row["url"] == ged.ARCHIVE_URL)
@@ -201,7 +201,7 @@ class HistoricalEventsTests(unittest.TestCase):
         self.assertEqual(archive["bytes"], ged.ARCHIVE_BYTES)
         self.assertIn(
             "https://creativecommons.org/licenses/by/4.0/",
-            (provenance / "ucdp-downloads-index.html").read_text(),
+            (provenance / "ucdp-downloads-index.html").read_text(encoding="utf-8"),
         )
 
     def test_committed_real_snapshot_integrity_and_coverage(self):
