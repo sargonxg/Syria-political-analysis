@@ -4,7 +4,7 @@ Verified 5 November 2026. This change adds a browser-derived view to **Assess fr
 
 ## Behavior checked
 
-The diagram has three relationship types: selected publisher attribution, entered report passages, and named upstream reference. A blank worksheet has no report relationships. Publisher changes clear only that report's fields and trail. Selecting a quotation shows its exact entered text, line breaks, locator and separately labelled analyst note. HTML-like quotation text remains inert text.
+The diagram has three relationship types: selected publisher attribution, entered report passages, and named upstream reference. A blank worksheet has no report relationships. Selecting a genre alone immediately adds its entered report node; reverting to unknown removes it when no other material is entered. Publisher changes clear only that report's fields and trail. Selecting a quotation shows its exact entered text, line breaks, locator and separately labelled analyst note. HTML-like quotation text remains inert text.
 
 Repeated upstream URLs converge only after the existing normalization removes fragments and common tracking parameters. Distinct paths on one host remain distinct. Unsafe/empty URLs produce no reference node or edge. Original URL forms remain in the inspector and export. A shared reference does not establish independent corroboration.
 
@@ -14,7 +14,7 @@ Interpretation, alternative explanations and missing evidence stay in an unrevie
 
 - `PYTHONPATH=src .venv/bin/python -m unittest discover -s tests -v`: **67 tests passed**. The sandbox run used network permission for the private desk's in-memory TestClient. An earlier run without that permission stalled and was stopped; no desk implementation change was needed.
 - Corpus validation: **55 source profiles, 44 document references, 14 paraphrases, 14 navigation anchors, eight context themes and eight analytical lenses**. Seven political entities, six qualified assertion drafts and 18 concepts validate.
-- `tests/media-browser.js`: **50 assertions passed** at 1440px and 390px, with no uncaught errors, page overflow or external requests. Checks cover keyboard selection, shared/distinct/unsafe references, exact/inert quotation text, stale-selection clearing, publisher changes and unchanged export provenance, including the existing asynchronous-hash race test.
+- `tests/media-browser.js`: **54 assertions passed** at 1440px and 390px, with no uncaught errors, page overflow or external requests. Checks cover genre-only live updates, keyboard selection, shared/distinct/unsafe references, exact/inert quotation text, stale-selection clearing, publisher changes and unchanged export provenance, including the existing asynchronous-hash race test.
 - The downloaded browser JSON validates against `schemas/media_assessment.schema.json`.
 - Axe WCAG 2 A/AA and WCAG 2.1 AA checks on the comparison view: **zero violations and zero incomplete checks**, in light/dark themes at both widths. This is scoped automated evidence, not a complete accessibility certification.
 - Python lint/format checks, JavaScript syntax and Prettier checks pass. `git diff --check` passes.

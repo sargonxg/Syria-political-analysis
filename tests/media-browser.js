@@ -19,6 +19,23 @@ async function testMedia(page, baseURL = "http://127.0.0.1:8766") {
         (await page.locator(".lineage-edge").count()) === 0,
       "An empty worksheet draws no invented report relationships",
     );
+    const genre = page.locator("#assessment-reports select").nth(0);
+    await genre.selectOption("analysis");
+    ok(
+      (await page.locator('[data-node-kind="report"]').count()) === 1 &&
+        (await page
+          .locator('[data-relation="entered_attribution"]')
+          .count()) === 1 &&
+        (await page.locator('[data-node-kind="quotations"]').count()) === 0,
+      "Selecting a genre alone immediately creates its entered report node",
+    );
+    await genre.selectOption("unknown");
+    ok(
+      (await page.locator('[data-node-kind="report"]').count()) === 0 &&
+        (await page.locator(".lineage-edge").count()) === 0 &&
+        !(await page.locator("#lineage-viewport").isVisible()),
+      "Reverting the only entered genre immediately removes the report trail",
+    );
     await page
       .locator("#assessment-question")
       .fill("How is this synthetic claim described?");

@@ -565,7 +565,10 @@
         option.value = value;
       }
       genre.value = report.genre;
-      genre.addEventListener("change", () => (report.genre = genre.value));
+      genre.addEventListener("change", () => {
+        report.genre = genre.value;
+        lineage();
+      });
       input(
         form,
         "Why this report belongs in the comparison",
