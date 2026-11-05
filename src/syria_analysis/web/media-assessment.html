@@ -29,6 +29,56 @@
   </p>
   <div id="assessment-reports" class="assessment-reports"></div>
   <p id="assessment-lineage" role="status"></p>
+  <section
+    id="assessment-lineage-view"
+    class="lineage-view"
+    aria-labelledby="lineage-title"
+  >
+    <div class="lineage-heading">
+      <h3 id="lineage-title">Entered evidence trail</h3>
+      <button id="lineage-clear" type="button" disabled>Clear selection</button>
+    </div>
+    <p id="lineage-help" class="lineage-help">
+      Select a record to inspect its wording and scope. Lines show only entered
+      attribution and references; they do not verify a quotation or its claims.
+      On small screens, scroll the diagram or use the text list below.
+    </p>
+    <p id="lineage-empty" class="lineage-empty">
+      Add a report URL, selected passage or upstream reference to trace this
+      comparison. Nothing is fetched or inferred.
+    </p>
+    <div
+      id="lineage-viewport"
+      class="lineage-viewport"
+      role="region"
+      aria-label="Evidence trail diagram, scroll horizontally on small screens"
+      aria-describedby="lineage-help"
+      tabindex="0"
+      hidden
+    >
+      <div id="lineage-canvas" class="lineage-canvas">
+        <svg id="lineage-edges" aria-hidden="true"></svg>
+        <div id="lineage-nodes"></div>
+      </div>
+    </div>
+    <div
+      id="lineage-inspector"
+      class="lineage-inspector"
+      role="region"
+      aria-label="Selected evidence trail record"
+      aria-live="polite"
+      hidden
+    ></div>
+    <details id="lineage-text" class="lineage-text" hidden>
+      <summary>Read the connections as text</summary>
+      <ul id="lineage-connections"></ul>
+      <p>
+        Shared means the same entered URL after removing its fragment and common
+        tracking parameters. It does not establish independent corroboration.
+        Analyst interpretation has no evidence-support link assigned.
+      </p>
+    </details>
+  </section>
   <div class="assessment-conclusion">
     <label
       >Your interpretation<textarea

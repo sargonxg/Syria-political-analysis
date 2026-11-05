@@ -114,7 +114,10 @@
     field.value = value;
     field.maxLength = kind === "textarea" ? 2000 : 1200;
     if (kind === "textarea") field.rows = 3;
-    field.addEventListener("input", () => change(field.value));
+    field.addEventListener("input", () => {
+      change(field.value);
+      lineage();
+    });
     return field;
   }
   function renderProfiles() {
@@ -155,7 +158,383 @@
     $("assessment-lineage").textContent = same
       ? "Both reports name the same upstream URL. This is a disclosed shared reference, not independent corroboration."
       : "Upstream dependence remains an explicit research question. Two publishers do not automatically mean two independent evidence lineages.";
+    renderLineage();
   }
+  let selectedTrailId = null;
+  const trailPositions = [70, 235],
+    trailWidth = 184,
+    trailHeight = 88;
+  function trailModel() {
+    const nodes = [],
+      edges = [],
+      publishers = new Map(),
+      references = new Map();
+    reports.forEach((report, i) => {
+      const source = sourceIndex.get(report.source_id);
+      if (!source) return;
+      const label = "Report " + (i === 0 ? "A" : "B"),
+        publisherId = "publisher:" + source.id,
+        reportId = "report:" + i + ":" + source.id,
+        quotations = dimensions
+          .map(([key, title]) => ({ title, ...report.evidence[key] }))
+          .filter((row) => row.passage.trim());
+      if (!publishers.has(publisherId)) {
+        const publisher = {
+          id: publisherId,
+          kind: "publisher",
+          title: source.name,
+          caption: "Selected publisher",
+          x: 12,
+          y: trailPositions[i],
+          source,
+        };
+        publishers.set(publisherId, publisher);
+        nodes.push(publisher);
+      } else publishers.get(publisherId).y = 152;
+      const hasMaterial =
+        report.url.trim() ||
+        report.published_at.trim() ||
+        report.upstream_url.trim() ||
+        report.selection_basis.trim() ||
+        report.genre !== "unknown" ||
+        dimensions.some(([key]) =>
+          Object.values(report.evidence[key]).some((value) => value.trim()),
+        );
+      if (!hasMaterial) return;
+      nodes.push({
+        id: reportId,
+        kind: "report",
+        title: label,
+        caption: report.url.trim()
+          ? safe(report.url)?.hostname || "URL needs correction"
+          : "URL not supplied",
+        x: 244,
+        y: trailPositions[i],
+        label,
+        source,
+        report,
+      });
+      edges.push({
+        from: publisherId,
+        to: reportId,
+        relation: "entered_attribution",
+        text: source.name + " → " + label + ": selected publisher attribution.",
+      });
+      if (quotations.length) {
+        const id = "quotations:" + i + ":" + source.id;
+        nodes.push({
+          id,
+          kind: "quotations",
+          title:
+            quotations.length +
+            " entered quotation" +
+            (quotations.length === 1 ? "" : "s"),
+          caption: label + " · select to read",
+          x: 476,
+          y: trailPositions[i],
+          label,
+          source,
+          report,
+          quotations,
+        });
+        edges.push({
+          from: reportId,
+          to: id,
+          relation: "entered_passages",
+          text:
+            label +
+            " → entered quotations: user-supplied wording and locators.",
+        });
+      }
+      const upstream = canonical(report.upstream_url);
+      if (!upstream) return;
+      if (!references.has(upstream))
+        references.set(upstream, {
+          id: "reference:" + upstream,
+          kind: "reference",
+          title: new URL(upstream).hostname,
+          x: 708,
+          y: trailPositions[i],
+          url: upstream,
+          entered: [],
+        });
+      const reference = references.get(upstream);
+      reference.entered.push({ label, url: report.upstream_url });
+      reference.caption =
+        reference.entered.length === 2
+          ? "Shared entered reference"
+          : "Named by " + label;
+      if (reference.entered.length === 2) reference.y = 152;
+      edges.push({
+        from: reportId,
+        to: reference.id,
+        relation: "named_upstream",
+        route: i === 0 ? "below" : "above",
+        text: label + " → " + upstream + ": entered upstream reference.",
+      });
+    });
+    nodes.push(...references.values());
+    const interpretation = $("assessment-interpretation").value,
+      alternative = $("assessment-alternative").value,
+      gaps = $("assessment-gaps").value;
+    if ([interpretation, alternative, gaps].some((text) => text.trim()))
+      nodes.push({
+        id: "analyst-reading",
+        kind: "interpretation",
+        title: "Analyst interpretation",
+        caption: "Unreviewed · no support link",
+        x: 476,
+        y: 375,
+        interpretation,
+        alternative,
+        gaps,
+      });
+    return { nodes, edges };
+  }
+  function inspectTrail(node) {
+    const box = $("lineage-inspector");
+    box.replaceChildren();
+    box.hidden = !node;
+    if (!node) return;
+    el("h4", node.title, box);
+    if (node.kind === "publisher") {
+      el(
+        "p",
+        "Selected source profile; this is not an ownership or control edge.",
+        box,
+      );
+      link("Publisher profile ↗", node.source.url, box);
+      el("p", "Institutional profile check: " + node.source.checked_on, box);
+    } else if (node.kind === "report") {
+      el(
+        "p",
+        "User-attributed to " + node.source.name + "; no report was fetched.",
+        box,
+      );
+      if (!link("Open entered report ↗", node.report.url, box))
+        el("p", "Public report URL not supplied or needs correction.", box);
+      el("p", "Publication: " + (node.report.published_at || "Unknown"), box);
+      el("p", "Genre: " + node.report.genre, box);
+      if (node.report.selection_basis.trim())
+        el("p", "Selection: " + node.report.selection_basis, box);
+    } else if (node.kind === "quotations") {
+      el(
+        "p",
+        node.label +
+          " · " +
+          node.source.name +
+          ". These passages were entered by the researcher; exactness and support have not been verified.",
+        box,
+      );
+      node.quotations.forEach((row) => {
+        el("h5", row.title, box);
+        el("blockquote", row.passage, box);
+        el(
+          "p",
+          "Locator: " + (row.locator || "Not supplied"),
+          box,
+          "lineage-locator",
+        );
+        if (row.note.trim())
+          el("p", "Analyst note: " + row.note, box, "lineage-analyst-note");
+      });
+    } else if (node.kind === "reference") {
+      el(
+        "p",
+        node.entered.length === 2
+          ? "Both reports name this upstream URL. Shared reference does not establish independent corroboration or a shared owner."
+          : "A report names this upstream URL. The relationship is declared in the worksheet, not independently verified.",
+        box,
+      );
+      link("Canonical reference ↗", node.url, box);
+      node.entered.forEach((row) =>
+        el("p", row.label + " entered: " + row.url, box),
+      );
+    } else {
+      el(
+        "p",
+        "Your unreviewed reading of the comparison, separate from publisher wording. No evidence-support relationship has been assigned.",
+        box,
+      );
+      for (const [title, value] of [
+        ["Interpretation", node.interpretation],
+        ["Alternative explanation", node.alternative],
+        ["Missing evidence", node.gaps],
+      ])
+        if (value.trim()) {
+          el("h5", title, box);
+          el("p", value, box, "lineage-analyst-note");
+        }
+    }
+  }
+  function selectTrail(model, id) {
+    selectedTrailId = id;
+    $("lineage-clear").disabled = !id;
+    $("lineage-nodes")
+      .querySelectorAll("button")
+      .forEach((button) => {
+        button.setAttribute(
+          "aria-pressed",
+          String(button.dataset.nodeId === id),
+        );
+      });
+    $("lineage-edges")
+      .querySelectorAll("path")
+      .forEach((path) => {
+        const related = path.dataset.from === id || path.dataset.to === id;
+        path.classList.toggle("is-related", !!id && related);
+        path.classList.toggle("is-muted", !!id && !related);
+      });
+    inspectTrail(model.nodes.find((node) => node.id === id));
+  }
+  function renderLineage() {
+    const model = trailModel(),
+      visible = model.nodes.some((node) => node.kind !== "publisher"),
+      authored = model.nodes.some((node) => node.kind === "interpretation"),
+      height = authored ? 480 : 345,
+      svg = $("lineage-edges"),
+      index = new Map(model.nodes.map((node) => [node.id, node]));
+    $("lineage-empty").hidden = visible;
+    $("lineage-viewport").hidden = !visible;
+    $("lineage-text").hidden = !visible;
+    $("lineage-canvas").style.height = height + "px";
+    svg.replaceChildren();
+    svg.setAttribute("viewBox", "0 0 908 " + height);
+    function svgEl(tag, attributes, parent = svg) {
+      const element = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        tag,
+      );
+      for (const [key, value] of Object.entries(attributes))
+        element.setAttribute(key, value);
+      parent.append(element);
+      return element;
+    }
+    const marker = svgEl(
+      "marker",
+      {
+        id: "lineage-arrow",
+        viewBox: "0 0 10 10",
+        refX: "9",
+        refY: "5",
+        markerWidth: "5",
+        markerHeight: "5",
+        orient: "auto-start-reverse",
+      },
+      svgEl("defs", {}),
+    );
+    svgEl("polygon", { points: "0,0 10,5 0,10", fill: "var(--edge)" }, marker);
+    model.edges.forEach((edge) => {
+      const from = index.get(edge.from),
+        to = index.get(edge.to),
+        endY = to.y + trailHeight / 2;
+      let d =
+        "M " +
+        (from.x + trailWidth + 3) +
+        " " +
+        (from.y + trailHeight / 2) +
+        " L " +
+        (to.x - 5) +
+        " " +
+        endY;
+      if (edge.route) {
+        const startX = from.x + trailWidth / 2,
+          startY =
+            edge.route === "below" ? from.y + trailHeight + 3 : from.y - 3,
+          bendY =
+            to.entered.length === 2 ? endY : edge.route === "below" ? 185 : 207;
+        d =
+          "M " +
+          startX +
+          " " +
+          startY +
+          " C " +
+          startX +
+          " " +
+          bendY +
+          ", " +
+          (to.x - 45) +
+          " " +
+          bendY +
+          ", " +
+          (to.x - 5) +
+          " " +
+          endY;
+      }
+      const path = svgEl("path", {
+        d,
+        "marker-end": "url(#lineage-arrow)",
+        class: "lineage-edge",
+      });
+      path.dataset.from = edge.from;
+      path.dataset.to = edge.to;
+      path.dataset.relation = edge.relation;
+    });
+    const box = $("lineage-nodes");
+    box.replaceChildren();
+    [
+      "Publisher",
+      "Entered report",
+      "Selected wording",
+      "Named reference",
+    ].forEach((title, i) => {
+      const label = el("span", title, box, "lineage-stage");
+      label.style.left = 12 + i * 232 + "px";
+    });
+    model.nodes.forEach((node) => {
+      const button = el(
+        "button",
+        undefined,
+        box,
+        "lineage-node lineage-" + node.kind,
+      );
+      button.type = "button";
+      button.style.left = node.x + "px";
+      button.style.top = node.y + "px";
+      button.dataset.nodeId = node.id;
+      button.dataset.nodeKind = node.kind;
+      button.setAttribute("aria-pressed", "false");
+      button.setAttribute("aria-controls", "lineage-inspector");
+      el("strong", node.title, button);
+      el("small", node.caption, button);
+      button.addEventListener("click", () =>
+        selectTrail(model, selectedTrailId === node.id ? null : node.id),
+      );
+    });
+    if (authored) {
+      const notice = el(
+        "p",
+        "Analyst-authored, shown separately. No support link is asserted.",
+        box,
+        "lineage-authored",
+      );
+      notice.style.top = "390px";
+    }
+    const list = $("lineage-connections");
+    list.replaceChildren();
+    model.edges.forEach((edge) => el("li", edge.text, list));
+    if (!model.edges.length)
+      el("li", "No report relationships entered yet.", list);
+    if (authored)
+      el(
+        "li",
+        "Analyst interpretation is a separate unreviewed worksheet note with no support edge.",
+        list,
+      );
+    selectTrail(
+      model,
+      visible && index.has(selectedTrailId) ? selectedTrailId : null,
+    );
+  }
+  $("lineage-clear").addEventListener("click", () =>
+    selectTrail(trailModel(), null),
+  );
+  for (const id of [
+    "assessment-interpretation",
+    "assessment-alternative",
+    "assessment-gaps",
+  ])
+    $(id).addEventListener("input", lineage);
   function renderReports() {
     const box = $("assessment-reports");
     box.replaceChildren();
@@ -200,7 +579,6 @@
         report.upstream_url,
         (v) => {
           report.upstream_url = v;
-          lineage();
         },
       );
       dimensions.forEach(([key, title, help]) => {

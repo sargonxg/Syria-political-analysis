@@ -14,6 +14,12 @@ python -m http.server 8766 --bind 127.0.0.1 --directory dist
 
 Open `http://127.0.0.1:8766/sources/`, then **Assess framing**. Choose two publishers, enter original URLs and selected passages, and keep an interpretation, alternative explanation and missing evidence separately. A repeated upstream URL is flagged as a shared entered reference, not independent corroboration. Switching a publisher clears only that report's fields; prior quotations cannot silently inherit a new attribution. Notes remain in the tab until an explicit download. No browser API calls or automatic article scraping occur.
 
+The **Entered evidence trail** draws only the relationships in your worksheet: selected publisher → entered report, report → entered quotations, and report → named upstream URL. Select a record with a pointer or Tab and Enter/Space to inspect exact wording, locators and original URL entries. Repeated upstream URLs share one node after fragments and common tracking parameters are removed; distinct paths remain distinct. The text connection list provides the same relationships without interpreting a diagram. On narrow screens the diagram scrolls within its own panel.
+
+Your interpretation appears as a separate, unreviewed node. It has no evidence-support edge: the current worksheet does not record which individual claim supports an interpretation. A report-level upstream URL is not silently assigned to each quotation either. Empty fields produce no quotation/reference relationship, and changing a publisher removes that report's entered trail. The diagram is a derived view; the `media-framing-assessment/1` export contract is unchanged and remains the source of the entered records.
+
+See [0.3.1 verification and limits](entered-trail-verification.md) for the tested provenance, keyboard, mobile and export behavior.
+
 The source directory includes recorded first-party disclosures and partial institutional evidence. Funding/ownership unknowns remain unknown. No political-bias, credibility or reliability score is calculated. An omitted question in a selected report does not establish intent or the character of an entire outlet.
 
 ## AI-readable comparison contract

@@ -1,11 +1,13 @@
 import json
 import tempfile
+import tomllib
 import unittest
 from copy import deepcopy
 from pathlib import Path
 
 from jsonschema import Draft202012Validator, FormatChecker
 
+from syria_analysis import __version__
 from syria_analysis.cli import main
 from syria_analysis.core import load_workspace
 from syria_analysis.media_assessment import comparison, markdown, validate_assessment
@@ -19,6 +21,13 @@ class MediaAssessmentTests(unittest.TestCase):
         self.pack = comparison(
             self.workspace, "syria-direct", "sana", "How is the selected claim framed?"
         )
+
+    def test_release_metadata_agrees_without_changing_the_assessment_contract(self):
+        project = tomllib.loads((ROOT / "pyproject.toml").read_text())
+        manifest = json.loads((ROOT / "data/manifest.json").read_text())
+        self.assertEqual(__version__, project["project"]["version"])
+        self.assertEqual(__version__, manifest["toolkit_version"])
+        self.assertEqual(self.pack["format"], "media-framing-assessment/1")
 
     def test_schema_preserves_original_profiles_without_rating_or_false_review(self):
         schema = json.loads((ROOT / "schemas/media_assessment.schema.json").read_text())

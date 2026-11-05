@@ -2,6 +2,8 @@
 
 This public repository contains code, documentation and public-source research. You can read, clone and run it without an account or paid API. It does **not** provide an anonymously accessible hosted desk. Your own running desk requires a private key; anyone holding that key can access all its cases.
 
+To explore the public directory and compare reports without private case storage, use the [offline source-comparison application](media-assessment.md#use-the-offline-application). Its entered evidence trail and JSON/Markdown downloads need no access key. The steps below set up the separate private notebook.
+
 ## 1. Install locally
 
 Use Python 3.12 and Git. No Docker or cloud account is needed for this route:

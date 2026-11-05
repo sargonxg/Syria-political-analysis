@@ -6,7 +6,7 @@ Build a research notebook that keeps sources, exact passages, attributed claims 
 
 ![Actual source atlas: publisher records, research themes and qualified institutional context](docs/images/source-atlas-desktop.png)
 
-Navigate 55 publisher and institutional profiles. Compare specific reports across attribution, framing, support, information lineage, scope and language. The worksheet exports selected passages and a separate analyst assessment; it does not turn ownership or funding into a political-bias score. Eight data/research resources retain their access prerequisites. [Comparison on mobile](docs/images/source-comparison-mobile.png).
+Navigate 55 publisher and institutional profiles. Compare specific reports across attribution, framing, support, information lineage, scope and language. Select a record in the entered evidence trail to inspect quotations, locators and shared upstream references, with analyst interpretation shown separately. The worksheet exports selected passages and a separate analyst assessment; it does not turn ownership or funding into a political-bias score. Eight data/research resources retain their access prerequisites. [Comparison on mobile](docs/images/source-comparison-mobile.png).
 
 ![Two selected publisher profiles with attributed ownership/funding notes and explicit limits](docs/images/source-comparison-desktop.png)
 
