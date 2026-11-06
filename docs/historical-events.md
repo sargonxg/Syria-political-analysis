@@ -1,7 +1,7 @@
 # Historical event provenance and refresh
 
-The historical atlas uses a finite, redistributable selection of **113,656 real
-UCDP GED 26.1 records**, covering provider years 2011–2025. It is a historical
+The historical atlas uses a finite, redistributable selection of **120,576 real
+UCDP GED 26.1 records**, covering provider years 2000–2025. It is a historical
 research collection, not a current operational feed or a complete inventory of
 violence. No model-generated observations or synthetic padding are included.
 
@@ -40,27 +40,27 @@ sharding. Retained source values are unchanged; provider endorsement is not impl
 
 ## Selection and geographic coding
 
-The selection uses the provider's `year` field from 2011 through 2025 and exact
+The selection uses the provider's `year` field from 2000 through 2025 and exact
 country labels below. Lookup codes support navigation; they do not change evidence
 labels or assert boundaries or legal status.
 
 | Exact provider label | Lookup code | Retained records |
 | --- | --- | ---: |
-| Syria | SY | 88,279 |
-| Iraq | IQ | 6,022 |
-| Lebanon | LB | 1,498 |
-| Israel | IL | 9,176 |
-| Jordan | JO | 7 |
-| Egypt | EG | 806 |
-| Yemen (North Yemen) | YE | 5,857 |
-| Iran | IR | 517 |
-| Turkey | TR | 1,494 |
+| Syria | SY | 88,284 |
+| Iraq | IQ | 9,030 |
+| Lebanon | LB | 1,791 |
+| Israel | IL | 11,187 |
+| Jordan | JO | 8 |
+| Egypt | EG | 824 |
+| Yemen (North Yemen) | YE | 6,103 |
+| Iran | IR | 687 |
+| Turkey | TR | 2,662 |
 
 The provider `Israel` category includes locations coded in Gaza and the West Bank.
 There is no separately invented country series. Inspect original `country`,
 `adm_1`, `adm_2`, location and precision fields before making geographic comparisons.
 
-Of 113,783 finite regional candidates, 127 entire records were excluded by
+Of 120,936 finite regional candidates, 360 entire records were excluded by
 publication scope. A decoded screening view is checked across every source field;
 the original retained field values are never redacted. The public manifest gives
 the method and count without publishing excluded text. The archive and provenance
@@ -82,10 +82,10 @@ aggregate reporting not fully disaggregated; 1 identifies an individual event.
 `type_of_violence` retains state-based (1), non-state (2) and one-sided (3) coding.
 
 **Low, best and high are provider estimates, not confidence intervals.** There
-are 664 observations where they are not ordered. Their exact values are preserved
-and flagged `provider_estimates_not_ordered`. Of these, 93 have aggregate reporting
-and 571 do not; the codebook's discussion of aggregate subtraction does not explain
-every individual case. No blanket cause is inferred. There are 1,924 aggregate
+are 683 observations where they are not ordered. Their exact values are preserved
+and flagged `provider_estimates_not_ordered`. The codebook's discussion of aggregate
+subtraction does not explain every individual case; no blanket cause is inferred.
+There are 2,099 aggregate
 records overall, independently flagged `aggregate_reporting`.
 
 `code_status=Clear` is the provider's coding status, not a new review or guarantee
@@ -95,12 +95,12 @@ no political allegiance, control or confidence score is inferred.
 
 ## File and integration contract
 
-The snapshot is `data/historical/ucdp-ged-26.1/`. It contains `manifest.json`, 228
-compact parts under `events/`, 228 matching full parts under `events-raw/`, and
+The snapshot is `data/historical/ucdp-ged-26.1/`. It contains `manifest.json`, 297
+compact parts under `events/`, 297 matching full parts under `events-raw/`, and
 archival-only `provenance/`. Country/year parts are sorted by numeric provider ID.
 Every source JSON asset is at most **1,572,864 bytes**; the actual largest is
-1,572,830 bytes. Source compact records total 92,641,480 bytes; full records total
-216,297,693 bytes. These immutable source parts remain uncompressed in the
+1,572,830 bytes. Source compact records total 98,161,044 bytes; full records total
+228,461,716 bytes. These immutable source parts remain uncompressed in the
 repository, independently of the smaller static hosting package.
 
 `build_static_bundle(repository: Path, output: Path)` in
@@ -172,3 +172,14 @@ PYTHONPATH=src .venv/bin/python -m unittest discover -s tests -p test_historical
 
 The small test fixture contains nine verbatim provider rows, attributed to this
 release. Deliberately invalid in-memory test cases are never included in served data.
+
+## Coverage expansion recorded on 2026-11-06
+
+The same pinned official release was expanded from provider years 2011–2025 to
+2000–2025. This added 6,920 retained records; no existing observation was rewritten.
+All 456 prior compact/full source parts were checked byte-for-byte against their
+existing manifest hashes and retained unchanged. The new source manifest SHA-256 is
+`522512b06f95616b86aa0448da0505aae6f2106d007efe3ae7f264ee0c0f24b0`.
+Earlier dated verification receipts describe the earlier coverage, not a rerun of
+the expanded snapshot. The [semantic catalog](semantic-catalog.md) adds bounded
+navigation and lazy field alignment while reusing these immutable records.

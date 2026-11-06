@@ -330,29 +330,31 @@ class HistoricalEventsTests(unittest.TestCase):
     def test_committed_real_snapshot_integrity_and_coverage(self):
         manifest = ged.validate_snapshot(ROOT / ged.SNAPSHOT_DIRECTORY)
         self.assertEqual(manifest["selection"]["source_rows"], 417968)
-        self.assertEqual(manifest["selection"]["scope_candidates"], 113783)
-        self.assertEqual(manifest["selection"]["retained_records"], 113656)
-        self.assertEqual(manifest["selection"]["excluded_whole_records"], 127)
-        self.assertEqual(len(manifest["event_shards"]), 228)
-        self.assertEqual(len(manifest["raw_shards"]), 228)
+        self.assertEqual(manifest["selection"]["scope_candidates"], 120936)
+        self.assertEqual(manifest["selection"]["retained_records"], 120576)
+        self.assertEqual(manifest["selection"]["excluded_whole_records"], 360)
+        self.assertEqual(manifest["selection"]["provider_year_start"], 2000)
+        self.assertEqual(manifest["selection"]["provider_year_end"], 2025)
+        self.assertEqual(len(manifest["event_shards"]), 297)
+        self.assertEqual(len(manifest["raw_shards"]), 297)
         self.assertEqual(
             {row["code"]: row["event_count"] for row in manifest["countries"]},
             {
-                "SY": 88279,
-                "IQ": 6022,
-                "LB": 1498,
-                "IL": 9176,
-                "JO": 7,
-                "EG": 806,
-                "YE": 5857,
-                "IR": 517,
-                "TR": 1494,
+                "SY": 88284,
+                "IQ": 9030,
+                "LB": 1791,
+                "IL": 11187,
+                "JO": 8,
+                "EG": 824,
+                "YE": 6103,
+                "IR": 687,
+                "TR": 2662,
             },
         )
         self.assertEqual(
-            manifest["quality_flag_counts"]["provider_estimates_not_ordered"], 664
+            manifest["quality_flag_counts"]["provider_estimates_not_ordered"], 683
         )
-        self.assertEqual(manifest["quality_flag_counts"]["aggregate_reporting"], 1924)
+        self.assertEqual(manifest["quality_flag_counts"]["aggregate_reporting"], 2099)
         self.assertLessEqual(
             max(
                 row["bytes"]

@@ -4,7 +4,13 @@ Explore historical conflict data and build source-qualified policy context. Keep
 
 **[Historical research atlas](docs/historical-atlas.md)** · [Real worked selections](examples/historical-research/) · [Data contracts](schemas/research_selection.schema.json)
 
-Explore **113,656 UCDP GED records for 2011–2025** and **15,272 annual World Bank values** across 32 indicators. A linked map and timeline, recorded-sides view and exact source inspector let you investigate a geography or period, inspect precision and export a bounded research selection. Compact map partitions load first; all 49 original event fields load on selection. Annual series retain units, missing years and source qualifications.
+Explore **120,576 UCDP GED records for 2000–2025** and **15,272 annual World Bank values** across 32 indicators. A linked map and timeline, recorded-sides view and exact source inspector let you investigate a geography or period, inspect precision and export a bounded research selection. Compact map partitions load first; all 49 original event fields load on selection. Annual series retain units, missing years and source qualifications.
+
+The [semantic catalog](docs/semantic-catalog.md) adds five scoped vocabulary lenses, a 2,048-record navigation sample and 188 lazy country/year indexes. PROV-O, SKOS, OWL-Time and GeoSPARQL expose actual source fields; the SOSA/SSN lens uses a concrete annual World Bank result. These are field-navigation alignments, without automatic political inference or a claim of full standards compliance.
+
+The [read-only research database](cloudflare/README.md) adds indexed local SQLite and optional Cloudflare D1 queries, with original fields, source manifests and resumable imports. Query a country, interval, recorded side and precision; inspect the result before preparing a bounded research context. The [lens guide](docs/atlas-lenses.md) explains each mapping and its limits.
+
+![Actual five-lens view of 2,048 source-linked navigation records](docs/images/historical-atlas-lenses.png)
 
 ![Historical research atlas using actual provider records](docs/images/historical-atlas-desktop.png)
 

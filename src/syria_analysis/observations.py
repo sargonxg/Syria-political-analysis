@@ -28,6 +28,7 @@ def build_observation_atlas(repository: Path, output: Path):
     """No network collection or private cases occur during a static build."""
     from .country_context import build_static_bundle as context_bundle
     from .historical_events import build_static_bundle as events_bundle
+    from .semantic_catalog import build_semantic_catalog
 
     repository, output = repository.resolve(), output.resolve()
     output.mkdir(parents=True, exist_ok=True)
@@ -80,6 +81,7 @@ def build_observation_atlas(repository: Path, output: Path):
         repository / "ontology/observations.jsonld",
         output / "data/observation-vocabulary.jsonld",
     )
+    manifest["semantic_catalog"] = build_semantic_catalog(repository, output, manifest)
     _write(output / "data/manifest.json", manifest)
     return manifest
 

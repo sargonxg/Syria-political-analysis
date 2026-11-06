@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "created_at": "2026-11-02T16:05:37.068108Z",
-  "checked_on": "2026-11-05",
+  "checked_on": "2026-11-06",
   "publisher": "Giulio Catanzariti — independent research project",
   "automatic_refresh": false,
   "counts": {
@@ -26,7 +26,7 @@
     "edges": 137
   },
   "last_feed_collection_at": "2026-11-02T17:12:14.422757Z",
-  "toolkit_version": "0.4.1",
+  "toolkit_version": "0.5.0",
   "country_registry": "data/countries.json",
   "default_country": "SY",
   "region": "Middle East",
@@ -56,9 +56,9 @@
   "check_calendar": "UTC",
   "historical_research": {
     "event_dataset": "UCDP GED 26.1",
-    "event_records": 113656,
+    "event_records": 120576,
     "event_years": [
-      2011,
+      2000,
       2025
     ],
     "event_country_categories": 9,
@@ -68,9 +68,15 @@
     "economy_count": 10,
     "formats": [
       "policy-observation-atlas/1",
-      "policy-research-selection/1"
+      "policy-research-selection/1",
+      "policy-semantic-catalog/1",
+      "policy-semantic-graph/1",
+      "policy-semantic-partition/1"
     ],
     "automatic_refresh": false,
-    "scope": "Separate attributed data layers; not reviewed political assertions or a live feed."
+    "scope": "Separate attributed data layers; not reviewed political assertions or a live feed.",
+    "semantic_lenses": 5,
+    "navigation_record_nodes": 2048,
+    "event_country_year_partitions": 188
   }
 }

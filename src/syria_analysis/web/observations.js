@@ -27,6 +27,33 @@ const state = {
   selectedFull: null,
   selectedError: "",
   query: "",
+  actor: "",
+  mode: "static",
+  database: {
+    configured: false,
+    ready: false,
+    base: "",
+    matched: 0,
+    nextCursor: null,
+    cursor: null,
+    history: [],
+    snapshot: null,
+  },
+  catalog: null,
+  catalogPromise: null,
+  catalogError: "",
+  semanticGraph: null,
+  semanticLoading: false,
+  semanticError: "",
+  semanticRows: [],
+  lens: "prov-o",
+  lensSelection: null,
+  lensSearch: "",
+  lensPage: 0,
+  lensRows: [],
+  lensHitGrid: new Map(),
+  lensDirty: true,
+  selectedIndicator: null,
   category: "",
   precision: "",
   order: "newest",
@@ -91,7 +118,12 @@ function publicLink(url, label) {
   label = label.replace(/\s*↗/g, "");
   try {
     const target = new URL(url);
-    if (!["https:", "http:"].includes(target.protocol))
+    if (
+      !["https:", "http:"].includes(target.protocol) ||
+      target.username ||
+      target.password ||
+      /[\s\u0000-\u001f\u007f]/.test(url)
+    )
       return element("span", label);
     const link = element("a", label);
     link.href = target.href;
@@ -153,8 +185,7 @@ async function decodeGzip(bytes, expected, signal) {
   signal?.addEventListener("abort", onAbort, { once: true });
   try {
     while (true) {
-      if (signal?.aborted)
-        throw new DOMException("Cancelled", "AbortError");
+      if (signal?.aborted) throw new DOMException("Cancelled", "AbortError");
       const { value, done } = await reader.read();
       if (done) break;
       length += value.byteLength;
@@ -166,8 +197,7 @@ async function decodeGzip(bytes, expected, signal) {
       }
       chunks.push(value);
     }
-    if (signal?.aborted)
-      throw new DOMException("Cancelled", "AbortError");
+    if (signal?.aborted) throw new DOMException("Cancelled", "AbortError");
   } catch (error) {
     await reader.cancel().catch(() => {});
     if (error.name === "AbortError") throw error;
@@ -228,7 +258,9 @@ async function fetchJSON(path, signal, cache = "force-cache", expected = null) {
     throw new Error(`Unsupported source encoding: ${expected.encoding}.`);
   let value;
   try {
-    value = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(jsonBytes));
+    value = JSON.parse(
+      new TextDecoder("utf-8", { fatal: true }).decode(jsonBytes),
+    );
   } catch {
     throw new Error(
       "The requested asset is not valid JSON. An authentication page or incomplete build may have been returned.",
@@ -402,6 +434,8 @@ function clearSelected() {
   state.selected = null;
   state.selectedFull = null;
   state.selectedError = "";
+  state.selectedIndicator = null;
+  state.lensSelection = null;
   renderInspector();
 }
 
@@ -431,6 +465,8 @@ function countryYears() {
     $(id).min = state.minYear;
     $(id).max = state.maxYear;
   }
+  $("full-history").textContent =
+    `Full history · ${state.minYear}–${state.maxYear}`;
 }
 
 function updateYears(from, to) {
@@ -461,6 +497,7 @@ function updateYears(from, to) {
 
 async function loadEvents() {
   if (!state.manifest) return;
+  if (state.mode === "database") return loadDatabaseEvents();
   abortExport();
   state.loadController?.abort();
   const controller = new AbortController();
@@ -648,12 +685,17 @@ function categoryLabel(code) {
 }
 
 function populateEventCategories() {
+  const declared =
+    [...state.datasets.values()].find(
+      (dataset) => dataset.kind === "conflict_event",
+    )?.precision?.type_of_violence || {};
   const values = [
-    ...new Set(
-      state.events
+    ...new Set([
+      ...Object.keys(declared),
+      ...state.events
         .map((row) => textOf(eventValue(row, "type_of_violence")))
         .filter(Boolean),
-    ),
+    ]),
   ].sort();
   const all = element("option", "All provider categories");
   all.value = "";
@@ -672,6 +714,9 @@ function populateEventCategories() {
 
 function applyFilters(cancelExport = true) {
   if (cancelExport) abortExport();
+  $("query-receipt").textContent = state.actor
+    ? `Applied actor: ${state.actor}`
+    : "";
   state.filtered = state.events.filter(
     (row) =>
       row._yearStart <= state.to &&
@@ -680,7 +725,9 @@ function applyFilters(cancelExport = true) {
         textOf(eventValue(row, "type_of_violence")) === state.category) &&
       (!state.precision ||
         textOf(eventValue(row, "where_prec")) === state.precision) &&
-      (!state.query || row._search.includes(state.query)),
+      (!state.query || row._search.includes(state.query)) &&
+      (!state.actor ||
+        sidesOf(row).join(" ").toLocaleLowerCase().includes(state.actor)),
   );
   if (state.order === "newest") state.filtered.reverse();
   state.page = 0;
@@ -700,6 +747,7 @@ function applyFilters(cancelExport = true) {
   state.mapDirty = true;
   state.networkDirty = true;
   state.timelineDirty = true;
+  if (state.view === "lenses") renderLenses();
   scheduleDraw();
 }
 
@@ -782,6 +830,9 @@ function renderTable() {
   $("table-summary").textContent = state.loading
     ? "Loading compact records. Previous results are cleared while the selection changes."
     : `${number.format(state.filtered.length)} matching historical dataset records. ${current.length ? `Showing ${number.format(start + 1)}–${number.format(start + current.length)}.` : ""} Full original fields load when inspected.`;
+  if (!state.loading && state.mode === "database")
+    $("table-summary").textContent =
+      `${number.format(state.filtered.length)} visible records from the current database page; ${number.format(state.database.matched)} match the server query. Directory search applies to this returned page only. Full original fields load from the database detail endpoint.`;
   $("page-status").textContent =
     `Page ${pages ? state.page + 1 : 0} of ${number.format(pages)}`;
   $("previous-page").disabled = state.page === 0 || !pages;
@@ -789,6 +840,7 @@ function renderTable() {
 }
 
 async function fullEvent(row, signal) {
+  if (row._origin === "database") return fullDatabaseEvent(row, signal);
   if (!row.raw_shard) return row;
   const shard = state.rawShards.get(row.raw_shard);
   if (
@@ -857,9 +909,13 @@ async function selectEvent(row, moveFocus = false) {
   state.selectionController = controller;
   const generation = ++state.selectionGeneration;
   state.selected = row;
-  state.selectedFull = row.raw_shard ? null : row;
+  state.selectedIndicator = null;
+  state.lensSelection = { kind: "conflict_event", row };
+  const needsOriginal = Boolean(row.raw_shard) || row._origin === "database";
+  state.selectedFull = needsOriginal ? null : row;
   state.selectedError = "";
   renderInspector();
+  if (state.view === "lenses") renderLenses();
   renderTable();
   updateExportPreview();
   state.mapDirty = true;
@@ -870,13 +926,14 @@ async function selectEvent(row, moveFocus = false) {
     if (window.innerWidth < 800)
       $("inspector-title").scrollIntoView({ behavior: "auto", block: "start" });
   }
-  if (!row.raw_shard) return;
+  if (!needsOriginal) return;
   try {
     const original = await fullEvent(row, controller.signal);
     if (generation !== state.selectionGeneration || controller.signal.aborted)
       return;
     state.selectedFull = original;
     renderInspector();
+    if (state.view === "lenses") renderLenses();
   } catch (error) {
     if (generation !== state.selectionGeneration || controller.signal.aborted)
       return;
@@ -904,6 +961,8 @@ function addFact(list, title, value) {
 function renderInspector() {
   const container = $("event-inspector");
   container.replaceChildren();
+  if (state.selectedIndicator)
+    return renderAnnualInspector(state.selectedIndicator, container);
   const row = state.selectedFull || state.selected;
   if (!row) {
     container.append(
@@ -920,11 +979,17 @@ function renderInspector() {
     return;
   }
   const dataset = state.datasets.get(row.dataset_id);
+  $("inspector-title").textContent = "Event record";
   container.append(
     element("h3", labelOf(row)),
     element("p", row.id, "record-id"),
   );
   const list = element("dl", null, "fact-list");
+  addFact(
+    list,
+    "Provider geography",
+    row.country || eventValue(row, "country") || row.country_code,
+  );
   addFact(list, "Recorded date / interval", dateLabel(row));
   addFact(
     list,
@@ -978,6 +1043,25 @@ function renderInspector() {
       : JSON.stringify(row.source_locator),
   );
   container.append(list);
+  if (
+    row._origin === "semantic-index" &&
+    !state.filtered.some((event) => event.id === row.id)
+  )
+    container.append(
+      element(
+        "p",
+        "Selected from the source navigation index, outside the current event query. The query and its export selection are unchanged.",
+        "record-id",
+      ),
+    );
+  if (row._origin === "database")
+    container.append(
+      element(
+        "p",
+        "Source: read-only database query. Original-field digest checked against the server’s declared record identity; this is not a static-manifest transport verification.",
+        "record-id",
+      ),
+    );
   const nonOrdered =
     (row.quality_flags || []).some((flag) =>
       /bounds|order/i.test(textOf(flag)),
@@ -1242,7 +1326,10 @@ function drawMap() {
     context.fill();
   }
   context.globalAlpha = 1;
-  if (state.selected?._point) {
+  if (
+    state.selected?._point &&
+    state.filtered.some((row) => row.id === state.selected.id)
+  ) {
     const [x, y] = mapScreen(state.selected._point, width, height);
     context.strokeStyle = "#fff2ca";
     context.lineWidth = 1.5;
@@ -1258,6 +1345,9 @@ function drawMap() {
   $("mapped-count").textContent = state.loading
     ? "Loading…"
     : `${number.format(mapped)} mapped / ${number.format(state.filtered.length)} matching${inView < mapped ? ` · ${number.format(inView)} in view` : ""}`;
+  if (!state.loading && state.mode === "database")
+    $("mapped-count").textContent =
+      `${number.format(mapped)} mapped on this database page · ${number.format(state.database.matched)} server matches`;
   $("event-map").setAttribute(
     "aria-label",
     `${currentCountry()?.name || state.country}, ${state.from} to ${state.to}: ${number.format(mapped)} geolocated historical records, ${number.format(state.filtered.length)} matching records. Use the event table for individual records.`,
@@ -1377,6 +1467,9 @@ function drawTimeline() {
   context.fillText(`Annual maximum ${number.format(max)}`, width - 2, 10);
   $("timeline-note").textContent =
     `${complete ? "All included country records by provider year, before search/category filters." : "Loaded country records only; full annual shard counts are unavailable."} Drag a period, or enter years above. Recorded coverage is not a measure of all violence.`;
+  if (state.mode === "database")
+    $("timeline-note").textContent =
+      "Static snapshot country counts, before database query filters. Drag a period to query it on the server. This reference histogram does not summarize the current database result page.";
 }
 
 function drawNetwork() {
@@ -1555,6 +1648,7 @@ function renderIndicators() {
     tbody.append(tr);
   }
   state.indicatorDirty = true;
+  if (state.view === "lenses" && state.catalog) renderLenses();
   scheduleDraw();
 }
 
@@ -1666,6 +1760,10 @@ function scheduleDraw() {
       state.networkDirty = false;
       drawNetwork();
     }
+    if (state.lensDirty && state.view === "lenses") {
+      state.lensDirty = false;
+      drawLenses();
+    }
     if (state.timelineDirty) {
       state.timelineDirty = false;
       drawTimeline();
@@ -1698,9 +1796,14 @@ function selectionCandidates() {
 
 function selectionFilters() {
   const scope = $("export-kind").value;
+  const selected = scope === "selected" ? state.selected : null;
+  const selectedCountry = selected?.country_code || state.country;
   const result = {
-    country_code: state.country,
-    provider_country_label: currentCountry()?.name || state.country,
+    country_code: selectedCountry,
+    provider_country_label:
+      state.manifest.countries.find(
+        (country) => country.code === selectedCountry,
+      )?.name || selectedCountry,
     export_scope: scope,
     record_order:
       scope === "both"
@@ -1711,12 +1814,41 @@ function selectionFilters() {
     result.events = {
       date_overlap: { from: `${state.from}-01-01`, to: `${state.to}-12-31` },
       search: state.query,
+      actor: state.actor || null,
       type_of_violence: state.category || null,
       where_prec: state.precision || null,
       order: state.order,
       selected_event_id:
         scope === "selected" ? state.selected?.id || null : null,
     };
+  if (scope !== "indicators") {
+    result.events.query_source = selected
+      ? selected._origin === "database"
+        ? "database"
+        : "static_snapshot"
+      : state.mode === "database"
+        ? "database"
+        : "static_snapshot";
+    if (selected) {
+      result.events.date_overlap = {
+        from: selected.date_start,
+        to: selected.date_end,
+      };
+      result.events.search = "";
+      result.events.actor = null;
+      result.events.type_of_violence = null;
+      result.events.where_prec = null;
+      result.events.selection_basis =
+        "One explicitly selected record, including a reference-index record outside the current query if selected.";
+    }
+    if (result.events.query_source === "database") {
+      result.events.database_snapshot_id = state.database.snapshot.id;
+      result.events.database_backend = state.database.backend;
+      result.events.database_page_cursor = state.database.cursor;
+      result.events.record_search_scope =
+        "Record search is local to the returned database page; country/date/actor/category/precision filters run on the server.";
+    }
+  }
   if (scope === "indicators" || scope === "both") {
     const series = selectedSeries();
     result.country_indicators = {
@@ -1741,7 +1873,7 @@ function updateExportPreview() {
   $("export-markdown").disabled = loading || busy || !candidates.length;
   const prefix = loading
     ? "Selection is loading."
-    : `${number.format(candidates.length)} matching ${scope === "both" ? "separately typed source" : scope === "indicators" ? "annual country-indicator" : "conflict-event"} records.`;
+    : `${number.format(queryMatchedCount())} matching ${scope === "both" ? "separately typed source" : scope === "indicators" ? "annual country-indicator" : "conflict-event"} records.${state.mode === "database" && scope !== "indicators" && scope !== "selected" ? ` ${number.format(candidates.length)} are available on the current result page.` : ""}`;
   $("export-preview").textContent =
     `${prefix} Download includes the first ${Math.min(EXPORT_LIMIT, candidates.length)} records, reduced further if needed to stay within 1 MiB.${scope === "both" ? " Selected series first, then events; the two types are not joined." : ""} Full original provider fields are loaded for exported events. Omitted counts are explicit.`;
 }
@@ -1897,7 +2029,7 @@ async function exportSelection(kind) {
       alternatives: $("note-alternatives").value,
       gaps: $("note-gaps").value,
     },
-    matched: candidates.length,
+    matched: queryMatchedCount(),
     candidates: candidates.slice(0, EXPORT_LIMIT),
     limitations: [
       ...new Set([
@@ -1910,6 +2042,10 @@ async function exportSelection(kind) {
       ]),
     ],
   };
+  if (snapshot.candidates.some((item) => item.row._origin === "database"))
+    snapshot.limitations.push(
+      `Database records are a bounded current result page from the declared read-only ${state.database.backend === "sqlite" ? "local SQLite adapter" : "D1"} snapshot. Original-field hashes are checked against the server’s record identity; this is not static-manifest transport verification. The exported page is not a representative sample.`,
+    );
   $("export-json").textContent =
     kind === "json" ? "Loading original records…" : "Download selection JSON";
   $("export-markdown").textContent =
@@ -1940,7 +2076,7 @@ async function exportSelection(kind) {
           hydrated.set(`${item.kind}:${row.id}`, exportRecord(item.kind, row));
         }
         completed += 1;
-        if (generation === state.exportGeneration)
+        if (generation === state.exportGeneration && !controller.signal.aborted)
           $("export-status").textContent =
             `Original source groups loaded: ${completed} / ${groups.size}. Full fields are retained.`;
       },
@@ -2301,6 +2437,54 @@ function connectTimeline() {
 }
 
 function connectControls() {
+  const applyQuery = () => {
+    state.actor = $("actor-search").value.trim().toLocaleLowerCase();
+    state.query = $("event-search").value.trim().toLocaleLowerCase();
+    updateYears($("year-from").value, $("year-to").value);
+    if (state.mode === "database") loadEvents();
+    else applyFilters();
+  };
+  $("apply-query").addEventListener("click", applyQuery);
+  $("actor-search").addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      applyQuery();
+    }
+  });
+  $("full-history").addEventListener("click", () => {
+    updateYears(state.minYear, state.maxYear);
+    loadEvents();
+  });
+  $("data-source").addEventListener("change", () => {
+    abortExport();
+    state.mode = $("data-source").value;
+    if (state.mode === "database" && !state.database.ready) {
+      state.mode = "static";
+      renderConnection();
+      return;
+    }
+    state.rawCache.clear();
+    state.actor = $("actor-search").value.trim().toLocaleLowerCase();
+    state.query = $("event-search").value.trim().toLocaleLowerCase();
+    if (state.mode === "static")
+      state.datasets = new Map(
+        state.manifest.datasets.map((dataset) => [dataset.id, dataset]),
+      );
+    renderConnection();
+    loadEvents();
+  });
+  $("database-next").addEventListener("click", () => {
+    if (state.database.nextCursor)
+      loadDatabaseEvents(state.database.nextCursor, [
+        ...state.database.history,
+        state.database.cursor,
+      ]);
+  });
+  $("database-previous").addEventListener("click", () => {
+    const history = [...state.database.history];
+    const cursor = history.pop();
+    loadDatabaseEvents(cursor || null, history);
+  });
   $("country").addEventListener("change", () => {
     abortExport();
     state.country = $("country").value;
@@ -2323,7 +2507,8 @@ function connectControls() {
   );
   $("event-type").addEventListener("change", () => {
     state.category = $("event-type").value;
-    applyFilters();
+    if (state.mode === "database") loadEvents();
+    else applyFilters();
   });
   $("event-search").addEventListener("input", () => {
     state.query = $("event-search").value.trim().toLocaleLowerCase();
@@ -2331,7 +2516,8 @@ function connectControls() {
   });
   $("location-precision").addEventListener("change", () => {
     state.precision = $("location-precision").value;
-    applyFilters();
+    if (state.mode === "database") loadEvents();
+    else applyFilters();
   });
   $("event-order").addEventListener("change", () => {
     state.order = $("event-order").value;
@@ -2348,6 +2534,7 @@ function connectControls() {
   for (const [id, view] of [
     ["map-view", "map"],
     ["network-view", "network"],
+    ["lenses-view", "lenses"],
   ])
     $(id).addEventListener("click", () => {
       state.view = view;
@@ -2358,8 +2545,12 @@ function connectControls() {
       );
       $("geography-view").hidden = view !== "map";
       $("sides-view").hidden = view !== "network";
+      $("context-lenses-view").hidden = view !== "lenses";
+      $("lenses-view").setAttribute("aria-pressed", String(view === "lenses"));
+      if (view === "lenses") loadLenses().catch(() => {});
       state.mapDirty = true;
       state.networkDirty = true;
+      state.lensDirty = true;
       scheduleDraw();
     });
   $("indicator-select").addEventListener("change", () => {
@@ -2387,6 +2578,7 @@ function connectControls() {
     state.timelineDirty = true;
     state.indicatorDirty = true;
     state.networkDirty = true;
+    state.lensDirty = true;
     scheduleDraw();
   });
   for (const id of [
@@ -2394,10 +2586,897 @@ function connectControls() {
     "timeline",
     "indicator-chart",
     "sides-network",
+    "lens-canvas",
   ])
     resize.observe($(id));
   connectMap();
   connectTimeline();
+  connectLenses();
+}
+
+/* Database mode is opt-in and never silently replaced by static results. */
+async function databaseJSON(path, signal) {
+  const response = await fetch(localURL(path), {
+    signal,
+    cache: "no-store",
+    credentials: "same-origin",
+  });
+  const bytes = await response.arrayBuffer();
+  if (bytes.byteLength > 5 * 1024 * 1024)
+    throw new Error(
+      "Database response exceeds the browser’s bounded response limit.",
+    );
+  let body;
+  try {
+    body = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
+  } catch {
+    throw new Error(
+      "The database endpoint did not return JSON. Check authentication and deployment configuration.",
+    );
+  }
+  if (!response.ok || body.status !== "ready")
+    throw new Error(
+      body.error?.message ||
+        body.message ||
+        `Database unavailable (HTTP ${response.status}).`,
+    );
+  if (
+    body.api_version !== "policy-research-db/1" ||
+    !["d1", "sqlite"].includes(body.backend) ||
+    body.read_only !== true
+  )
+    throw new Error(
+      "The database endpoint does not declare the supported read-only research contract.",
+    );
+  return body;
+}
+
+function renderConnection(message = "") {
+  const connected = state.mode === "database";
+  $("connection-badge").textContent = connected
+    ? state.database.backend === "sqlite"
+      ? "Local SQLite query"
+      : "D1 database query"
+    : "Static snapshot";
+  $("connection-badge").classList.toggle(
+    "connected",
+    connected && state.database.ready,
+  );
+  $("connection-status").textContent =
+    message ||
+    (connected
+      ? state.database.backend === "sqlite"
+        ? "Local read-only adapter. This is not a deployed D1 connection; current result page only."
+        : "Read-only D1 query. The map shows the current bounded result page."
+      : state.database.ready
+        ? "Static files active. A database is available; choose it explicitly to run server queries."
+        : "Verified source files active. No database is connected to this deployment.");
+  $("data-source").querySelector('[value="database"]').disabled =
+    !state.database.ready;
+  $("data-source").value = state.mode;
+  $("event-order").disabled = connected;
+  $("database-pagination").hidden = !connected;
+}
+
+async function probeDatabase() {
+  const configured = state.manifest?.query_api;
+  if (!configured || configured.enabled !== true || !configured.base_url) {
+    renderConnection();
+    return;
+  }
+  try {
+    state.database.base = localURL(configured.base_url).pathname.replace(
+      /\/$/,
+      "",
+    );
+    state.database.configured = true;
+    renderConnection(
+      "Static snapshot active; checking the configured same-origin database…",
+    );
+    const status = await databaseJSON(`${state.database.base}/status`);
+    if (!status.snapshot?.id)
+      throw new Error("Database snapshot identity is missing.");
+    state.database.ready = true;
+    state.database.snapshot = status.snapshot;
+    state.database.backend = status.backend;
+    renderConnection();
+  } catch (error) {
+    state.database.ready = false;
+    renderConnection(`Static snapshot active. ${error.message}`);
+  }
+}
+
+async function loadDatabaseEvents(cursor = null, history = []) {
+  abortExport();
+  state.loadController?.abort();
+  const controller = new AbortController();
+  state.loadController = controller;
+  const generation = ++state.loadGeneration;
+  state.events = [];
+  state.filtered = [];
+  state.page = 0;
+  state.loading = true;
+  state.fitPending = true;
+  state.database.matched = 0;
+  state.database.nextCursor = null;
+  clearSelected();
+  renderTable();
+  renderCategoryKey();
+  updateExportPreview();
+  $("map-title").textContent = currentCountry()?.name || state.country;
+  $("map-card").setAttribute("aria-busy", "true");
+  $("map-empty").hidden = false;
+  $("map-empty").textContent = "Running the read-only database query…";
+  $("load-status").textContent =
+    "Querying country, date interval, recorded actor and provider categories on the server…";
+  $("retry-load").hidden = true;
+  state.mapDirty = true;
+  state.networkDirty = true;
+  scheduleDraw();
+  const url = localURL(`${state.database.base}/events`);
+  url.searchParams.set("country", state.country);
+  url.searchParams.set("from", `${state.from}-01-01`);
+  url.searchParams.set("to", `${state.to}-12-31`);
+  url.searchParams.set("limit", "200");
+  if (state.actor) url.searchParams.set("actor", state.actor);
+  if (state.category) url.searchParams.set("type", state.category);
+  if (state.precision) url.searchParams.set("precision", state.precision);
+  if (cursor) url.searchParams.set("cursor", cursor);
+  try {
+    const body = await databaseJSON(url, controller.signal);
+    if (controller.signal.aborted || generation !== state.loadGeneration)
+      return;
+    if (
+      !Array.isArray(body.records) ||
+      body.returned !== body.records.length ||
+      body.returned > 200 ||
+      !Number.isSafeInteger(body.matched) ||
+      body.matched < body.returned ||
+      body.page_scope !== "current_page" ||
+      body.bounded !== true ||
+      typeof body.has_more !== "boolean" ||
+      (body.next_cursor !== null && typeof body.next_cursor !== "string")
+    )
+      throw new Error(
+        "The database result counts or pagination do not match the bounded contract.",
+      );
+    if (
+      body.snapshot?.id !== state.database.snapshot?.id ||
+      body.backend !== state.database.backend
+    )
+      throw new Error(
+        "The database snapshot changed. Reload the page to query its new identity.",
+      );
+    for (const dataset of body.datasets || [])
+      state.datasets.set(dataset.id, dataset);
+    state.events = body.records
+      .map((row) => normalizeEvent({ ...row, _origin: "database" }, row))
+      .sort(
+        (a, b) =>
+          a.date_start.localeCompare(b.date_start) || a.id.localeCompare(b.id),
+      );
+    state.database.matched = body.matched;
+    state.database.nextCursor = body.next_cursor;
+    state.database.cursor = cursor;
+    state.database.history = history;
+    state.loading = false;
+    state.order = "newest";
+    $("event-order").value = "newest";
+    populateEventCategories();
+    $("map-card").setAttribute("aria-busy", "false");
+    $("load-status").textContent =
+      `${number.format(body.returned)} historical records loaded for ${currentCountry()?.name || state.country}, ${state.from}–${state.to}; ${number.format(body.matched)} match the database query. Current page only.`;
+    renderConnection();
+    applyFilters(false);
+    $("database-page-status").textContent =
+      `Database page ${history.length + 1} · ${number.format(body.returned)} returned / ${number.format(body.matched)} matched`;
+    $("database-previous").disabled = !history.length;
+    $("database-next").disabled = !body.has_more || !body.next_cursor;
+  } catch (error) {
+    if (controller.signal.aborted || generation !== state.loadGeneration)
+      return;
+    controller.abort();
+    state.loading = false;
+    $("map-card").setAttribute("aria-busy", "false");
+    $("load-status").textContent =
+      `Database query failed. ${error.message} No static results have replaced it.`;
+    $("map-empty").textContent =
+      "Database query unavailable. Retry, or explicitly choose Verified static snapshot above.";
+    $("retry-load").hidden = false;
+    $("database-next").disabled = true;
+    $("database-previous").disabled = true;
+    renderConnection(
+      "The selected database query failed. Retry or choose the static snapshot explicitly.",
+    );
+    renderTable();
+    updateExportPreview();
+  }
+}
+
+async function fullDatabaseEvent(row, signal) {
+  const detail = await databaseJSON(
+    `${state.database.base}/events/${encodeURIComponent(row.id)}`,
+    signal,
+  );
+  const original = detail.record;
+  if (
+    detail.snapshot?.id !== state.database.snapshot?.id ||
+    detail.backend !== state.database.backend ||
+    !original ||
+    original.id !== row.id ||
+    original.dataset_id !== row.dataset_id ||
+    original.raw_record_sha256 !== row.raw_record_sha256 ||
+    !/^[a-f0-9]{64}$/i.test(row.raw_record_sha256 || "") ||
+    detail.provenance?.canonical_original_record_sha256 !==
+      row.raw_record_sha256
+  )
+    throw new Error(
+      "Database record identity does not match its declared snapshot and original-field digest.",
+    );
+  const keys = Object.keys(original.attributes || {}).sort();
+  if (
+    keys.length !== 49 ||
+    !keys.every((key) => typeof original.attributes[key] === "string")
+  )
+    throw new Error(
+      "Database detail does not contain all 49 original string-valued provider fields.",
+    );
+  const canonical = JSON.stringify(
+    Object.fromEntries(keys.map((key) => [key, original.attributes[key]])),
+  );
+  if (
+    (await sha256(encoder.encode(canonical))) !==
+    row.raw_record_sha256.toLowerCase()
+  )
+    throw new Error(
+      "Database original fields do not match the server’s declared canonical digest.",
+    );
+  return {
+    ...row,
+    ...original,
+    _origin: "database",
+    _rawLoaded: true,
+    _databaseProvenance: detail.provenance,
+  };
+}
+
+function queryMatchedCount() {
+  const scope = $("export-kind").value;
+  if (scope === "selected") return state.selected ? 1 : 0;
+  const events =
+    state.mode === "database" && !state.query
+      ? state.database.matched
+      : state.filtered.length;
+  return scope === "indicators"
+    ? selectedSeries().length
+    : scope === "both"
+      ? events + selectedSeries().length
+      : events;
+}
+
+/* Semantic lenses are documented alignments over source fields, not a reasoner. */
+const LENS_LABELS = {
+  "prov-o": "Provenance",
+  skos: "Concepts",
+  "owl-time": "Time",
+  geosparql: "Geography",
+  "sosa-ssn": "Observations",
+};
+const LENS_POLICY = {
+  "prov-o":
+    "Trace a comparison to its publisher, release and original partition. A dataset row and the reports it cites are different evidence objects.",
+  skos: "Check how the provider defines a category before comparing groups or aligning it with another classification. A matching label alone is not a shared definition.",
+  "owl-time":
+    "Read the recorded interval and its precision before connecting an event to a diplomatic chronology. Event time, publication and retrieval are separate clocks.",
+  geosparql:
+    "Read the geographic precision before drawing a local policy conclusion. An administrative representative point does not establish an exact incident position or territorial control.",
+  "sosa-ssn":
+    "Keep the country, observed property, annual period, unit and source method together. These are statistical observations; country-year alignment with events does not establish causation.",
+};
+
+async function verifiedMetadata(descriptor) {
+  if (
+    !descriptor?.path ||
+    !/^[a-f0-9]{64}$/i.test(descriptor.sha256 || "") ||
+    !Number.isSafeInteger(descriptor.bytes)
+  )
+    throw new Error("The semantic asset has incomplete integrity metadata.");
+  const url = localURL(descriptor.path);
+  url.searchParams.set("sha256", descriptor.sha256);
+  const response = await fetch(url, {
+    cache: "force-cache",
+    credentials: "same-origin",
+  });
+  if (!response.ok)
+    throw new Error(`Semantic asset unavailable (HTTP ${response.status}).`);
+  const bytes = await response.arrayBuffer();
+  if (
+    bytes.byteLength > 5 * 1024 * 1024 ||
+    bytes.byteLength !== descriptor.bytes ||
+    (await sha256(bytes)) !== descriptor.sha256.toLowerCase()
+  )
+    throw new Error(
+      "The semantic asset does not match its declared bytes and SHA-256.",
+    );
+  try {
+    return JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
+  } catch {
+    throw new Error("The semantic asset is not valid UTF-8 JSON.");
+  }
+}
+
+async function loadLenses() {
+  if (state.catalog) return state.catalog;
+  if (state.catalogPromise) return state.catalogPromise;
+  state.catalogError = "";
+  $("retry-lenses").hidden = true;
+  $("lens-status").textContent = "Loading the source-qualified lens catalogue…";
+  state.catalogPromise = (async () => {
+    try {
+      const catalog = await verifiedMetadata(state.manifest?.semantic_catalog);
+      if (
+        catalog.format !== "policy-semantic-catalog/1" ||
+        !Array.isArray(catalog.lenses) ||
+        Object.keys(LENS_LABELS).some(
+          (id) => !catalog.lenses.some((lens) => lens.id === id),
+        )
+      )
+        throw new Error(
+          "The catalogue does not define all five supported source lenses.",
+        );
+      state.catalog = catalog;
+      const buttons = catalog.lenses
+        .filter((lens) => LENS_LABELS[lens.id])
+        .map((lens) => {
+          const button = element("button", LENS_LABELS[lens.id]);
+          button.dataset.lens = lens.id;
+          button.setAttribute("aria-pressed", String(lens.id === state.lens));
+          button.addEventListener("click", () => {
+            state.lens = lens.id;
+            state.lensPage = 0;
+            state.lensSelection =
+              lens.id === "sosa-ssn"
+                ? state.selectedIndicator
+                  ? { kind: "country_indicator", row: state.selectedIndicator }
+                  : null
+                : state.selected
+                  ? { kind: "conflict_event", row: state.selected }
+                  : null;
+            if (lens.id === "sosa-ssn") $("lens-collection").value = "query";
+            renderLenses();
+          });
+          return button;
+        });
+      $("lens-choices").replaceChildren(...buttons);
+      renderLenses();
+      return catalog;
+    } catch (error) {
+      state.catalogError = error.message;
+      $("lens-status").textContent =
+        `Lens catalogue unavailable. ${error.message} The geographic snapshot remains separate.`;
+      $("retry-lenses").hidden = false;
+      throw error;
+    } finally {
+      state.catalogPromise = null;
+    }
+  })();
+  return state.catalogPromise;
+}
+
+async function loadSemanticIndex() {
+  if (state.semanticGraph || state.semanticLoading) return;
+  state.semanticLoading = true;
+  state.semanticError = "";
+  $("lens-status").textContent = "Loading the finite source navigation index…";
+  try {
+    await loadLenses();
+    const graph = await verifiedMetadata(state.catalog.graph_view);
+    if (
+      graph.format !== "policy-semantic-graph/1" ||
+      !Array.isArray(graph.nodes) ||
+      !Array.isArray(graph.edges)
+    )
+      throw new Error("Unsupported semantic graph format.");
+    const rows = graph.nodes.filter((node) => node.kind === "conflict_event");
+    if (
+      rows.length !== graph.counts?.record_nodes ||
+      rows.length < 2000 ||
+      new Set(rows.map((row) => row.id)).size !== rows.length
+    )
+      throw new Error(
+        "The declared source-record index count does not match its nodes.",
+      );
+    const compactPaths = new Set(
+      (state.manifest.event_shards || []).map((shard) => shard.path),
+    );
+    state.semanticRows = rows.map((node) => {
+      const source = state.rawShards.get(node.raw_shard);
+      if (
+        !compactPaths.has(node.compact_shard) ||
+        !source ||
+        source.dataset_id !== node.dataset_id ||
+        source.country_code !== node.country_code
+      )
+        throw new Error(
+          "An index record has no registered evidence partition.",
+        );
+      return normalizeEvent(
+        {
+          ...node,
+          _origin: "semantic-index",
+          attributes: {
+            type_of_violence: textOf(node.concept?.value),
+            where_prec: textOf(node.precision?.where_prec),
+            date_prec: textOf(node.precision?.date_prec),
+            event_clarity: textOf(node.precision?.event_clarity),
+          },
+        },
+        node,
+      );
+    });
+    state.semanticGraph = graph;
+    state.semanticLoading = false;
+    renderLenses();
+  } catch (error) {
+    state.semanticLoading = false;
+    state.semanticError = error.message;
+    $("lens-status").textContent =
+      `Reference index unavailable. ${error.message} It has not been replaced with generated records.`;
+    $("retry-lenses").hidden = false;
+  }
+}
+
+function lensSourceRows() {
+  if (state.lens === "sosa-ssn") return selectedSeries();
+  return $("lens-collection").value === "index"
+    ? state.semanticRows
+    : state.filtered;
+}
+
+function lensDate(row) {
+  return row.indicator_code ? String(row.year) : row.date_start;
+}
+
+function lensFacet(row) {
+  const dataset = state.datasets.get(row.dataset_id);
+  if (state.lens === "prov-o")
+    return `${row.country_code} · ${state.manifest.countries.find((country) => country.code === row.country_code)?.name || row.country_code}`;
+  if (state.lens === "skos")
+    return categoryLabel(textOf(eventValue(row, "type_of_violence")));
+  if (state.lens === "owl-time")
+    return (
+      dataset?.precision?.date_prec?.[textOf(eventValue(row, "date_prec"))] ||
+      "Date precision not supplied"
+    );
+  if (state.lens === "geosparql")
+    return (
+      dataset?.precision?.where_prec?.[textOf(eventValue(row, "where_prec"))] ||
+      "Geographic precision not supplied"
+    );
+  return (
+    attributes(row).display_unit || row.unit || "Provider unit not supplied"
+  );
+}
+
+function renderLenses() {
+  if (!state.catalog) return;
+  const lens = state.catalog.lenses.find((item) => item.id === state.lens);
+  if (!lens) return;
+  const annual = state.lens === "sosa-ssn";
+  for (const button of $("lens-choices").querySelectorAll("button"))
+    button.setAttribute(
+      "aria-pressed",
+      String(button.dataset.lens === state.lens),
+    );
+  $("lens-collection").querySelector('[value="index"]').disabled = annual;
+  $("lens-collection").disabled = annual;
+  $("lens-indicator-label").hidden = !annual;
+  $("lens-title").textContent = lens.title;
+  $("lens-scope").textContent = Array.isArray(lens.scope)
+    ? lens.scope.join(" ")
+    : lens.scope || "";
+  $("lens-policy").textContent = LENS_POLICY[state.lens];
+  const terms = (lens.terms || []).map((term) =>
+    publicLink(term.url, term.label || term.id),
+  );
+  $("lens-terms").replaceChildren(...terms);
+  $("lens-limitations").textContent = [
+    "A source-field alignment, not automated reasoning or full standards-compliance certification.",
+    ...(Array.isArray(lens.limitations)
+      ? lens.limitations
+      : [lens.limitations || ""]),
+  ].join(" ");
+  const codes = new Map(
+    state.indicators.map((row) => [
+      row.indicator_code,
+      row.indicator_name || row.indicator_code,
+    ]),
+  );
+  $("lens-indicator").replaceChildren(
+    ...[...codes]
+      .sort((a, b) => a[1].localeCompare(b[1]))
+      .map(([code, label]) => {
+        const option = element("option", label);
+        option.value = code;
+        return option;
+      }),
+  );
+  $("lens-indicator").value = state.indicatorCode;
+  const rows = lensSourceRows();
+  state.lensRows = state.lensSearch
+    ? rows.filter((row) =>
+        [row.id, row.label, row.country_code, lensDate(row)]
+          .join(" ")
+          .toLocaleLowerCase()
+          .includes(state.lensSearch),
+      )
+    : rows;
+  $("lens-count").textContent =
+    `${number.format(state.lensRows.length)} real ${annual ? "annual observations" : "record nodes"}`;
+  const indexed = !annual && $("lens-collection").value === "index";
+  $("lens-status").textContent = indexed
+    ? state.semanticLoading
+      ? "Loading the integrity-checked source navigation index…"
+      : state.semanticError
+        ? `Reference index unavailable. ${state.semanticError}`
+        : `${number.format(rows.length)} source records in a nonrepresentative navigation sample across provider geographies. Current event filters do not filter this reference index.`
+    : annual
+      ? `${currentCountry()?.name || state.country} · ${state.indicatorCode}. One annual series; units are not combined.`
+      : `${state.mode === "database" ? "Current database result page" : "Current verified event query"}. Every dot resolves to an underlying source record.`;
+  $("lens-index-method").textContent = state.semanticGraph
+    ? `${state.semanticGraph.selection?.purpose || "Navigation sample"}. Selection: ${state.semanticGraph.selection?.method || "see catalogue"}. ${number.format(state.semanticGraph.selection?.available_records || 0)} records in the underlying historical collection.`
+    : "The optional reference index is a finite navigation sample, not a statistically representative sample or the whole source collection.";
+  $("lens-layout-note").textContent =
+    `Horizontal position: ${annual ? "source calendar year" : "recorded start date"}. Vertical groups: ${annual ? "the selected series’ unit" : state.lens === "prov-o" ? "provider country collections" : state.lens === "skos" ? "provider category" : state.lens === "owl-time" ? "provider date-precision category" : "provider location-precision category"}. Layout positions are not an additional geographic or causal claim. Lines highlight only a selected field path.`;
+  renderLensDirectory();
+  renderLensPath();
+  state.lensDirty = true;
+  scheduleDraw();
+}
+
+function renderLensDirectory() {
+  const pages = Math.ceil(state.lensRows.length / 12);
+  state.lensPage = Math.max(
+    0,
+    Math.min(state.lensPage, Math.max(0, pages - 1)),
+  );
+  $("lens-record-list").replaceChildren(
+    ...state.lensRows
+      .slice(state.lensPage * 12, (state.lensPage + 1) * 12)
+      .map((row) => {
+        const button = element(
+          "button",
+          `${row.country_code} · ${lensDate(row).slice(0, 10)} · ${row.label || row.indicator_name || row.id}`,
+        );
+        button.addEventListener("click", () => selectLensRecord(row, true));
+        return button;
+      }),
+  );
+  $("lens-page-status").textContent =
+    `Page ${pages ? state.lensPage + 1 : 0} / ${number.format(pages)}`;
+  $("lens-previous").disabled = state.lensPage === 0;
+  $("lens-next").disabled = state.lensPage + 1 >= pages;
+}
+
+function renderAnnualInspector(row, container) {
+  $("inspector-title").textContent = "Annual observation";
+  container.append(
+    element("h3", `${row.indicator_name || row.indicator_code} · ${row.year}`),
+    element("p", row.id, "record-id"),
+  );
+  const facts = element("dl", null, "fact-list");
+  addFact(
+    facts,
+    "Country / economy",
+    attributes(row).country_name || row.country_code,
+  );
+  addFact(facts, "Annual period", String(row.year));
+  addFact(
+    facts,
+    "Source value",
+    row.value === null ? "Missing" : textOf(row.value),
+  );
+  addFact(
+    facts,
+    "Unit",
+    attributes(row).display_unit || row.unit || "Not supplied",
+  );
+  addFact(
+    facts,
+    "Status",
+    attributes(row).source_status_interpretation ||
+      row.status ||
+      "Not supplied",
+  );
+  addFact(facts, "Source row locator", row.source_locator);
+  container.append(
+    facts,
+    sourceJSON(
+      { id: row.id, attributes: attributes(row) },
+      `Original annual fields for ${row.id}`,
+    ),
+  );
+  const dataset = state.datasets.get(row.dataset_id);
+  if (dataset)
+    container.append(
+      publicLink(dataset.url, `${dataset.title} · ${dataset.version}`),
+    );
+}
+
+function selectLensRecord(row, focus = false) {
+  if (row.indicator_code) {
+    clearSelected();
+    state.selectedIndicator = row;
+    state.lensSelection = { kind: "country_indicator", row };
+    renderInspector();
+    renderLenses();
+    updateExportPreview();
+    if (focus) {
+      $("inspector-title").tabIndex = -1;
+      $("inspector-title").focus({ preventScroll: true });
+    }
+  } else selectEvent(row, focus);
+}
+
+function renderLensPath() {
+  const container = $("lens-record-path");
+  container.replaceChildren();
+  const selection = state.lensSelection;
+  if (
+    !selection ||
+    !state.lensRows.some((row) => row.id === selection.row.id)
+  ) {
+    container.append(
+      element(
+        "p",
+        "Select a dot or use Browse lens records. The path will show the exact source record, its field values and the vocabulary used to read it.",
+      ),
+    );
+    return;
+  }
+  const row =
+    selection.kind === "conflict_event" &&
+    state.selectedFull?.id === selection.row.id
+      ? state.selectedFull
+      : selection.row;
+  const dataset = state.datasets.get(row.dataset_id);
+  const a = attributes(row);
+  const fieldNames =
+    state.lens === "prov-o"
+      ? ["id", "raw_shard", "raw_record_sha256"]
+      : state.lens === "skos"
+        ? ["type_of_violence"]
+        : state.lens === "owl-time"
+          ? ["date_start", "date_end", "date_prec"]
+          : state.lens === "geosparql"
+            ? ["latitude", "longitude", "where_prec"]
+            : [
+                "indicator_id",
+                "date",
+                "value",
+                "unit",
+                "display_unit",
+                "obs_status",
+                "source_last_updated",
+              ];
+  const values = Object.fromEntries(
+    fieldNames.map((key) => [key, row[key] ?? a[key] ?? null]),
+  );
+  container.append(
+    element("h4", row.id),
+    element(
+      "p",
+      row.indicator_code
+        ? `${row.indicator_name} · ${row.year}`
+        : `${row.country_code} · ${dateLabel(row)} · ${labelOf(row)}`,
+    ),
+  );
+  const path = element("div", null, "lens-path-nodes");
+  const makeNode = (title, subtitle, action) => {
+    const button = element("button", title);
+    button.append(element("small", subtitle));
+    button.addEventListener("click", action);
+    return button;
+  };
+  const detail = element(
+    "div",
+    "Select a path step to inspect its supporting value.",
+    "lens-path-detail",
+  );
+  path.append(
+    makeNode(dataset?.title || row.dataset_id, "Attributed dataset", () => {
+      detail.replaceChildren(
+        element(
+          "p",
+          `${dataset?.publisher || ""} · ${dataset?.version || ""} · ${dataset?.license || ""}`,
+        ),
+      );
+      if (dataset) detail.append(publicLink(dataset.url, "Original dataset"));
+    }),
+    makeNode(
+      row.indicator_code ? row.indicator_code : row.provider_id || row.id,
+      "Exact source record",
+      () => {
+        detail.replaceChildren(
+          sourceJSON(
+            {
+              id: row.id,
+              source_locator: row.source_locator,
+              raw_record_sha256: row.raw_record_sha256 || null,
+            },
+            "Exact source record identity",
+          ),
+        );
+      },
+    ),
+    makeNode(LENS_LABELS[state.lens], fieldNames.join(" · "), () => {
+      detail.replaceChildren(
+        sourceJSON(values, "Exact fields used by this lens"),
+      );
+    }),
+  );
+  container.append(path, detail);
+}
+
+function stableFraction(id) {
+  let hash = 2166136261;
+  for (let index = 0; index < id.length; index += 1)
+    hash = Math.imul(hash ^ id.charCodeAt(index), 16777619);
+  return (hash >>> 0) / 4294967295;
+}
+
+function drawLenses() {
+  const prepared = prepareCanvas($("lens-canvas"));
+  if (!prepared) return;
+  const { context, width, height } = prepared;
+  state.lensHitGrid.clear();
+  const rows = state.lensRows;
+  if (!rows.length) {
+    context.fillStyle = "#c5d5c2";
+    context.font = "12px Arial, sans-serif";
+    context.textAlign = "center";
+    context.fillText(
+      "No source records in this lens selection.",
+      width / 2,
+      height / 2,
+    );
+    return;
+  }
+  const counts = new Map();
+  for (const row of rows) {
+    const group = lensFacet(row);
+    counts.set(group, (counts.get(group) || 0) + 1);
+  }
+  const groups = [...counts.entries()].sort(
+    (a, b) => b[1] - a[1] || a[0].localeCompare(b[0]),
+  );
+  const visible = groups.slice(0, 9).map(([label]) => label);
+  if (groups.length > 9) visible.push("Other source groups");
+  const start = Math.min(...rows.map((row) => Date.parse(lensDate(row))));
+  const end = Math.max(...rows.map((row) => Date.parse(lensDate(row))));
+  const left = width < 500 ? 90 : 155,
+    right = width - 15,
+    top = 15,
+    bottom = height - 35;
+  const band = (bottom - top) / visible.length;
+  context.font = "9px Arial, sans-serif";
+  visible.forEach((label, index) => {
+    const y = top + band * (index + 0.5);
+    context.strokeStyle = "#36544a";
+    context.lineWidth = 0.6;
+    context.beginPath();
+    context.moveTo(left - 5, y);
+    context.lineTo(right, y);
+    context.stroke();
+    context.fillStyle = "#c8d8c5";
+    context.textAlign = "right";
+    context.fillText(
+      label.length > 29 ? `${label.slice(0, 26)}…` : label,
+      left - 12,
+      y + 3,
+      left - 18,
+    );
+  });
+  let selected = null;
+  context.globalAlpha = 0.65;
+  for (const row of rows) {
+    const label = lensFacet(row);
+    const group = visible.includes(label)
+      ? visible.indexOf(label)
+      : visible.length - 1;
+    const x =
+      left +
+      ((Date.parse(lensDate(row)) - start) / Math.max(86400000, end - start)) *
+        (right - left);
+    const y =
+      top + band * (group + 0.5) + (stableFraction(row.id) - 0.5) * band * 0.7;
+    context.fillStyle = row.indicator_code ? "#c6dba8" : eventColor(row);
+    context.beginPath();
+    context.arc(x, y, rows.length > 1000 ? 1.6 : 2.6, 0, Math.PI * 2);
+    context.fill();
+    const key = `${Math.floor(x / 16)},${Math.floor(y / 16)}`;
+    if (!state.lensHitGrid.has(key)) state.lensHitGrid.set(key, []);
+    state.lensHitGrid.get(key).push({ row, x, y });
+    if (state.lensSelection?.row.id === row.id) selected = { x, y, group };
+  }
+  context.globalAlpha = 1;
+  if (selected) {
+    context.strokeStyle = "#e8cf99";
+    context.lineWidth = 1;
+    context.beginPath();
+    context.moveTo(left - 7, top + band * (selected.group + 0.5));
+    context.lineTo(selected.x, selected.y);
+    context.stroke();
+    context.beginPath();
+    context.arc(selected.x, selected.y, 6, 0, Math.PI * 2);
+    context.stroke();
+  }
+  context.fillStyle = "#bdcfb8";
+  context.textAlign = "left";
+  context.fillText(new Date(start).getUTCFullYear(), left, height - 10);
+  context.textAlign = "right";
+  context.fillText(new Date(end).getUTCFullYear(), right, height - 10);
+  $("lens-canvas").setAttribute(
+    "aria-label",
+    `${LENS_LABELS[state.lens]} lens, ${number.format(rows.length)} real source records. Use Browse lens records for keyboard selection and exact record details.`,
+  );
+}
+
+function connectLenses() {
+  $("lens-collection").addEventListener("change", () => {
+    state.lensPage = 0;
+    state.lensSelection = null;
+    if ($("lens-collection").value === "index" && !state.semanticGraph)
+      loadSemanticIndex();
+    renderLenses();
+  });
+  $("retry-lenses").addEventListener("click", () =>
+    state.catalog && $("lens-collection").value === "index"
+      ? loadSemanticIndex()
+      : loadLenses().catch(() => {}),
+  );
+  $("lens-search").addEventListener("input", () => {
+    state.lensSearch = $("lens-search").value.trim().toLocaleLowerCase();
+    state.lensPage = 0;
+    renderLenses();
+  });
+  $("lens-previous").addEventListener("click", () => {
+    state.lensPage -= 1;
+    renderLensDirectory();
+  });
+  $("lens-next").addEventListener("click", () => {
+    state.lensPage += 1;
+    renderLensDirectory();
+  });
+  $("lens-indicator").addEventListener("change", () => {
+    abortExport();
+    state.indicatorCode = $("lens-indicator").value;
+    $("indicator-select").value = state.indicatorCode;
+    state.lensSelection = null;
+    renderIndicators();
+    renderLenses();
+    updateExportPreview();
+  });
+  $("lens-canvas").addEventListener("click", (event) => {
+    const rect = $("lens-canvas").getBoundingClientRect();
+    const x = event.clientX - rect.left,
+      y = event.clientY - rect.top;
+    let chosen = null,
+      distance = 144;
+    for (let dx = -1; dx <= 1; dx += 1)
+      for (let dy = -1; dy <= 1; dy += 1) {
+        for (const point of state.lensHitGrid.get(
+          `${Math.floor(x / 16) + dx},${Math.floor(y / 16) + dy}`,
+        ) || []) {
+          const squared = (point.x - x) ** 2 + (point.y - y) ** 2;
+          if (squared < distance) {
+            chosen = point.row;
+            distance = squared;
+          }
+        }
+      }
+    if (chosen) selectLensRecord(chosen);
+  });
 }
 
 function projectGeometry(geometry) {
@@ -2480,6 +3559,9 @@ async function initialize() {
       "event-type",
       "event-search",
       "location-precision",
+      "actor-search",
+      "apply-query",
+      "full-history",
     ])
       $(id).disabled = false;
     const precision =
@@ -2495,6 +3577,8 @@ async function initialize() {
       $("location-precision").append(option);
     }
     countryYears();
+    $("full-history").textContent =
+      `Full history · ${state.minYear}–${state.maxYear}`;
     updateYears(
       params.get("from") || 2020,
       params.get("to") || Math.min(2025, state.maxYear),
@@ -2515,6 +3599,7 @@ async function initialize() {
       ? `Snapshot built ${manifest.built_at.slice(0, 10)}`
       : "Dated dataset releases";
     renderProvenance();
+    probeDatabase();
     loadGeography();
     loadEvents();
     loadIndicators();

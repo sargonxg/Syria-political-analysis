@@ -52,6 +52,31 @@
         </aside>
       </section>
 
+      <section class="connection-bar" aria-label="Research data connection">
+        <div>
+          <span id="connection-badge" class="connection-badge"
+            >Static snapshot</span
+          ><span id="connection-status" role="status"
+            >Source files are verified in this browser.</span
+          >
+        </div>
+        <div class="connection-controls">
+          <label for="data-source">Query source</label
+          ><select id="data-source">
+            <option value="static">Verified static snapshot</option>
+            <option value="database" disabled>
+              Connected database
+            </option></select
+          ><a
+            id="database-workspace"
+            href="https://gc-personal-private.giuliocatanzariti.workers.dev/projects/tacitus/graph?tool=middle-east"
+            target="_blank"
+            rel="noreferrer"
+            >Open database workspace</a
+          >
+        </div>
+      </section>
+
       <section class="filter-panel" id="filters" aria-label="Research filters">
         <div class="filter-top">
           <label class="country-label"
@@ -84,35 +109,55 @@
                 disabled
             /></label>
           </fieldset>
-          <label
-            >Location precision
-            <select id="location-precision" disabled>
-              <option value="">All provider codes</option>
-            </select>
-          </label>
-          <label
-            >Provider category
-            <select id="event-type" disabled>
-              <option value="">All categories</option>
-            </select>
-          </label>
-          <label class="search-label"
-            >Find in loaded event records
+          <label class="actor-label"
+            >Recorded actor / side
             <input
-              id="event-search"
+              id="actor-search"
               type="search"
-              placeholder="A place, recorded side or event ID"
               maxlength="200"
+              placeholder="Search the provider’s side names"
               disabled
             />
           </label>
+          <button id="apply-query" class="primary" disabled>Apply query</button>
         </div>
+        <details class="advanced-filters">
+          <summary>Category, location precision and record search</summary>
+          <div class="advanced-filter-grid">
+            <label
+              >Location precision
+              <select id="location-precision" disabled>
+                <option value="">All provider codes</option>
+              </select>
+            </label>
+            <label
+              >Provider category
+              <select id="event-type" disabled>
+                <option value="">All categories</option>
+              </select>
+            </label>
+            <label class="search-label"
+              >Find in loaded event records
+              <input
+                id="event-search"
+                type="search"
+                placeholder="A place, recorded side or event ID"
+                maxlength="200"
+                disabled
+              />
+            </label>
+          </div>
+        </details>
         <div class="load-line">
           <p id="load-status" role="status" aria-live="polite">
             Loading the public manifest.
           </p>
+          <span id="query-receipt"></span>
           <button id="retry-load" class="text-button" hidden>
             Retry loading
+          </button>
+          <button id="full-history" class="text-button" disabled>
+            Full history
           </button>
           <a href="#method">How to read this</a>
         </div>
@@ -130,6 +175,9 @@
                 <button id="map-view" aria-pressed="true">Geography</button>
                 <button id="network-view" aria-pressed="false">
                   Recorded sides
+                </button>
+                <button id="lenses-view" aria-pressed="false">
+                  Context lenses
                 </button>
               </div>
             </div>
@@ -198,6 +246,85 @@
               </p>
               <div id="network-pairs" class="network-pairs"></div>
             </div>
+            <section
+              id="context-lenses-view"
+              class="lenses-view"
+              aria-label="Source-qualified context lenses"
+              hidden
+            >
+              <div class="lenses-toolbar">
+                <div
+                  id="lens-choices"
+                  class="lens-choices"
+                  role="group"
+                  aria-label="Semantic lens"
+                ></div>
+                <label
+                  >Record collection<select id="lens-collection">
+                    <option value="query">Current event query</option>
+                    <option value="index">Source navigation index</option>
+                  </select></label
+                >
+              </div>
+              <div class="lens-introduction">
+                <div>
+                  <h3 id="lens-title">Reading the lens catalogue…</h3>
+                  <p id="lens-scope"></p>
+                </div>
+                <span id="lens-count"></span>
+              </div>
+              <label
+                id="lens-indicator-label"
+                class="lens-indicator-label"
+                hidden
+                >Annual indicator<select id="lens-indicator"></select
+              ></label>
+              <p id="lens-status" class="lens-status" role="status">
+                The catalogue loads when you open this view.
+              </p>
+              <button id="retry-lenses" hidden>Retry lens catalogue</button>
+              <div class="lens-canvas-frame">
+                <canvas
+                  id="lens-canvas"
+                  role="img"
+                  aria-label="Source record graph; individual records remain available in the directory below"
+                ></canvas>
+              </div>
+              <p id="lens-layout-note" class="lens-layout-note"></p>
+              <div
+                id="lens-record-path"
+                class="lens-record-path"
+                aria-live="polite"
+              ></div>
+              <details class="lens-directory">
+                <summary>Browse lens records with keyboard or touch</summary>
+                <label
+                  >Find a lens record<input
+                    id="lens-search"
+                    type="search"
+                    maxlength="200"
+                    placeholder="Record ID, label, year or country"
+                /></label>
+                <div id="lens-record-list" class="lens-record-list"></div>
+                <div class="lens-pagination">
+                  <button id="lens-previous" disabled>Previous records</button
+                  ><span id="lens-page-status"></span
+                  ><button id="lens-next" disabled>Next records</button>
+                </div>
+              </details>
+              <div class="lens-reading">
+                <div>
+                  <h4>Why this matters for policy</h4>
+                  <p id="lens-policy"></p>
+                </div>
+                <details>
+                  <summary>Vocabulary, alignment and source limits</summary>
+                  <div id="lens-terms"></div>
+                  <p id="lens-limitations"></p>
+                  <p id="lens-index-method"></p>
+                </details>
+              </div>
+            </section>
             <section class="timeline" aria-labelledby="timeline-title">
               <div class="section-heading">
                 <h3 id="timeline-title">Time, in perspective</h3>
@@ -254,6 +381,12 @@
               <button id="previous-page" disabled>Previous</button
               ><span id="page-status">Page 0 of 0</span
               ><button id="next-page" disabled>Next</button>
+            </div>
+            <div id="database-pagination" class="database-pagination" hidden>
+              <button id="database-previous" disabled>
+                Previous database page</button
+              ><span id="database-page-status"></span
+              ><button id="database-next" disabled>Next database page</button>
             </div>
           </section>
         </div>

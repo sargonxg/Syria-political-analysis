@@ -1,0 +1,42 @@
+{
+  "provenance": {
+    "description": "One actual normalized WDI annual result, retained with source fields and attributed series metadata. Not synthetic and not a direct-measurement claim.",
+    "dataset_id": "world-bank-wdi",
+    "source_snapshot_manifest_sha256": "2d047fe127c9bc8af9532772be59f69880cf09b4bf45ab90f273a0ba30ed9c09",
+    "license": "CC-BY-4.0; World Bank dataset terms also apply",
+    "source_url": "https://api.worldbank.org/v2/country/SYR/indicator/SP.POP.TOTL?source=2&date=2024&format=json&footnote=y"
+  },
+  "record": {
+    "attributes": {
+      "country_id": "SY",
+      "country_name": "Syrian Arab Republic",
+      "countryiso3code": "SYR",
+      "date": "2024",
+      "decimal": 0,
+      "display_unit": "persons",
+      "display_unit_basis": "Reviewed indicator name and definition; original unit metadata retained; no scaling applied.",
+      "footnote": "",
+      "indicator_id": "SP.POP.TOTL",
+      "indicator_name": "Population, total",
+      "interpretation_note": "Midyear population estimate; not a census count.",
+      "obs_status": "",
+      "request_receipt_id": "wb-request:1a6743531145ae4ed86b4a63",
+      "source_id_requested": "2",
+      "source_indicator_metadata": "https://api.worldbank.org/v2/sources/2/series/SP.POP.TOTL/metadata?format=json",
+      "source_last_updated": "2026-10-08",
+      "source_status_interpretation": "Blank provider status. Direct measurement versus estimate/projection is not supplied at cell level; consult methodology.",
+      "unit": "",
+      "value": 24672760
+    },
+    "country_code": "SY",
+    "dataset_id": "world-bank-wdi",
+    "id": "wdi:2:SYR:SP.POP.TOTL:2024",
+    "indicator_code": "SP.POP.TOTL",
+    "indicator_name": "Population, total",
+    "source_locator": "https://api.worldbank.org/v2/country/SYR/indicator/SP.POP.TOTL?source=2&date=2024&format=json&footnote=y",
+    "status": "Source status unspecified",
+    "unit": "persons",
+    "value": 24672760,
+    "year": 2024
+  }
+}

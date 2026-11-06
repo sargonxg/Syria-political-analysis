@@ -1,0 +1,120 @@
+{
+  "format": "policy-semantic-lenses/1",
+  "version": "1.0.0",
+  "context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "time": "http://www.w3.org/2006/time#",
+    "geo": "http://www.opengis.net/ont/geosparql#",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "ssn": "http://www.w3.org/ns/ssn/",
+    "dcterms": "http://purl.org/dc/terms/"
+  },
+  "alignment_status": "Scoped vocabulary alignment and field navigation; no RDF entailment, reasoner, validation against every standard or claim of full compliance.",
+  "lenses": [
+    {
+      "id": "prov-o",
+      "title": "PROV-O · provenance",
+      "namespace": "http://www.w3.org/ns/prov#",
+      "reference": "https://www.w3.org/TR/prov-o/",
+      "standard_version": "W3C Recommendation 2013-04-30",
+      "applies_to": ["conflict_event", "country_indicator"],
+      "scope": "Follow a retained record to its named provider release, original identifier, source locator and byte identity.",
+      "terms": [
+        {"id": "prov:Entity", "url": "http://www.w3.org/ns/prov#Entity", "label": "Entity"},
+        {"id": "prov:wasDerivedFrom", "url": "http://www.w3.org/ns/prov#wasDerivedFrom", "label": "Was derived from"}
+      ],
+      "record_fields": ["id", "dataset_id", "provider_id", "source_locator", "raw_record_sha256"],
+      "templates": [
+        {"id": "record-origin", "subject": "record", "predicate": "prov:wasDerivedFrom", "object": "dataset", "source_fields": ["dataset_id", "provider_id"], "scope": "The normalized record derives from the named source dataset, not an independent corroborating source."}
+      ],
+      "limitations": ["Lineage is not verification or source independence.", "No claim is made that every upstream news reference was retrieved or reviewed."]
+    },
+    {
+      "id": "skos",
+      "title": "SKOS · concepts",
+      "namespace": "http://www.w3.org/2004/02/skos/core#",
+      "reference": "https://www.w3.org/TR/skos-reference/",
+      "standard_version": "W3C Recommendation 2009-08-18",
+      "applies_to": ["conflict_event", "country_indicator"],
+      "scope": "Keep provider category codes and their labels explicit. GED violence types are concepts in a small source-specific scheme; annual series retain their own indicator identifiers.",
+      "terms": [
+        {"id": "skos:Concept", "url": "http://www.w3.org/2004/02/skos/core#Concept", "label": "Concept"},
+        {"id": "skos:ConceptScheme", "url": "http://www.w3.org/2004/02/skos/core#ConceptScheme", "label": "Concept scheme"},
+        {"id": "skos:prefLabel", "url": "http://www.w3.org/2004/02/skos/core#prefLabel", "label": "Preferred label"},
+        {"id": "skos:notation", "url": "http://www.w3.org/2004/02/skos/core#notation", "label": "Source notation"}
+      ],
+      "record_fields": ["attributes.type_of_violence", "attributes.indicator_id", "attributes.indicator_name"],
+      "templates": [
+        {"id": "provider-category", "subject": "record", "predicate": "dcterms:subject", "object": "provider_concept", "source_fields": ["attributes.type_of_violence"], "scope": "A category explicitly supplied by the provider. No inferred topic, allegiance or cross-scheme equivalence."}
+      ],
+      "limitations": ["No skos:exactMatch or broader/narrower hierarchy is inferred.", "Provider classification does not establish a present-day affiliation or a political judgment."]
+    },
+    {
+      "id": "owl-time",
+      "title": "OWL-Time · time",
+      "namespace": "http://www.w3.org/2006/time#",
+      "reference": "https://www.w3.org/TR/2017/REC-owl-time-20171019/",
+      "standard_version": "W3C Recommendation 2017-10-19",
+      "applies_to": ["conflict_event", "country_indicator"],
+      "scope": "Inspect the provider event date window and its precision; distinguish an annual series label from an exact observation instant.",
+      "terms": [
+        {"id": "time:Interval", "url": "http://www.w3.org/2006/time#Interval", "label": "Interval"},
+        {"id": "time:hasBeginning", "url": "http://www.w3.org/2006/time#hasBeginning", "label": "Has beginning"},
+        {"id": "time:hasEnd", "url": "http://www.w3.org/2006/time#hasEnd", "label": "Has end"},
+        {"id": "time:inXSDgYear", "url": "http://www.w3.org/2006/time#inXSDgYear", "label": "Calendar year"}
+      ],
+      "record_fields": ["date_start", "date_end", "attributes.date_prec", "attributes.date"],
+      "templates": [
+        {"id": "reported-start", "subject": "reported_interval", "predicate": "time:hasBeginning", "object": "provider_start_date", "source_fields": ["date_start", "attributes.date_prec"], "scope": "A source-qualified date boundary, not proof of an exact instant."},
+        {"id": "reported-end", "subject": "reported_interval", "predicate": "time:hasEnd", "object": "provider_end_date", "source_fields": ["date_end", "attributes.date_prec"], "scope": "The full reported date window remains visible."}
+      ],
+      "limitations": ["No Allen interval reasoning or ordering inference is run.", "Raw midnight timestamps are not treated as precise times; annual values may refer to fiscal or modelled periods described by series metadata."]
+    },
+    {
+      "id": "geosparql",
+      "title": "GeoSPARQL · geography",
+      "namespace": "http://www.opengis.net/ont/geosparql#",
+      "reference": "https://docs.ogc.org/is/22-047r1/22-047r1.html",
+      "standard_version": "OGC GeoSPARQL 1.1, document 22-047r1",
+      "applies_to": ["conflict_event"],
+      "scope": "Separate a reported feature from its provider coordinate representation and geographic precision. A marker can represent a broad area.",
+      "terms": [
+        {"id": "geo:Feature", "url": "http://www.opengis.net/ont/geosparql#Feature", "label": "Feature"},
+        {"id": "geo:Geometry", "url": "http://www.opengis.net/ont/geosparql#Geometry", "label": "Geometry"},
+        {"id": "geo:hasGeometry", "url": "http://www.opengis.net/ont/geosparql#hasGeometry", "label": "Has geometry"},
+        {"id": "geo:asWKT", "url": "http://www.opengis.net/ont/geosparql#asWKT", "label": "WKT representation"}
+      ],
+      "record_fields": ["latitude", "longitude", "attributes.geom_wkt", "attributes.where_prec", "attributes.where_coordinates", "attributes.adm_1", "attributes.adm_2"],
+      "templates": [
+        {"id": "reported-geometry", "subject": "reported_feature", "predicate": "geo:hasGeometry", "object": "provider_geometry", "source_fields": ["latitude", "longitude", "attributes.where_prec"], "scope": "Coordinate representation only; not current control, a precise impact location or a boundary decision."}
+      ],
+      "limitations": ["No SPARQL geometry engine, spatial topology reasoning or GeoSPARQL conformance suite is implemented.", "Annual economy values are not geocoded as conflict events; provider country labels are retained without sovereignty inference."]
+    },
+    {
+      "id": "sosa-ssn",
+      "title": "SOSA / SSN · observations",
+      "namespace": "http://www.w3.org/ns/sosa/",
+      "reference": "https://www.w3.org/TR/vocab-ssn/",
+      "standard_version": "W3C / OGC Semantic Sensor Network Ontology, 2017",
+      "applies_to": ["country_indicator"],
+      "scope": "Use the SOSA observation/property/feature/result pattern to inspect an actual World Bank annual value. The source may be estimated or modelled; this does not assert a physical sensor or a direct measurement.",
+      "terms": [
+        {"id": "sosa:Observation", "url": "http://www.w3.org/ns/sosa/Observation", "label": "Observation"},
+        {"id": "sosa:observedProperty", "url": "http://www.w3.org/ns/sosa/observedProperty", "label": "Observed property"},
+        {"id": "sosa:hasFeatureOfInterest", "url": "http://www.w3.org/ns/sosa/hasFeatureOfInterest", "label": "Feature of interest"},
+        {"id": "sosa:hasResult", "url": "http://www.w3.org/ns/sosa/hasResult", "label": "Has result"},
+        {"id": "sosa:phenomenonTime", "url": "http://www.w3.org/ns/sosa/phenomenonTime", "label": "Phenomenon time"}
+      ],
+      "record_fields": ["attributes.countryiso3code", "attributes.indicator_id", "attributes.indicator_name", "attributes.date", "attributes.value", "attributes.unit", "unit"],
+      "templates": [
+        {"id": "annual-property", "subject": "provider_annual_observation", "predicate": "sosa:observedProperty", "object": "indicator", "source_fields": ["attributes.indicator_id", "attributes.indicator_name"], "scope": "The named annual indicator; not an inferred conflict metric."},
+        {"id": "annual-feature", "subject": "provider_annual_observation", "predicate": "sosa:hasFeatureOfInterest", "object": "provider_economy", "source_fields": ["attributes.countryiso3code", "attributes.country_name"], "scope": "The source economy classification, not an event point."},
+        {"id": "annual-result", "subject": "provider_annual_observation", "predicate": "sosa:hasResult", "object": "reported_value", "source_fields": ["attributes.value", "unit", "attributes.unit"], "scope": "Preserve value, metadata-derived display unit and raw unit separately."},
+        {"id": "annual-period", "subject": "provider_annual_observation", "predicate": "sosa:phenomenonTime", "object": "provider_annual_period", "source_fields": ["attributes.date"], "scope": "An annual reference label, not a known measurement instant or retrieval time."}
+      ],
+      "example_request": {"dataset_id": "world-bank-wdi", "record_id": "wdi:2:SYR:SP.POP.TOTL:2024"},
+      "limitations": ["The concrete example is a provider annual population result, not a GED conflict record or sensor observation.", "No madeBySensor, instrument, procedure, exact measurement time or SSN implementation/compliance is invented.", "An annual value aligned with an event year is not evidence of causation."]
+    }
+  ]
+}

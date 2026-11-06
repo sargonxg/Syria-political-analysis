@@ -1,0 +1,38 @@
+{
+  "checked_on": "2026-11-06",
+  "version": "0.5.0",
+  "events": 120576,
+  "event_years": [
+    2000,
+    2025
+  ],
+  "annual_values": 15272,
+  "source_profiles": 55,
+  "semantic_lenses": 5,
+  "semantic_navigation_records": 2048,
+  "navigation_is_representative": false,
+  "python_tests_passed": 135,
+  "worker_api_tests_passed": 7,
+  "static_browser_checks": 30,
+  "local_sqlite_browser_checks": 11,
+  "axe_states": 12,
+  "axe_violations": 0,
+  "independent_semantic_browser_checks": 29,
+  "remote_d1": {
+    "ready": true,
+    "import_parts": 35,
+    "source_sql_sha256": "4fc4933aa54ac43176e8dc2c61d34729241a02b3f7d1ca3fa028d8e0eb9a6201",
+    "database_bytes": 452685824,
+    "remote_rows_with_wrong_original_field_count": 0,
+    "worked_syria_2024_2025_type1_precision1_matches": 323,
+    "syria_population_2024": 24672760
+  },
+  "local_workerd": {
+    "real_data_subset": true,
+    "event_rows": 40,
+    "original_fields_verified": 49,
+    "browser_checks_passed": 10,
+    "pagination_browser_skip": "Only14 matches in the subset; keyset pagination separately passed actual-D1 API pages of3."
+  },
+  "scope": "Remote D1 was verified through the account API. Authenticated owner-site browser use is a separate deployment check; local adapter and subset runtime checks do not establish production browser availability."
+}

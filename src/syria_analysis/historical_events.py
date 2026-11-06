@@ -37,7 +37,7 @@ CODEBOOK_SHA256 = "f767380ebbf365aec7586f98b6d100cafb69fb54010a908604d53bd9ad655
 COLLECTION_URL = "https://ucdp.uu.se/downloads/"
 LICENSE_URL = "https://creativecommons.org/licenses/by/4.0/"
 MAX_SHARD_BYTES = 1536 * 1024
-START_YEAR, END_YEAR = 2011, 2025
+START_YEAR, END_YEAR = 2000, 2025
 COUNTRIES = {
     "Syria": "SY",
     "Iraq": "IQ",
@@ -152,7 +152,7 @@ PRECISION = {
     },
 }
 LIMITATIONS = [
-    "Historical coded observations, 2011–2025; not a current operational feed.",
+    f"Historical coded observations, {START_YEAR}–{END_YEAR}; not a current operational feed.",
     "A selected-country subset, not complete violence, news or policy coverage.",
     "Provider country labels and coordinates are retained; lookup codes do not assert political boundaries or legal status.",
     "The provider Israel category contains location records in Gaza and the West Bank; no separate country series is invented.",
@@ -277,7 +277,10 @@ def _dataset_metadata() -> dict:
         "csv_bytes": CSV_BYTES,
         "codebook_url": CODEBOOK_URL,
         "codebook_sha256": CODEBOOK_SHA256,
-        "coverage": {"date_start": "2011-01-01", "date_end": "2025-12-31"},
+        "coverage": {
+            "date_start": f"{START_YEAR}-01-01",
+            "date_end": f"{END_YEAR}-12-31",
+        },
         "precision": PRECISION,
         "limitations": LIMITATIONS,
         "attribution": [

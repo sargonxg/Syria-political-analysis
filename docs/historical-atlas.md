@@ -1,6 +1,6 @@
 # Historical research atlas
 
-A reproducible Middle East data workspace: **113,656 UCDP GED event records for 2011–2025**, plus **15,272 non-null annual World Development Indicators values**, 32 indicators and ten economies. The event collection has nine provider country categories; annual country context also includes the World Bank's West Bank and Gaza category. These are separate source classifications, not a border determination or an inferred join.
+A reproducible Middle East data workspace: **120,576 UCDP GED event records for 2000–2025**, plus **15,272 non-null annual World Development Indicators values**, 32 indicators and ten economies. The event collection has nine provider country categories; annual country context also includes the World Bank's West Bank and Gaza category. These are separate source classifications, not a border determination or an inferred join.
 
 The map and time filter operate on compact point partitions. Selecting a record retrieves its complete 49 original UCDP fields. Full records, codebook precision, dates, fatality estimates and source locators remain attached. Static builds store the detailed partitions as lossless gzip JSON; browser and CLI verify both compressed and decoded identities before reading them. The source snapshot remains plain, immutable JSON. The recorded-sides view counts provider side-A/side-B pairs; its lines do not establish affiliation or current relationships. A paginated directory provides the same record selection without relying on a map.
 

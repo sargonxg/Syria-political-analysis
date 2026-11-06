@@ -1,0 +1,19 @@
+{
+  "main_module": "research-worker.mjs",
+  "compatibility_date": "2026-11-06",
+  "bindings": [
+    { "type": "assets", "name": "ASSETS" },
+    { "type": "d1", "name": "RESEARCH_DB", "id": "<YOUR_D1_DATABASE_UUID>" },
+    { "type": "plain_text", "name": "PRIVATE_HOSTNAME", "text": "research-preview.example.org" }
+  ],
+  "assets": {
+    "jwt": "<ASSETS_UPLOAD_COMPLETION_TOKEN_NOT_COMMITTED>",
+    "config": {
+      "run_worker_first": [
+        "/api/research/*",
+        "/tools/middle-east/observations/data/manifest.json",
+        "/observations/data/manifest.json"
+      ]
+    }
+  }
+}

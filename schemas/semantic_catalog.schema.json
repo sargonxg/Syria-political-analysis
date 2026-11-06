@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sargonxg/Syria-political-analysis/blob/main/schemas/semantic_catalog.schema.json",
+  "title": "Bounded source-derived semantic navigation contracts",
+  "oneOf": [
+    {"$ref": "#/$defs/catalog"},
+    {"$ref": "#/$defs/graph"},
+    {"$ref": "#/$defs/partition"},
+    {"$ref": "#/$defs/lenses"}
+  ],
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "asset": {
+      "type": "object",
+      "required": ["path", "bytes", "sha256"],
+      "properties": {
+        "path": {"type": "string", "pattern": "^\\./data/[A-Za-z0-9_./-]+\\.json(?:\\.gz)?$"},
+        "bytes": {"type": "integer", "minimum": 0, "maximum": 3145728},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "lens": {
+      "type": "object",
+      "required": ["id", "title", "namespace", "reference", "standard_version", "applies_to", "scope", "terms", "record_fields", "templates", "limitations"],
+      "properties": {
+        "id": {"enum": ["prov-o", "skos", "owl-time", "geosparql", "sosa-ssn"]},
+        "title": {"type": "string", "minLength": 1},
+        "namespace": {"type": "string", "format": "uri"},
+        "reference": {"type": "string", "format": "uri"},
+        "standard_version": {"type": "string"},
+        "applies_to": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["conflict_event", "country_indicator"]}},
+        "scope": {"type": "string", "minLength": 20},
+        "terms": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["id", "url", "label"], "properties": {"id": {"type": "string"}, "url": {"type": "string", "format": "uri"}, "label": {"type": "string"}}, "additionalProperties": false}},
+        "record_fields": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "templates": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["id", "subject", "predicate", "object", "source_fields", "scope"], "properties": {"id": {"type": "string"}, "subject": {"type": "string"}, "predicate": {"type": "string"}, "object": {"type": "string"}, "source_fields": {"type": "array", "minItems": 1, "items": {"type": "string"}}, "scope": {"type": "string"}}, "additionalProperties": false}},
+        "limitations": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "example_request": {"type": "object", "required": ["dataset_id", "record_id"], "properties": {"dataset_id": {"const": "world-bank-wdi"}, "record_id": {"type": "string", "pattern": "^wdi:2:"}}, "additionalProperties": false}
+      },
+      "additionalProperties": false
+    },
+    "lenses": {
+      "type": "object",
+      "required": ["format", "version", "context", "alignment_status", "lenses"],
+      "properties": {
+        "format": {"const": "policy-semantic-lenses/1"},
+        "version": {"const": "1.0.0"},
+        "context": {"type": "object"},
+        "alignment_status": {"type": "string"},
+        "lenses": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"$ref": "#/$defs/lens"}}
+      },
+      "additionalProperties": false
+    },
+    "record": {
+      "type": "object",
+      "required": ["id", "kind", "dataset_id", "label", "country_code", "date_start", "date_end", "latitude", "longitude", "raw_shard", "raw_record_sha256", "compact_shard", "precision", "concept"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^ucdp-ged:26\\.1:[0-9]+$"},
+        "kind": {"const": "conflict_event"},
+        "dataset_id": {"const": "ucdp-ged-26.1"},
+        "label": {"type": "string"},
+        "country_code": {"enum": ["SY", "IQ", "LB", "IL", "JO", "EG", "YE", "IR", "TR"]},
+        "date_start": {"type": "string", "format": "date"},
+        "date_end": {"type": "string", "format": "date"},
+        "latitude": {"type": "number", "minimum": -90, "maximum": 90},
+        "longitude": {"type": "number", "minimum": -180, "maximum": 180},
+        "raw_shard": {"type": "string", "pattern": "^\\./data/events-raw/[A-Z]{2}/[0-9]{4}-[0-9]{3}\\.json\\.gz$"},
+        "raw_record_sha256": {"$ref": "#/$defs/sha256"},
+        "compact_shard": {"type": "string", "pattern": "^\\./data/events/[A-Z]{2}/[0-9]{4}-[0-9]{3}\\.json$"},
+        "precision": {"type": "object", "required": ["where_prec", "date_prec", "event_clarity"], "properties": {"where_prec": {"enum": ["1", "2", "3", "4", "5", "6", "7"]}, "date_prec": {"enum": ["1", "2", "3", "4", "5"]}, "event_clarity": {"enum": ["1", "2"]}}, "additionalProperties": false},
+        "concept": {"type": "object", "required": ["id", "label", "source_field", "value"], "properties": {"id": {"type": "string", "pattern": "^ucdp:type-of-violence:[123]$"}, "label": {"type": "string"}, "source_field": {"const": "type_of_violence"}, "value": {"enum": ["1", "2", "3"]}}, "additionalProperties": false}
+      },
+      "additionalProperties": false
+    },
+    "anchor": {
+      "type": "object",
+      "required": ["id", "kind", "label"],
+      "properties": {"id": {"type": "string"}, "kind": {"enum": ["dataset", "concept"]}, "label": {"type": "string"}, "dataset_id": {"type": "string"}, "url": {"type": "string", "format": "uri"}, "license": {"type": "string"}, "version": {"type": "string"}, "scheme": {"type": "string"}, "code": {"enum": ["1", "2", "3"]}},
+      "additionalProperties": false
+    },
+    "graph": {
+      "type": "object",
+      "required": ["format", "dataset_ids", "context", "source_snapshot_sha256", "selection", "nodes", "edges", "counts", "limitations"],
+      "properties": {
+        "format": {"const": "policy-semantic-graph/1"},
+        "dataset_ids": {"const": ["ucdp-ged-26.1"]},
+        "context": {"type": "object"},
+        "source_snapshot_sha256": {"$ref": "#/$defs/sha256"},
+        "selection": {"type": "object", "required": ["method", "purpose", "requested_record_nodes", "available_records"], "properties": {"method": {"const": "round_robin_country_year_then_provider_id"}, "purpose": {"const": "Navigation sample, not statistically representative"}, "requested_record_nodes": {"const": 2048}, "available_records": {"type": "integer", "minimum": 1}}, "additionalProperties": false},
+        "nodes": {"type": "array", "minItems": 1, "maxItems": 2052, "items": {"oneOf": [{"$ref": "#/$defs/record"}, {"$ref": "#/$defs/anchor"}]}},
+        "edges": {"type": "array", "maxItems": 4096, "items": {"type": "object", "required": ["source", "target", "predicate", "lens", "source_fields"], "properties": {"source": {"type": "string"}, "target": {"type": "string"}, "predicate": {"enum": ["prov:wasDerivedFrom", "dcterms:subject"]}, "lens": {"enum": ["prov-o", "skos"]}, "source_fields": {"type": "array", "minItems": 1, "items": {"type": "string"}}}, "additionalProperties": false}},
+        "counts": {"type": "object", "required": ["record_nodes", "nodes", "edges"], "additionalProperties": {"type": "integer", "minimum": 0}},
+        "limitations": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "partition": {
+      "type": "object",
+      "required": ["format", "country_code", "partition_year", "year_start", "year_end", "record_count", "source_snapshot_sha256", "event_shards", "raw_shards", "lens_ids", "scope"],
+      "properties": {
+        "format": {"const": "policy-semantic-partition/1"},
+        "country_code": {"type": "string", "pattern": "^[A-Z]{2}$"},
+        "partition_year": {"type": "integer", "minimum": 2000, "maximum": 2025},
+        "year_start": {"type": "integer"}, "year_end": {"type": "integer"},
+        "record_count": {"type": "integer", "minimum": 1},
+        "source_snapshot_sha256": {"$ref": "#/$defs/sha256"},
+        "event_shards": {"type": "array", "minItems": 1, "items": {"allOf": [{"$ref": "#/$defs/asset"}, {"required": ["count", "dataset_id", "country_code", "partition_year", "part"]}]}},
+        "raw_shards": {"type": "array", "minItems": 1, "items": {"allOf": [{"$ref": "#/$defs/asset"}, {"required": ["count", "encoding", "decoded_bytes", "decoded_sha256"], "properties": {"encoding": {"const": "gzip"}, "decoded_bytes": {"type": "integer", "maximum": 1572864}, "decoded_sha256": {"$ref": "#/$defs/sha256"}}}]}},
+        "lens_ids": {"const": ["prov-o", "skos", "owl-time", "geosparql", "sosa-ssn"]},
+        "scope": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "catalog": {
+      "type": "object",
+      "required": ["format", "version", "built_at", "source_snapshots", "datasets", "ontology_alignment", "context", "lenses", "concepts", "counts", "graph_view", "partitions", "examples", "limitations"],
+      "properties": {
+        "format": {"const": "policy-semantic-catalog/1"}, "version": {"const": "1.0.0"},
+        "built_at": {"type": "string", "format": "date-time"},
+        "source_snapshots": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["dataset_id", "repository_path", "sha256", "record_count"], "properties": {"sha256": {"$ref": "#/$defs/sha256"}, "record_count": {"type": "integer", "minimum": 1}}}},
+        "datasets": {"type": "array", "minItems": 1},
+        "ontology_alignment": {"type": "string", "minLength": 20},
+        "context": {"type": "object"},
+        "lenses": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"$ref": "#/$defs/lens"}},
+        "concepts": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"$ref": "#/$defs/anchor"}},
+        "counts": {"type": "object", "required": ["event_records", "annual_values", "lenses", "partitions", "record_nodes", "nodes", "edges"], "additionalProperties": {"type": "integer", "minimum": 0}},
+        "graph_view": {"allOf": [{"$ref": "#/$defs/asset"}, {"required": ["node_count", "record_node_count", "edge_count"]}]},
+        "partitions": {"type": "array", "minItems": 1, "items": {"allOf": [{"$ref": "#/$defs/asset"}, {"required": ["country_code", "partition_year", "year_start", "year_end", "record_count"]}]}},
+        "examples": {"type": "array", "maxItems": 1, "items": {"type": "object", "required": ["lens", "id", "kind", "dataset_id", "indicator_shard", "shard", "attributes_sha256", "evidence_fields", "qualification"], "properties": {"lens": {"const": "sosa-ssn"}, "kind": {"const": "country_indicator"}, "attributes_sha256": {"$ref": "#/$defs/sha256"}, "shard": {"$ref": "#/$defs/asset"}}}},
+        "limitations": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    }
+  }
+}

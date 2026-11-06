@@ -40,6 +40,13 @@ async function testObservations(page, baseURL = "http://127.0.0.1:8766") {
     await page.setViewportSize({ width: 1440, height: 1100 });
     await page.goto(atlasURL);
     await ready("Syria");
+    const manifest = await (
+      await page.request.get(atlasURL + "data/manifest.json")
+    ).json();
+    const declaredEvents = manifest.event_shards.reduce(
+      (sum, shard) => sum + shard.count,
+      0,
+    );
     await page.waitForFunction(
       () =>
         document
@@ -49,8 +56,10 @@ async function testObservations(page, baseURL = "http://127.0.0.1:8766") {
       { timeout: 60000 },
     );
     ok(
-      (await page.locator("#edition-coverage").innerText()).includes("113,656"),
-      "Manifest describes the real 113,656-record historical subset",
+      (await page.locator("#edition-coverage").innerText()).includes(
+        new Intl.NumberFormat("en").format(declaredEvents),
+      ) && declaredEvents >= 120576,
+      "Edition describes the manifested historical subset, including the expanded 2000–2025 records",
     );
     ok(
       (await page.locator("#event-rows tr").count()) > 0 &&
@@ -115,6 +124,87 @@ async function testObservations(page, baseURL = "http://127.0.0.1:8766") {
       ),
       "Every dataset has exactly the seven cross-repository provenance fields",
     );
+    ok(
+      (await page.locator("#connection-badge").innerText()) ===
+        "Static snapshot",
+      "Static delivery is labelled explicitly before any database opt-in",
+    );
+    if (!manifest.query_api?.enabled)
+      ok(
+        !requests.some((url) =>
+          new URL(url).pathname.startsWith("/api/research"),
+        ),
+        "An unconfigured static mirror makes no database probe or cross-origin fallback",
+      );
+    await page.locator("#lenses-view").click();
+    await page.waitForFunction(
+      () => document.querySelectorAll("#lens-choices button").length === 5,
+      null,
+      { timeout: 30000 },
+    );
+    for (const id of ["prov-o", "skos", "owl-time", "geosparql"]) {
+      await page.locator(`[data-lens="${id}"]`).click();
+      ok(
+        (await page.locator("#lens-count").innerText()).includes("5,263") &&
+          (await page.locator("#lens-policy").innerText()).length > 40,
+        "Source records and a concrete policy-use explanation remain visible in " +
+          id,
+      );
+    }
+    await page.locator("#lens-collection").selectOption("index");
+    await page.waitForFunction(
+      () => document.querySelector("#lens-count").textContent.includes("2,048"),
+      null,
+      { timeout: 30000 },
+    );
+    ok(
+      (await page.locator("#lens-status").innerText()).includes(
+        "nonrepresentative",
+      ),
+      "The 2,048-node navigation sample is visibly qualified",
+    );
+    await page.locator(".lens-directory summary").click();
+    await page.locator("#lens-record-list button").first().click();
+    await page.waitForFunction(
+      () =>
+        document
+          .querySelector("#event-inspector details summary")
+          ?.textContent.includes("49 original provider fields"),
+      null,
+      { timeout: 30000 },
+    );
+    ok(
+      (await page.locator("#lens-record-path").innerText()).includes(
+        await page.locator("#event-inspector .record-id").first().innerText(),
+      ),
+      "Indexed graph selection resolves the exact underlying source identity and original fields",
+    );
+    await page.locator("#export-kind").selectOption("selected");
+    const indexed = (await downloadSelection()).pack;
+    ok(
+      indexed.records.length === 1 &&
+        indexed.filters.country_code === indexed.records[0].country_code &&
+        indexed.filters.events.date_overlap.from ===
+          indexed.records[0].date_start &&
+        indexed.filters.events.query_source === "static_snapshot",
+      "An indexed record outside the query exports its own country, dates and static source basis",
+    );
+    await page.locator("#export-kind").selectOption("events");
+    await page.locator('[data-lens="sosa-ssn"]').click();
+    await page.locator("#lens-record-list button").first().click();
+    ok(
+      (await page.locator("#lens-count").innerText()).includes(
+        "66 real annual",
+      ) &&
+        (await page.locator("#inspector-title").innerText()) ===
+          "Annual observation" &&
+        !(await page.locator("#lens-record-list").innerText()).includes(
+          "-01-01",
+        ),
+      "SOSA reads actual annual values and year labels, without inventing an exact measurement day or a GED sensor",
+    );
+    await page.locator("#map-view").click();
+    await page.locator(".advanced-filters summary").click();
     await page.locator("#event-type").selectOption("1");
     await page.locator("#location-precision").selectOption("1");
     const filtered = (await downloadSelection()).pack;
@@ -129,6 +219,21 @@ async function testObservations(page, baseURL = "http://127.0.0.1:8766") {
         filtered.filters.events.where_prec === "1",
       "Provider category and geographic precision filter both the records and exported filter receipt",
     );
+    await page.locator("#actor-search").fill("SDF");
+    await page.locator("#apply-query").click();
+    const actor = (await downloadSelection()).pack;
+    ok(
+      actor.records.length > 0 &&
+        actor.records.every((row) =>
+          (row.attributes.side_a + " " + row.attributes.side_b)
+            .toLowerCase()
+            .includes("sdf"),
+        ) &&
+        actor.filters.events.actor === "sdf",
+      "A literal recorded-actor query filters real provider side names and preserves its receipt",
+    );
+    await page.locator("#actor-search").fill("");
+    await page.locator("#apply-query").click();
     await page.locator("#network-view").click();
     await page.waitForFunction(
       () => document.querySelectorAll("#network-pairs li").length > 0,
