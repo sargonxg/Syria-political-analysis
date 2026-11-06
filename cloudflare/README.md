@@ -160,7 +160,13 @@ Run the user Worker first for `/api/research/*` and these exact manifest paths:
 ```text
 /tools/middle-east/observations/data/manifest.json
 /observations/data/manifest.json
+/tools/tacitus-context/semantic/manifest.json
+/semantic/manifest.json
 ```
+
+Atlas paths must have `policy-observation-atlas/1`; Workbench semantic paths must
+have `tacitus-semantic-explorer/1`. A different format at an allowed path is
+rejected rather than being rewritten. Other paths are never rewritten.
 
 Only with a bound database, the Worker adds
 `query_api:{"enabled":true,"base_url":"/api/research"}` to that served manifest.

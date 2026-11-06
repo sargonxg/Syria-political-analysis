@@ -12,7 +12,9 @@
       "run_worker_first": [
         "/api/research/*",
         "/tools/middle-east/observations/data/manifest.json",
-        "/observations/data/manifest.json"
+        "/observations/data/manifest.json",
+        "/tools/tacitus-context/semantic/manifest.json",
+        "/semantic/manifest.json"
       ]
     }
   }

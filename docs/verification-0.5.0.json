@@ -12,7 +12,7 @@
   "semantic_navigation_records": 2048,
   "navigation_is_representative": false,
   "python_tests_passed": 135,
-  "worker_api_tests_passed": 7,
+  "worker_api_tests_passed": 8,
   "static_browser_checks": 30,
   "local_sqlite_browser_checks": 11,
   "axe_states": 12,
@@ -34,5 +34,10 @@
     "browser_checks_passed": 10,
     "pagination_browser_skip": "Only14 matches in the subset; keyset pagination separately passed actual-D1 API pages of3."
   },
-  "scope": "Remote D1 was verified through the account API. Authenticated owner-site browser use is a separate deployment check; local adapter and subset runtime checks do not establish production browser availability."
+  "scope": "Remote D1 was verified through the account API. Authenticated owner-site browser use is a separate deployment check; local adapter and subset runtime checks do not establish production browser availability.",
+  "worker_module_sha256": "ae9bd767fc59705e1a6028582eed9bdb27538f5a435510e57dea025b0630f17d",
+  "connected_manifests": [
+    "Atlas",
+    "Workbench semantic exploration"
+  ]
 }

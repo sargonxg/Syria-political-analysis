@@ -140,3 +140,35 @@ test('only a bound private-host manifest gets the explicit API gate, preserving 
     assert.equal((await tooLarge.json()).error.code, 'MANIFEST_TOO_LARGE');
     db.close();
 });
+
+test('Workbench manifest paths have their own strict format and unchanged hashes without a binding', async () => {
+    const { db, env } = fixture();
+    const original = { format: 'tacitus-semantic-explorer/1', graph: { path: './graph.json', sha256: 'd'.repeat(64) },
+        catalog: { path: './catalog.json', sha256: 'e'.repeat(64) }, source_snapshot: { sha256: 'f'.repeat(64) } };
+    const body = JSON.stringify(original);
+    const assets = { fetch: async () => new Response(body, { headers: { 'Content-Type': 'application/json', ETag: 'semantic-original' } }) };
+    for (const path of ['/tools/tacitus-context/semantic/manifest.json', '/semantic/manifest.json']) {
+        const result = await worker.fetch(new Request('https://private.example.org' + path), { ...env, ASSETS: assets });
+        assert.equal(result.status, 200);
+        const manifest = await result.json();
+        assert.deepEqual(manifest.query_api, { enabled: true, base_url: '/api/research' });
+        delete manifest.query_api;
+        assert.deepEqual(manifest, original);
+        assert.equal(result.headers.get('cache-control'), 'private, no-store');
+        assert.equal(result.headers.get('etag'), null);
+        const unbound = await worker.fetch(new Request('https://private.example.org' + path), { ASSETS: assets });
+        assert.equal(await unbound.text(), body);
+        assert.equal(unbound.headers.get('etag'), 'semantic-original');
+        const wrong = await worker.fetch(new Request('https://private.example.org' + path), { ...env,
+            ASSETS: { fetch: async () => new Response(JSON.stringify({ format: 'policy-observation-atlas/1' })) } });
+        assert.equal(wrong.status, 503);
+        assert.equal((await wrong.json()).error.code, 'MANIFEST_UNAVAILABLE');
+    }
+    const wrongFamily = await worker.fetch(new Request('https://private.example.org/observations/data/manifest.json'), { ...env, ASSETS: assets });
+    assert.equal(wrongFamily.status, 503);
+    const unrelated = await worker.fetch(new Request('https://private.example.org/semantic/other-manifest.json'), { ...env, ASSETS: assets });
+    assert.equal(await unrelated.text(), body);
+    const blocked = await worker.fetch(new Request('https://wrong.example.org/semantic/manifest.json'), { ...env, ASSETS: assets });
+    assert.equal(blocked.status, 403);
+    db.close();
+});

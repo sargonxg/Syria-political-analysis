@@ -2,7 +2,12 @@
 const API_VERSION = 'policy-research-db/1';
 const PREFIX = '/api/research';
 const MAX_LIMIT = 200;
-const MANIFEST_PATHS = ['/tools/middle-east/observations/data/manifest.json', '/observations/data/manifest.json'];
+const MANIFEST_FORMATS = Object.freeze({
+    '/tools/middle-east/observations/data/manifest.json': 'policy-observation-atlas/1',
+    '/observations/data/manifest.json': 'policy-observation-atlas/1',
+    '/tools/tacitus-context/semantic/manifest.json': 'tacitus-semantic-explorer/1',
+    '/semantic/manifest.json': 'tacitus-semantic-explorer/1',
+});
 const COMPACT_FIELDS = ['year', 'type_of_violence', 'side_a', 'side_b', 'side_a_new_id', 'side_b_new_id',
     'best', 'low', 'high', 'where_prec', 'date_prec', 'event_clarity', 'adm_1', 'adm_2', 'where_coordinates'];
 const FILTER_KEYS = ['country', 'from', 'to', 'actor', 'type', 'precision', 'date_precision'];
@@ -299,7 +304,7 @@ async function api(request, env) {
     }
     fail(404, 'NOT_FOUND', 'This research endpoint does not exist.');
 }
-async function connectedManifest(request, env) {
+async function connectedManifest(request, env, expectedFormat) {
     validateHost(request, env);
     if (!env.ASSETS)
         fail(503, 'ASSETS_UNCONFIGURED', 'The static atlas is not configured.');
@@ -344,8 +349,8 @@ async function connectedManifest(request, env) {
     catch {
         fail(503, 'MANIFEST_UNAVAILABLE', 'The static atlas manifest is not valid UTF-8 JSON.');
     }
-    if (manifest.format !== 'policy-observation-atlas/1')
-        fail(503, 'MANIFEST_UNAVAILABLE', 'The static asset is not an observation-atlas manifest.');
+    if (manifest.format !== expectedFormat)
+        fail(503, 'MANIFEST_UNAVAILABLE', 'The static asset does not match the expected research-manifest format for this path.');
     manifest.query_api = { enabled: true, base_url: PREFIX };
     const outgoing = new Headers(response.headers);
     for (const name of ['Content-Length', 'ETag', 'Last-Modified', 'Content-Encoding'])
@@ -359,8 +364,8 @@ export default {
     async fetch(request, env) {
         const path = new URL(request.url).pathname;
         try {
-            if (MANIFEST_PATHS.includes(path) && env.RESEARCH_DB && env.RESEARCH_UI_ENABLED !== 'false')
-                return await connectedManifest(request, env);
+            if (Object.hasOwn(MANIFEST_FORMATS, path) && env.RESEARCH_DB && env.RESEARCH_UI_ENABLED !== 'false')
+                return await connectedManifest(request, env, MANIFEST_FORMATS[path]);
             if (path !== PREFIX && !path.startsWith(PREFIX + '/')) {
                 if (env.ASSETS)
                     return env.ASSETS.fetch(request);
