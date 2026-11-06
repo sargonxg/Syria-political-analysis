@@ -223,9 +223,11 @@ async function eventDetail(id, db, state) {
     const row = await db.prepare('SELECT record_json,dataset_id FROM events WHERE id=? LIMIT 1').bind(id).first();
     if (!row)
         fail(404, 'NOT_FOUND', 'This event is not present in the imported snapshot.');
-    const original = JSON.parse(row.record_json), record = parsedRecord(row);
-    const dataset = await db.prepare('SELECT metadata_json FROM datasets WHERE id=? LIMIT 1').bind(row.dataset_id).first();
-    return json({ ...envelope(state), record, dataset: JSON.parse(dataset.metadata_json), provenance: {
+    const original = JSON.parse(row.record_json), record = { ...original };
+    delete record.raw_shard;
+    const dataset = state.datasets.find((item) => item.id === row.dataset_id);
+    if (!dataset) fail(503, 'DB_SCHEMA_NOT_READY', 'The event dataset is absent from this snapshot’s bounded metadata.');
+    return json({ ...envelope(state), record, dataset, provenance: {
             basis: 'validated_committed_snapshot', transport: state.backend === 'sqlite' ? 'sqlite_local_adapter' : 'cloudflare_d1', source_partition: original.raw_shard || null,
             manifest_sha256: state.snapshot.manifests['ucdp-ged-snapshot'], canonical_original_record_sha256: record.raw_record_sha256,
             digest_basis: 'Server-supplied digest of the retained provider fields; not an independent browser manifest attestation.',

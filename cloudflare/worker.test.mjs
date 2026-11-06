@@ -226,6 +226,7 @@ test('metadata is reused, continuation omits counts, and exact counts remain exp
     assert.equal(localStatus.provenance.transport, 'sqlite_local_adapter');
     const localDetail = await (await request('/events/ucdp-ged:26.1:1', { ...tracked.env, RESEARCH_BACKEND: 'sqlite' })).json();
     assert.equal(localDetail.provenance.transport, 'sqlite_local_adapter');
+    assert.equal(tracked.sql.length, 1, 'Detail uses cached dataset metadata and a single primary-key event lookup');
     assert.equal((await (await request('/status', tracked.env)).json()).backend, 'd1');
     t.mock.timers.tick(60001);
     await request('/status', tracked.env);
