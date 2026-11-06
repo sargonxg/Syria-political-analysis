@@ -38,6 +38,11 @@ and all data precede readiness metadata. The last `state="ready"` marker is
 required before the API reports availability. There are no destructive `DROP`
 statements or remote `BEGIN`/`COMMIT` wrappers. Existing output is refused.
 
+Keep import files byte-preserving. For a programmatic SQLite replay, use
+`Path("research.sql").read_bytes().decode("utf-8")`; universal-newline text
+reads can rewrite line endings inside quoted manifest strings. The checksummed
+binary upload and checkpointed splitter retain those original bytes.
+
 The initial local database is 460,959,744 bytes and the SQL is 286,806,509 bytes;
 the receipt is authoritative for subsequent builds. The builder refuses a
 database over its conservative 490 MB budget. Actual account import/storage

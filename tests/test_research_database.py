@@ -39,8 +39,11 @@ class ResearchDatabaseTests(unittest.TestCase):
         }
         path = repository / "data/sources/registry.json"
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(
-            json.dumps([source], ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        # Exercise exact CRLF manifest bytes on every platform, not just Windows.
+        path.write_bytes(
+            (json.dumps([source], ensure_ascii=False, indent=2) + "\n")
+            .replace("\n", "\r\n")
+            .encode("utf-8")
         )
         return rows, path.read_bytes()
 
@@ -57,7 +60,8 @@ class ResearchDatabaseTests(unittest.TestCase):
             self.assertEqual(a["sql_sha256"], b["sql_sha256"])
             self.assertEqual(a["snapshot_id"], b["snapshot_id"])
             self.assertLess(a["maximum_statement_bytes"], 100_000)
-            sql = (Path(directory) / "first/research.sql").read_text(encoding="utf-8")
+            # Universal-newline text reads would rewrite CRLF inside SQL literals.
+            sql = (Path(directory) / "first/research.sql").read_bytes().decode("utf-8")
             self.assertNotIn("BEGIN TRANSACTION", sql)
             self.assertNotIn("DROP TABLE", sql)
             connection = sqlite3.connect(":memory:")
