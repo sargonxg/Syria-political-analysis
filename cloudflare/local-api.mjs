@@ -2,7 +2,7 @@
 /** Offline development adapter: the same Worker module against read-only node:sqlite. */
 import { DatabaseSync } from 'node:sqlite';
 import { createServer } from 'node:http';
-import { readFile, stat } from 'node:fs/promises';
+import { readFile, stat, realpath } from 'node:fs/promises';
 import { resolve, sep, extname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import worker from './research-worker.mjs';
@@ -29,7 +29,10 @@ export function localAssets(directory) {
     return { async fetch(request) {
             let path;
             try {
-                path = resolve(root, '.' + decodeURIComponent(new URL(request.url).pathname));
+                const pathname = decodeURIComponent(new URL(request.url).pathname);
+                if (pathname.split('/').some((part) => part.startsWith('.') || /\.(?:sql|sqlite3?|db|pem|key)$/i.test(part)))
+                    return new Response('Not found', { status: 404 });
+                path = resolve(root, '.' + pathname);
             }
             catch {
                 return new Response('Invalid path', { status: 400 });
@@ -39,8 +42,12 @@ export function localAssets(directory) {
             try {
                 if ((await stat(path)).isDirectory())
                     path = resolve(path, 'index.html');
-                const body = await readFile(path);
-                return new Response(body, { headers: { 'Content-Type': types[extname(path)] || 'application/octet-stream' } });
+                const [actualRoot, actualPath] = await Promise.all([realpath(root), realpath(path)]);
+                if (!actualPath.startsWith(actualRoot + sep))
+                    return new Response('Not found', { status: 404 });
+                const body = await readFile(actualPath);
+                return new Response(body, { headers: { 'Content-Type': types[extname(path)] || 'application/octet-stream',
+                    'Cache-Control': 'private, no-store', 'X-Content-Type-Options': 'nosniff' } });
             }
             catch {
                 return new Response('Not found', { status: 404 });

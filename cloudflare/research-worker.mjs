@@ -2,6 +2,18 @@
 const API_VERSION = 'policy-research-db/1';
 const PREFIX = '/api/research';
 const MAX_LIMIT = 200;
+const MAX_QUERY_YEARS = 6;
+const MAX_CANDIDATES = 20000;
+const MAX_AGGREGATE_GROUPS = 10000;
+const CACHE_TTL_MS = 60000;
+// Regional API policy, separate from the actual availability reported by status.
+const COUNTRY_CODES = new Set(['EG', 'IL', 'IQ', 'IR', 'JO', 'LB', 'PS', 'SY', 'TR', 'YE']);
+// Only snapshot metadata / aggregate values are cached. No Request, Response,
+// user identity, annotations, I/O promise or per-request backend is retained.
+// These bounded isolate-local caches are neither durable nor a global rate limit.
+const stateCache = new WeakMap();
+const aggregateCache = new WeakMap();
+const quotaBackoff = new WeakMap();
 const MANIFEST_FORMATS = Object.freeze({
     '/tools/middle-east/observations/data/manifest.json': 'policy-observation-atlas/1',
     '/observations/data/manifest.json': 'policy-observation-atlas/1',
@@ -14,10 +26,10 @@ const FILTER_KEYS = ['country', 'from', 'to', 'actor', 'type', 'precision', 'dat
 class APIError extends Error {
     constructor(status, code, message) { super(message); this.status = status; this.code = code; }
 }
-function json(value, status = 200) {
+function json(value, status = 200, headers = {}) {
     return Response.json(value, { status, headers: {
             'Cache-Control': 'private, no-store', 'X-Content-Type-Options': 'nosniff',
-            'Referrer-Policy': 'same-origin', 'Vary': 'Origin',
+            'Referrer-Policy': 'same-origin', 'Vary': 'Origin', ...headers,
         } });
 }
 function fail(status, code, message) { throw new APIError(status, code, message); }
@@ -43,7 +55,7 @@ function checkParameters(params, allowed) {
     }
 }
 function day(value, name) {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(value) || value.startsWith('0000'))
+    if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value) || value.startsWith('0000'))
         fail(400, 'INVALID_DATE', `${name} must be a real ISO calendar day.`);
     const parsed = new Date(value + 'T00:00:00Z');
     if (!Number.isFinite(parsed.valueOf()) || parsed.toISOString().slice(0, 10) !== value)
@@ -64,23 +76,62 @@ function integer(value, minimum, maximum, name) {
         fail(400, 'INVALID_INTEGER', `${name} is outside its allowed range.`);
     return number;
 }
-function filters(params, state, pagination = true) {
-    checkParameters(params, pagination ? [...FILTER_KEYS, 'limit', 'cursor'] : FILTER_KEYS);
-    const country = params.get('country') || null;
-    if (country && (!/^[A-Z]{2}$/.test(country) || !state.countries.some((item) => item.code === country)))
-        fail(400, 'INVALID_COUNTRY', 'country must be one of the supplied uppercase ISO2 country codes.');
-    const from = day(params.get('from') || state.snapshot.date_start, 'from');
-    const to = day(params.get('to') || state.snapshot.date_end, 'to');
+function countryCode(value) {
+    if (!COUNTRY_CODES.has(value))
+        fail(400, 'INVALID_COUNTRY', 'An available uppercase regional country code is required.');
+    return value;
+}
+function filters(params, pagination = true) {
+    checkParameters(params, pagination ? [...FILTER_KEYS, 'limit', 'cursor', 'count'] : FILTER_KEYS);
+    const country = countryCode(params.get('country'));
+    const from = day(params.get('from') || '', 'from');
+    const to = day(params.get('to') || '', 'to');
     if (from > to)
         fail(400, 'REVERSED_DATES', 'from must not be later than to.');
+    if (Number(to.slice(0, 4)) - Number(from.slice(0, 4)) >= MAX_QUERY_YEARS)
+        fail(422, 'QUERY_WINDOW_TOO_WIDE', 'Use at most six calendar years per query, or explore the full verified static snapshot.');
     return { country, from, to, actor: boundedText(params.get('actor') || '', 200, 'actor'),
         type: params.has('type') ? integer(params.get('type'), 1, 3, 'type') : null,
         precision: params.has('precision') ? integer(params.get('precision'), 1, 7, 'precision') : null,
         date_precision: params.has('date_precision') ? integer(params.get('date_precision'), 1, 5, 'date_precision') : null };
 }
-function whereEvents(filter) {
-    const clauses = ['date_end >= ?', 'date_start <= ?'], bindings = [filter.from, filter.to];
-    for (const [key, column] of [['country', 'country_code'], ['type', 'violence_type'], ['precision', 'geography_precision'], ['date_precision', 'date_precision']]) {
+function queryBounds(state) {
+    const bounds = state.query_bounds;
+    if (bounds?.format !== 'policy-query-bounds/1' || bounds.snapshot_id !== state.snapshot.id
+        || bounds.events !== state.counts.events || !Number.isSafeInteger(bounds.maximum_interval_days)
+        || bounds.maximum_interval_days < 0 || bounds.maximum_interval_days > 36600
+        || !bounds.country_start_year_counts || typeof bounds.country_start_year_counts !== 'object')
+        return null;
+    let total = 0;
+    for (const [country, years] of Object.entries(bounds.country_start_year_counts)) {
+        if (!COUNTRY_CODES.has(country) || !years || typeof years !== 'object' || Array.isArray(years)) return null;
+        for (const [year, count] of Object.entries(years)) {
+            if (!/^[1-9]\d{3}$/.test(year) || !Number.isSafeInteger(count) || count < 0) return null;
+            total += count;
+        }
+    }
+    return total === bounds.events ? bounds : null;
+}
+function whereEvents(filter, state) {
+    const bounds = queryBounds(state);
+    if (!bounds)
+        fail(503, 'DB_QUERY_BOUNDS_REQUIRED', 'This snapshot needs offline-validated query bounds before event queries can run. Use the verified static snapshot.');
+    if (!state.countries.some((item) => item.code === filter.country))
+        fail(400, 'INVALID_COUNTRY', 'The country is not present in this snapshot.');
+    const earliest = new Date(filter.from + 'T00:00:00Z');
+    earliest.setUTCDate(earliest.getUTCDate() - bounds.maximum_interval_days);
+    const lower = earliest.toISOString().slice(0, 10);
+    const candidates = Object.entries(bounds.country_start_year_counts[filter.country] || {})
+        .filter(([year]) => Number(year) >= earliest.getUTCFullYear() && Number(year) <= Number(filter.to.slice(0, 4)))
+        .reduce((sum, [, count]) => sum + count, 0);
+    if (candidates > MAX_CANDIDATES)
+        fail(422, 'QUERY_READ_BUDGET', 'This interval exceeds the conservative 20,000 candidate-record budget. Narrow the dates or use the verified static snapshot.');
+    // A validated maximum interval supplies a safe lower date_start bound.
+    // Both ends seek the existing country/date index; the residual date_end
+    // predicate preserves overlaps, including intervals crossing a year boundary.
+    const clauses = ['country_code = ?', 'date_start >= ?', 'date_start <= ?', 'date_end >= ?'];
+    const bindings = [filter.country, lower, filter.to, filter.from];
+    for (const [key, column] of [['type', 'violence_type'], ['precision', 'geography_precision'], ['date_precision', 'date_precision']]) {
         if (filter[key] !== null) {
             clauses.push(column + ' = ?');
             bindings.push(filter[key]);
@@ -91,14 +142,14 @@ function whereEvents(filter) {
         clauses.push('instr(actor_search, ?) > 0');
         bindings.push(filter.actor.toLowerCase());
     }
-    return { sql: clauses.join(' AND '), bindings };
+    return { sql: clauses.join(' AND '), bindings, candidates };
 }
 async function digest(text) {
     const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
     return [...new Uint8Array(bytes)].map((byte) => byte.toString(16).padStart(2, '0')).join('');
 }
 function encodeCursor(value) { return btoa(JSON.stringify(value)).replaceAll('+', '-').replaceAll('/', '_').replace(/=+$/, ''); }
-function decodeCursor(value, fingerprint, state) {
+function decodeCursor(value, fingerprint) {
     if (value.length > 2048 || !/^[A-Za-z0-9_-]+$/.test(value))
         fail(400, 'INVALID_CURSOR', 'The page cursor is invalid.');
     let parsed;
@@ -108,27 +159,32 @@ function decodeCursor(value, fingerprint, state) {
     catch {
         fail(400, 'INVALID_CURSOR', 'The page cursor is invalid.');
     }
-    if (!parsed || Object.keys(parsed).sort().join(',') !== 'date,fingerprint,id,kind,snapshot,v'
-        || parsed.v !== 1 || parsed.kind !== 'events' || parsed.snapshot !== state.snapshot.id || parsed.fingerprint !== fingerprint
+    if (!parsed || typeof parsed !== 'object' || Object.keys(parsed).sort().join(',') !== 'date,fingerprint,id,kind,snapshot,v'
+        || parsed.v !== 1 || parsed.kind !== 'events' || !/^[a-f0-9]{64}$/.test(parsed.snapshot) || parsed.fingerprint !== fingerprint
         || typeof parsed.id !== 'string' || !/^[A-Za-z0-9:._-]{1,200}$/.test(parsed.id))
         fail(400, 'CURSOR_MISMATCH', 'The cursor belongs to a different query or snapshot; restart the query.');
     day(parsed.date, 'cursor date');
     return parsed;
 }
 async function stateOf(db) {
+    const cached = stateCache.get(db);
+    if (cached && cached.expires > Date.now()) return cached.state;
     const rows = await db.batch([
         db.prepare('SELECT version FROM schema_migrations ORDER BY version DESC LIMIT 1'),
-        db.prepare('SELECT key,value FROM research_meta'),
+        db.prepare('SELECT key,value FROM research_meta LIMIT 32'),
+        db.prepare('SELECT metadata_json FROM datasets ORDER BY id LIMIT 100'),
     ]);
     const state = Object.fromEntries(rows[1].results.map((row) => [row.key, JSON.parse(row.value)]));
     if (rows[0].results[0]?.version !== 1 || state.schema_version !== 1 || state.format !== API_VERSION || state.state !== 'ready'
         || !/^[a-f0-9]{64}$/.test(state.snapshot?.id || '') || !Array.isArray(state.countries))
         fail(503, 'DB_SCHEMA_NOT_READY', 'The research database has not completed a compatible snapshot import.');
+    state.datasets = rows[2].results.map((row) => JSON.parse(row.metadata_json));
+    stateCache.set(db, { state, expires: Date.now() + CACHE_TTL_MS });
     return state;
 }
 function envelope(state) {
     return { api_version: API_VERSION, status: 'ready', backend: state.backend || 'd1', runtime: state.runtime || 'cloudflare-d1', read_only: true,
-        snapshot: state.snapshot, provenance: { basis: 'validated_committed_snapshot', transport: 'cloudflare_d1' } };
+        snapshot: state.snapshot, provenance: { basis: 'validated_committed_snapshot', transport: state.backend === 'sqlite' ? 'sqlite_local_adapter' : 'cloudflare_d1' } };
 }
 function parsedRecord(row, compact = false) {
     const record = JSON.parse(row.record_json);
@@ -139,30 +195,29 @@ function parsedRecord(row, compact = false) {
     }
     return record;
 }
-async function datasets(db) {
-    const result = await db.prepare('SELECT metadata_json FROM datasets ORDER BY id').all();
-    return result.results.map((row) => JSON.parse(row.metadata_json));
-}
-async function events(url, db, state) {
-    const filter = filters(url.searchParams, state), predicate = whereEvents(filter);
-    const limit = url.searchParams.has('limit') ? integer(url.searchParams.get('limit'), 1, MAX_LIMIT, 'limit') : 100;
-    const fingerprint = await digest(JSON.stringify(filter));
+async function events(plan, db, state) {
+    const { filter, limit, fingerprint, cursor, count } = plan, predicate = whereEvents(filter, state);
     let pageSQL = predicate.sql, pageBindings = [...predicate.bindings];
-    if (url.searchParams.has('cursor')) {
-        const cursor = decodeCursor(url.searchParams.get('cursor'), fingerprint, state);
+    if (cursor) {
+        if (cursor.snapshot !== state.snapshot.id)
+            fail(400, 'CURSOR_MISMATCH', 'The cursor belongs to a different snapshot; restart the query.');
         pageSQL += ' AND (date_start < ? OR (date_start = ? AND id < ?))';
         pageBindings.push(cursor.date, cursor.date, cursor.id);
     }
-    const result = await db.batch([
-        db.prepare('SELECT count(*) AS matched FROM events WHERE ' + predicate.sql).bind(...predicate.bindings),
+    const statements = [
         db.prepare('SELECT record_json,id,date_start FROM events WHERE ' + pageSQL + ' ORDER BY date_start DESC,id DESC LIMIT ?').bind(...pageBindings, limit + 1),
-    ]);
-    const matched = result[0].results[0].matched, available = result[1].results;
+    ];
+    if (count === 'exact') statements.push(db.prepare('SELECT count(*) AS matched FROM events WHERE ' + predicate.sql).bind(...predicate.bindings));
+    const result = await db.batch(statements);
+    const matched = count === 'exact' ? result[1].results[0].matched : null, available = result[0].results;
     const hasMore = available.length > limit, page = available.slice(0, limit), last = page.at(-1);
     const next = hasMore ? encodeCursor({ v: 1, kind: 'events', snapshot: state.snapshot.id, fingerprint, date: last.date_start, id: last.id }) : null;
-    return json({ ...envelope(state), datasets: (await datasets(db)).filter((item) => item.kind === 'conflict_event'),
+    return json({ ...envelope(state), datasets: state.datasets.filter((item) => item.kind === 'conflict_event'),
         filters: filter, order: 'date_start_desc,id_desc', records: page.map((row) => parsedRecord(row, true)), matched,
-        returned: page.length, limit, next_cursor: next, has_more: hasMore, page_scope: 'current_page', bounded: true, truncated: matched > page.length });
+        returned: page.length, limit, next_cursor: next, has_more: hasMore, page_scope: 'current_page', bounded: true,
+        count_scope: count === 'exact' ? 'exact_query' : 'not_requested', query_fingerprint: fingerprint,
+        candidate_records_upper_bound: predicate.candidates,
+        truncated: matched === null ? (hasMore || cursor ? true : false) : matched > page.length });
 }
 async function eventDetail(id, db, state) {
     const row = await db.prepare('SELECT record_json,dataset_id FROM events WHERE id=? LIMIT 1').bind(id).first();
@@ -171,28 +226,50 @@ async function eventDetail(id, db, state) {
     const original = JSON.parse(row.record_json), record = parsedRecord(row);
     const dataset = await db.prepare('SELECT metadata_json FROM datasets WHERE id=? LIMIT 1').bind(row.dataset_id).first();
     return json({ ...envelope(state), record, dataset: JSON.parse(dataset.metadata_json), provenance: {
-            basis: 'validated_committed_snapshot', transport: 'cloudflare_d1', source_partition: original.raw_shard || null,
+            basis: 'validated_committed_snapshot', transport: state.backend === 'sqlite' ? 'sqlite_local_adapter' : 'cloudflare_d1', source_partition: original.raw_shard || null,
             manifest_sha256: state.snapshot.manifests['ucdp-ged-snapshot'], canonical_original_record_sha256: record.raw_record_sha256,
             digest_basis: 'Server-supplied digest of the retained provider fields; not an independent browser manifest attestation.',
         } });
 }
-async function aggregates(url, db, state) {
-    const filter = filters(url.searchParams, state, false), predicate = whereEvents(filter);
-    const spatial = predicate.sql + ' AND latitude IS NOT NULL AND longitude IS NOT NULL AND latitude BETWEEN -90 AND 90 AND longitude BETWEEN -180 AND 180';
-    const result = await db.batch([
-        db.prepare('SELECT count(*) AS records FROM events WHERE ' + predicate.sql).bind(...predicate.bindings),
-        db.prepare('SELECT event_year AS year,count(*) AS records FROM events WHERE ' + predicate.sql + ' GROUP BY event_year ORDER BY event_year').bind(...predicate.bindings),
-        db.prepare('SELECT violence_type AS type,count(*) AS records FROM events WHERE ' + predicate.sql + ' GROUP BY violence_type ORDER BY violence_type').bind(...predicate.bindings),
-        db.prepare('SELECT count(*) AS records FROM events WHERE ' + spatial).bind(...predicate.bindings),
-        db.prepare('SELECT CAST((longitude+180)/2 AS INTEGER) AS x,CAST((latitude+90)/2 AS INTEGER) AS y,count(*) AS records FROM events WHERE ' + spatial + ' GROUP BY x,y ORDER BY records DESC,x,y LIMIT 501').bind(...predicate.bindings),
-    ]);
-    return json({ ...envelope(state), filters: filter, matched: result[0].results[0].records,
-        timeline: result[1].results, categories: result[2].results,
-        geography: { degrees: 2, bounded: true, limit: 500, truncated: result[4].results.length > 500,
-            geocoded_records: result[3].results[0].records,
-            omitted_missing_or_invalid_coordinates: result[0].results[0].records - result[3].results[0].records,
-            cells: result[4].results.slice(0, 500).map((row) => ({ longitude: row.x * 2 - 179, latitude: row.y * 2 - 89, records: row.records })),
-            interpretation: 'Two-degree bins of provider coordinates, with their original uncertainty. Missing or invalid coordinates are omitted and counted. Counts do not establish territorial control.' } });
+async function aggregates(filter, db, state) {
+    const predicate = whereEvents(filter, state), key = state.snapshot.id + ':' + JSON.stringify(filter);
+    let cache = aggregateCache.get(db);
+    if (!cache) { cache = new Map(); aggregateCache.set(db, cache); }
+    const cached = cache.get(key);
+    if (cached && cached.expires > Date.now()) return json({ ...envelope(state), ...cached.value });
+    // One indexed scan, grouped once. Derive all three views from those same
+    // groups; never sample a result and label it an exact aggregate.
+    const valid = 'latitude IS NOT NULL AND longitude IS NOT NULL AND latitude BETWEEN -90 AND 90 AND longitude BETWEEN -180 AND 180';
+    const sql = 'SELECT event_year AS year,violence_type AS type,'
+        + `CASE WHEN ${valid} THEN MIN(179,CAST((longitude+180)/2 AS INTEGER)) ELSE NULL END AS x,`
+        + `CASE WHEN ${valid} THEN MIN(89,CAST((latitude+90)/2 AS INTEGER)) ELSE NULL END AS y,`
+        + 'count(*) AS records FROM events WHERE ' + predicate.sql
+        + ' GROUP BY event_year,violence_type,x,y ORDER BY event_year,violence_type,x,y LIMIT ?';
+    const result = await db.prepare(sql).bind(...predicate.bindings, MAX_AGGREGATE_GROUPS + 1).all();
+    if (result.results.length > MAX_AGGREGATE_GROUPS)
+        fail(422, 'AGGREGATE_GROUP_BUDGET', 'This query exceeds the bounded aggregate group budget. Narrow its dates or filters. No partial totals are returned.');
+    const years = new Map(), types = new Map(), cells = new Map();
+    let matched = 0, geocoded = 0;
+    for (const row of result.results) {
+        matched += row.records;
+        years.set(row.year, (years.get(row.year) || 0) + row.records);
+        types.set(row.type, (types.get(row.type) || 0) + row.records);
+        if (row.x === null || row.y === null) continue;
+        geocoded += row.records;
+        const cell = row.x + ',' + row.y, previous = cells.get(cell);
+        cells.set(cell, { x: row.x, y: row.y, records: (previous?.records || 0) + row.records });
+    }
+    const spatial = [...cells.values()].sort((a, b) => b.records - a.records || a.x - b.x || a.y - b.y);
+    const value = { filters: filter, matched, candidate_records_upper_bound: predicate.candidates,
+        timeline: [...years].sort((a, b) => a[0] - b[0]).map(([year, records]) => ({ year, records })),
+        categories: [...types].sort((a, b) => a[0] - b[0]).map(([type, records]) => ({ type, records })),
+        geography: { degrees: 2, bounded: true, limit: 500, truncated: spatial.length > 500,
+            geocoded_records: geocoded, omitted_missing_or_invalid_coordinates: matched - geocoded,
+            cells: spatial.slice(0, 500).map((row) => ({ longitude: row.x * 2 - 179, latitude: row.y * 2 - 89, records: row.records })),
+            interpretation: 'Two-degree bins of provider coordinates, with their original uncertainty. Missing or invalid coordinates are omitted and counted. Counts do not establish territorial control.' } };
+    if (cache.size >= 16) cache.delete(cache.keys().next().value);
+    cache.set(key, { expires: Date.now() + CACHE_TTL_MS, value });
+    return json({ ...envelope(state), ...value });
 }
 async function sourceProfiles(url, db, state) {
     checkParameters(url.searchParams, ['q', 'type', 'limit', 'offset']);
@@ -243,6 +320,43 @@ async function indicators(url, db, state) {
         returned: result[1].results.length, limit, offset, has_more: offset + result[1].results.length < result[0].results[0].matched,
         interpretation: 'Separate annual country context. No event linkage, interpolation, causal attribution or regional aggregation.' });
 }
+async function preflight(url) {
+    const path = url.pathname, params = url.searchParams;
+    if ([PREFIX + '/status', PREFIX + '/health', PREFIX + '/datasets', PREFIX + '/lenses', PREFIX + '/provenance'].includes(path)) {
+        checkParameters(params, []);
+        return { path };
+    }
+    if (path === PREFIX + '/events' || path === PREFIX + '/aggregates') {
+        const filter = filters(params, path.endsWith('/events'));
+        if (path.endsWith('/aggregates')) return { path, filter };
+        const limit = params.has('limit') ? integer(params.get('limit'), 1, MAX_LIMIT, 'limit') : 100;
+        const count = params.has('count') ? params.get('count') : (params.has('cursor') ? 'none' : 'exact');
+        if (!['exact', 'none'].includes(count)) fail(400, 'INVALID_COUNT', 'count must be exact or none.');
+        const fingerprint = await digest(JSON.stringify(filter));
+        const cursor = params.has('cursor') ? decodeCursor(params.get('cursor'), fingerprint) : null;
+        return { path, filter, limit, count, fingerprint, cursor };
+    }
+    if (path.startsWith(PREFIX + '/events/')) {
+        checkParameters(params, []);
+        return { path, id: routeID(path, PREFIX + '/events/') };
+    }
+    if (path === PREFIX + '/sources') {
+        checkParameters(params, ['q', 'type', 'limit', 'offset']);
+        boundedText(params.get('q') || '', 200, 'q');
+        boundedText(params.get('type') || '', 80, 'type');
+    } else if (path === PREFIX + '/indicators') {
+        checkParameters(params, ['country', 'indicator', 'from_year', 'to_year', 'limit', 'offset']);
+        countryCode(params.get('country'));
+        const series = boundedText(params.get('indicator') || '', 100, 'indicator');
+        if (!/^[A-Z0-9._]+$/.test(series)) fail(400, 'INVALID_INDICATOR', 'An explicit indicator code is required.');
+        const from = integer(params.get('from_year') || '1960', 1, 9999, 'from_year');
+        const to = integer(params.get('to_year') || '2025', 1, 9999, 'to_year');
+        if (from > to) fail(400, 'REVERSED_DATES', 'from_year must not be later than to_year.');
+    } else fail(404, 'NOT_FOUND', 'This research endpoint does not exist.');
+    if (params.has('limit')) integer(params.get('limit'), 1, MAX_LIMIT, 'limit');
+    if (params.has('offset')) integer(params.get('offset'), 0, 10000, 'offset');
+    return { path };
+}
 function routeID(path, prefix) {
     const encoded = path.slice(prefix.length);
     let id;
@@ -256,6 +370,26 @@ function routeID(path, prefix) {
         fail(400, 'INVALID_ID', 'The record identifier is malformed.');
     return id;
 }
+function quotaError(retryAt) {
+    const error = new APIError(503, 'DB_QUOTA_EXHAUSTED', 'D1 reports its daily quota is exhausted. Explicitly choose the verified static snapshot; database requests are paused until the next UTC day.');
+    error.retryAt = retryAt;
+    return error;
+}
+function isDailyD1Quota(error) {
+    // Never expose provider error text. Match only a named D1 daily/free-tier
+    // error, including wrapped causes; generic faults are not labelled quotas.
+    for (let depth = 0; error && depth < 4; depth++, error = error.cause) {
+        const message = String(error.message || '').slice(0, 4096);
+        if (/\bD1(?:_ERROR|_EXEC_ERROR|_QUOTA_ERROR)\b/i.test(message)
+            && /daily|for the day|free tier/i.test(message) && /limit|exceed|quota/i.test(message)) return true;
+    }
+    return false;
+}
+function nextUTCDay() {
+    const day = new Date();
+    day.setUTCHours(24, 0, 0, 0);
+    return day.valueOf();
+}
 async function api(request, env) {
     validateHost(request, env);
     const url = new URL(request.url);
@@ -263,34 +397,38 @@ async function api(request, env) {
         fail(414, 'URL_TOO_LONG', 'The query URL exceeds its bound.');
     if (request.method !== 'GET')
         fail(405, 'READ_ONLY', 'The research API accepts GET requests only.');
+    const plan = await preflight(url); // Reject routes, parameters and malformed cursors before touching D1.
     if (!env.RESEARCH_DB)
         return json({ api_version: API_VERSION, status: 'unconfigured', backend: 'none', read_only: true,
             error: { code: 'DB_UNCONFIGURED', message: 'No research database is bound. The static snapshot remains a separate mode.' } }, 503);
-    const db = env.RESEARCH_DB, state = await stateOf(db), path = url.pathname;
-    state.backend = env.RESEARCH_BACKEND === 'sqlite' ? 'sqlite' : 'd1';
-    state.runtime = state.backend === 'sqlite' ? 'sqlite-local-adapter' : 'cloudflare-d1';
+    const db = env.RESEARCH_DB;
+    if ((quotaBackoff.get(db) || 0) > Date.now()) throw quotaError(quotaBackoff.get(db));
+    const backend = env.RESEARCH_BACKEND === 'sqlite' ? 'sqlite' : 'd1';
+    const state = { ...await stateOf(db), backend, runtime: backend === 'sqlite' ? 'sqlite-local-adapter' : 'cloudflare-d1' }, path = plan.path;
     if (path === PREFIX + '/status' || path === PREFIX + '/health') {
         checkParameters(url.searchParams, []);
         return json({ ...envelope(state), schema_version: 1, counts: state.counts, countries: state.countries,
-            capabilities: { events: true, indicators: state.counts.indicators > 0, sources: state.counts.sources > 0,
-                aggregates: true, lenses: state.counts.lenses > 0 },
-            limits: { page_records: 200, actor_characters: 200, url_bytes: 4096 }, limitations: state.limitations });
+            capabilities: { events: !!queryBounds(state), indicators: state.counts.indicators > 0, sources: state.counts.sources > 0,
+                aggregates: !!queryBounds(state), lenses: state.counts.lenses > 0 },
+            limits: { page_records: MAX_LIMIT, actor_characters: 200, url_bytes: 4096,
+                event_query_years: MAX_QUERY_YEARS, event_candidate_records: MAX_CANDIDATES, aggregate_groups: MAX_AGGREGATE_GROUPS,
+                metadata_cache_seconds: CACHE_TTL_MS / 1000 }, limitations: state.limitations });
     }
     if (path === PREFIX + '/events')
-        return events(url, db, state);
+        return events(plan, db, state);
     if (path.startsWith(PREFIX + '/events/')) {
         checkParameters(url.searchParams, []);
-        return eventDetail(routeID(path, PREFIX + '/events/'), db, state);
+        return eventDetail(plan.id, db, state);
     }
     if (path === PREFIX + '/aggregates')
-        return aggregates(url, db, state);
+        return aggregates(plan.filter, db, state);
     if (path === PREFIX + '/sources')
         return sourceProfiles(url, db, state);
     if (path === PREFIX + '/indicators')
         return indicators(url, db, state);
     if (path === PREFIX + '/datasets') {
         checkParameters(url.searchParams, []);
-        return json({ ...envelope(state), datasets: await datasets(db) });
+        return json({ ...envelope(state), datasets: state.datasets });
     }
     if (path === PREFIX + '/lenses') {
         checkParameters(url.searchParams, []);
@@ -300,7 +438,7 @@ async function api(request, env) {
     if (path === PREFIX + '/provenance') {
         checkParameters(url.searchParams, []);
         const result = await db.prepare('SELECT id,path,sha256,bytes,chunks FROM manifests ORDER BY id').all();
-        return json({ ...envelope(state), manifests: result.results, datasets: await datasets(db) });
+        return json({ ...envelope(state), manifests: result.results, datasets: state.datasets });
     }
     fail(404, 'NOT_FOUND', 'This research endpoint does not exist.');
 }
@@ -374,12 +512,21 @@ export default {
             return await api(request, env);
         }
         catch (error) {
+            if (env.RESEARCH_DB && isDailyD1Quota(error)) {
+                const retryAt = nextUTCDay();
+                quotaBackoff.set(env.RESEARCH_DB, retryAt);
+                stateCache.delete(env.RESEARCH_DB);
+                aggregateCache.delete(env.RESEARCH_DB);
+                error = quotaError(retryAt);
+            }
             const known = error instanceof APIError;
             const code = known ? error.code : 'DB_UNAVAILABLE';
             if (!known)
                 console.error(JSON.stringify({ event: 'research_api_failure', code, request_id: crypto.randomUUID() }));
             return json({ api_version: API_VERSION, status: 'unavailable', backend: env.RESEARCH_DB ? (env.RESEARCH_BACKEND === 'sqlite' ? 'sqlite' : 'd1') : 'none', read_only: true,
-                error: { code, message: known ? error.message : 'The research database could not answer this request. Retry or explicitly choose the static snapshot.' } }, known ? error.status : 503);
+                ...(error?.retryAt ? { retry_at: new Date(error.retryAt).toISOString(), fallback: { mode: 'static', automatic: false } } : {}),
+                error: { code, message: known ? error.message : 'The research database could not answer this request. Retry or explicitly choose the static snapshot.' } }, known ? error.status : 503,
+                error?.retryAt ? { 'Retry-After': String(Math.max(1, Math.ceil((error.retryAt - Date.now()) / 1000))) } : {});
         }
     },
 };

@@ -29,6 +29,10 @@ async function testObservationsDatabase(
       (await page.locator("#data-source").inputValue()) === "static",
       "An available database does not silently replace the static snapshot",
     );
+    ok(
+      requests.every((url) => !new URL(url).pathname.startsWith("/api/research")),
+      "Opening the configured atlas makes no database probes until Database is explicitly selected",
+    );
     const firstResponse = page.waitForResponse(
       (response) =>
         response.url().includes("/api/research/events?") &&
@@ -117,7 +121,9 @@ async function testObservationsDatabase(
       "Export counts, size, backend and snapshot receipt describe the bounded database selection",
     );
     if (actor.has_more) {
+      const nextResponse = page.waitForResponse((response) => response.url().includes("/api/research/events?") && response.status() === 200);
       await page.locator("#database-next").click();
+      const next = await (await nextResponse).json();
       await page.waitForFunction(
         () =>
           document
@@ -126,7 +132,8 @@ async function testObservationsDatabase(
         null,
         { timeout: 60000 },
       );
-      ok(true, "Opaque cursor pagination loads a second actual result page");
+      ok(next.matched === null && next.count_scope === "not_requested" && (await page.locator("#database-page-status").innerText()).includes(`${new Intl.NumberFormat("en").format(actor.matched)} matched`),
+        "Continuation skips the count query and retains the exact first-page count bound to the same filters and snapshot");
     }
     const outage = async (route) =>
       route.fulfill({
@@ -153,6 +160,29 @@ async function testObservationsDatabase(
       "A chosen database failure clears stale results and never silently falls back",
     );
     await page.unroute("**/api/research/events?**", outage);
+    let quotaCalls = 0;
+    const retryAt = new Date();
+    retryAt.setUTCHours(24, 0, 0, 0);
+    const quota = async (route) => {
+      quotaCalls++;
+      await route.fulfill({ status: 503, contentType: "application/json", body: JSON.stringify({
+        status: "unavailable", error: { code: "DB_QUOTA_EXHAUSTED", message: "Synthetic quota outage: choose Verified static snapshot." },
+        retry_at: retryAt.toISOString(),
+      }) });
+    };
+    await page.route("**/api/research/**", quota);
+    await page.locator("#apply-query").click();
+    await page.waitForFunction(() => document.querySelector("#load-status").textContent.includes("Synthetic quota outage"));
+    await page.locator("#retry-load").click();
+    await page.waitForFunction(() => document.querySelector("#load-status").textContent.includes("paused until"));
+    ok(quotaCalls === 1 && (await page.locator("#event-rows button").count()) === 0,
+      "A typed quota outage prevents repeated API calls and keeps the failed database selection empty");
+    await page.reload();
+    await page.waitForFunction(() => document.querySelector('#data-source [value="database"]').disabled === false);
+    await page.locator("#data-source").selectOption("database");
+    await page.waitForFunction(() => document.querySelector("#load-status").textContent.includes("paused until"));
+    ok(quotaCalls === 1, "Per-tab quota backoff survives reload without probing D1 or storing research filters");
+    await page.unroute("**/api/research/**", quota);
     await page.locator("#data-source").selectOption("static");
     await page.waitForFunction(
       () =>

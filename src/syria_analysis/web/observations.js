@@ -38,6 +38,8 @@ const state = {
     cursor: null,
     history: [],
     snapshot: null,
+    countReceipt: null,
+    retryAt: 0,
   },
   catalog: null,
   catalogPromise: null,
@@ -225,6 +227,36 @@ async function decodeGzip(bytes, expected, signal) {
   return decoded;
 }
 
+async function responseBytes(response, signal, limit = 5 * 1024 * 1024) {
+  const reader = response.body?.getReader();
+  if (!reader) throw new Error("The response has no readable body.");
+  const chunks = [];
+  let length = 0;
+  const cancel = () => { reader.cancel().catch(() => {}); };
+  signal?.addEventListener("abort", cancel, { once: true });
+  try {
+    while (true) {
+      if (signal?.aborted) throw new DOMException("Cancelled", "AbortError");
+      const { done, value } = await reader.read();
+      if (done) break;
+      length += value.byteLength;
+      if (length > limit) throw new Error("The response exceeds the atlas’s 5 MiB per-file safety limit.");
+      chunks.push(value);
+    }
+    if (signal?.aborted) throw new DOMException("Cancelled", "AbortError");
+  } catch (error) {
+    await reader.cancel().catch(() => {});
+    throw error;
+  } finally {
+    signal?.removeEventListener("abort", cancel);
+    reader.releaseLock();
+  }
+  const bytes = new Uint8Array(length);
+  let offset = 0;
+  for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
+  return bytes;
+}
+
 async function fetchJSON(path, signal, cache = "force-cache", expected = null) {
   const url = localURL(path);
   if (expected) {
@@ -243,9 +275,7 @@ async function fetchJSON(path, signal, cache = "force-cache", expected = null) {
     throw new Error(
       `Could not load ${new URL(path, PAGE_BASE).pathname} (HTTP ${response.status}).`,
     );
-  const bytes = await response.arrayBuffer();
-  if (bytes.byteLength > 5 * 1024 * 1024)
-    throw new Error("A data asset exceeds the atlas’s per-file safety limit.");
+  const bytes = await responseBytes(response, signal);
   if (expected && (await sha256(bytes)) !== expected.sha256.toLowerCase()) {
     throw new Error(
       `Source integrity check failed for ${url.pathname}. Its bytes do not match the manifest SHA-256. Retry after a complete dataset build.`,
@@ -2458,7 +2488,7 @@ function connectControls() {
   $("data-source").addEventListener("change", () => {
     abortExport();
     state.mode = $("data-source").value;
-    if (state.mode === "database" && !state.database.ready) {
+    if (state.mode === "database" && !state.database.configured) {
       state.mode = "static";
       renderConnection();
       return;
@@ -2596,16 +2626,14 @@ function connectControls() {
 
 /* Database mode is opt-in and never silently replaced by static results. */
 async function databaseJSON(path, signal) {
+  if (state.database.retryAt > Date.now())
+    throw new Error(`Database queries are paused until ${new Date(state.database.retryAt).toLocaleString()}. Choose Verified static snapshot to continue.`);
   const response = await fetch(localURL(path), {
     signal,
     cache: "no-store",
     credentials: "same-origin",
   });
-  const bytes = await response.arrayBuffer();
-  if (bytes.byteLength > 5 * 1024 * 1024)
-    throw new Error(
-      "Database response exceeds the browser’s bounded response limit.",
-    );
+  const bytes = await responseBytes(response, signal);
   let body;
   try {
     body = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
@@ -2614,12 +2642,20 @@ async function databaseJSON(path, signal) {
       "The database endpoint did not return JSON. Check authentication and deployment configuration.",
     );
   }
-  if (!response.ok || body.status !== "ready")
+  if (!response.ok || body.status !== "ready") {
+    if (body.error?.code === "DB_QUOTA_EXHAUSTED") {
+      const retryAt = Date.parse(body.retry_at);
+      if (Number.isFinite(retryAt) && retryAt > Date.now() && retryAt - Date.now() <= 27 * 60 * 60 * 1000) {
+        state.database.retryAt = retryAt;
+        try { sessionStorage.setItem("research-quota:" + state.database.base, String(retryAt)); } catch { /* Storage can be disabled. */ }
+      }
+    }
     throw new Error(
       body.error?.message ||
         body.message ||
         `Database unavailable (HTTP ${response.status}).`,
     );
+  }
   if (
     body.api_version !== "policy-research-db/1" ||
     !["d1", "sqlite"].includes(body.backend) ||
@@ -2648,17 +2684,21 @@ function renderConnection(message = "") {
       ? state.database.backend === "sqlite"
         ? "Local read-only adapter. This is not a deployed D1 connection; current result page only."
         : "Read-only D1 query. The map shows the current bounded result page."
+      : state.database.retryAt > Date.now()
+        ? `Verified source files active. Database quota is exhausted until ${new Date(state.database.retryAt).toLocaleString()}. Static browsing makes no database requests.`
       : state.database.ready
         ? "Static files active. A database is available; choose it explicitly to run server queries."
-        : "Verified source files active. No database is connected to this deployment.");
+        : state.database.configured
+          ? "Verified source files active. Choose Database to connect; static browsing makes no database requests."
+          : "Verified source files active. No database is connected to this deployment.");
   $("data-source").querySelector('[value="database"]').disabled =
-    !state.database.ready;
+    !state.database.configured;
   $("data-source").value = state.mode;
   $("event-order").disabled = connected;
   $("database-pagination").hidden = !connected;
 }
 
-async function probeDatabase() {
+function configureDatabase() {
   const configured = state.manifest?.query_api;
   if (!configured || configured.enabled !== true || !configured.base_url) {
     renderConnection();
@@ -2670,20 +2710,25 @@ async function probeDatabase() {
       "",
     );
     state.database.configured = true;
-    renderConnection(
-      "Static snapshot active; checking the configured same-origin database…",
-    );
-    const status = await databaseJSON(`${state.database.base}/status`);
-    if (!status.snapshot?.id)
-      throw new Error("Database snapshot identity is missing.");
-    state.database.ready = true;
-    state.database.snapshot = status.snapshot;
-    state.database.backend = status.backend;
+    try {
+      const saved = Number(sessionStorage.getItem("research-quota:" + state.database.base));
+      if (saved > Date.now() && saved - Date.now() <= 27 * 60 * 60 * 1000) state.database.retryAt = saved;
+    } catch { /* Memory backoff still works when storage is disabled. */ }
     renderConnection();
   } catch (error) {
     state.database.ready = false;
     renderConnection(`Static snapshot active. ${error.message}`);
   }
+}
+
+async function ensureDatabase(signal) {
+  if (state.database.ready) return;
+  const status = await databaseJSON(`${state.database.base}/status`, signal);
+  if (!status.snapshot?.id || status.capabilities?.events !== true)
+    throw new Error("The database needs a compatible, bounded event snapshot. Choose Verified static snapshot instead.");
+  state.database.ready = true;
+  state.database.snapshot = status.snapshot;
+  state.database.backend = status.backend;
 }
 
 async function loadDatabaseEvents(cursor = null, history = []) {
@@ -2721,8 +2766,14 @@ async function loadDatabaseEvents(cursor = null, history = []) {
   if (state.actor) url.searchParams.set("actor", state.actor);
   if (state.category) url.searchParams.set("type", state.category);
   if (state.precision) url.searchParams.set("precision", state.precision);
+  const queryKey = url.search;
+  const receipt = state.database.countReceipt;
+  const reuseCount = receipt?.queryKey === queryKey && receipt.snapshot === state.database.snapshot?.id && receipt.backend === state.database.backend;
+  url.searchParams.set("count", reuseCount ? "none" : "exact");
   if (cursor) url.searchParams.set("cursor", cursor);
   try {
+    await ensureDatabase(controller.signal);
+    if (controller.signal.aborted || generation !== state.loadGeneration) return;
     const body = await databaseJSON(url, controller.signal);
     if (controller.signal.aborted || generation !== state.loadGeneration)
       return;
@@ -2730,8 +2781,9 @@ async function loadDatabaseEvents(cursor = null, history = []) {
       !Array.isArray(body.records) ||
       body.returned !== body.records.length ||
       body.returned > 200 ||
-      !Number.isSafeInteger(body.matched) ||
-      body.matched < body.returned ||
+      !/^[a-f0-9]{64}$/.test(body.query_fingerprint || "") ||
+      !(body.count_scope === "exact_query" && Number.isSafeInteger(body.matched) && body.matched >= body.returned
+        || body.count_scope === "not_requested" && body.matched === null && reuseCount && receipt.fingerprint === body.query_fingerprint && receipt.matched >= body.returned) ||
       body.page_scope !== "current_page" ||
       body.bounded !== true ||
       typeof body.has_more !== "boolean" ||
@@ -2749,13 +2801,15 @@ async function loadDatabaseEvents(cursor = null, history = []) {
       );
     for (const dataset of body.datasets || [])
       state.datasets.set(dataset.id, dataset);
+    const matched = body.matched === null ? receipt.matched : body.matched;
+    state.database.countReceipt = { queryKey, snapshot: body.snapshot.id, backend: body.backend, fingerprint: body.query_fingerprint, matched };
     state.events = body.records
       .map((row) => normalizeEvent({ ...row, _origin: "database" }, row))
       .sort(
         (a, b) =>
           a.date_start.localeCompare(b.date_start) || a.id.localeCompare(b.id),
       );
-    state.database.matched = body.matched;
+    state.database.matched = matched;
     state.database.nextCursor = body.next_cursor;
     state.database.cursor = cursor;
     state.database.history = history;
@@ -2765,11 +2819,11 @@ async function loadDatabaseEvents(cursor = null, history = []) {
     populateEventCategories();
     $("map-card").setAttribute("aria-busy", "false");
     $("load-status").textContent =
-      `${number.format(body.returned)} historical records loaded for ${currentCountry()?.name || state.country}, ${state.from}–${state.to}; ${number.format(body.matched)} match the database query. Current page only.`;
+      `${number.format(body.returned)} historical records loaded for ${currentCountry()?.name || state.country}, ${state.from}–${state.to}; ${number.format(matched)} match the database query. Current page only.`;
     renderConnection();
     applyFilters(false);
     $("database-page-status").textContent =
-      `Database page ${history.length + 1} · ${number.format(body.returned)} returned / ${number.format(body.matched)} matched`;
+      `Database page ${history.length + 1} · ${number.format(body.returned)} returned / ${number.format(matched)} matched`;
     $("database-previous").disabled = !history.length;
     $("database-next").disabled = !body.has_more || !body.next_cursor;
   } catch (error) {
@@ -3599,7 +3653,7 @@ async function initialize() {
       ? `Snapshot built ${manifest.built_at.slice(0, 10)}`
       : "Dated dataset releases";
     renderProvenance();
-    probeDatabase();
+    configureDatabase();
     loadGeography();
     loadEvents();
     loadIndicators();

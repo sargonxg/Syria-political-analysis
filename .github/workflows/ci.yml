@@ -87,6 +87,7 @@ jobs:
       - name: Build and serve the separate read-only research database
         run: |
           python scripts/build_research_database.py --output output/research-database
+          node scripts/check_research_query_budget.mjs output/research-database/research.sqlite3 output/query-budget-proof.json
           node cloudflare/local-api.mjs --database output/research-database/research.sqlite3 --assets dist --enable-api-ui --port 8790 > /tmp/research-api.log 2>&1 &
           for i in $(seq 1 30); do curl --fail --silent http://127.0.0.1:8790/api/research/status > /dev/null && break || sleep 1; done
           curl --fail --silent http://127.0.0.1:8790/api/research/status > /dev/null
