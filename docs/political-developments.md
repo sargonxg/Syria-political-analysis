@@ -60,7 +60,8 @@ escapes HTML/script delimiters, and source material is rendered with `textConten
 The CSP permits same-origin script/style assets and disables network connections.
 There is no upload, API, account, local storage, analytics or model call. The
 three static files can be copied to a static host or included in the existing
-showcase. Browser assets are supplied by the source checkout's `web/` directory.
+showcase. Browser assets are packaged in `src/syria_analysis/web/`, so both an
+installed wheel and an editable checkout can build the viewer.
 
 ## What the three records establish
 
