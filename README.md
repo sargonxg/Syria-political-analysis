@@ -8,13 +8,28 @@ Explore historical conflict data, examine political documents and compare report
 | What does a policy document actually say? | Structure supplied text into exact paragraph spans, annotate its claims and export a bounded selection with omissions. | [Local document workshop](docs/document-workshop.md) · [Resolution 2254 example](docs/policy-document.md) |
 | What political act is documented? | Inspect three sourced political records and a BBC/Guardian comparison; preserve event dates, publication dates and evidence gaps. | [Political evidence study](docs/political-developments.md) |
 | How do reports frame a development? | Navigate 55 source profiles and compare specific passages, attribution and reporting lineage. | [Source comparison](docs/media-assessment.md) |
+| How can a policy document become inspectable AI context? | Store a complete AI-policy instrument, search its text, inspect typed assertions and export a dependency-closed prompt. | [Document → knowledge case](docs/policy-document-knowledge.md) |
+
+## Try the complete policy-document case
+
+```sh
+python scripts/build_policy_case.py --output output/policy-case
+python -m http.server 8768 --bind 127.0.0.1 --directory output/policy-case
+```
+
+Open **http://127.0.0.1:8768/**. Trace Executive Order 14179 from complete captured
+text through a source-qualified graph and searchable SQLite store to a bounded
+research prompt. All 17 text blocks are retained; eight semantic assertions are
+explicitly unreviewed drafts. Inspect how a shorter selection can lose legal and
+funding qualifications. [Provenance, ontology, exact measurements and limits](docs/policy-document-knowledge.md).
+No model call, cloud account or dependency installation is required.
 
 ## Try the current implementation
 
 The changes are on the review branch below. Python 3.11+ is sufficient for the static atlas and standalone exporters; no model account or API key is needed.
 
 ```sh
-git clone --branch codex/local-query-resilience-20261106 https://github.com/sargonxg/Syria-political-analysis.git
+git clone --branch codex/policy-document-knowledge-20261107 https://github.com/sargonxg/Syria-political-analysis.git
 cd Syria-political-analysis
 python -m pip install -e .
 python scripts/build_showcase.py
