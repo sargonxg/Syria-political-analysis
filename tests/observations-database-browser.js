@@ -13,6 +13,12 @@ async function testObservationsDatabase(
     if (!value) throw new Error(label);
     checks.push(label);
   };
+  const readResponse = async (pending) => {
+    const response = await pending;
+    const failure = await response.finished();
+    if (failure) throw new Error("Research API response did not finish");
+    return response.json();
+  };
   page.on("pageerror", onError);
   page.on("request", onRequest);
   try {
@@ -39,7 +45,7 @@ async function testObservationsDatabase(
         response.status() === 200,
     );
     await page.locator("#data-source").selectOption("database");
-    const first = await (await firstResponse).json();
+    const first = await readResponse(firstResponse);
     await page.waitForFunction(
       () =>
         document
@@ -87,7 +93,7 @@ async function testObservationsDatabase(
         response.status() === 200,
     );
     await page.locator("#apply-query").click();
-    const actor = await (await actorResponse).json();
+    const actor = await readResponse(actorResponse);
     await page.waitForFunction(
       () =>
         document.querySelector("#map-card").getAttribute("aria-busy") ===
@@ -123,7 +129,7 @@ async function testObservationsDatabase(
     if (actor.has_more) {
       const nextResponse = page.waitForResponse((response) => response.url().includes("/api/research/events?") && response.status() === 200);
       await page.locator("#database-next").click();
-      const next = await (await nextResponse).json();
+      const next = await readResponse(nextResponse);
       await page.waitForFunction(
         () =>
           document

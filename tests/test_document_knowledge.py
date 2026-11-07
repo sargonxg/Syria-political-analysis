@@ -9,7 +9,9 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from contextlib import closing
 from pathlib import Path
+from unittest.mock import patch
 
 from syria_analysis.document_knowledge import (
     evaluate_selection,
@@ -101,9 +103,9 @@ class DocumentKnowledgeTests(unittest.TestCase):
             lambda m: m["assertions"][0].update(requires=["policy-objective"]),
             lambda m: m["entities"][0].update(type="InventedClass"),
         ]
-        for patch in patches:
+        for mutate in patches:
             m = copy.deepcopy(self.model)
-            patch(m)
+            mutate(m)
             with self.assertRaises(ValueError):
                 validate_model(self.text, self.source, m)
         m = copy.deepcopy(self.model)
@@ -149,16 +151,51 @@ class DocumentKnowledgeTests(unittest.TestCase):
             for number, sql in enumerate(edits):
                 path = Path(temp) / f"{number}.sqlite3"
                 write_database(path, self.text, self.source, self.model)
-                with sqlite3.connect(path) as db:
+                with closing(sqlite3.connect(path)) as db, db:
                     db.execute(sql)
                 with self.assertRaisesRegex(ValueError, "mismatch"):
                     reopen(path)
+
+    def test_database_handles_close_on_success_and_refusal(self):
+        connections = []
+        connect = sqlite3.connect
+
+        def tracked(*args, **kwargs):
+            result = connect(*args, **kwargs)
+            connections.append(result)
+            return result
+
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "closed.sqlite3"
+            with patch(
+                "syria_analysis.document_knowledge.sqlite3.connect", side_effect=tracked
+            ):
+                write_database(path, self.text, self.source, self.model)
+                reopen(path)
+                search(path, "appropriations")
+            for db in connections:
+                with self.assertRaisesRegex(sqlite3.ProgrammingError, "closed"):
+                    db.execute("SELECT 1")
+            with closing(connect(path)) as db, db:
+                db.execute("UPDATE document SET text='changed'")
+            connections.clear()
+            with (
+                patch(
+                    "syria_analysis.document_knowledge.sqlite3.connect",
+                    side_effect=tracked,
+                ),
+                self.assertRaisesRegex(ValueError, "mismatch"),
+            ):
+                reopen(path)
+            for db in connections:
+                with self.assertRaisesRegex(sqlite3.ProgrammingError, "closed"):
+                    db.execute("SELECT 1")
 
     def test_supplied_database_views_have_an_execution_budget(self):
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / "case.sqlite3"
             write_database(path, self.text, self.source, self.model)
-            with sqlite3.connect(path) as db:
+            with closing(sqlite3.connect(path)) as db, db:
                 db.executescript("""ALTER TABLE document RENAME TO original_document;
                     CREATE VIEW document AS SELECT * FROM original_document
                     WHERE (WITH RECURSIVE n(x) AS (VALUES(1) UNION ALL SELECT x+1 FROM n WHERE x<1000000000) SELECT sum(x) FROM n)>0;""")

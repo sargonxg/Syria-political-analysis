@@ -10,6 +10,7 @@ import hashlib
 import json
 import re
 import sqlite3
+from contextlib import closing
 from pathlib import Path
 
 from .document_workshop import (
@@ -431,7 +432,7 @@ def write_database(path, text, source, model):
         not path.exists() and not path.is_symlink(), "Database destination must be new"
     )
     path.touch(mode=0o600, exist_ok=False)
-    with sqlite3.connect(path) as db:
+    with closing(sqlite3.connect(path)) as db, db:
         db.execute("PRAGMA foreign_keys=ON")
         db.executescript("""
           CREATE TABLE document(id INTEGER PRIMARY KEY CHECK(id=1),text TEXT NOT NULL,sha256 TEXT NOT NULL,source_json TEXT NOT NULL,model_json TEXT NOT NULL,record_sha256 TEXT NOT NULL);
@@ -522,7 +523,7 @@ def reopen(path):
         path.is_file() and path.stat().st_size <= 4 * 1024 * 1024,
         "Invalid or oversized local research database",
     )
-    with sqlite3.connect(path.resolve().as_uri() + "?mode=ro", uri=True) as db:
+    with closing(sqlite3.connect(path.resolve().as_uri() + "?mode=ro", uri=True)) as db:
         _bound_reads(db)
         text, digest, meta, model, record_digest = db.execute(
             "SELECT text,sha256,source_json,model_json,record_sha256 FROM document WHERE id=1"
@@ -538,7 +539,7 @@ def reopen(path):
         == record_digest,
         "Stored metadata/model digest mismatch",
     )
-    with sqlite3.connect(path.resolve().as_uri() + "?mode=ro", uri=True) as db:
+    with closing(sqlite3.connect(path.resolve().as_uri() + "?mode=ro", uri=True)) as db:
         _bound_reads(db)
         expected = {
             "paragraph": sorted(
@@ -587,7 +588,9 @@ def search(path, query, limit=20):
     require(0 < len(terms) <= 20, "Search requires 1–20 terms")
     expression = " AND ".join('"' + t.replace('"', '""') + '"' for t in terms)
     reopen(path)
-    with sqlite3.connect(Path(path).resolve().as_uri() + "?mode=ro", uri=True) as db:
+    with closing(
+        sqlite3.connect(Path(path).resolve().as_uri() + "?mode=ro", uri=True)
+    ) as db:
         _bound_reads(db)
         return [
             {"id": row[0], "text": row[1]}
