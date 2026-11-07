@@ -2,3 +2,6 @@
 data/historical/** -text
 data/observations/** -text
 tests/fixtures/** -text
+
+# General-document reference packets pin exact input bytes and spans.
+examples/document-workshop/** -text

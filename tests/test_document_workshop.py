@@ -28,7 +28,9 @@ ROOT = Path(__file__).resolve().parents[1]
 class DocumentWorkshopTests(unittest.TestCase):
     def setUp(self):
         self.fixture = json.loads(
-            (ROOT / "examples/document-workshop/evaluation-fixture.json").read_text()
+            (ROOT / "examples/document-workshop/evaluation-fixture.json").read_text(
+                encoding="utf-8"
+            )
         )
         self.text = self.fixture["text"]
         self.source = self.fixture["source"]
@@ -284,7 +286,9 @@ class DocumentWorkshopTests(unittest.TestCase):
 
     def test_committed_example_and_schema_validate(self):
         packet = json.loads(
-            (ROOT / "examples/document-workshop/request-selection.json").read_text()
+            (ROOT / "examples/document-workshop/request-selection.json").read_text(
+                encoding="utf-8"
+            )
         )
         self.assertTrue(
             validate_packet(packet, self.text, self.source, self.annotations)
@@ -294,7 +298,7 @@ class DocumentWorkshopTests(unittest.TestCase):
         except ImportError:
             self.skipTest("Optional JSON Schema test dependency unavailable")
         schema = json.loads(
-            (ROOT / "schemas/document_workshop.schema.json").read_text()
+            (ROOT / "schemas/document_workshop.schema.json").read_text(encoding="utf-8")
         )
         jsonschema.Draft202012Validator.check_schema(schema)
         jsonschema.Draft202012Validator(
@@ -307,9 +311,9 @@ class DocumentWorkshopTests(unittest.TestCase):
         self.assertEqual(
             result,
             json.loads(
-                (
-                    ROOT / "examples/document-workshop/evaluation-results.json"
-                ).read_text()
+                (ROOT / "examples/document-workshop/evaluation-results.json").read_text(
+                    encoding="utf-8"
+                )
             ),
         )
         cases = {case["id"]: case for case in result["cases"]}

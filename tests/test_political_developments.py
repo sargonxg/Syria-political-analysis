@@ -313,7 +313,9 @@ class PoliticalDevelopmentTests(unittest.TestCase):
         except ImportError:
             self.skipTest("jsonschema is an optional development dependency")
         schema = json.loads(
-            (ROOT / "schemas/political_developments.schema.json").read_text()
+            (ROOT / "schemas/political_developments.schema.json").read_text(
+                encoding="utf-8"
+            )
         )
         Draft202012Validator.check_schema(schema)
         validator = Draft202012Validator(schema, format_checker=FormatChecker())
@@ -439,7 +441,7 @@ class PoliticalDevelopmentTests(unittest.TestCase):
             self.assertEqual(build_browser(self.study, output), output)
             self.assertTrue((output.parent / "political-study.js").exists())
             self.assertTrue((output.parent / "political-study.css").exists())
-            page = output.read_text()
+            page = output.read_text(encoding="utf-8")
             self.assertIn("script-src 'self'", page)
             self.assertIn("connect-src 'none'", page)
             self.assertNotIn("'unsafe-inline'", page)
@@ -462,7 +464,9 @@ class PoliticalDevelopmentTests(unittest.TestCase):
             for identifier, packet in payload["selections"].items():
                 self.assertEqual(packet, select_developments(self.study, [identifier]))
                 self.assertTrue(validate_selection(packet, self.study))
-            javascript = (output.parent / "political-study.js").read_text()
+            javascript = (output.parent / "political-study.js").read_text(
+                encoding="utf-8"
+            )
             for unsafe in (
                 ".innerHTML",
                 ".outerHTML",
@@ -486,7 +490,7 @@ class PoliticalDevelopmentTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "index.html"
             build_browser(study, output)
-            page = output.read_text()
+            page = output.read_text(encoding="utf-8")
             self.assertNotIn(attack, page)
             self.assertNotIn("<img src=x", page)
             self.assertIn("\\u003c/script\\u003e", page)

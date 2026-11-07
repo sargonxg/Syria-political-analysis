@@ -588,7 +588,7 @@ def build_browser(study, output):
     validate_study(study)
     output = Path(output)
     require(output.suffix.lower() == ".html", "Browser output must be an HTML file")
-    assets = Path(__file__).resolve().parents[2] / "web"
+    assets = Path(__file__).resolve().parent / "web"
     template = (assets / "political-study.html").read_text(encoding="utf-8")
     javascript = (assets / "political-study.js").read_text(encoding="utf-8")
     css = (assets / "political-study.css").read_text(encoding="utf-8")
