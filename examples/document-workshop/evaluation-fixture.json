@@ -1,0 +1,102 @@
+{
+  "fixture_kind": "synthetic_contract_cases",
+  "text": "The council requests its envoy to convene representatives for negotiations. This fictional request does not establish that talks have taken place.\n\nA separate fictional report states that a preparatory meeting was held on 12 March 2024. Its participant list and independent corroboration are not supplied.\n\nAn analyst proposes comparing participation, agreed procedures and follow-up evidence before assessing whether the political process is inclusive.\n\nThe fictional source adds that the reported attendance is provisional and has not been independently checked. This qualification limits any assessment of participation.",
+  "source": {
+    "title": "Fictional policy note for practice",
+    "uri": null,
+    "published_on": "2024-03-15"
+  },
+  "annotations": [
+    {
+      "paragraph_id": "p001",
+      "claim_kind": "normative_expression",
+      "actor": "Fictional council",
+      "source_verb": "requests",
+      "statement": "The fictional council requests convening negotiations.",
+      "qualification": "No meeting or implementation is established by the request."
+    },
+    {
+      "paragraph_id": "p002",
+      "claim_kind": "reported_action",
+      "source_verb": "states",
+      "event_on": "2024-03-12",
+      "qualification": "An attributed fictional report, without independent corroboration."
+    },
+    {
+      "paragraph_id": "p003",
+      "claim_kind": "analyst_interpretation",
+      "source_verb": "proposes",
+      "qualification": "An analytical proposal, not an observed outcome."
+    },
+    {
+      "paragraph_id": "p004",
+      "claim_kind": "unclassified",
+      "source_verb": "qualifies",
+      "qualification": "A separate source qualification that must accompany an assessment of reported participation."
+    }
+  ],
+  "cases": [
+    {
+      "id": "request-focus",
+      "question": "What does the fictional council request?",
+      "selected_paragraph_ids": [
+        "p001"
+      ],
+      "rubric_paragraph_ids": [
+        "p001"
+      ],
+      "rubric_note": "The request is retained together with its sentence distinguishing request from implementation."
+    },
+    {
+      "id": "overbroad-selection",
+      "question": "What does the fictional council request?",
+      "selected_paragraph_ids": [
+        "p001",
+        "p002",
+        "p003",
+        "p004"
+      ],
+      "rubric_paragraph_ids": [
+        "p001"
+      ],
+      "rubric_note": "Retaining every paragraph adds material outside the narrow request question."
+    },
+    {
+      "id": "implementation-gap",
+      "question": "Does a request alone establish that a meeting occurred?",
+      "selected_paragraph_ids": [
+        "p001"
+      ],
+      "rubric_paragraph_ids": [
+        "p001",
+        "p002"
+      ],
+      "rubric_note": "The request alone omits the separate attributed meeting report; neither independently establishes implementation."
+    },
+    {
+      "id": "qualification-omitted",
+      "question": "What does the report establish about participation?",
+      "selected_paragraph_ids": [
+        "p002"
+      ],
+      "rubric_paragraph_ids": [
+        "p002",
+        "p004"
+      ],
+      "rubric_note": "The short reported-action paragraph must travel with paragraph 4, which qualifies attendance as provisional and not independently checked."
+    },
+    {
+      "id": "qualified-report",
+      "question": "What does the report establish about participation?",
+      "selected_paragraph_ids": [
+        "p002",
+        "p004"
+      ],
+      "rubric_paragraph_ids": [
+        "p002",
+        "p004"
+      ],
+      "rubric_note": "The reported action and its separate source qualification are retained together."
+    }
+  ]
+}

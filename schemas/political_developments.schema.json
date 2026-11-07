@@ -1,0 +1,859 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/sargonxg/Syria-political-analysis/blob/main/schemas/political_developments.schema.json",
+  "title": "Source-qualified political acts, media study and selections",
+  "description": "Structural schema only. The Python validator additionally checks real ordered dates, source/excerpt identities and hashes, source-wording boundaries, selection fidelity and portable size/depth limits. No schema certifies truth or completed human review.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/study"
+    },
+    {
+      "$ref": "#/$defs/political"
+    },
+    {
+      "$ref": "#/$defs/media"
+    },
+    {
+      "$ref": "#/$defs/selection"
+    }
+  ],
+  "$defs": {
+    "review": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "const": "automated_source_check_pending_human_review"
+        },
+        "human_review_recorded": {
+          "const": false
+        }
+      },
+      "required": [
+        "state",
+        "human_review_recorded"
+      ],
+      "additionalProperties": false
+    },
+    "excerpt": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "locator": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "text_kind": {
+          "const": "exact_excerpt"
+        },
+        "normalization": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "locator",
+        "text_kind",
+        "normalization",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "source_kind": {
+          "enum": [
+            "primary_instrument",
+            "institutional_reporting",
+            "primary_announcement",
+            "news_report",
+            "analysis"
+          ]
+        },
+        "byline": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "published_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "published_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "modified_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "publication_precision": {
+          "const": "day"
+        },
+        "retrieved_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "response_saved_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "checked_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "capture": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "bytes": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "representation": {
+              "enum": [
+                "HTML",
+                "PDF"
+              ]
+            },
+            "full_document_redistributed": {
+              "const": false
+            },
+            "note": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes",
+            "representation",
+            "full_document_redistributed",
+            "note"
+          ],
+          "additionalProperties": false
+        },
+        "excerpts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/excerpt"
+          },
+          "minItems": 1,
+          "maxItems": 12
+        },
+        "review_state": {
+          "const": "automated_source_check_pending_human_review"
+        },
+        "human_review_recorded": {
+          "const": false
+        },
+        "rights_note": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        }
+      },
+      "required": [
+        "id",
+        "publisher",
+        "title",
+        "url",
+        "source_kind",
+        "byline",
+        "published_on",
+        "published_at",
+        "modified_at",
+        "publication_precision",
+        "retrieved_on",
+        "response_saved_at",
+        "checked_at",
+        "capture",
+        "excerpts",
+        "review_state",
+        "human_review_recorded",
+        "rights_note"
+      ],
+      "additionalProperties": false
+    },
+    "basis": {
+      "type": "object",
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+        },
+        "excerpt_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+        }
+      },
+      "required": [
+        "source_id",
+        "excerpt_id"
+      ],
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+        },
+        "excerpt_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+        },
+        "relation": {
+          "const": "supports_attributed_act"
+        }
+      },
+      "required": [
+        "source_id",
+        "excerpt_id",
+        "relation"
+      ],
+      "additionalProperties": false
+    },
+    "development": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+        },
+        "record_type": {
+          "const": "political_development"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "development_kind": {
+          "enum": [
+            "adoption",
+            "announcement",
+            "invitation",
+            "meeting",
+            "appointment",
+            "agreement",
+            "announced_programme",
+            "reported_implementation"
+          ]
+        },
+        "country_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          },
+          "minItems": 1,
+          "maxItems": 10
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "attribution": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "event_time": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "start": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "end": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "precision": {
+                  "const": "day"
+                },
+                "basis": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 4000
+                }
+              },
+              "required": [
+                "start",
+                "end",
+                "precision",
+                "basis"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "start": {
+                  "type": "null"
+                },
+                "end": {
+                  "type": "null"
+                },
+                "precision": {
+                  "const": "unknown"
+                },
+                "basis": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 4000
+                }
+              },
+              "required": [
+                "start",
+                "end",
+                "precision",
+                "basis"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "geographic_scope": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "coordinates": {
+          "type": "null"
+        },
+        "structured_act": {
+          "type": "object",
+          "properties": {
+            "actor": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "act": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "object": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "evidence_status": {
+              "const": "source_attributed_act"
+            },
+            "policy_objectives_implemented": {
+              "const": false
+            },
+            "current_conditions_established": {
+              "const": false
+            }
+          },
+          "required": [
+            "actor",
+            "act",
+            "object",
+            "evidence_status",
+            "policy_objectives_implemented",
+            "current_conditions_established"
+          ],
+          "additionalProperties": false
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "minItems": 1,
+          "maxItems": 12
+        },
+        "planned_period": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "start": {
+                  "type": "string",
+                  "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"
+                },
+                "end": {
+                  "type": "string",
+                  "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"
+                },
+                "precision": {
+                  "const": "month"
+                },
+                "kind": {
+                  "const": "source_reported_plan"
+                }
+              },
+              "required": [
+                "start",
+                "end",
+                "precision",
+                "kind"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "qualifications": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          },
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "review": {
+          "$ref": "#/$defs/review"
+        },
+        "conflict_observation_links": {
+          "type": "array",
+          "maxItems": 0
+        }
+      },
+      "required": [
+        "id",
+        "record_type",
+        "title",
+        "development_kind",
+        "country_codes",
+        "statement",
+        "attribution",
+        "event_time",
+        "geographic_scope",
+        "coordinates",
+        "structured_act",
+        "evidence",
+        "planned_period",
+        "qualifications",
+        "review",
+        "conflict_observation_links"
+      ],
+      "additionalProperties": false
+    },
+    "political": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "const": "political-developments/1"
+        },
+        "collection_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "compiled_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "coverage": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          },
+          "minItems": 1,
+          "maxItems": 30
+        },
+        "developments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/development"
+          },
+          "minItems": 1,
+          "maxItems": 50
+        },
+        "boundaries": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          },
+          "minItems": 4,
+          "maxItems": 20
+        }
+      },
+      "required": [
+        "format",
+        "collection_id",
+        "title",
+        "compiled_on",
+        "coverage",
+        "sources",
+        "developments",
+        "boundaries"
+      ],
+      "additionalProperties": false
+    },
+    "annotation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+        },
+        "kind": {
+          "enum": [
+            "observable_text_feature",
+            "analyst_interpretation"
+          ]
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "basis": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/basis"
+          },
+          "minItems": 1,
+          "maxItems": 12
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "review": {
+          "$ref": "#/$defs/review"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "statement",
+        "basis",
+        "scope",
+        "review"
+      ],
+      "additionalProperties": false
+    },
+    "media": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "const": "media-comparison-study/1"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "development_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+        },
+        "country_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          },
+          "minItems": 1,
+          "maxItems": 10
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          },
+          "minItems": 1,
+          "maxItems": 30
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/annotation"
+          },
+          "minItems": 1,
+          "maxItems": 20
+        },
+        "lineage": {
+          "type": "object",
+          "properties": {
+            "primary_document_source_id": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+            },
+            "shared_development_id": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+            },
+            "publishing_entity_count": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 30
+            },
+            "independent_reporting_verified": {
+              "const": false
+            },
+            "upstream_dependence_assessed": {
+              "const": false
+            },
+            "note": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            }
+          },
+          "required": [
+            "primary_document_source_id",
+            "shared_development_id",
+            "publishing_entity_count",
+            "independent_reporting_verified",
+            "upstream_dependence_assessed",
+            "note"
+          ],
+          "additionalProperties": false
+        },
+        "boundaries": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          },
+          "minItems": 4,
+          "maxItems": 20
+        }
+      },
+      "required": [
+        "format",
+        "id",
+        "title",
+        "question",
+        "development_id",
+        "country_codes",
+        "sources",
+        "annotations",
+        "lineage",
+        "boundaries"
+      ],
+      "additionalProperties": false
+    },
+    "study": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "const": "political-evidence-study/1"
+        },
+        "political": {
+          "$ref": "#/$defs/political"
+        },
+        "media": {
+          "$ref": "#/$defs/media"
+        }
+      },
+      "required": [
+        "format",
+        "political",
+        "media"
+      ],
+      "additionalProperties": false
+    },
+    "selection": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "const": "political-development-selection/1"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "source_snapshot_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/development"
+          },
+          "minItems": 1,
+          "maxItems": 50
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          },
+          "minItems": 1,
+          "maxItems": 30
+        },
+        "selection": {
+          "type": "object",
+          "properties": {
+            "available_record_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+              },
+              "minItems": 1,
+              "maxItems": 50
+            },
+            "retained_record_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+              },
+              "minItems": 1,
+              "maxItems": 50
+            },
+            "omitted_record_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+              },
+              "minItems": 0,
+              "maxItems": 50
+            },
+            "retained_excerpt_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+              },
+              "minItems": 1,
+              "maxItems": 100
+            },
+            "omitted_excerpt_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9-]{0,100}$"
+              },
+              "minItems": 0,
+              "maxItems": 100
+            },
+            "method": {
+              "const": "explicit_selection"
+            },
+            "note": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4000
+            }
+          },
+          "required": [
+            "available_record_ids",
+            "retained_record_ids",
+            "omitted_record_ids",
+            "retained_excerpt_ids",
+            "omitted_excerpt_ids",
+            "method",
+            "note"
+          ],
+          "additionalProperties": false
+        },
+        "boundaries": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          },
+          "minItems": 4,
+          "maxItems": 20
+        }
+      },
+      "required": [
+        "format",
+        "question",
+        "source_snapshot_sha256",
+        "records",
+        "sources",
+        "selection",
+        "boundaries"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

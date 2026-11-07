@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Three source-qualified political acts and a worked comparison of reporting on Resolution 2254. Inspect dates, exact excerpts and bounded evidence selections.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; img-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <title>Political acts &amp; reporting · TACITUS</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./political-study.css">
+  <script defer src="./political-study.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#study">Skip to study</a>
+  <header class="masthead">
+    <a class="wordmark" href="https://github.com/sargonxg/Syria-political-analysis">TACITUS<span>Public research tools</span></a>
+    <a href="https://github.com/sargonxg/Syria-political-analysis">Code &amp; method ↗</a>
+  </header>
+  <main id="study">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">Middle East / A worked source study</p>
+      <h1 id="page-title">Political acts &amp; reporting.</h1>
+      <p>Inspect three political records and two reports about the adoption of Resolution 2254. Keep the documented act, source wording and interpretation separate.</p>
+      <p class="scope">Selected historical evidence. Human review remains pending. No live feed or model service.</p>
+    </section>
+    <nav class="view-controls" aria-label="Choose a source study">
+      <button id="show-acts" type="button" aria-pressed="true" aria-controls="acts-panel">Political developments</button>
+      <button id="show-comparison" type="button" aria-pressed="false" aria-controls="comparison-panel">Compare reporting</button>
+    </nav>
+    <section id="acts-panel" aria-labelledby="acts-title">
+      <h2 class="section-title" id="acts-title">Three source-qualified acts</h2>
+      <div id="act-choices" class="act-choices" role="group" aria-label="Choose a political development"></div>
+      <div id="act-detail" class="act-detail"></div>
+      <div class="export-row">
+        <p>A shared date or location with a violence record does not establish causation. The prepared selection retains its date basis, qualifications and omitted IDs.</p>
+        <button id="download-act" type="button" disabled>Download this record ↓</button>
+      </div>
+    </section>
+    <section id="comparison-panel" aria-labelledby="comparison-title" hidden>
+      <h2 class="section-title" id="comparison-title">One adoption, two editorial treatments</h2>
+      <p id="comparison-question" class="comparison-question"></p>
+      <div id="media-pair" class="media-pair"></div>
+      <details class="comparison-details">
+        <summary>Read the comparison annotations</summary>
+        <div id="comparison-annotations"></div>
+      </details>
+      <details class="comparison-details">
+        <summary>Check the primary wording in paragraph 4</summary>
+        <div id="primary-wording"></div>
+      </details>
+      <div class="export-row">
+        <p>Different genres and adjacent publication dates. This compares the selected passages, with no outlet-level bias or credibility score.</p>
+        <button id="download-study" type="button">Download cited study ↓</button>
+      </div>
+    </section>
+    <p class="study-status" id="study-status" role="status">Source-checked drafts · Human review pending.</p>
+    <noscript><p>This study uses JavaScript to switch views and download its prepared selections. The same JSON can be built without a browser using <code>python scripts/build_political_developments.py</code>. Read the <a href="https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf">primary resolution</a> directly.</p></noscript>
+  </main>
+  <footer>
+    <p>Public sources, exact excerpts and explicit limits. No account, upload, analytics, storage or model call.</p>
+    <p>Short attributed excerpts retain their original rights. Source hashes identify captures, not truth or independent corroboration.</p>
+  </footer>
+  <script id="political-study-data" type="application/json">__POLITICAL_STUDY_DATA__</script>
+</body>
+</html>

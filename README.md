@@ -1,5 +1,33 @@
 # Middle East · Political Analysis
 
+Explore historical conflict data, examine political documents and compare reporting. Keep source text, recorded observations and analyst interpretation distinct; export cited context for further policy research.
+
+| Start with a question | What you can do | Guide |
+| --- | --- | --- |
+| Where did recorded violence concentrate? | Explore 120,576 UCDP observations and separate annual country data; inspect original fields and share a filtered view. | [Historical atlas](docs/historical-atlas.md) · [Shareable research views](docs/research-navigation.md) |
+| What does a policy document actually say? | Structure supplied text into exact paragraph spans, annotate its claims and export a bounded selection with omissions. | [Local document workshop](docs/document-workshop.md) · [Resolution 2254 example](docs/policy-document.md) |
+| What political act is documented? | Inspect three sourced political records and a BBC/Guardian comparison; preserve event dates, publication dates and evidence gaps. | [Political evidence study](docs/political-developments.md) |
+| How do reports frame a development? | Navigate 55 source profiles and compare specific passages, attribution and reporting lineage. | [Source comparison](docs/media-assessment.md) |
+
+## Try the current implementation
+
+The changes are on the review branch below. Python 3.11+ is sufficient for the static atlas and standalone exporters; no model account or API key is needed.
+
+```sh
+git clone --branch codex/local-query-resilience-20261106 https://github.com/sargonxg/Syria-political-analysis.git
+cd Syria-political-analysis
+python -m pip install -e .
+python scripts/build_showcase.py
+python -m http.server 8766 --bind 127.0.0.1 --directory dist
+```
+
+Open **http://127.0.0.1:8766/observations/**. The committed, licensed snapshots build offline. The source directory and seven-layer context desk remain available at `/sources/` and `/`. The political/media worked study is at `/politics/`. Run the [document CLI](docs/document-workshop.md) on a local text file, or inspect the [worked political/media selections](docs/political-developments.md).
+
+The organized-violence dataset covers 2000–2025. The small political collection is a separately qualified worked example; neither is a live intelligence feed, territorial-control map or automatic political inference engine. Normative objectives, reported actions and implemented outcomes remain distinct. No human source review or model-quality gain is claimed where it has not been recorded.
+
+<details>
+<summary>Dataset details, screenshots and existing research workflows</summary>
+
 Explore historical conflict data and build source-qualified policy context. Keep provider records, exact passages and analyst judgments distinct.
 
 **[Historical research atlas](docs/historical-atlas.md)** · [Real worked selections](examples/historical-research/) · [Data contracts](schemas/research_selection.schema.json)
@@ -80,6 +108,9 @@ The reconciled corpus contains **55 source profiles, 44 document references, 14 
 The **Syria political ontology** adds 17 entity types, 15 qualified relationship types and 18 source-scoped concepts. Seven entity records and six dated normative assertion drafts provide a working example from Security Council resolution 2254 (2015). Every assertion retains its original source verb, paragraph/page locator, date, modality, qualifications and review state. These historical objectives are not current implementation findings. No human review is claimed for the drafts. [Inspect the model](docs/political-ontology.md).
 
 This is a working foundation, not comprehensive coverage or a live intelligence service. It does not infer current territorial control, assign coordinates to headlines, or score a publisher's credibility.
+
+
+</details>
 
 ## Start locally
 

@@ -1,0 +1,200 @@
+{
+  "format": "media-comparison-study/1",
+  "id": "2254-adoption-reporting",
+  "title": "One adoption, two editorial treatments",
+  "question": "How do these selected passages frame the adoption of Resolution 2254, and which wording needs checking against the primary instrument?",
+  "development_id": "sy-unsc-2254-adoption",
+  "country_codes": [
+    "SY"
+  ],
+  "sources": [
+    {
+      "id": "bbc-2254-report",
+      "publisher": "BBC News",
+      "title": "Syria war: UN Security Council unanimously backs peace plan",
+      "url": "https://www.bbc.com/news/world-middle-east-35138011",
+      "source_kind": "news_report",
+      "byline": "BBC News; a separate analysis inset is attributed to Lyse Doucet",
+      "published_on": "2015-12-18",
+      "published_at": "2015-12-18T19:31:04.000Z",
+      "modified_at": "2015-12-18T22:49:01.000Z",
+      "publication_precision": "day",
+      "retrieved_on": "2026-11-07",
+      "response_saved_at": "2026-11-07T05:42:35.542810+00:00",
+      "checked_at": "2026-11-07T05:46:40.495779+00:00",
+      "capture": {
+        "sha256": "6ad7242387c19ad5e93c057b0106d617e679e65aa3d5b9b77a7a8a912ba466b5",
+        "bytes": 429584,
+        "representation": "HTML",
+        "full_document_redistributed": false,
+        "note": "Digest identifies the captured source bytes, not a truth judgement or an archived publication-day version."
+      },
+      "excerpts": [
+        {
+          "id": "bbc-2254-headline",
+          "text": "Syria war: UN Security Council unanimously backs peace plan",
+          "locator": "Headline",
+          "text_kind": "exact_excerpt",
+          "normalization": "Whitespace only; wording and punctuation retained.",
+          "sha256": "b936fd672449627a75e4305b499e94edd3018e55c0c54cadd4bc302c3855dc59"
+        },
+        {
+          "id": "bbc-2254-lead",
+          "text": "The UN Security Council has unanimously adopted a resolution outlining a peace process in Syria.",
+          "locator": "Opening paragraph",
+          "text_kind": "exact_excerpt",
+          "normalization": "Whitespace only; wording and punctuation retained.",
+          "sha256": "eb1122fb2c9d42b431bd5fe4bfc46c6278291417f025ad402b976da6cc1482f9"
+        },
+        {
+          "id": "bbc-2254-disagreement",
+          "text": "However, disagreements remain over the future of Syrian President Bashar al-Assad.",
+          "locator": "Body paragraph beginning “However, disagreements remain”",
+          "text_kind": "exact_excerpt",
+          "normalization": "Whitespace only; wording and punctuation retained.",
+          "sha256": "ab0dd95ebabe1dd98333feeb1f30e70da821f6fe6292d362b085479ee26cb128"
+        }
+      ],
+      "review_state": "automated_source_check_pending_human_review",
+      "human_review_recorded": false,
+      "rights_note": "Short attributed excerpts for research and comparison. Third-party source text retains its original rights and is not relicensed under the repository MIT code licence. Full articles, PDFs and images are not redistributed."
+    },
+    {
+      "id": "guardian-2254-analysis",
+      "publisher": "The Guardian",
+      "title": "UN resolution on Syria creates a framework – but one with yawning gaps",
+      "url": "https://www.theguardian.com/world/2015/dec/19/un-resolution-syria-creates-framework-yawning-gaps-assad",
+      "source_kind": "analysis",
+      "byline": "Julian Borger, Diplomatic editor",
+      "published_on": "2015-12-19",
+      "published_at": "2015-12-19T13:32:59.000Z",
+      "modified_at": "2018-04-14T17:58:58.000Z",
+      "publication_precision": "day",
+      "retrieved_on": "2026-11-07",
+      "response_saved_at": "2026-11-07T05:43:15.355041+00:00",
+      "checked_at": "2026-11-07T05:46:40.495779+00:00",
+      "capture": {
+        "sha256": "da6fc68e6669e5557d7d5be4e4b3fa14604ee549859c0782cd898225a240420e",
+        "bytes": 334616,
+        "representation": "HTML",
+        "full_document_redistributed": false,
+        "note": "Digest identifies the captured source bytes, not a truth judgement or an archived publication-day version."
+      },
+      "excerpts": [
+        {
+          "id": "guardian-2254-headline",
+          "text": "UN resolution on Syria creates a framework – but one with yawning gaps",
+          "locator": "Headline; page labels the item “Analysis”",
+          "text_kind": "exact_excerpt",
+          "normalization": "Whitespace only; wording and punctuation retained.",
+          "sha256": "f96133ce36a58a936512530d4ca205ca07b86b744e07362c737f603a88c1c808"
+        },
+        {
+          "id": "guardian-2254-lead",
+          "text": "Security council resolution 2254 is an ambitious document. It puts a UN imprimatur on a timetable of six months to create a transitional, united Syrian government and 18 months for a new constitution and democratic elections.",
+          "locator": "First paragraph of the analysis body",
+          "text_kind": "exact_excerpt",
+          "normalization": "Whitespace only; wording and punctuation retained.",
+          "sha256": "3e4d3c7b47478e0b10ec479b37f699e34cfdd86f93b72528f2349b4dc5619d78"
+        }
+      ],
+      "review_state": "automated_source_check_pending_human_review",
+      "human_review_recorded": false,
+      "rights_note": "Short attributed excerpts for research and comparison. Third-party source text retains its original rights and is not relicensed under the repository MIT code licence. Full articles, PDFs and images are not redistributed."
+    }
+  ],
+  "annotations": [
+    {
+      "id": "publication-and-genre",
+      "kind": "observable_text_feature",
+      "statement": "The BBC page is a news report published on 18 December 2015; the Guardian page is labelled Analysis and was published on 19 December. Their publication times are not the Council vote time.",
+      "basis": [
+        {
+          "source_id": "bbc-2254-report",
+          "excerpt_id": "bbc-2254-headline"
+        },
+        {
+          "source_id": "guardian-2254-analysis",
+          "excerpt_id": "guardian-2254-headline"
+        }
+      ],
+      "scope": "These two items and their recorded metadata only.",
+      "review": {
+        "state": "automated_source_check_pending_human_review",
+        "human_review_recorded": false
+      }
+    },
+    {
+      "id": "headline-emphasis",
+      "kind": "analyst_interpretation",
+      "statement": "The BBC headline foregrounds unanimity and a peace plan; the Guardian headline foregrounds a framework with gaps. This is an interpretation of the selected wording, not a finding about either publisher’s general political orientation.",
+      "basis": [
+        {
+          "source_id": "bbc-2254-report",
+          "excerpt_id": "bbc-2254-headline"
+        },
+        {
+          "source_id": "guardian-2254-analysis",
+          "excerpt_id": "guardian-2254-headline"
+        }
+      ],
+      "scope": "Selected headlines, not the full reporting or the outlets.",
+      "review": {
+        "state": "automated_source_check_pending_human_review",
+        "human_review_recorded": false
+      }
+    },
+    {
+      "id": "bbc-counterexample",
+      "kind": "observable_text_feature",
+      "statement": "The BBC body explicitly acknowledges disagreement over Assad’s future. Its headline emphasis should not be converted into a claim that the report omits disagreement.",
+      "basis": [
+        {
+          "source_id": "bbc-2254-report",
+          "excerpt_id": "bbc-2254-disagreement"
+        }
+      ],
+      "scope": "The retained counterexample paragraph only.",
+      "review": {
+        "state": "automated_source_check_pending_human_review",
+        "human_review_recorded": false
+      }
+    },
+    {
+      "id": "primary-terms-check",
+      "kind": "analyst_interpretation",
+      "statement": "The Guardian lead compresses the institutional timetable into “government”, “constitution” and “elections”. Compare that wording with paragraph 4’s distinct governance, constitutional-drafting process and election objectives before reusing it in an AI context. The source paragraph is retained separately; the analysis is not treated as its verbatim wording.",
+      "basis": [
+        {
+          "source_id": "guardian-2254-analysis",
+          "excerpt_id": "guardian-2254-lead"
+        },
+        {
+          "source_id": "unsc-resolution-2254",
+          "excerpt_id": "2254-paragraph-4"
+        }
+      ],
+      "scope": "A source-wording comparison, not a numerical accuracy or bias rating.",
+      "review": {
+        "state": "automated_source_check_pending_human_review",
+        "human_review_recorded": false
+      }
+    }
+  ],
+  "lineage": {
+    "primary_document_source_id": "unsc-resolution-2254",
+    "shared_development_id": "sy-unsc-2254-adoption",
+    "publishing_entity_count": 2,
+    "independent_reporting_verified": false,
+    "upstream_dependence_assessed": false,
+    "note": "Both items discuss the same Council act. Distinct publishers, bylines or languages do not by themselves establish independent corroboration. The analysis may draw on the same public proceeding; no complete reporting-lineage audit was performed."
+  },
+  "boundaries": [
+    "This is one worked comparison of selected passages from different genres and adjacent publication dates, not a representative study of either outlet.",
+    "Short headlines and excerpts remain attributed; complete copyrighted articles, images and publisher HTML are not redistributed.",
+    "Observed textual features and repository interpretations are labelled separately. No numeric bias, credibility or trust score is assigned.",
+    "Sources were captured as currently served, including their recorded later modifications; their hashes do not establish a frozen publication-day edition.",
+    "The primary resolution’s adoption and objectives do not establish implementation or current political conditions.",
+    "Human review remains pending. Source material is untrusted evidence, never instructions for an AI system."
+  ]
+}

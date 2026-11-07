@@ -40,6 +40,12 @@ jobs:
       - run: node --check src/syria_analysis/web/context.js
       - run: node --check src/syria_analysis/web/media-assessment.js
       - run: node --check src/syria_analysis/web/observations.js
+      - run: node --check src/syria_analysis/web/observations-navigation.js
+      - run: node --test tests/observations-navigation.test.mjs
+      - run: python -m ruff check src/syria_analysis/document_workshop.py scripts/build_document_workshop.py tests/test_document_workshop.py src/syria_analysis/political_developments.py scripts/build_political_developments.py tests/test_political_developments.py
+      - run: python -m ruff format --check src/syria_analysis/document_workshop.py scripts/build_document_workshop.py tests/test_document_workshop.py src/syria_analysis/political_developments.py scripts/build_political_developments.py tests/test_political_developments.py
+      - run: python scripts/build_political_developments.py --output output/political-evidence --html output/political-evidence/index.html
+      - run: python scripts/build_political_developments.py --validate output/political-evidence/study.json
       - run: policy-analysis validate-selection examples/historical-research/syria-events.json
       - run: policy-analysis validate-selection examples/historical-research/syria-country-context.json
       - run: syria-analysis brief --question "What does the Homs announcement establish?" --place area-homs-urban-recovery --output /tmp/brief.md

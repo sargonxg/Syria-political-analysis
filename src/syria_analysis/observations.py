@@ -37,6 +37,7 @@ def build_observation_atlas(repository: Path, output: Path):
         ("observations.html", "index.html"),
         ("observations.css", "observations.css"),
         ("observations.js", "observations.js"),
+        ("observations-navigation.js", "observations-navigation.js"),
     ):
         shutil.copyfile(web / source, output / target)
     fragments = [events_bundle(repository, output), context_bundle(repository, output)]
