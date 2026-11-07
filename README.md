@@ -12,8 +12,6 @@ The [read-only research database](cloudflare/README.md) adds indexed local SQLit
 
 ![Actual five-lens view of 2,048 source-linked navigation records](docs/images/historical-atlas-lenses.png)
 
-![Historical research atlas using actual provider records](docs/images/historical-atlas-desktop.png)
-
 ```sh
 git clone https://github.com/sargonxg/Syria-political-analysis.git
 cd Syria-political-analysis
@@ -25,6 +23,21 @@ python -m http.server 8766 --bind 127.0.0.1 --directory dist
 Open **http://127.0.0.1:8766/observations/**. No API key, model account or Rust build is needed. The committed, licensed snapshots build without live collection. [Query from Python/CLI, prepare a brief and reopen a selection in Workbench](docs/historical-atlas.md). A static build can be hosted on Cloudflare; the separately authenticated notebook below is a different workflow.
 
 The historical collection has nine UCDP provider country categories; the annual series cover ten World Bank economies. Provider geography is retained, without an independent border determination. This is historical research coverage, not a live event feed, current control map or causal model. Syria remains the first curated political-ontology collection.
+
+**[Work through a policy document](docs/policy-document.md)** · [Inspectable packets](examples/policy-document/) · [Selection schema](schemas/policy_document_selection.schema.json)
+
+![Actual personal-site policy walkthrough: primary paragraph, qualified assertion and downloadable selection](docs/images/policy-document-lab.png)
+
+The screenshot shows the personal site consuming this repository’s static example; the local exporter below produces the same cited packets without requiring the website.
+
+Start with Security Council resolution 2254 (2015). Three primary paragraphs map to six qualified political assertions: a request for negotiations, supported institutional objectives and a conditional ceasefire. Choose a question, retain the relevant records and export the full citations, draft-review state, omissions and implementation gaps. The original receipt and paraphrases remain unchanged. Political objectives and organized-violence observations have separate evidence types.
+
+```sh
+python scripts/build_policy_document.py --task negotiations --output output/policy-document
+python scripts/build_policy_document.py --validate output/policy-document/selection.json
+```
+
+This small offline example needs Python 3.11+ only. The exporter makes no model call and does not claim automatic extraction or tested relevance gains. Its UTF-8 byte counts compare selected evidence with the curated six-record baseline, not with the entire document. [How to pair this with conflict research without inferring causality](docs/policy-document.md#political-developments-and-conflict-observations).
 
 **[Assess media framing](docs/media-assessment.md)** · [Research/data resources](data/sources/resources.json)
 
@@ -56,7 +69,7 @@ The public code and sample corpus can be read, cloned and run locally. The optio
 
 The screenshot uses fictional browser-test records only. [Mobile view](docs/images/desk-mobile.png).
 
-![Selected source-backed regional navigation anchors](docs/source-map.svg)
+[Selected source-backed regional navigation anchors](docs/source-map.svg).
 
 An independent, public-source research toolkit by Giulio Catanzariti. Start with a source, preserve what it actually says, and keep the analyst's judgement visible.
 
