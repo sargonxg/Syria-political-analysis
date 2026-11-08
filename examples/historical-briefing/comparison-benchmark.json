@@ -1,0 +1,762 @@
+{
+  "format": "tacitus-comparison-benchmark/1",
+  "run_at": "2026-11-08T06:19:18.573Z",
+  "compiler_sha256": "c9d144be1513d395306bc07485d667f953b1574c8f1fc228d053eecc1c9ebcb7",
+  "runtime": "v24.22.1",
+  "platform": "linux",
+  "database_records": 120576,
+  "method": "Same full read-only SQLite snapshot; six developer-visible period comparisons, three byte budgets, full vs compact representation. One warm-up and three measured repeated compilations per successful arm. Refusals are recorded, not replaced. Counts independently checked with SQL; every retained field checked against the source record.",
+  "cases": [
+    {
+      "country": "SY",
+      "baseline": [
+        2011,
+        2013
+      ],
+      "focus": [
+        2014,
+        2016
+      ],
+      "budget_bytes": 8000,
+      "arms": {
+        "full": {
+          "status": "refused",
+          "reason": "Comparison budget cannot retain evidence from both nonempty periods. Increase the budget."
+        },
+        "compact": {
+          "status": "refused",
+          "reason": "Comparison budget cannot retain evidence from both nonempty periods. Increase the budget."
+        }
+      }
+    },
+    {
+      "country": "SY",
+      "baseline": [
+        2011,
+        2013
+      ],
+      "focus": [
+        2014,
+        2016
+      ],
+      "budget_bytes": 16000,
+      "arms": {
+        "full": {
+          "status": "ok",
+          "payload_bytes": 14458,
+          "selected_records": 3,
+          "selected_by_period": {
+            "baseline": 2,
+            "focus": 1
+          },
+          "sha256": "e1d04db8cf67331c6f22425b427482fb1b542c84dc0c6e70de071c4b6363f374",
+          "p50_ms": 621.8237949999998,
+          "p95_ms": 639.672337,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        },
+        "compact": {
+          "status": "ok",
+          "payload_bytes": 15929,
+          "selected_records": 11,
+          "selected_by_period": {
+            "baseline": 6,
+            "focus": 5
+          },
+          "sha256": "f4d68e1de8949fe596bc533c54e0eeb790701d76e4c0de234e01247fc7e18829",
+          "p50_ms": 627.2223389999999,
+          "p95_ms": 639.1974969999992,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        }
+      },
+      "additional_records": 8
+    },
+    {
+      "country": "SY",
+      "baseline": [
+        2011,
+        2013
+      ],
+      "focus": [
+        2014,
+        2016
+      ],
+      "budget_bytes": 32000,
+      "arms": {
+        "full": {
+          "status": "ok",
+          "payload_bytes": 31607,
+          "selected_records": 11,
+          "selected_by_period": {
+            "baseline": 6,
+            "focus": 5
+          },
+          "sha256": "05a6a2481aa364275276f6cb17d23522c18e708bae4406abc753d33c1cc21721",
+          "p50_ms": 629.3438849999984,
+          "p95_ms": 641.6519749999989,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        },
+        "compact": {
+          "status": "ok",
+          "payload_bytes": 31513,
+          "selected_records": 35,
+          "selected_by_period": {
+            "baseline": 18,
+            "focus": 17
+          },
+          "sha256": "de0918f0d81e8f917b464f2992704c59c89e4413149af351cdaa170a69a0a981",
+          "p50_ms": 642.7023640000007,
+          "p95_ms": 662.8175929999998,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        }
+      },
+      "additional_records": 24
+    },
+    {
+      "country": "IQ",
+      "baseline": [
+        2011,
+        2013
+      ],
+      "focus": [
+        2014,
+        2017
+      ],
+      "budget_bytes": 8000,
+      "arms": {
+        "full": {
+          "status": "refused",
+          "reason": "Comparison budget cannot retain evidence from both nonempty periods. Increase the budget."
+        },
+        "compact": {
+          "status": "refused",
+          "reason": "Comparison budget cannot retain evidence from both nonempty periods. Increase the budget."
+        }
+      }
+    },
+    {
+      "country": "IQ",
+      "baseline": [
+        2011,
+        2013
+      ],
+      "focus": [
+        2014,
+        2017
+      ],
+      "budget_bytes": 16000,
+      "arms": {
+        "full": {
+          "status": "ok",
+          "payload_bytes": 15586,
+          "selected_records": 4,
+          "selected_by_period": {
+            "baseline": 2,
+            "focus": 2
+          },
+          "sha256": "107e760ac15073ab55252ebb45ef1723f0c909398d1fe078922788a89a6b8ead",
+          "p50_ms": 53.708732999999484,
+          "p95_ms": 56.33479499999885,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        },
+        "compact": {
+          "status": "ok",
+          "payload_bytes": 15888,
+          "selected_records": 12,
+          "selected_by_period": {
+            "baseline": 6,
+            "focus": 6
+          },
+          "sha256": "427e24193ff99176857948fdd8c82330dd3aa64bfa35ec39fec61e56d0ebd039",
+          "p50_ms": 55.299590999999054,
+          "p95_ms": 57.39398400000027,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        }
+      },
+      "additional_records": 8
+    },
+    {
+      "country": "IQ",
+      "baseline": [
+        2011,
+        2013
+      ],
+      "focus": [
+        2014,
+        2017
+      ],
+      "budget_bytes": 32000,
+      "arms": {
+        "full": {
+          "status": "ok",
+          "payload_bytes": 30119,
+          "selected_records": 11,
+          "selected_by_period": {
+            "baseline": 6,
+            "focus": 5
+          },
+          "sha256": "b07b9b93879fe9043e6fad4af6ab30746c98199ed5b97366d4a9580992e754de",
+          "p50_ms": 57.567128000000594,
+          "p95_ms": 59.538142999999764,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        },
+        "compact": {
+          "status": "ok",
+          "payload_bytes": 31559,
+          "selected_records": 34,
+          "selected_by_period": {
+            "baseline": 17,
+            "focus": 17
+          },
+          "sha256": "65793371fe606a9cd4a102fde5bd710b728745a5a225b0548b8ef98ed67f8ae5",
+          "p50_ms": 57.732858999999735,
+          "p95_ms": 58.226620000001276,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        }
+      },
+      "additional_records": 23
+    },
+    {
+      "country": "LB",
+      "baseline": [
+        2003,
+        2005
+      ],
+      "focus": [
+        2006,
+        2006
+      ],
+      "budget_bytes": 8000,
+      "arms": {
+        "full": {
+          "status": "refused",
+          "reason": "Comparison budget cannot retain evidence from both nonempty periods. Increase the budget."
+        },
+        "compact": {
+          "status": "ok",
+          "payload_bytes": 7486,
+          "selected_records": 2,
+          "selected_by_period": {
+            "baseline": 1,
+            "focus": 1
+          },
+          "sha256": "827fb279030d06729e666fc3ed45466ec5ae2280e79432ab7cec1a7485fe82f6",
+          "p50_ms": 12.36675699999978,
+          "p95_ms": 12.635565000000497,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        }
+      }
+    },
+    {
+      "country": "LB",
+      "baseline": [
+        2003,
+        2005
+      ],
+      "focus": [
+        2006,
+        2006
+      ],
+      "budget_bytes": 16000,
+      "arms": {
+        "full": {
+          "status": "ok",
+          "payload_bytes": 14595,
+          "selected_records": 4,
+          "selected_by_period": {
+            "baseline": 2,
+            "focus": 2
+          },
+          "sha256": "fc7354eb4979700501d27ea1d12293a44e9aa424f196edb8370883c713825be9",
+          "p50_ms": 13.477645000000848,
+          "p95_ms": 14.22656300000017,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        },
+        "compact": {
+          "status": "ok",
+          "payload_bytes": 15556,
+          "selected_records": 15,
+          "selected_by_period": {
+            "baseline": 4,
+            "focus": 11
+          },
+          "sha256": "6f8cb8ac09a253df37bb3b5b2f95218ca5ce37008bb4beab9c5bf679eed3a21f",
+          "p50_ms": 11.284150999999838,
+          "p95_ms": 12.673092000000906,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        }
+      },
+      "additional_records": 11
+    },
+    {
+      "country": "LB",
+      "baseline": [
+        2003,
+        2005
+      ],
+      "focus": [
+        2006,
+        2006
+      ],
+      "budget_bytes": 32000,
+      "arms": {
+        "full": {
+          "status": "ok",
+          "payload_bytes": 30898,
+          "selected_records": 12,
+          "selected_by_period": {
+            "baseline": 4,
+            "focus": 8
+          },
+          "sha256": "3c0f43985cd9b07eb88b07c48ea783af9bbebecfa2dfa2aa15eeff49db405f99",
+          "p50_ms": 18.01423999999861,
+          "p95_ms": 20.412946000000375,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        },
+        "compact": {
+          "status": "ok",
+          "payload_bytes": 31706,
+          "selected_records": 38,
+          "selected_by_period": {
+            "baseline": 4,
+            "focus": 34
+          },
+          "sha256": "ae645132c56904bd57355577054689e24537ac468fe804d0cc01c4eb12ad3e6c",
+          "p50_ms": 13.661874999999782,
+          "p95_ms": 15.4634530000003,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        }
+      },
+      "additional_records": 26
+    },
+    {
+      "country": "YE",
+      "baseline": [
+        2011,
+        2014
+      ],
+      "focus": [
+        2015,
+        2020
+      ],
+      "budget_bytes": 8000,
+      "arms": {
+        "full": {
+          "status": "refused",
+          "reason": "Comparison budget cannot retain evidence from both nonempty periods. Increase the budget."
+        },
+        "compact": {
+          "status": "refused",
+          "reason": "Comparison budget cannot retain evidence from both nonempty periods. Increase the budget."
+        }
+      }
+    },
+    {
+      "country": "YE",
+      "baseline": [
+        2011,
+        2014
+      ],
+      "focus": [
+        2015,
+        2020
+      ],
+      "budget_bytes": 16000,
+      "arms": {
+        "full": {
+          "status": "ok",
+          "payload_bytes": 15344,
+          "selected_records": 3,
+          "selected_by_period": {
+            "baseline": 2,
+            "focus": 1
+          },
+          "sha256": "09aecb3874b5de3a1fe0afd9ea69023d8827acbb9cbf892b550eee216d9ec856",
+          "p50_ms": 60.71255299999939,
+          "p95_ms": 62.28891400000066,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        },
+        "compact": {
+          "status": "ok",
+          "payload_bytes": 15812,
+          "selected_records": 10,
+          "selected_by_period": {
+            "baseline": 5,
+            "focus": 5
+          },
+          "sha256": "09e360e67fa0672b147f51088b2b7f737cc04763df6bb54b1b54cc165514d108",
+          "p50_ms": 62.7065079999993,
+          "p95_ms": 77.51040900000044,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        }
+      },
+      "additional_records": 7
+    },
+    {
+      "country": "YE",
+      "baseline": [
+        2011,
+        2014
+      ],
+      "focus": [
+        2015,
+        2020
+      ],
+      "budget_bytes": 32000,
+      "arms": {
+        "full": {
+          "status": "ok",
+          "payload_bytes": 30807,
+          "selected_records": 10,
+          "selected_by_period": {
+            "baseline": 5,
+            "focus": 5
+          },
+          "sha256": "e4c6c8a3553c6e197c8c4721945e74255a8c05f25d3e7d519539243875c6aed5",
+          "p50_ms": 75.66553000000022,
+          "p95_ms": 92.68438699999933,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        },
+        "compact": {
+          "status": "ok",
+          "payload_bytes": 31519,
+          "selected_records": 32,
+          "selected_by_period": {
+            "baseline": 16,
+            "focus": 16
+          },
+          "sha256": "dc6520bea984f3dabd91aa7e40ba8e3056605d4660ba229d35a2f9335a2df1c7",
+          "p50_ms": 70.62206199999855,
+          "p95_ms": 74.18668999999863,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        }
+      },
+      "additional_records": 22
+    },
+    {
+      "country": "JO",
+      "baseline": [
+        2000,
+        2010
+      ],
+      "focus": [
+        2011,
+        2025
+      ],
+      "budget_bytes": 8000,
+      "arms": {
+        "full": {
+          "status": "refused",
+          "reason": "Comparison budget cannot retain evidence from both nonempty periods. Increase the budget."
+        },
+        "compact": {
+          "status": "ok",
+          "payload_bytes": 7867,
+          "selected_records": 2,
+          "selected_by_period": {
+            "baseline": 1,
+            "focus": 1
+          },
+          "sha256": "b17b78d60585326c886e45d649e41c5a9d532caa7d073b5302c1587d717bc9cd",
+          "p50_ms": 2.123572000000422,
+          "p95_ms": 2.395417000001544,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        }
+      }
+    },
+    {
+      "country": "JO",
+      "baseline": [
+        2000,
+        2010
+      ],
+      "focus": [
+        2011,
+        2025
+      ],
+      "budget_bytes": 16000,
+      "arms": {
+        "full": {
+          "status": "ok",
+          "payload_bytes": 15157,
+          "selected_records": 4,
+          "selected_by_period": {
+            "baseline": 1,
+            "focus": 3
+          },
+          "sha256": "afecdfb4af7eef5abb95b462ecf0a4ec10839722412728a62a98b881c4d16c84",
+          "p50_ms": 2.5489889999989828,
+          "p95_ms": 3.1704480000007607,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        },
+        "compact": {
+          "status": "ok",
+          "payload_bytes": 12856,
+          "selected_records": 8,
+          "selected_by_period": {
+            "baseline": 1,
+            "focus": 7
+          },
+          "sha256": "94ac6bf4d771904a5cf8dfb4b7b6168c6d9af3d99bc5dc5ba1dd2fafaf3710ea",
+          "p50_ms": 1.8525070000014239,
+          "p95_ms": 2.4554770000013377,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        }
+      },
+      "additional_records": 4
+    },
+    {
+      "country": "JO",
+      "baseline": [
+        2000,
+        2010
+      ],
+      "focus": [
+        2011,
+        2025
+      ],
+      "budget_bytes": 32000,
+      "arms": {
+        "full": {
+          "status": "ok",
+          "payload_bytes": 24368,
+          "selected_records": 8,
+          "selected_by_period": {
+            "baseline": 1,
+            "focus": 7
+          },
+          "sha256": "d449c6ec13415198b8a01c8ac12349fe23fed2ab0a651e42a877ece58406719a",
+          "p50_ms": 2.0514279999988503,
+          "p95_ms": 2.183086999999432,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        },
+        "compact": {
+          "status": "ok",
+          "payload_bytes": 12856,
+          "selected_records": 8,
+          "selected_by_period": {
+            "baseline": 1,
+            "focus": 7
+          },
+          "sha256": "94ac6bf4d771904a5cf8dfb4b7b6168c6d9af3d99bc5dc5ba1dd2fafaf3710ea",
+          "p50_ms": 1.8852869999991526,
+          "p95_ms": 2.1718089999994845,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        }
+      },
+      "additional_records": 0
+    },
+    {
+      "country": "SY",
+      "baseline": [
+        2000,
+        2001
+      ],
+      "focus": [
+        2002,
+        2003
+      ],
+      "budget_bytes": 8000,
+      "arms": {
+        "full": {
+          "status": "ok",
+          "payload_bytes": 7799,
+          "selected_records": 1,
+          "selected_by_period": {
+            "baseline": 1,
+            "focus": 0
+          },
+          "sha256": "b5fa2b1f3611516ae6873fe51edee74359d0505257b5b7753f0774626cae890b",
+          "p50_ms": 74.72463600000083,
+          "p95_ms": 76.13756600000124,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        },
+        "compact": {
+          "status": "ok",
+          "payload_bytes": 6460,
+          "selected_records": 1,
+          "selected_by_period": {
+            "baseline": 1,
+            "focus": 0
+          },
+          "sha256": "3d0688e9724f794c797b46ec1b59eb1e3ab62036b025aae134e8aef207a45599",
+          "p50_ms": 83.76026600000114,
+          "p95_ms": 87.97350899999947,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        }
+      },
+      "additional_records": 0
+    },
+    {
+      "country": "SY",
+      "baseline": [
+        2000,
+        2001
+      ],
+      "focus": [
+        2002,
+        2003
+      ],
+      "budget_bytes": 16000,
+      "arms": {
+        "full": {
+          "status": "ok",
+          "payload_bytes": 7799,
+          "selected_records": 1,
+          "selected_by_period": {
+            "baseline": 1,
+            "focus": 0
+          },
+          "sha256": "b5fa2b1f3611516ae6873fe51edee74359d0505257b5b7753f0774626cae890b",
+          "p50_ms": 93.72589499999958,
+          "p95_ms": 97.39863200000036,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        },
+        "compact": {
+          "status": "ok",
+          "payload_bytes": 6460,
+          "selected_records": 1,
+          "selected_by_period": {
+            "baseline": 1,
+            "focus": 0
+          },
+          "sha256": "3d0688e9724f794c797b46ec1b59eb1e3ab62036b025aae134e8aef207a45599",
+          "p50_ms": 78.83568999999989,
+          "p95_ms": 94.22065199999997,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        }
+      },
+      "additional_records": 0
+    },
+    {
+      "country": "SY",
+      "baseline": [
+        2000,
+        2001
+      ],
+      "focus": [
+        2002,
+        2003
+      ],
+      "budget_bytes": 32000,
+      "arms": {
+        "full": {
+          "status": "ok",
+          "payload_bytes": 7799,
+          "selected_records": 1,
+          "selected_by_period": {
+            "baseline": 1,
+            "focus": 0
+          },
+          "sha256": "b5fa2b1f3611516ae6873fe51edee74359d0505257b5b7753f0774626cae890b",
+          "p50_ms": 134.5652680000003,
+          "p95_ms": 147.05903899999976,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        },
+        "compact": {
+          "status": "ok",
+          "payload_bytes": 6460,
+          "selected_records": 1,
+          "selected_by_period": {
+            "baseline": 1,
+            "focus": 0
+          },
+          "sha256": "3d0688e9724f794c797b46ec1b59eb1e3ab62036b025aae134e8aef207a45599",
+          "p50_ms": 99.61992099999952,
+          "p95_ms": 100.78527600000234,
+          "measured_runs": 3,
+          "deterministic": true,
+          "source_fidelity": true,
+          "counts_match_independent_sql": true
+        }
+      },
+      "additional_records": 0
+    }
+  ],
+  "limitations": [
+    "Byte-size and selected-record coverage, not token cost, model answer quality, causality or diplomatic outcomes.",
+    "Cases are developer-visible, not a held-out evaluation.",
+    "Three measured repetitions give descriptive p50/p95 only; host timing is not Cloudflare latency.",
+    "More records is not proof of greater relevance; compact mode omits fields explicitly."
+  ]
+}
