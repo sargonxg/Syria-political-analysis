@@ -1,0 +1,65 @@
+{
+  "format": "tacitus-d1-query-check/1",
+  "database": "tacitus-research-v16",
+  "migration": "additive covering index; no provider data changed",
+  "before": [
+    {
+      "country": "SY",
+      "from": "2014-01-01",
+      "to": "2016-12-31",
+      "records": 37559,
+      "sql_duration_ms": 217.4416,
+      "rows_read": 68990,
+      "rows_written": 0
+    },
+    {
+      "country": "IQ",
+      "from": "2014-01-01",
+      "to": "2017-12-31",
+      "records": 2830,
+      "sql_duration_ms": 19.4937,
+      "rows_read": 6794,
+      "rows_written": 0
+    },
+    {
+      "country": "LB",
+      "from": "2006-01-01",
+      "to": "2006-12-31",
+      "records": 246,
+      "sql_duration_ms": 1.4845,
+      "rows_read": 289,
+      "rows_written": 0
+    }
+  ],
+  "after": [
+    {
+      "country": "SY",
+      "from": "2014-01-01",
+      "to": "2016-12-31",
+      "records": 37559,
+      "sql_duration_ms": 9.3495,
+      "rows_read": 68990,
+      "rows_written": 0
+    },
+    {
+      "country": "IQ",
+      "from": "2014-01-01",
+      "to": "2017-12-31",
+      "records": 2830,
+      "sql_duration_ms": 1.0657,
+      "rows_read": 6794,
+      "rows_written": 0
+    },
+    {
+      "country": "LB",
+      "from": "2006-01-01",
+      "to": "2006-12-31",
+      "records": 246,
+      "sql_duration_ms": 0.5713,
+      "rows_read": 289,
+      "rows_written": 0
+    }
+  ],
+  "counts_equal": true,
+  "method": "One server SQL-duration observation per case before and after; not an end-to-end latency benchmark."
+}

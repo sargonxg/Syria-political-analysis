@@ -2,7 +2,7 @@
 
 Explore historical conflict data and build source-qualified policy context. Keep provider records, exact passages and analyst judgments distinct.
 
-**[Historical research atlas](docs/historical-atlas.md)** · [Real worked selections](examples/historical-research/) · [Data contracts](schemas/research_selection.schema.json)
+**[Historical briefing compiler](docs/historical-briefing.md)** · **[Historical research atlas](docs/historical-atlas.md)** · [Real worked selections](examples/historical-research/) · [Data contracts](schemas/research_selection.schema.json)
 
 Explore **120,576 UCDP GED records for 2000–2025** and **15,272 annual World Bank values** across 32 indicators. A linked map and timeline, recorded-sides view and exact source inspector let you investigate a geography or period, inspect precision and export a bounded research selection. Compact map partitions load first; all 49 original event fields load on selection. Annual series retain units, missing years and source qualifications.
 

@@ -1,0 +1,14 @@
+{
+  "format": "tacitus-brief-receipt/1",
+  "payload_sha256": "79c567ff545622b85ad1e7664b3c0bc69dfa4662e8181bf7fa9bf38ffe2a71f7",
+  "payload_bytes": 14851,
+  "budget_bytes": 16000,
+  "matched_records": 37559,
+  "selected_records": 5,
+  "omitted_matching_records": 37554,
+  "candidates_considered": 128,
+  "unconsidered_matching_records": 37431,
+  "considered_but_not_packed": 123,
+  "budget_scope": "Exact compact JSON packet only. Markdown and this receipt add overhead.",
+  "model_calls": 0
+}

@@ -22,7 +22,7 @@ jobs:
       - run: python -m pip install -e '.[dev,desk,test]'
       - run: syria-analysis validate
       - run: python -m unittest discover -s tests -v
-      - run: node --test cloudflare/worker.test.mjs
+      - run: node --test cloudflare/worker.test.mjs cloudflare/briefing.test.mjs
       - run: python -m ruff check src/syria_analysis/desk tests/test_desk.py src/syria_analysis/media_assessment.py tests/test_media_assessment.py
       - run: python -m ruff format --check src/syria_analysis/desk tests/test_desk.py src/syria_analysis/media_assessment.py tests/test_media_assessment.py
       - run: syria-analysis build-context --output /tmp/context.json --jsonl /tmp/context.jsonl
