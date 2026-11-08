@@ -114,3 +114,13 @@ Third-party observations retain their original attribution and licensing in
 the packet. Checksums establish byte consistency with the retained dataset, not
 independent truth or publisher authentication.
 
+
+## Cross-backend compilation check
+
+The same compiler was executed against the real Cloudflare D1 database and the
+local full-volume SQLite build for the default Syria 2014–2016 task. Both returned
+the same 14,851-byte context and SHA-256
+`79c567ff545622b85ad1e7664b3c0bc69dfa4662e8181bf7fa9bf38ffe2a71f7`.
+The [remote receipt](../examples/historical-briefing/remote-compiler-check.json)
+records five complete provider records selected from 37,559 matches. This checks
+cross-backend output fidelity, not hosted sign-in or analyst usefulness.
