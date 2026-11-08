@@ -1,0 +1,277 @@
+{
+  "@context": {
+    "policy": "urn:policy-analysis:ontology:core:",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "dcterms": "http://purl.org/dc/terms/"
+  },
+  "@graph": [
+    {
+      "@id": "urn:tacitus:semantic:document:unsc-2254-excerpts",
+      "@type": "policy:Document",
+      "dcterms:title": "Security Council resolution 2254 (2015)",
+      "dcterms:issued": "2015-12-18",
+      "dcterms:creator": "United Nations Security Council",
+      "dcterms:source": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+      "policy:sourceTextSHA256": "69c6305fe434a4b180a95de44fad4b6262f21395dd41f45ea235e36331774689"
+    },
+    {
+      "@id": "urn:tacitus:semantic:entity:instrument-unsc-2254-2015",
+      "@type": "policy:LegalInstrument",
+      "rdfs:label": "Security Council resolution 2254 (2015)"
+    },
+    {
+      "@id": "urn:tacitus:semantic:entity:objective-norm-2254-op4-process",
+      "@type": "policy:NormativeObjective",
+      "rdfs:label": "A Syrian-led political process facilitated by the United Nations"
+    },
+    {
+      "@id": "urn:tacitus:semantic:entity:objective-norm-2254-op4-governance",
+      "@type": "policy:NormativeObjective",
+      "rdfs:label": "Credible, inclusive and non-sectarian governance"
+    },
+    {
+      "@id": "urn:tacitus:semantic:entity:objective-norm-2254-op4-constitution",
+      "@type": "policy:NormativeObjective",
+      "rdfs:label": "A schedule and process for drafting a new constitution"
+    },
+    {
+      "@id": "urn:tacitus:semantic:entity:objective-norm-2254-op4-elections",
+      "@type": "policy:NormativeObjective",
+      "rdfs:label": "Free and fair elections pursuant to a new constitution"
+    },
+    {
+      "@id": "urn:tacitus:semantic:span:op-4",
+      "@type": "policy:EvidenceSpan",
+      "prov:wasDerivedFrom": {
+        "@id": "urn:tacitus:semantic:document:unsc-2254-excerpts"
+      },
+      "policy:quote": "4. Expresses its support, in this regard, for a Syrian-led political process that is facilitated by the United Nations and, within a target of six months, establishes credible, inclusive and non-sectarian governance and sets a schedule and process for drafting a new constitution, and further expresses its support for free and fair elections, pursuant to the new constitution, to be held within 18 months and administered under supervision of the United Nations, to the satisfaction of the governance and to the highest international standards of transparency and accountability, with all Syrians, including members of the diaspora, eligible to participate, as set forth in the 14 November 2015 ISSG Statement;",
+      "policy:startUTF16": 481,
+      "policy:endUTF16": 1192,
+      "policy:locator": "Operative paragraph 4, printed page 2/4"
+    },
+    {
+      "@id": "urn:tacitus:semantic:assertion:norm-2254-op4-process",
+      "@type": "rdf:Statement",
+      "rdf:subject": {
+        "@id": "urn:tacitus:semantic:entity:instrument-unsc-2254-2015"
+      },
+      "rdf:predicate": {
+        "@id": "policy:expresses_support_for"
+      },
+      "rdf:object": {
+        "@id": "urn:tacitus:semantic:entity:objective-norm-2254-op4-process"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "urn:tacitus:semantic:span:op-4"
+        }
+      ],
+      "policy:requiredContext": [],
+      "policy:sourceVerb": "expresses its support for",
+      "policy:reviewState": "needs_source_check",
+      "policy:qualifications": [
+        "This is the Council’s expressed support in the 2015 instrument, not a description of a current operating process."
+      ],
+      "policy:temporalScope": {
+        "kind": "document_expression_at_adoption",
+        "source_statement_on": "2015-12-18",
+        "implementation_period_verified": false,
+        "source_target_expression": null,
+        "current_applicability_assessed": false
+      },
+      "dcterms:subject": [
+        {
+          "@id": "urn:tacitus:semantic:concept:political-process"
+        },
+        {
+          "@id": "urn:tacitus:semantic:concept:syrian-led-owned"
+        }
+      ]
+    },
+    {
+      "@id": "urn:tacitus:semantic:assertion:norm-2254-op4-governance",
+      "@type": "rdf:Statement",
+      "rdf:subject": {
+        "@id": "urn:tacitus:semantic:entity:instrument-unsc-2254-2015"
+      },
+      "rdf:predicate": {
+        "@id": "policy:expresses_support_for"
+      },
+      "rdf:object": {
+        "@id": "urn:tacitus:semantic:entity:objective-norm-2254-op4-governance"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "urn:tacitus:semantic:span:op-4"
+        }
+      ],
+      "policy:requiredContext": [],
+      "policy:sourceVerb": "expresses its support for",
+      "policy:reviewState": "needs_source_check",
+      "policy:qualifications": [
+        "This objective belongs to the process supported in the paragraph; no governance arrangement is asserted to have been established."
+      ],
+      "policy:temporalScope": {
+        "kind": "document_expression_at_adoption",
+        "source_statement_on": "2015-12-18",
+        "implementation_period_verified": false,
+        "source_target_expression": "Within a target of six months, as stated in operative paragraph 4; no implementation date or outcome is inferred.",
+        "current_applicability_assessed": false
+      },
+      "dcterms:subject": [
+        {
+          "@id": "urn:tacitus:semantic:concept:governance"
+        },
+        {
+          "@id": "urn:tacitus:semantic:concept:inclusion"
+        }
+      ]
+    },
+    {
+      "@id": "urn:tacitus:semantic:assertion:norm-2254-op4-constitution",
+      "@type": "rdf:Statement",
+      "rdf:subject": {
+        "@id": "urn:tacitus:semantic:entity:instrument-unsc-2254-2015"
+      },
+      "rdf:predicate": {
+        "@id": "policy:expresses_support_for"
+      },
+      "rdf:object": {
+        "@id": "urn:tacitus:semantic:entity:objective-norm-2254-op4-constitution"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "urn:tacitus:semantic:span:op-4"
+        }
+      ],
+      "policy:requiredContext": [],
+      "policy:sourceVerb": "expresses its support for",
+      "policy:reviewState": "needs_source_check",
+      "policy:qualifications": [
+        "The object is the proposed schedule and drafting process, not an adopted constitution."
+      ],
+      "policy:temporalScope": {
+        "kind": "document_expression_at_adoption",
+        "source_statement_on": "2015-12-18",
+        "implementation_period_verified": false,
+        "source_target_expression": "Within a target of six months applies to the process language in the paragraph; no adopted timetable is asserted.",
+        "current_applicability_assessed": false
+      },
+      "dcterms:subject": [
+        {
+          "@id": "urn:tacitus:semantic:concept:constitutional-process"
+        },
+        {
+          "@id": "urn:tacitus:semantic:concept:political-process"
+        }
+      ]
+    },
+    {
+      "@id": "urn:tacitus:semantic:assertion:norm-2254-op4-elections",
+      "@type": "rdf:Statement",
+      "rdf:subject": {
+        "@id": "urn:tacitus:semantic:entity:instrument-unsc-2254-2015"
+      },
+      "rdf:predicate": {
+        "@id": "policy:expresses_support_for"
+      },
+      "rdf:object": {
+        "@id": "urn:tacitus:semantic:entity:objective-norm-2254-op4-elections"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "urn:tacitus:semantic:span:op-4"
+        }
+      ],
+      "policy:requiredContext": [],
+      "policy:sourceVerb": "expresses its support for",
+      "policy:reviewState": "needs_source_check",
+      "policy:qualifications": [
+        "The paragraph also specifies transparency and accountability standards.",
+        "Eligibility and supervision are objectives in the 2015 text, not statements of present electoral law or arrangements."
+      ],
+      "policy:temporalScope": {
+        "kind": "document_expression_at_adoption",
+        "source_statement_on": "2015-12-18",
+        "implementation_period_verified": false,
+        "source_target_expression": "To be held within 18 months, as stated in the source; no new deadline or current election date is calculated.",
+        "current_applicability_assessed": false
+      },
+      "dcterms:subject": [
+        {
+          "@id": "urn:tacitus:semantic:concept:electoral-process"
+        },
+        {
+          "@id": "urn:tacitus:semantic:concept:inclusion"
+        }
+      ]
+    },
+    {
+      "@id": "policy:LegalInstrument",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Legal Instrument",
+      "rdfs:comment": "A source-identified resolution, agreement or other instrument."
+    },
+    {
+      "@id": "policy:NormativeObjective",
+      "@type": "rdfs:Class",
+      "rdfs:label": "Normative Objective",
+      "rdfs:comment": "An aim, requested action or proposed arrangement expressed by a document."
+    },
+    {
+      "@id": "policy:expresses_support_for",
+      "@type": "rdf:Property",
+      "rdfs:label": "expresses support for",
+      "policy:allowedDomainType": [
+        {
+          "@id": "policy:LegalInstrument"
+        }
+      ],
+      "policy:allowedRangeType": [
+        {
+          "@id": "policy:NormativeObjective"
+        }
+      ]
+    },
+    {
+      "@id": "urn:tacitus:semantic:concept:political-process",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Political process",
+      "skos:scopeNote": "An analytical category for documented efforts toward a political arrangement; not proof that one is operating."
+    },
+    {
+      "@id": "urn:tacitus:semantic:concept:syrian-led-owned",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Syrian-led and Syrian-owned process",
+      "skos:scopeNote": "A Syria-specific formulation retained as historical document language."
+    },
+    {
+      "@id": "urn:tacitus:semantic:concept:governance",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Governance",
+      "skos:scopeNote": "A topic or stated objective, not an automatic description of governing authority."
+    },
+    {
+      "@id": "urn:tacitus:semantic:concept:constitutional-process",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Constitutional process",
+      "skos:scopeNote": "Work on a constitutional schedule or text, distinguishing proposals from adopted instruments."
+    },
+    {
+      "@id": "urn:tacitus:semantic:concept:electoral-process",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Electoral process",
+      "skos:scopeNote": "Elections as a documented topic, objective or event; actual timing and eligibility require separate evidence."
+    },
+    {
+      "@id": "urn:tacitus:semantic:concept:inclusion",
+      "@type": "skos:Concept",
+      "skos:prefLabel": "Inclusion",
+      "skos:scopeNote": "An analytical question about participation and access; a stated aspiration is not measured inclusion."
+    }
+  ]
+}

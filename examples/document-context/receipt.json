@@ -1,0 +1,12 @@
+{
+  "format": "tacitus-semantic-receipt/1",
+  "payload_bytes": 9045,
+  "budget_bytes": 16000,
+  "payload_sha256": "90813e78ace860e6ad546985fed51e35ce061d8402a5c7eb62e4e9e0c50a1421",
+  "source_text_sha256": "69c6305fe434a4b180a95de44fad4b6262f21395dd41f45ea235e36331774689",
+  "selected_assertions": 4,
+  "unique_evidence_spans": 1,
+  "omitted_assertions": 2,
+  "model_calls": 0,
+  "review_status": "not_reviewed"
+}
