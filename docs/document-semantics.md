@@ -15,6 +15,14 @@ The example links the repository's six existing assertion drafts to selected ope
 
 The English source text is a whitespace-normalized excerpt, not the complete PDF. It retains the original primary PDF URL and SHA-256, its own text SHA-256, paragraph/page locators, and explicit UTF-16 source offsets. Offsets index the retained transcription, not PDF bytes. The source drafts remain `needs_source_check` with no recorded human approval.
 
+The pinned transcription can also be verified directly against the primary PDF with Poppler’s `pdftotext` installed:
+
+```sh
+python scripts/verify_semantic_transcription.py --pdf path/to/n1544334.pdf
+```
+
+The verifier checks the primary PDF hash before parsing, reconstructs the declared normalized paragraphs and checks every UTF-16 span. It refuses a different PDF or transcription instead of replacing the example. This verifies source-text consistency, not political interpretation or human approval.
+
 ## A useful review workflow
 
 - Inspect the source paragraph behind a proposed claim.
