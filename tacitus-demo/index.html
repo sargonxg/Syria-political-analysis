@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="An original, offline TACITUS point-and-click adventure about sources, context, time and review.">
+  <title>The House of Evidence · TACITUS</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="project.js" defer></script><script src="engine.js" defer></script><script src="game.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#desk">Skip to the research desk</a>
+  <header><a class="wordmark" href="https://www.tacitus.me/">TACITUS <span>◳</span></a><span class="edition">A SMALL ADVENTURE IN CLEAR THINKING</span><button id="reset" type="button">New game</button></header>
+  <main>
+    <section class="intro"><p class="eyebrow">THE HOUSE OF EVIDENCE / 01</p><h1>A mystery is only as good<br>as its sources.</h1><p>Four rooms. One disputed promise. Bring back a brief you can defend.</p></section>
+    <section class="adventure" aria-label="Research mansion">
+      <div class="scene"><img src="mansion.png" width="1672" height="941" alt="An original pixel-art mansion at night: a library, map room, clock archive and analyst study glow above a moonlit courtyard.">
+        <div class="room-targets"><button data-room="library" class="hotspot library">01 <span>Library</span></button><button data-room="map" class="hotspot map">02 <span>Map room</span></button><button data-room="clock" class="hotspot clock">03 <span>Clock archive</span></button><button data-room="study" class="hotspot study">04 <span>Study</span></button></div>
+        <div class="scene-caption"><span class="live-dot"></span> FICTIONAL CASE · NO MODEL CALLS · LOCAL ONLY</div>
+      </div>
+      <aside class="mission"><p class="eyebrow">YOUR ASSIGNMENT</p><h2>Did the harbor reopen?</h2><p>Two dispatches reached the mansion. A headline sounds certain. The original promise has a condition.</p><p class="note">All people, places and documents in this case are original synthetic teaching fixtures.</p><ol id="inventory" aria-label="Your discoveries"><li>□ Preserve the condition</li><li>□ Keep attribution</li><li>□ Check the clock</li><li>□ Export the brief</li></ol><p id="progress" role="status" aria-live="polite">0 / 4 discoveries</p></aside>
+    </section>
+    <nav class="rooms" aria-label="Choose a room"><button data-room="library" type="button">01 / Library</button><button data-room="map" type="button">02 / Map room</button><button data-room="clock" type="button">03 / Clock archive</button><button data-room="study" type="button">04 / Study</button></nav>
+    <section id="desk" class="desk" tabindex="-1" aria-labelledby="room-title"><div class="desk-heading"><div><p class="eyebrow" id="room-label">01 / PRESERVE</p><h2 id="room-title">The library</h2></div><span class="tag">READ → QUESTION → REVIEW</span></div><div id="room-content"></div><p id="feedback" role="status" aria-live="polite"></p></section>
+    <section class="project"><div><p class="eyebrow">FROM THE GAME TO THE CODE</p><h2 id="project-title">TACITUS</h2><p id="project-purpose"></p><p id="project-boundary" class="note"></p></div><div><h3>Try the actual project</h3><pre id="project-command"></pre><a id="project-guide" href="../TACITUS_GUIDE.md">Purpose, code, setup & research ↗</a></div></section>
+    <footer><p>Original adventure, code and AI-generated artwork for TACITUS. Inspired by the point-and-click genre; no existing game assets or characters are used. <a href="CREDITS.md">Credits & research</a>.</p><p>This teaching demo runs separately from the repository’s application. A matching quotation establishes text identity; it does not establish truth, completeness or approval.</p></footer>
+  </main>
+</body>
+</html>

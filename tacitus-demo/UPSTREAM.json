@@ -1,0 +1,6 @@
+{
+  "source": "https://github.com/sargonxg/sargonxg/tree/main/tacitus-demo",
+  "component": "The House of Evidence",
+  "engine_sha256": "dae58a2bb132ab6da818ee6a07f4649a83f60cba775d775856532fbdbb1f4bb2",
+  "scope": "Shared original teaching engine; project.js supplies repository-specific navigation. Application runtime is separate."
+}

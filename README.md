@@ -1,5 +1,20 @@
 # Middle East · Political Analysis
 
+<!-- tacitus-practical-entry -->
+## Purpose, code and a playable introduction
+
+Query historical provider records, inspect source fields and export a bounded research selection without inventing a political conclusion.
+
+**Local public-source toolkit.** Historical datasets, curated source profiles and private notebooks have separate coverage and access requirements. Records are not a current event feed.
+
+[Setup, code walkthrough, research & verification](TACITUS_GUIDE.md) · [Play the original 8-bit teaching adventure](tacitus-demo/index.html) · [Demo credits](tacitus-demo/CREDITS.md)
+
+![The original House of Evidence teaching adventure; synthetic case, separate from this project’s runtime](tacitus-demo/mansion.png)
+
+Research: [RAG](https://arxiv.org/abs/2005.11401), [long-context evidence use](https://arxiv.org/abs/2307.03172), [GraphRAG](https://arxiv.org/abs/2404.16130). [What TACITUS borrows, adds and still needs to measure](https://github.com/sargonxg/sargonxg/blob/main/docs/RESEARCH_AND_DESIGN.md).
+<!-- /tacitus-practical-entry -->
+
+
 Explore historical conflict data and build source-qualified policy context. Keep provider records, exact passages and analyst judgments distinct.
 
 **[Historical research atlas](docs/historical-atlas.md)** · [Real worked selections](examples/historical-research/) · [Data contracts](schemas/research_selection.schema.json)
