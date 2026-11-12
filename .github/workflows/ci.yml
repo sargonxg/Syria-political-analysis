@@ -27,13 +27,13 @@ jobs:
       - run: python scripts/build_policy_case.py --database output/policy-case/research.sqlite3 --search appropriations
       - run: python -m ruff check src/syria_analysis/document_knowledge.py src/syria_analysis/document_knowledge_view.py scripts/build_policy_case.py tests/test_document_knowledge.py
       - run: python -m ruff format --check src/syria_analysis/document_knowledge.py src/syria_analysis/document_knowledge_view.py scripts/build_policy_case.py tests/test_document_knowledge.py
-      - run: node --test cloudflare/worker.test.mjs
       - run: python scripts/build_policy_document.py --output output/policy-document
       - run: python scripts/build_policy_document.py --validate examples/policy-document/negotiations.json
       - run: python scripts/build_policy_document.py --validate examples/policy-document/institutions.json
       - run: python scripts/build_policy_document.py --validate examples/policy-document/ceasefire.json
       - run: python -m ruff check src/syria_analysis/policy_document.py scripts/build_policy_document.py tests/test_policy_document.py
       - run: python -m ruff format --check src/syria_analysis/policy_document.py scripts/build_policy_document.py tests/test_policy_document.py
+      - run: node --test cloudflare/worker.test.mjs cloudflare/briefing.test.mjs cloudflare/comparison.test.mjs cloudflare/document-context.test.mjs
       - run: python -m ruff check src/syria_analysis/desk tests/test_desk.py src/syria_analysis/media_assessment.py tests/test_media_assessment.py
       - run: python -m ruff format --check src/syria_analysis/desk tests/test_desk.py src/syria_analysis/media_assessment.py tests/test_media_assessment.py
       - run: syria-analysis build-context --output /tmp/context.json --jsonl /tmp/context.jsonl

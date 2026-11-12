@@ -89,6 +89,8 @@ CREATE TABLE semantic_lenses (
 
 -- Created before the ready marker is written. No inference or stance is encoded.
 CREATE INDEX events_country_date ON events(country_code, date_start DESC, id DESC);
+-- Cover interval-count/aggregate predicates without visiting large provider JSON rows.
+CREATE INDEX events_country_interval ON events(country_code, date_start, date_end);
 CREATE INDEX events_country_year ON events(country_code, event_year);
 CREATE INDEX events_country_type_date ON events(country_code, violence_type, date_start DESC, id DESC);
 CREATE INDEX events_country_precision_date ON events(country_code, geography_precision, date_start DESC, id DESC);

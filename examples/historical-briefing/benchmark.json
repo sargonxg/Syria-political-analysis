@@ -1,0 +1,343 @@
+{
+  "format": "tacitus-briefing-benchmark/1",
+  "run_at": "2026-11-08T05:30:21.914Z",
+  "runtime": "v24.22.1",
+  "platform": "linux",
+  "architecture": "x64",
+  "snapshot_id": "9d1f965e9abbeb9eb86e7eb36cdafca20cf453309ec0b2d879a41b48963a8369",
+  "counts": {
+    "events": 120576,
+    "indicators": 15272,
+    "lenses": 5,
+    "sources": 55
+  },
+  "method": "Read-only SQLite. One warm-up, 20 measured repetitions per arm per case, rotating covering-index/legacy-index/NOT INDEXED execution order. Same prepared count query, inputs and full database. Warm OS cache. Compilation measured separately.",
+  "query_cases": [
+    {
+      "country": "SY",
+      "from": 2014,
+      "to": 2016,
+      "records": 37559,
+      "repetitions_per_arm": 20,
+      "indexed_p50_ms": 5.007815999999821,
+      "indexed_p95_ms": 7.990428999999949,
+      "scan_p50_ms": 75.86941999999999,
+      "scan_p95_ms": 99.65482199999997,
+      "legacy_p50_ms": 65.56820500000003,
+      "legacy_p95_ms": 98.82715400000006,
+      "same_results": true,
+      "query_plan": [
+        "SEARCH events USING COVERING INDEX events_country_interval (country_code=? AND date_start<?)"
+      ]
+    },
+    {
+      "country": "IQ",
+      "from": 2014,
+      "to": 2017,
+      "records": 2830,
+      "repetitions_per_arm": 20,
+      "indexed_p50_ms": 0.45797099999981583,
+      "indexed_p95_ms": 0.6399049999999988,
+      "scan_p50_ms": 62.19181899999967,
+      "scan_p95_ms": 85.87645300000077,
+      "legacy_p50_ms": 4.829879000000801,
+      "legacy_p95_ms": 6.934245000000374,
+      "same_results": true,
+      "query_plan": [
+        "SEARCH events USING COVERING INDEX events_country_interval (country_code=? AND date_start<?)"
+      ]
+    },
+    {
+      "country": "LB",
+      "from": 2006,
+      "to": 2006,
+      "records": 246,
+      "repetitions_per_arm": 20,
+      "indexed_p50_ms": 0.06354599999940547,
+      "indexed_p95_ms": 0.12618099999963306,
+      "scan_p50_ms": 66.17219599999953,
+      "scan_p95_ms": 75.77984500000002,
+      "legacy_p50_ms": 0.24305699999968056,
+      "legacy_p95_ms": 0.40848600000026636,
+      "same_results": true,
+      "query_plan": [
+        "SEARCH events USING COVERING INDEX events_country_interval (country_code=? AND date_start<?)"
+      ]
+    },
+    {
+      "country": "YE",
+      "from": 2015,
+      "to": 2020,
+      "records": 2672,
+      "repetitions_per_arm": 20,
+      "indexed_p50_ms": 0.29215300000032585,
+      "indexed_p95_ms": 0.426063000000795,
+      "scan_p50_ms": 63.76397100000031,
+      "scan_p95_ms": 69.72101599999951,
+      "legacy_p50_ms": 3.754997000000003,
+      "legacy_p95_ms": 4.357898999998724,
+      "same_results": true,
+      "query_plan": [
+        "SEARCH events USING COVERING INDEX events_country_interval (country_code=? AND date_start<?)"
+      ]
+    },
+    {
+      "country": "JO",
+      "from": 2000,
+      "to": 2025,
+      "records": 8,
+      "repetitions_per_arm": 20,
+      "indexed_p50_ms": 0.04410699999971257,
+      "indexed_p95_ms": 0.09024700000009034,
+      "scan_p50_ms": 62.96758899999986,
+      "scan_p95_ms": 74.17826000000059,
+      "legacy_p50_ms": 0.01945999999952619,
+      "legacy_p95_ms": 0.02932399999917834,
+      "same_results": true,
+      "query_plan": [
+        "SEARCH events USING COVERING INDEX events_country_interval (country_code=? AND date_start<?)"
+      ]
+    },
+    {
+      "country": "SY",
+      "from": 2000,
+      "to": 2001,
+      "records": 1,
+      "repetitions_per_arm": 20,
+      "indexed_p50_ms": 0.05006599999978789,
+      "indexed_p95_ms": 0.06608000000051106,
+      "scan_p50_ms": 68.99689299999955,
+      "scan_p95_ms": 76.5298270000003,
+      "legacy_p50_ms": 0.016064000001279055,
+      "legacy_p95_ms": 0.01789699999972072,
+      "same_results": true,
+      "query_plan": [
+        "SEARCH events USING COVERING INDEX events_country_interval (country_code=? AND date_start<?)"
+      ]
+    }
+  ],
+  "packing_cases": [
+    {
+      "country": "SY",
+      "from": 2014,
+      "to": 2016,
+      "budget": 8000,
+      "payload_bytes": 7365,
+      "selected": 1,
+      "matched": 37559,
+      "elapsed_ms": 405.90855999999985,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    },
+    {
+      "country": "SY",
+      "from": 2014,
+      "to": 2016,
+      "budget": 16000,
+      "payload_bytes": 14851,
+      "selected": 5,
+      "matched": 37559,
+      "elapsed_ms": 284.7131539999996,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    },
+    {
+      "country": "SY",
+      "from": 2014,
+      "to": 2016,
+      "budget": 32000,
+      "payload_bytes": 30760,
+      "selected": 14,
+      "matched": 37559,
+      "elapsed_ms": 301.8173110000007,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    },
+    {
+      "country": "IQ",
+      "from": 2014,
+      "to": 2017,
+      "budget": 8000,
+      "payload_bytes": 6951,
+      "selected": 1,
+      "matched": 2830,
+      "elapsed_ms": 28.934663,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    },
+    {
+      "country": "IQ",
+      "from": 2014,
+      "to": 2017,
+      "budget": 16000,
+      "payload_bytes": 14711,
+      "selected": 5,
+      "matched": 2830,
+      "elapsed_ms": 35.55584999999974,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    },
+    {
+      "country": "IQ",
+      "from": 2014,
+      "to": 2017,
+      "budget": 32000,
+      "payload_bytes": 31990,
+      "selected": 14,
+      "matched": 2830,
+      "elapsed_ms": 46.8212309999999,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    },
+    {
+      "country": "LB",
+      "from": 2006,
+      "to": 2006,
+      "budget": 8000,
+      "payload_bytes": 6892,
+      "selected": 1,
+      "matched": 246,
+      "elapsed_ms": 10.37958499999877,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    },
+    {
+      "country": "LB",
+      "from": 2006,
+      "to": 2006,
+      "budget": 16000,
+      "payload_bytes": 14339,
+      "selected": 5,
+      "matched": 246,
+      "elapsed_ms": 12.798396000000139,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    },
+    {
+      "country": "LB",
+      "from": 2006,
+      "to": 2006,
+      "budget": 32000,
+      "payload_bytes": 31617,
+      "selected": 14,
+      "matched": 246,
+      "elapsed_ms": 23.9069559999989,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    },
+    {
+      "country": "YE",
+      "from": 2015,
+      "to": 2020,
+      "budget": 8000,
+      "payload_bytes": 7149,
+      "selected": 1,
+      "matched": 2672,
+      "elapsed_ms": 29.602993999998944,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    },
+    {
+      "country": "YE",
+      "from": 2015,
+      "to": 2020,
+      "budget": 16000,
+      "payload_bytes": 15983,
+      "selected": 5,
+      "matched": 2672,
+      "elapsed_ms": 33.61526699999922,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    },
+    {
+      "country": "YE",
+      "from": 2015,
+      "to": 2020,
+      "budget": 32000,
+      "payload_bytes": 31963,
+      "selected": 13,
+      "matched": 2672,
+      "elapsed_ms": 41.642720999998346,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    },
+    {
+      "country": "JO",
+      "from": 2000,
+      "to": 2025,
+      "budget": 8000,
+      "payload_bytes": 6963,
+      "selected": 1,
+      "matched": 8,
+      "elapsed_ms": 1.2894150000010995,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    },
+    {
+      "country": "JO",
+      "from": 2000,
+      "to": 2025,
+      "budget": 16000,
+      "payload_bytes": 15164,
+      "selected": 5,
+      "matched": 8,
+      "elapsed_ms": 1.5279669999999896,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    },
+    {
+      "country": "JO",
+      "from": 2000,
+      "to": 2025,
+      "budget": 32000,
+      "payload_bytes": 20959,
+      "selected": 8,
+      "matched": 8,
+      "elapsed_ms": 2.244053000000349,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    },
+    {
+      "country": "SY",
+      "from": 2000,
+      "to": 2001,
+      "budget": 8000,
+      "payload_bytes": 6709,
+      "selected": 1,
+      "matched": 1,
+      "elapsed_ms": 1.2254290000000765,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    },
+    {
+      "country": "SY",
+      "from": 2000,
+      "to": 2001,
+      "budget": 16000,
+      "payload_bytes": 6709,
+      "selected": 1,
+      "matched": 1,
+      "elapsed_ms": 0.7953360000010434,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    },
+    {
+      "country": "SY",
+      "from": 2000,
+      "to": 2001,
+      "budget": 32000,
+      "payload_bytes": 6709,
+      "selected": 1,
+      "matched": 1,
+      "elapsed_ms": 1.0911140000007435,
+      "deterministic": true,
+      "exact_record_fidelity": true
+    }
+  ],
+  "limitations": [
+    "Fixed developer-visible cases; structural/performance checks, not held-out diplomatic evaluation.",
+    "SQLite timings on this host are not Cloudflare latency or model speed.",
+    "No model generation, token measurements, answer-quality evaluation or monetary savings.",
+    "Compilation timing is one observation per budget/case; query p50/p95 are descriptive over 20 repetitions."
+  ]
+}
