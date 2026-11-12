@@ -10,6 +10,7 @@ import os
 import sqlite3
 import tempfile
 from collections import Counter
+from datetime import date
 from pathlib import Path
 
 from syria_analysis import country_context
@@ -237,6 +238,8 @@ def build_database(repository, output, *, include_country_context=True):
             )
             manifests = {}
             counts, event_countries, annual_countries = Counter(), Counter(), Counter()
+            start_year_counts = {}
+            maximum_interval_days = 0
             country_names = {
                 item["code"]: item["name"] for item in event_manifest["countries"]
             }
@@ -258,6 +261,13 @@ def build_database(repository, output, *, include_country_context=True):
                     add_event(connection, row)
                     counts["events"] += 1
                     event_countries[row["country_code"]] += 1
+                    start = date.fromisoformat(row["date_start"])
+                    end = date.fromisoformat(row["date_end"])
+                    maximum_interval_days = max(
+                        maximum_interval_days, (end - start).days
+                    )
+                    years = start_year_counts.setdefault(row["country_code"], Counter())
+                    years[str(start.year)] += 1
             if counts["events"] != event_manifest["selection"]["retained_records"]:
                 raise ValueError("Research database lost historical event records")
 
@@ -399,6 +409,14 @@ def build_database(repository, output, *, include_country_context=True):
                 },
                 "counts": count_values,
                 "countries": countries,
+                "query_bounds": {
+                    "format": "policy-query-bounds/1",
+                    "snapshot_id": snapshot_id,
+                    "events": counts["events"],
+                    "maximum_interval_days": maximum_interval_days,
+                    "country_start_year_counts": start_year_counts,
+                    "basis": "Every retained original interval, validated during offline build; counts use date_start year, not provider event_year.",
+                },
                 "limitations": [
                     *event_manifest.get("limitations", []),
                     "Historical provider records; not a live feed, current territorial control or independently corroborated intelligence.",
@@ -420,6 +438,24 @@ def build_database(repository, output, *, include_country_context=True):
                     "Research database failed SQLite integrity/foreign-key validation"
                 )
             details = sql_dump(connection, staging / "research.sql")
+            # A separate, snapshot-conditional metadata patch for an operator
+            # who already imported this exact snapshot. Never executed here.
+            bounds_value = json_text(metadata["query_bounds"]).replace("'", "''")
+            patch = (
+                "-- Prepared offline; review and apply separately, never during quota exhaustion.\n"
+                "-- No event/source records, state marker or snapshot identity are changed.\n"
+                "INSERT INTO research_meta(key,value) "
+                f"SELECT 'query_bounds','{bounds_value}' "
+                "WHERE (SELECT json_extract(value,'$.id') FROM research_meta WHERE key='snapshot')="
+                f"'{snapshot_id}' "
+                "AND (SELECT json_extract(value,'$.events') FROM research_meta WHERE key='counts')="
+                f"{counts['events']} "
+                "AND (SELECT value FROM research_meta WHERE key='state')='\"ready\"' "
+                "ON CONFLICT(key) DO UPDATE SET value=excluded.value;\n"
+            )
+            if len(patch.encode("utf-8")) > MAX_STATEMENT_BYTES:
+                raise ValueError("Query-bounds metadata patch exceeds its import bound")
+            (staging / "query-bounds-upgrade.sql").write_text(patch, encoding="utf-8")
         finally:
             connection.close()
         if db_path.stat().st_size > MAX_DATABASE_BYTES:
@@ -436,6 +472,9 @@ def build_database(repository, output, *, include_country_context=True):
             "sql_bytes": (staging / "research.sql").stat().st_size,
             "sql_sha256": file_hash(staging / "research.sql"),
             "sql_md5": file_hash(staging / "research.sql", "md5"),
+            "query_bounds_upgrade_sha256": file_hash(
+                staging / "query-bounds-upgrade.sql"
+            ),
             **details,
             "source_manifests": manifests,
             "automatic_ingestion": False,

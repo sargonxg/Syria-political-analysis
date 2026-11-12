@@ -1,0 +1,264 @@
+{
+  "format": "policy-document-model/1",
+  "entities": [
+    {
+      "id": "president",
+      "type": "PublicActor",
+      "label": "President of the United States (issuing office)"
+    },
+    {
+      "id": "order",
+      "type": "LegalInstrument",
+      "label": "Executive Order 14179, signed 23 January 2025"
+    },
+    {
+      "id": "apst",
+      "type": "PublicActor",
+      "label": "Assistant to the President for Science and Technology"
+    },
+    {
+      "id": "advisor",
+      "type": "PublicActor",
+      "label": "Special Advisor for AI and Crypto"
+    },
+    {
+      "id": "apnsa",
+      "type": "PublicActor",
+      "label": "Assistant to the President for National Security Affairs"
+    },
+    {
+      "id": "omb",
+      "type": "PublicActor",
+      "label": "Director of the Office of Management and Budget"
+    },
+    {
+      "id": "agencies",
+      "type": "InstitutionOrOrganization",
+      "label": "Agency heads addressed in section 5; not an agency membership register"
+    },
+    {
+      "id": "policy",
+      "type": "NormativeObjective",
+      "label": "Policy stated in section 2"
+    },
+    {
+      "id": "ai-definition",
+      "type": "Concept",
+      "label": "AI as defined by the referenced statute"
+    },
+    {
+      "id": "plan",
+      "type": "NormativeObjective",
+      "label": "Development and submission of an AI action plan"
+    },
+    {
+      "id": "review",
+      "type": "PoliticalProcess",
+      "label": "Review of actions taken under revoked EO14110"
+    },
+    {
+      "id": "memoranda",
+      "type": "LegalInstrument",
+      "label": "OMB memoranda M-24-10 and M-24-18"
+    },
+    {
+      "id": "appropriations",
+      "type": "Concept",
+      "label": "Applicable law and availability of appropriations"
+    },
+    {
+      "id": "statutory-authority",
+      "type": "Concept",
+      "label": "Existing agency authority and OMB functions"
+    },
+    {
+      "id": "private-rights",
+      "type": "Concept",
+      "label": "Enforceable rights or benefits"
+    }
+  ],
+  "assertions": [
+    {
+      "id": "policy-objective",
+      "paragraph_ids": [
+        "p005"
+      ],
+      "subject_id": "president",
+      "relation_id": "describes_policy",
+      "object_id": "policy",
+      "source_verb": "sustain and enhance",
+      "statement": "Section 2 states a policy of sustaining and enhancing US global AI dominance.",
+      "epistemic_type": "normative_expression",
+      "qualifications": "This records the stated policy objective, including its listed purposes; it does not endorse the objective, measure dominance or establish policy outcomes.",
+      "requires": [],
+      "addressed_to_ids": []
+    },
+    {
+      "id": "ai-definition",
+      "paragraph_ids": [
+        "p006"
+      ],
+      "subject_id": "order",
+      "relation_id": "defines",
+      "object_id": "ai-definition",
+      "source_verb": "has the meaning",
+      "statement": "Section 3 incorporates the AI definition in 15 USC 9401(3).",
+      "epistemic_type": "normative_expression",
+      "qualifications": "The statutory definition is referenced, not reproduced or independently verified here. No external statute was ingested.",
+      "requires": [],
+      "addressed_to_ids": []
+    },
+    {
+      "id": "action-plan",
+      "paragraph_ids": [
+        "p007"
+      ],
+      "subject_id": "president",
+      "relation_id": "directs",
+      "object_id": "plan",
+      "source_verb": "shall develop and submit",
+      "statement": "Section 4 directs named roles to develop and submit an action plan to the President within 180 days of this order.",
+      "epistemic_type": "normative_expression",
+      "qualifications": "Preserve the listed coordination roles and the section 2 policy reference. This historical direction does not establish submission, adoption or implementation. Do not calculate a current deadline from an obsolete reference date.",
+      "requires": [
+        "policy-objective",
+        "appropriations-limit",
+        "authority-limit"
+      ],
+      "addressed_to_ids": [
+        "apst",
+        "advisor",
+        "apnsa"
+      ]
+    },
+    {
+      "id": "revocation-review",
+      "paragraph_ids": [
+        "p008"
+      ],
+      "subject_id": "president",
+      "relation_id": "directs",
+      "object_id": "review",
+      "source_verb": "shall immediately review",
+      "statement": "Section 5(a) directs review of actions taken pursuant to revoked EO 14110 and identifies a conditional process for changing inconsistent actions.",
+      "epistemic_type": "normative_expression",
+      "qualifications": "Only identified actions are addressed; changes or proposed changes must be appropriate and consistent with applicable law. Immediate finalization is not assumed; exemptions are conditional and legally authorized. The paragraph describes EO 14110 as revoked; it does not establish every regulation was rescinded.",
+      "requires": [
+        "policy-objective",
+        "appropriations-limit",
+        "authority-limit"
+      ],
+      "addressed_to_ids": [
+        "apst",
+        "advisor",
+        "apnsa",
+        "agencies"
+      ]
+    },
+    {
+      "id": "memoranda-revision",
+      "paragraph_ids": [
+        "p009"
+      ],
+      "subject_id": "president",
+      "relation_id": "directs",
+      "object_id": "memoranda",
+      "source_verb": "shall revise",
+      "statement": "Section 5(b) directs the OMB Director, coordinating with APST, to revise M-24-10 and M-24-18 as necessary within 60 days.",
+      "epistemic_type": "normative_expression",
+      "qualifications": "The revision is to make them consistent with section 2 policy. No revised memorandum, completion or present legal status has been independently captured.",
+      "requires": [
+        "policy-objective",
+        "appropriations-limit",
+        "authority-limit"
+      ],
+      "addressed_to_ids": [
+        "omb",
+        "apst"
+      ]
+    },
+    {
+      "id": "authority-limit",
+      "paragraph_ids": [
+        "p010",
+        "p011",
+        "p012"
+      ],
+      "subject_id": "order",
+      "relation_id": "preserves_authority",
+      "object_id": "statutory-authority",
+      "source_verb": "Nothing in this order",
+      "statement": "Section 6(a) preserves existing legally granted agency authority and specified OMB functions.",
+      "epistemic_type": "normative_expression",
+      "qualifications": "Read the lead-in and both following subclauses together. This statement alone does not resolve a conflict with a particular statute or agency power.",
+      "requires": [],
+      "addressed_to_ids": []
+    },
+    {
+      "id": "appropriations-limit",
+      "paragraph_ids": [
+        "p013"
+      ],
+      "subject_id": "order",
+      "relation_id": "conditions_on",
+      "object_id": "appropriations",
+      "source_verb": "subject to",
+      "statement": "Section 6(b) makes implementation consistent with applicable law and subject to available appropriations.",
+      "epistemic_type": "normative_expression",
+      "qualifications": "A direction is not an appropriation, funding transfer or implementation finding. No expenditure evidence is contained in this instrument.",
+      "requires": [],
+      "addressed_to_ids": []
+    },
+    {
+      "id": "private-rights-limit",
+      "paragraph_ids": [
+        "p014"
+      ],
+      "subject_id": "order",
+      "relation_id": "limits_enforceable_rights",
+      "object_id": "private-rights",
+      "source_verb": "does not",
+      "statement": "Section 6(c) says the order creates no enforceable substantive or procedural right or benefit.",
+      "epistemic_type": "normative_expression",
+      "qualifications": "Preserve the listed parties and enforcement scope in the exact passage. This is a source-scoped draft interpretation, not legal advice or an independent legal opinion.",
+      "requires": [],
+      "addressed_to_ids": []
+    }
+  ],
+  "tasks": [
+    {
+      "id": "action-plan",
+      "label": "Who must prepare the action plan?",
+      "question": "What does the January 2025 instrument direct about an AI action plan, who is addressed, and what limits or evidence gaps must a brief retain?",
+      "seed_assertion_ids": [
+        "action-plan"
+      ]
+    },
+    {
+      "id": "memoranda",
+      "label": "What changed for agency memoranda?",
+      "question": "What does the instrument direct about the OMB memoranda, and does it prove that revised memoranda were issued?",
+      "seed_assertion_ids": [
+        "memoranda-revision"
+      ]
+    },
+    {
+      "id": "review",
+      "label": "Were all earlier AI rules automatically rescinded?",
+      "question": "Does section 5 establish that every action under EO 14110 was immediately rescinded, and what conditions constrain that conclusion?",
+      "seed_assertion_ids": [
+        "revocation-review"
+      ]
+    },
+    {
+      "id": "limits",
+      "label": "What does the order leave unproven?",
+      "question": "Which stated legal and funding qualifications prevent treating this policy direction as a funded, implemented result or a new private right?",
+      "seed_assertion_ids": [
+        "authority-limit",
+        "appropriations-limit",
+        "private-rights-limit"
+      ]
+    }
+  ]
+}

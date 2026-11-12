@@ -52,6 +52,15 @@
         </aside>
       </section>
 
+      <details class="question-starts">
+        <summary>Start with a research question</summary>
+        <div class="question-start-grid">
+          <button id="start-geography" disabled><strong>Where do precisely geocoded records concentrate?</strong><span>Syria · 2024–2025 · State-based category · Provider precision 1</span></button>
+          <button id="start-recovery" disabled><strong>Which GDP estimates can a recovery brief actually use?</strong><span>Syria · Separate annual series · Inspect coverage and missing years</span></button>
+        </div>
+        <p>These starts set an evidence scope. They do not generate an assessment.</p>
+      </details>
+
       <section class="connection-bar" aria-label="Research data connection">
         <div>
           <span id="connection-badge" class="connection-badge"
@@ -163,6 +172,16 @@
         </div>
       </section>
 
+      <details class="view-reproduction">
+        <summary>Share &amp; reproduce this view</summary>
+        <p>Shared links contain filters, recorded-actor/search terms and an optional selected event ID. Your research question and analyst notes stay out of the link. Opening a shared link uses the verified static snapshot.</p>
+        <label>Shared view URL<input id="shared-view-url" type="url" readonly /></label>
+        <div class="button-row"><button id="copy-view" disabled>Copy view link</button><a id="open-view" target="_blank" rel="noreferrer">Open shared view ↗</a></div>
+        <pre id="reproduction-recipe" tabindex="0" role="region" aria-label="Research view reproduction recipe"></pre>
+      </details>
+
+      <p id="share-status" class="view-notice" role="status"></p>
+
       <section class="atlas-layout" aria-label="Historical events">
         <div class="visual-column">
           <div class="map-card" id="map-card" aria-busy="true">
@@ -231,6 +250,7 @@
               </p>
             </div>
             <div id="sides-view" hidden>
+              <div class="network-navigation"><label>Recorded-side focus<select id="network-focus"></select></label><button id="network-expand">Show more connected names</button><span id="network-scope" role="status"></span></div>
               <div class="network-frame">
                 <canvas
                   id="sides-network"
@@ -241,8 +261,9 @@
               <p class="network-rule">
                 A line counts records naming both sides in the provider’s side A
                 / side B fields. It does not mean affiliation, influence,
-                present-day status or causation. The view shows at most 18
-                names.
+                present-day status or causation. The graph starts with one
+                recorded side and up to five connected names; expand to at most 18.
+                Counts describe only the current filtered records.
               </p>
               <div id="network-pairs" class="network-pairs"></div>
             </div>
@@ -290,6 +311,7 @@
                   aria-label="Source record graph; individual records remain available in the directory below"
                 ></canvas>
               </div>
+              <div class="lens-graph-controls"><label>Visible graph records<select id="lens-node-limit"><option value="60">60 · Start small</option><option value="250">250</option><option value="1000">1,000</option><option value="2048">2,048 maximum</option></select></label><span id="lens-visible-count" role="status"></span></div>
               <p id="lens-layout-note" class="lens-layout-note"></p>
               <div
                 id="lens-record-path"

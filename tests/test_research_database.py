@@ -93,6 +93,44 @@ class ResearchDatabaseTests(unittest.TestCase):
                 '"ready"',
             )
             self.assertEqual(hashlib.md5(sql.encode()).hexdigest(), a["sql_md5"])
+            bounds = json.loads(
+                connection.execute(
+                    "SELECT value FROM research_meta WHERE key='query_bounds'"
+                ).fetchone()[0]
+            )
+            self.assertEqual(bounds["snapshot_id"], a["snapshot_id"])
+            self.assertEqual(bounds["events"], len(rows))
+            self.assertEqual(
+                sum(
+                    sum(years.values())
+                    for years in bounds["country_start_year_counts"].values()
+                ),
+                len(rows),
+            )
+            patch = (Path(directory) / "first/query-bounds-upgrade.sql").read_text(
+                encoding="utf-8"
+            )
+            connection.execute("DELETE FROM research_meta WHERE key='query_bounds'")
+            connection.executescript(patch)
+            self.assertEqual(
+                json.loads(
+                    connection.execute(
+                        "SELECT value FROM research_meta WHERE key='query_bounds'"
+                    ).fetchone()[0]
+                ),
+                bounds,
+            )
+            connection.execute("DELETE FROM research_meta WHERE key='query_bounds'")
+            connection.execute(
+                "UPDATE research_meta SET value=? WHERE key='snapshot'",
+                (json.dumps({"id": "0" * 64}),),
+            )
+            connection.executescript(patch)
+            self.assertIsNone(
+                connection.execute(
+                    "SELECT value FROM research_meta WHERE key='query_bounds'"
+                ).fetchone()
+            )
             connection.close()
 
     def test_existing_output_is_refused_and_source_snapshot_is_unchanged(self):

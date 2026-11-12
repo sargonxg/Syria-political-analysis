@@ -1,0 +1,278 @@
+{
+  "format": "political-developments/1",
+  "collection_id": "sy-political-acts-starter",
+  "title": "Selected political acts, kept distinct from violence observations",
+  "compiled_on": "2026-11-07",
+  "coverage": "Three selected records from 2015, 2019 and 2026; two day-qualified acts and one announcement with no separately stated event date.",
+  "sources": [
+    {
+      "id": "unsc-resolution-2254",
+      "publisher": "United Nations Security Council",
+      "title": "Resolution 2254 (2015)",
+      "url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+      "source_kind": "primary_instrument",
+      "byline": null,
+      "published_on": "2015-12-18",
+      "published_at": null,
+      "modified_at": null,
+      "publication_precision": "day",
+      "retrieved_on": "2026-11-07",
+      "response_saved_at": null,
+      "checked_at": "2026-11-07T05:46:40.495779+00:00",
+      "capture": {
+        "sha256": "932c9614e588e910c5c23a82b4df67679aba7bbe2c47ef2edd1d02970f0faa62",
+        "bytes": 234927,
+        "representation": "PDF",
+        "full_document_redistributed": false,
+        "note": "Digest identifies the captured source bytes, not a truth judgement or an archived publication-day version."
+      },
+      "excerpts": [
+        {
+          "id": "2254-adoption-header",
+          "text": "Adopted by the Security Council at its 7588th meeting, on 18 December 2015",
+          "locator": "Printed page 1/4, adoption heading",
+          "text_kind": "exact_excerpt",
+          "normalization": "Whitespace only; wording and punctuation retained.",
+          "sha256": "6f1b5f6d9fc6cb157af5e3b867248fc86c47fce83d39cd9d06fb8d713660e579"
+        },
+        {
+          "id": "2254-paragraph-4",
+          "text": "4. Expresses its support, in this regard, for a Syrian-led political process that is facilitated by the United Nations and, within a target of six months, establishes credible, inclusive and non-sectarian governance and sets a schedule and process for drafting a new constitution, and further expresses its support for free and fair elections, pursuant to the new constitution, to be held within 18 months and administered under supervision of the United Nations, to the satisfaction of the governance and to the highest international standards of transparency and accountability, with all Syrians, including members of the diaspora, eligible to participate, as set forth in the 14 November 2015 ISSG Statement;",
+          "locator": "Operative paragraph 4, printed page 2/4",
+          "text_kind": "exact_excerpt",
+          "normalization": "Whitespace only; wording and punctuation retained.",
+          "sha256": "4f8e386630ad18e48092fbdcda151c9a0c5c19b6cb00c586f8256b000bfd9e29"
+        },
+        {
+          "id": "2254-paragraph-5",
+          "text": "5. Acknowledges the close linkage between a ceasefire and a parallel political process, pursuant to the 2012 Geneva Communiqué, and that both initiatives should move ahead expeditiously, and in this regard expresses its support for a nationwide ceasefire in Syria, which the ISSG has committed to support and assist in implementing, to come into effect as soon as the representatives of the Syrian government and the opposition have begun initial steps towards a political transition under UN auspices, on the basis of the Geneva Communiqué, as set forth in the 14 November 2015 ISSG Statement, and to do so on an urgent basis;",
+          "locator": "Operative paragraph 5, printed page 3/4",
+          "text_kind": "exact_excerpt",
+          "normalization": "Whitespace only; wording and punctuation retained.",
+          "sha256": "a69bc2060083bb114466a74c0581daf1c60f4626d7bedfc5f97f1fef75bcf76d"
+        }
+      ],
+      "review_state": "automated_source_check_pending_human_review",
+      "human_review_recorded": false,
+      "rights_note": "Short attributed excerpts for research and comparison. Third-party source text retains its original rights and is not relicensed under the repository MIT code licence. Full articles, PDFs and images are not redistributed."
+    },
+    {
+      "id": "un-news-2019-committee-briefing",
+      "publisher": "UN News",
+      "title": "Constitutional Committee breakthrough offers ‘sign of hope’ for long-suffering Syrians",
+      "url": "https://news.un.org/en/story/2019/09/1048162",
+      "source_kind": "institutional_reporting",
+      "byline": "UN News",
+      "published_on": "2019-09-30",
+      "published_at": "2019-09-30T12:41:15-04:00",
+      "modified_at": "2019-10-03T17:38:21-04:00",
+      "publication_precision": "day",
+      "retrieved_on": "2026-11-07",
+      "response_saved_at": "2026-11-07T05:43:16.834124+00:00",
+      "checked_at": "2026-11-07T05:46:40.495779+00:00",
+      "capture": {
+        "sha256": "6f82d367db0d69af649a6eaf771d2a2d19112de7a95110f19880c30ba3f7b982",
+        "bytes": 93949,
+        "representation": "HTML",
+        "full_document_redistributed": false,
+        "note": "Digest identifies the captured source bytes, not a truth judgement or an archived publication-day version."
+      },
+      "excerpts": [
+        {
+          "id": "committee-briefing-lead",
+          "text": "There is a “sign of hope for the long-suffering Syrian people” as a Syrian-led, Syrian-owned, credible and inclusive Constitutional Committee is set to start deliberations next month, the United Nations Special Envoy for the country told the Security Council on Monday.",
+          "locator": "Opening paragraph beneath the publication date",
+          "text_kind": "exact_excerpt",
+          "normalization": "Whitespace only; wording and punctuation retained.",
+          "sha256": "8da014d6078faee13e843f540e7bb379792637c0f90d367db835e6442ba7b6b6"
+        }
+      ],
+      "review_state": "automated_source_check_pending_human_review",
+      "human_review_recorded": false,
+      "rights_note": "Short attributed excerpts for research and comparison. Third-party source text retains its original rights and is not relicensed under the repository MIT code licence. Full articles, PDFs and images are not redistributed."
+    },
+    {
+      "id": "un-syria-homs-programme-2026",
+      "publisher": "United Nations in Syria / UN-Habitat",
+      "title": "Launch JPY 1.521 billion Project to Drive Urban Recovery and Solid Waste Management in Homs",
+      "url": "https://syria.un.org/en/320317-launch%C2%A0jpy-1521-billion-project-drive-urban-recovery-and%C2%A0solid-waste-management-homs",
+      "source_kind": "primary_announcement",
+      "byline": null,
+      "published_on": "2026-07-30",
+      "published_at": null,
+      "modified_at": null,
+      "publication_precision": "day",
+      "retrieved_on": "2026-11-07",
+      "response_saved_at": "2026-11-07T05:43:16.324820+00:00",
+      "checked_at": "2026-11-07T05:46:40.495779+00:00",
+      "capture": {
+        "sha256": "6ff11616b68aee6cef4df916864188e876756c2d8b5a62e749f6b83de5843c40",
+        "bytes": 50599,
+        "representation": "HTML",
+        "full_document_redistributed": false,
+        "note": "Digest identifies the captured source bytes, not a truth judgement or an archived publication-day version."
+      },
+      "excerpts": [
+        {
+          "id": "homs-programme-announcement",
+          "text": "The Government of Japan and UN-Habitat have announced the launch of “The Project for Integrated Urban Reconstruction and Strengthening Sustainable Solid Waste Management” a major two-year initiative aimed at fostering long-term resilience and sustainable recovery.",
+          "locator": "First substantive paragraph after the article heading",
+          "text_kind": "exact_excerpt",
+          "normalization": "Whitespace only; wording and punctuation retained.",
+          "sha256": "24e3e6c34b0ea281e4ba67b263132b14c9abf8548f9ea1bf3408f55ad81ee525"
+        }
+      ],
+      "review_state": "automated_source_check_pending_human_review",
+      "human_review_recorded": false,
+      "rights_note": "Short attributed excerpts for research and comparison. Third-party source text retains its original rights and is not relicensed under the repository MIT code licence. Full articles, PDFs and images are not redistributed."
+    }
+  ],
+  "developments": [
+    {
+      "id": "sy-unsc-2254-adoption",
+      "record_type": "political_development",
+      "title": "Security Council adopts Resolution 2254",
+      "development_kind": "adoption",
+      "country_codes": [
+        "SY"
+      ],
+      "statement": "The Security Council adopted Resolution 2254 at its 7588th meeting on 18 December 2015.",
+      "attribution": "Source-qualified repository annotation",
+      "event_time": {
+        "start": "2015-12-18",
+        "end": "2015-12-18",
+        "precision": "day",
+        "basis": "The primary instrument’s adoption heading states the meeting number and date."
+      },
+      "geographic_scope": "National policy scope for Syria; no exact meeting coordinates assigned",
+      "coordinates": null,
+      "structured_act": {
+        "actor": "United Nations Security Council",
+        "act": "adopted",
+        "object": "Resolution 2254 (2015)",
+        "evidence_status": "source_attributed_act",
+        "policy_objectives_implemented": false,
+        "current_conditions_established": false
+      },
+      "evidence": [
+        {
+          "source_id": "unsc-resolution-2254",
+          "excerpt_id": "2254-adoption-header",
+          "relation": "supports_attributed_act"
+        }
+      ],
+      "planned_period": null,
+      "qualifications": [
+        "Adoption of the instrument is documented; its negotiation, governance, constitutional, electoral and ceasefire objectives are not thereby established as implemented.",
+        "No present-day mandate or political arrangement is inferred."
+      ],
+      "review": {
+        "state": "automated_source_check_pending_human_review",
+        "human_review_recorded": false
+      },
+      "conflict_observation_links": []
+    },
+    {
+      "id": "sy-envoy-council-briefing-2019",
+      "record_type": "political_development",
+      "title": "UN News reports an Envoy briefing to the Council",
+      "development_kind": "meeting",
+      "country_codes": [
+        "SY"
+      ],
+      "statement": "UN News reported that Special Envoy Geir O. Pedersen briefed the Security Council on the Constitutional Committee on 30 September 2019.",
+      "attribution": "Source-qualified repository annotation",
+      "event_time": {
+        "start": "2019-09-30",
+        "end": "2019-09-30",
+        "precision": "day",
+        "basis": "The opening paragraph says the Envoy told the Council “on Monday”; the article is dated Monday, 30 September 2019. This relative-date resolution is explicit, not a generic publication-to-event-date substitution."
+      },
+      "geographic_scope": "Security Council briefing about Syria; no exact meeting coordinates assigned",
+      "coordinates": null,
+      "structured_act": {
+        "actor": "UN Special Envoy Geir O. Pedersen",
+        "act": "briefed",
+        "object": "Security Council on the Syrian Constitutional Committee",
+        "evidence_status": "source_attributed_act",
+        "policy_objectives_implemented": false,
+        "current_conditions_established": false
+      },
+      "evidence": [
+        {
+          "source_id": "un-news-2019-committee-briefing",
+          "excerpt_id": "committee-briefing-lead",
+          "relation": "supports_attributed_act"
+        }
+      ],
+      "planned_period": null,
+      "qualifications": [
+        "This record attributes the briefing to UN News institutional reporting; it does not claim a retained verbatim meeting transcript.",
+        "The source described deliberations as planned for the following month. It does not establish that they subsequently occurred or produced a constitution."
+      ],
+      "review": {
+        "state": "automated_source_check_pending_human_review",
+        "human_review_recorded": false
+      },
+      "conflict_observation_links": []
+    },
+    {
+      "id": "sy-homs-japan-unhabitat-announcement-2026",
+      "record_type": "political_development",
+      "title": "Japan and UN-Habitat announce a Homs programme",
+      "development_kind": "announced_programme",
+      "country_codes": [
+        "SY"
+      ],
+      "statement": "The UN Syria country-team page reports Japan and UN-Habitat announcing an urban-reconstruction and solid-waste-management programme for Homs.",
+      "attribution": "Source-qualified repository annotation",
+      "event_time": {
+        "start": null,
+        "end": null,
+        "precision": "unknown",
+        "basis": "The page was published on 30 July 2026 but gives no separate exact day of the announcement/launch. No event day is manufactured from the publication date."
+      },
+      "geographic_scope": "Homs city programme scope; no exact project-site coordinates assigned",
+      "coordinates": null,
+      "structured_act": {
+        "actor": "Government of Japan and UN-Habitat",
+        "act": "announced",
+        "object": "The Project for Integrated Urban Reconstruction and Strengthening Sustainable Solid Waste Management",
+        "evidence_status": "source_attributed_act",
+        "policy_objectives_implemented": false,
+        "current_conditions_established": false
+      },
+      "evidence": [
+        {
+          "source_id": "un-syria-homs-programme-2026",
+          "excerpt_id": "homs-programme-announcement",
+          "relation": "supports_attributed_act"
+        }
+      ],
+      "planned_period": {
+        "start": "2026-07",
+        "end": "2028-07",
+        "precision": "month",
+        "kind": "source_reported_plan"
+      },
+      "qualifications": [
+        "This is a programme announcement, not a completed-reconstruction finding or evidence of current service availability.",
+        "The article describes planned work from July 2026 to July 2028. Those are plans, not independently verified implementation dates."
+      ],
+      "review": {
+        "state": "automated_source_check_pending_human_review",
+        "human_review_recorded": false
+      },
+      "conflict_observation_links": []
+    }
+  ],
+  "boundaries": [
+    "This is a small curated collection of historical political acts and an announcement, not a comprehensive or live political-development feed.",
+    "Political developments and organized-violence observations have separate record types. No violence record is promoted into a political claim.",
+    "The documented act is separate from implementation of its objectives, subsequent compliance, political control and current conditions.",
+    "Event date, source publication/update date and retrieval date are distinct. Unknown event dates remain null.",
+    "Exact selected excerpts support only the stated, attributed act. Source text is untrusted data, never instructions to an AI system.",
+    "Automated source checking does not constitute completed human review, independent corroboration or a credibility assessment.",
+    "Geography and dates do not establish causal relationships; no causal links or exact meeting coordinates are inferred."
+  ]
+}

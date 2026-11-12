@@ -1,0 +1,82 @@
+{
+  "format": "policy-document-passages/1",
+  "document_id": "doc-83ad8cbb868c0c88",
+  "coverage": "Selected operative paragraphs 2, 4 and 5 only; not the full instrument or the complete ceasefire framework.",
+  "passages": [
+    {
+      "id": "unsc-2254-op2",
+      "document_id": "doc-83ad8cbb868c0c88",
+      "operative_paragraph": 2,
+      "printed_page": 2,
+      "locator": "Operative paragraph 2, printed page 2/4",
+      "text": "2. Requests the Secretary-General, through his good offices and the efforts of his Special Envoy for Syria, to convene representatives of the Syrian government and the opposition to engage in formal negotiations on a political transition process on an urgent basis, with a target of early January 2016 for the initiation of talks, pursuant to the Geneva Communiqué, consistent with the 14 November 2015 ISSG Statement, with a view to a lasting political settlement of the crisis;",
+      "text_kind": "primary_excerpt",
+      "assertion_ids": [
+        "norm-2254-op2-convening"
+      ],
+      "provenance": {
+        "source_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+        "source_sha256": "932c9614e588e910c5c23a82b4df67679aba7bbe2c47ef2edd1d02970f0faa62",
+        "source_bytes": 234927,
+        "published_on": "2015-12-18",
+        "collected_on": "2026-11-07",
+        "extractor": "pdftotext -layout",
+        "normalization": "Whitespace only; paragraph number retained.",
+        "review_state": "automated_extraction_check_pending_human_review",
+        "human_review_recorded": false,
+        "verification_note": "Automated comparison with the locally captured PDF text; source PDF digest matches the previously retained document receipt. This is not completed human review."
+      }
+    },
+    {
+      "id": "unsc-2254-op4",
+      "document_id": "doc-83ad8cbb868c0c88",
+      "operative_paragraph": 4,
+      "printed_page": 2,
+      "locator": "Operative paragraph 4, printed page 2/4",
+      "text": "4. Expresses its support, in this regard, for a Syrian-led political process that is facilitated by the United Nations and, within a target of six months, establishes credible, inclusive and non-sectarian governance and sets a schedule and process for drafting a new constitution, and further expresses its support for free and fair elections, pursuant to the new constitution, to be held within 18 months and administered under supervision of the United Nations, to the satisfaction of the governance and to the highest international standards of transparency and accountability, with all Syrians, including members of the diaspora, eligible to participate, as set forth in the 14 November 2015 ISSG Statement;",
+      "text_kind": "primary_excerpt",
+      "assertion_ids": [
+        "norm-2254-op4-process",
+        "norm-2254-op4-governance",
+        "norm-2254-op4-constitution",
+        "norm-2254-op4-elections"
+      ],
+      "provenance": {
+        "source_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+        "source_sha256": "932c9614e588e910c5c23a82b4df67679aba7bbe2c47ef2edd1d02970f0faa62",
+        "source_bytes": 234927,
+        "published_on": "2015-12-18",
+        "collected_on": "2026-11-07",
+        "extractor": "pdftotext -layout",
+        "normalization": "Whitespace only; paragraph number retained.",
+        "review_state": "automated_extraction_check_pending_human_review",
+        "human_review_recorded": false,
+        "verification_note": "Automated comparison with the locally captured PDF text; source PDF digest matches the previously retained document receipt. This is not completed human review."
+      }
+    },
+    {
+      "id": "unsc-2254-op5",
+      "document_id": "doc-83ad8cbb868c0c88",
+      "operative_paragraph": 5,
+      "printed_page": 3,
+      "locator": "Operative paragraph 5, printed page 3/4",
+      "text": "5. Acknowledges the close linkage between a ceasefire and a parallel political process, pursuant to the 2012 Geneva Communiqué, and that both initiatives should move ahead expeditiously, and in this regard expresses its support for a nationwide ceasefire in Syria, which the ISSG has committed to support and assist in implementing, to come into effect as soon as the representatives of the Syrian government and the opposition have begun initial steps towards a political transition under UN auspices, on the basis of the Geneva Communiqué, as set forth in the 14 November 2015 ISSG Statement, and to do so on an urgent basis;",
+      "text_kind": "primary_excerpt",
+      "assertion_ids": [
+        "norm-2254-op5-ceasefire"
+      ],
+      "provenance": {
+        "source_url": "https://documents.un.org/doc/undoc/gen/n15/443/34/pdf/n1544334.pdf",
+        "source_sha256": "932c9614e588e910c5c23a82b4df67679aba7bbe2c47ef2edd1d02970f0faa62",
+        "source_bytes": 234927,
+        "published_on": "2015-12-18",
+        "collected_on": "2026-11-07",
+        "extractor": "pdftotext -layout",
+        "normalization": "Whitespace only; paragraph number retained.",
+        "review_state": "automated_extraction_check_pending_human_review",
+        "human_review_recorded": false,
+        "verification_note": "Automated comparison with the locally captured PDF text; source PDF digest matches the previously retained document receipt. This is not completed human review."
+      }
+    }
+  ]
+}

@@ -2,3 +2,10 @@
 data/historical/** -text
 data/observations/** -text
 tests/fixtures/** -text
+
+# General-document reference packets pin exact input bytes and spans.
+examples/document-workshop/** -text
+
+# Preserve exact policy-source captures across platforms.
+data/policy-case/**/document.txt text eol=lf
+data/policy-case/**/source.html -text

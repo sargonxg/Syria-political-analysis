@@ -1,0 +1,15 @@
+{
+  "format": "tacitus-change-receipt/1",
+  "payload_sha256": "f4d68e1de8949fe596bc533c54e0eeb790701d76e4c0de234e01247fc7e18829",
+  "payload_bytes": 15929,
+  "budget_bytes": 16000,
+  "selected_records": 11,
+  "selected_by_period": {
+    "baseline": 6,
+    "focus": 5
+  },
+  "omitted_scope_memberships": 68973,
+  "mode": "compact",
+  "model_calls": 0,
+  "budget_scope": "Exact compact JSON payload. Markdown and receipt are additional files."
+}

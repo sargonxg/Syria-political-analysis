@@ -1,4 +1,5 @@
 /* Historical research atlas. No external services, generated records or idle loop. */
+import { decodeNavigation, encodeNavigation, networkNeighborhood, lensNeighborhood, reproductionRecipe } from "./observations-navigation.js";
 const PAGE_BASE = new URL("./", window.location.href);
 const MANIFEST_URL = new URL("./data/manifest.json", PAGE_BASE);
 const EXPORT_LIMIT = 200;
@@ -38,6 +39,8 @@ const state = {
     cursor: null,
     history: [],
     snapshot: null,
+    countReceipt: null,
+    retryAt: 0,
   },
   catalog: null,
   catalogPromise: null,
@@ -83,6 +86,13 @@ const state = {
   timelineDirty: true,
   indicatorDirty: true,
   networkDirty: true,
+  navigationReady: false,
+  restoringNavigation: false,
+  navigationGeneration: 0,
+  sharedEventId: "",
+  networkFocus: "",
+  networkLimit: 6,
+  lensNodeLimit: 60,
   brush: null,
 };
 
@@ -225,6 +235,36 @@ async function decodeGzip(bytes, expected, signal) {
   return decoded;
 }
 
+async function responseBytes(response, signal, limit = 5 * 1024 * 1024) {
+  const reader = response.body?.getReader();
+  if (!reader) throw new Error("The response has no readable body.");
+  const chunks = [];
+  let length = 0;
+  const cancel = () => { reader.cancel().catch(() => {}); };
+  signal?.addEventListener("abort", cancel, { once: true });
+  try {
+    while (true) {
+      if (signal?.aborted) throw new DOMException("Cancelled", "AbortError");
+      const { done, value } = await reader.read();
+      if (done) break;
+      length += value.byteLength;
+      if (length > limit) throw new Error("The response exceeds the atlas’s 5 MiB per-file safety limit.");
+      chunks.push(value);
+    }
+    if (signal?.aborted) throw new DOMException("Cancelled", "AbortError");
+  } catch (error) {
+    await reader.cancel().catch(() => {});
+    throw error;
+  } finally {
+    signal?.removeEventListener("abort", cancel);
+    reader.releaseLock();
+  }
+  const bytes = new Uint8Array(length);
+  let offset = 0;
+  for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
+  return bytes;
+}
+
 async function fetchJSON(path, signal, cache = "force-cache", expected = null) {
   const url = localURL(path);
   if (expected) {
@@ -243,9 +283,7 @@ async function fetchJSON(path, signal, cache = "force-cache", expected = null) {
     throw new Error(
       `Could not load ${new URL(path, PAGE_BASE).pathname} (HTTP ${response.status}).`,
     );
-  const bytes = await response.arrayBuffer();
-  if (bytes.byteLength > 5 * 1024 * 1024)
-    throw new Error("A data asset exceeds the atlas’s per-file safety limit.");
+  const bytes = await responseBytes(response, signal);
   if (expected && (await sha256(bytes)) !== expected.sha256.toLowerCase()) {
     throw new Error(
       `Source integrity check failed for ${url.pathname}. Its bytes do not match the manifest SHA-256. Retry after a complete dataset build.`,
@@ -429,6 +467,7 @@ function abortExport() {
 }
 
 function clearSelected() {
+  if (!state.restoringNavigation) state.sharedEventId = "";
   state.selectionController?.abort();
   state.selectionGeneration += 1;
   state.selected = null;
@@ -909,6 +948,10 @@ async function selectEvent(row, moveFocus = false) {
   state.selectionController = controller;
   const generation = ++state.selectionGeneration;
   state.selected = row;
+  state.sharedEventId = row.id;
+  state.networkFocus = sidesOf(row)[0] || "";
+  state.networkLimit = 6;
+  state.networkDirty = true;
   state.selectedIndicator = null;
   state.lensSelection = { kind: "conflict_event", row };
   const needsOriginal = Boolean(row.raw_shard) || row._origin === "database";
@@ -920,6 +963,7 @@ async function selectEvent(row, moveFocus = false) {
   updateExportPreview();
   state.mapDirty = true;
   scheduleDraw();
+  syncNavigation();
   if (moveFocus) {
     $("inspector-title").tabIndex = -1;
     $("inspector-title").focus({ preventScroll: true });
@@ -1476,87 +1520,60 @@ function drawNetwork() {
   const prepared = prepareCanvas($("sides-network"));
   if (!prepared) return;
   const { context, width, height } = prepared;
-  const degrees = new Map();
   const pairs = new Map();
   for (const row of state.filtered) {
     const sides = sidesOf(row);
     if (!sides[0] || !sides[1] || sides[0] === sides[1]) continue;
-    const names = [...sides].sort();
-    const key = JSON.stringify(names);
+    const names = [...sides].sort(), key = JSON.stringify(names);
     const pair = pairs.get(key) || { names, count: 0 };
-    pair.count += 1;
-    pairs.set(key, pair);
-    for (const name of names) degrees.set(name, (degrees.get(name) || 0) + 1);
+    pair.count += 1; pairs.set(key, pair);
   }
-  const nodes = [...degrees.entries()]
-    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-    .slice(0, 18);
-  const positions = new Map();
-  const radius = Math.max(50, Math.min(width * 0.31, height * 0.34));
-  nodes.forEach(([name], index) => {
-    const angle = (index / nodes.length) * Math.PI * 2 - Math.PI / 2;
-    positions.set(name, {
-      x: width / 2 + Math.cos(angle) * radius,
-      y: height / 2 + Math.sin(angle) * radius,
+  const graph = networkNeighborhood([...pairs.values()], state.networkFocus, state.networkLimit);
+  if (graph.focus || (!state.loading && !state.restoringNavigation)) state.networkFocus = graph.focus;
+  const weights = new Map(graph.ranked), positions = new Map();
+  const radius = Math.max(50, Math.min(width * 0.29, height * 0.34));
+  graph.names.forEach((name, index) => {
+    const angle = ((index - 1) / Math.max(1, graph.names.length - 1)) * Math.PI * 2 - Math.PI / 2;
+    positions.set(name, index === 0 ? { x: width / 2, y: height / 2 } : {
+      x: width / 2 + Math.cos(angle) * radius, y: height / 2 + Math.sin(angle) * radius,
     });
   });
-  const visiblePairs = [...pairs.values()]
-    .filter((pair) => pair.names.every((name) => positions.has(name)))
-    .sort((a, b) => b.count - a.count);
-  const maxPair = Math.max(1, ...visiblePairs.map((pair) => pair.count));
-  for (const pair of visiblePairs) {
+  const maxPair = Math.max(1, ...graph.pairs.map((pair) => pair.count));
+  for (const pair of graph.pairs) {
     const [a, b] = pair.names.map((name) => positions.get(name));
-    context.strokeStyle = `rgba(154, 199, 170, ${0.12 + 0.48 * Math.sqrt(pair.count / maxPair)})`;
+    context.strokeStyle = `rgba(154, 199, 170, ${0.2 + 0.42 * Math.sqrt(pair.count / maxPair)})`;
     context.lineWidth = 0.5 + 3 * Math.sqrt(pair.count / maxPair);
-    context.beginPath();
-    context.moveTo(a.x, a.y);
-    context.lineTo(b.x, b.y);
-    context.stroke();
+    context.beginPath(); context.moveTo(a.x, a.y); context.lineTo(b.x, b.y); context.stroke();
   }
-  const maxDegree = Math.max(1, ...nodes.map((node) => node[1]));
-  for (const [name, degree] of nodes) {
-    const position = positions.get(name);
-    context.fillStyle = "#d9c391";
-    context.beginPath();
-    context.arc(
-      position.x,
-      position.y,
-      3 + 5 * Math.sqrt(degree / maxDegree),
-      0,
-      Math.PI * 2,
-    );
-    context.fill();
-    context.font = "9px Arial, sans-serif";
-    context.fillStyle = "#dce6d7";
+  const maxDegree = Math.max(1, ...graph.names.map((name) => weights.get(name)));
+  for (const name of graph.names) {
+    const position = positions.get(name), focused = name === graph.focus;
+    context.fillStyle = focused ? "#ecd7a5" : "#d9c391";
+    context.beginPath(); context.arc(position.x, position.y, focused ? 8 : 3 + 4 * Math.sqrt(weights.get(name) / maxDegree), 0, Math.PI * 2); context.fill();
+    context.font = `${focused ? 10 : 9}px Arial, sans-serif`; context.fillStyle = "#dce6d7";
     const left = position.x < width / 2;
-    context.textAlign = left ? "right" : "left";
-    const label = name.length > 30 ? `${name.slice(0, 27)}…` : name;
-    const labelWidth = Math.min(150, width * 0.27);
-    context.fillText(
-      label,
-      position.x + (left ? -12 : 12),
-      position.y + 3,
-      labelWidth,
-    );
+    context.textAlign = focused ? "center" : left ? "right" : "left";
+    const label = name.length > 34 ? `${name.slice(0, 31)}…` : name;
+    context.fillText(label, focused ? position.x : position.x + (left ? -12 : 12), focused ? position.y + 24 : position.y + 3, focused ? width * 0.56 : Math.min(150, width * 0.27));
   }
+  const options = graph.ranked.slice(0, 80);
+  if (graph.focus && !options.some(([name]) => name === graph.focus)) options.unshift([graph.focus, weights.get(graph.focus)]);
+  $("network-focus").replaceChildren(...options.map(([name]) => {
+    const option = element("option", name); option.value = name; return option;
+  }));
+  $("network-focus").value = graph.focus;
+  $("network-focus").disabled = !graph.names.length;
+  $("network-expand").disabled = state.networkLimit >= 18 || graph.names.length >= graph.connectedNames;
+  $("network-expand").textContent = $("network-expand").disabled ? (graph.names.length < graph.connectedNames ? "18-name display limit" : "Connected view complete") : `Show up to ${Math.min(18, state.networkLimit + 6)} names`;
+  $("network-scope").textContent = `${graph.names.length} of ${graph.connectedNames} names connected with this focus shown · ${graph.totalNames} distinct side labels in ${number.format(state.filtered.length)} filtered records. One-hop navigation; not a representative sample.`;
   const list = element("ol");
-  for (const pair of visiblePairs.slice(0, 8)) {
+  for (const pair of graph.pairs.slice(0, 8)) {
     const item = element("li", `${pair.names[0]} / ${pair.names[1]} `);
-    item.append(element("span", `· ${number.format(pair.count)} records`));
-    list.append(item);
+    item.append(element("span", `· ${number.format(pair.count)} records`)); list.append(item);
   }
-  $("network-pairs").replaceChildren(
-    visiblePairs.length
-      ? list
-      : element(
-          "p",
-          "No paired side names are present in the current filtered records.",
-        ),
-  );
-  $("sides-network").setAttribute(
-    "aria-label",
-    `Recorded opposing sides: ${nodes.length} displayed names from ${number.format(state.filtered.length)} matching event records. The largest recorded pairs are listed below.`,
-  );
+  $("network-pairs").replaceChildren(graph.pairs.length ? list : element("p", "No paired side names are present in the current filtered records."));
+  $("sides-network").setAttribute("aria-label", `Recorded opposing-side neighborhood: ${graph.names.length} displayed names around ${graph.focus || "no focus"} from ${number.format(state.filtered.length)} matching event records. Full recorded pairs for this view are listed below.`);
+  renderShare();
 }
 
 function selectedSeries() {
@@ -1862,6 +1879,7 @@ function selectionFilters() {
 }
 
 function updateExportPreview() {
+  renderShare();
   const candidates = selectionCandidates();
   const scope = $("export-kind").value;
   const loading =
@@ -2426,8 +2444,10 @@ function connectTimeline() {
     state.brush = null;
     if (canvas.hasPointerCapture(event.pointerId))
       canvas.releasePointerCapture(event.pointerId);
+    beginNavigationChange();
     updateYears(brush.start, brush.end);
     loadEvents();
+    syncNavigation();
   });
   canvas.addEventListener("pointercancel", () => {
     state.brush = null;
@@ -2436,137 +2456,231 @@ function connectTimeline() {
   });
 }
 
+/* Shared URLs contain public-data filter terms, never analyst notes or questions. */
+let navigationTimer = 0;
+let managedSearch = window.location.search;
+function navigationValue() {
+  return {
+    country: state.country, from: state.from, to: state.to,
+    actor: state.actor, query: state.query, category: state.category,
+    precision: state.precision, order: state.order, view: state.view,
+    indicatorCode: state.indicatorCode, selectedId: state.selected?.id || state.sharedEventId,
+    lens: state.lens, collection: $("lens-collection").value,
+    scope: $("export-kind").value, graphLimit: state.lensNodeLimit, networkFocus: state.networkFocus, networkLimit: state.networkLimit,
+  };
+}
+
+function sharedViewURL() {
+  const url = new URL(window.location.href);
+  url.search = encodeNavigation(navigationValue());
+  url.hash = "";
+  return url;
+}
+
+function renderShare() {
+  if (!state.manifest) return;
+  const url = sharedViewURL();
+  $("shared-view-url").value = url.href;
+  $("open-view").href = url.href;
+  $("copy-view").disabled = false;
+  $("reproduction-recipe").textContent = reproductionRecipe(
+    navigationValue(), state.manifest.datasets, url.href,
+    state.mode === "database" ? state.database.snapshot : null,
+  );
+}
+
+function syncNavigation(replace = false) {
+  window.clearTimeout(navigationTimer);
+  if (!state.navigationReady || state.restoringNavigation) return;
+  const url = sharedViewURL();
+  if (url.href !== window.location.href) {
+    window.history[replace ? "replaceState" : "pushState"](
+      { atlasView: true }, "", url.href,
+    );
+  }
+  managedSearch = url.search;
+  renderShare();
+}
+
+function beginNavigationChange() {
+  state.navigationGeneration += 1;
+  state.restoringNavigation = false;
+  state.navigationReady = true;
+  window.clearTimeout(navigationTimer);
+}
+
+function queueNavigation() {
+  window.clearTimeout(navigationTimer);
+  navigationTimer = window.setTimeout(() => syncNavigation(), 300);
+}
+
+function setView(view, synchronize = true) {
+  state.view = view;
+  for (const [id, target] of [["map-view", "map"], ["network-view", "network"], ["lenses-view", "lenses"]])
+    $(id).setAttribute("aria-pressed", String(view === target));
+  $("geography-view").hidden = view !== "map";
+  $("sides-view").hidden = view !== "network";
+  $("context-lenses-view").hidden = view !== "lenses";
+  if (view === "lenses") loadLenses().catch(() => {});
+  state.mapDirty = true; state.networkDirty = true; state.lensDirty = true;
+  scheduleDraw();
+  if (synchronize) syncNavigation();
+}
+
+async function restoreNavigation(initial = false, preset = null) {
+  window.clearTimeout(navigationTimer);
+  const generation = ++state.navigationGeneration;
+  state.restoringNavigation = true;
+  const parsed = decodeNavigation(window.location.search, state.manifest.countries.map((row) => row.code));
+  const nav = preset || parsed.value;
+  state.country = nav.country;
+  $("country").value = state.country;
+  state.mode = "static";
+  state.datasets = new Map(state.manifest.datasets.map((dataset) => [dataset.id, dataset]));
+  renderConnection();
+  state.actor = nav.actor; $("actor-search").value = nav.actor;
+  state.query = nav.query; $("event-search").value = nav.query;
+  state.category = nav.category; state.precision = nav.precision;
+  $("location-precision").value = nav.precision;
+  state.order = nav.order; $("event-order").value = nav.order;
+  state.indicatorCode = nav.indicatorCode;
+  state.lens = nav.lens; state.lensNodeLimit = nav.graphLimit;
+  $("lens-node-limit").value = String(nav.graphLimit);
+  $("lens-collection").value = nav.collection;
+  state.lensSearch = ""; $("lens-search").value = ""; state.lensPage = 0;
+  state.sharedEventId = nav.selectedId;
+  $("export-kind").value = nav.scope;
+  state.networkFocus = nav.networkFocus || ""; state.networkLimit = nav.networkLimit || 6;
+  countryYears(); updateYears(nav.from, nav.to); renderProvenance();
+  setView(nav.view, false);
+  $("share-status").textContent = parsed.ignored.length && !preset
+    ? "Some invalid or unsupported shared filters were ignored. The active values are shown above."
+    : "";
+  await Promise.all([loadEvents(), loadIndicators()]);
+  if (generation !== state.navigationGeneration) return;
+  if (nav.view === "lenses") {
+    try {
+      await loadLenses();
+      if (nav.collection === "index") await loadSemanticIndex();
+    } catch { /* The view displays the existing qualified catalogue error. */ }
+  }
+  if (generation !== state.navigationGeneration) return;
+  if (nav.selectedId) {
+    const row = state.events.find((item) => item.id === nav.selectedId)
+      || (nav.collection === "index" ? state.semanticRows.find((item) => item.id === nav.selectedId) : null);
+    if (row) {
+      await selectEvent(row);
+      state.networkFocus = nav.networkFocus || state.networkFocus;
+      state.networkLimit = nav.networkLimit || 6; state.networkDirty = true; scheduleDraw();
+    }
+    else $("share-status").textContent = "The shared event ID is not available in this bounded view. No substitute record was selected.";
+  }
+  if (generation !== state.navigationGeneration) return;
+  state.restoringNavigation = false; state.navigationReady = true;
+  managedSearch = window.location.search;
+  if (initial || preset) syncNavigation(initial);
+  else renderShare();
+}
+
+async function startQuestion(kind) {
+  const nav = decodeNavigation("", state.manifest.countries.map((row) => row.code)).value;
+  nav.country = "SY";
+  nav.order = "oldest";
+  if (kind === "geography") {
+    nav.from = 2024; nav.to = 2025; nav.category = "1"; nav.precision = "1";
+    $("brief-question").value = "Where do precisely geocoded state-based records concentrate in Syria in 2024–2025, and what does the provider's location precision establish?";
+  } else {
+    nav.from = 2020; nav.to = 2025; nav.indicatorCode = "NY.GDP.MKTP.KD"; nav.scope = "indicators";
+    $("brief-question").value = "Which constant-price GDP observations are available for a Syria recovery brief, and where does the annual series stop?";
+  }
+  await restoreNavigation(false, nav);
+  if (kind === "recovery") $("indicator-title").scrollIntoView({ block: "start", behavior: "auto" });
+}
+
 function connectControls() {
   const applyQuery = () => {
+    beginNavigationChange();
     state.actor = $("actor-search").value.trim().toLocaleLowerCase();
     state.query = $("event-search").value.trim().toLocaleLowerCase();
     updateYears($("year-from").value, $("year-to").value);
     if (state.mode === "database") loadEvents();
     else applyFilters();
+    syncNavigation();
   };
   $("apply-query").addEventListener("click", applyQuery);
   $("actor-search").addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      applyQuery();
-    }
+    if (event.key === "Enter") { event.preventDefault(); applyQuery(); }
   });
   $("full-history").addEventListener("click", () => {
-    updateYears(state.minYear, state.maxYear);
-    loadEvents();
+    beginNavigationChange(); updateYears(state.minYear, state.maxYear); loadEvents(); syncNavigation();
   });
   $("data-source").addEventListener("change", () => {
-    abortExport();
-    state.mode = $("data-source").value;
-    if (state.mode === "database" && !state.database.ready) {
-      state.mode = "static";
-      renderConnection();
-      return;
-    }
+    beginNavigationChange(); abortExport(); state.mode = $("data-source").value;
+    if (state.mode === "database" && !state.database.configured) { state.mode = "static"; renderConnection(); return; }
     state.rawCache.clear();
     state.actor = $("actor-search").value.trim().toLocaleLowerCase();
     state.query = $("event-search").value.trim().toLocaleLowerCase();
-    if (state.mode === "static")
-      state.datasets = new Map(
-        state.manifest.datasets.map((dataset) => [dataset.id, dataset]),
-      );
-    renderConnection();
-    loadEvents();
+    if (state.mode === "static") state.datasets = new Map(state.manifest.datasets.map((dataset) => [dataset.id, dataset]));
+    renderConnection(); loadEvents(); renderShare();
   });
   $("database-next").addEventListener("click", () => {
-    if (state.database.nextCursor)
-      loadDatabaseEvents(state.database.nextCursor, [
-        ...state.database.history,
-        state.database.cursor,
-      ]);
+    if (state.database.nextCursor) loadDatabaseEvents(state.database.nextCursor, [...state.database.history, state.database.cursor]);
   });
   $("database-previous").addEventListener("click", () => {
-    const history = [...state.database.history];
-    const cursor = history.pop();
-    loadDatabaseEvents(cursor || null, history);
+    const history = [...state.database.history], cursor = history.pop(); loadDatabaseEvents(cursor || null, history);
   });
   $("country").addEventListener("change", () => {
-    abortExport();
-    state.country = $("country").value;
-    state.compactCache.clear();
-    state.compactCacheBytes = 0;
-    state.rawCache.clear();
-    countryYears();
-    updateYears(state.from, state.to);
-    renderProvenance();
-    loadEvents();
-    loadIndicators();
+    beginNavigationChange(); abortExport(); state.country = $("country").value;
+    state.compactCache.clear(); state.compactCacheBytes = 0; state.rawCache.clear();
+    state.networkFocus = ""; state.networkLimit = 6;
+    countryYears(); updateYears(state.from, state.to); renderProvenance();
+    loadEvents(); loadIndicators(); syncNavigation();
   });
-  for (const id of ["year-from", "year-to"])
-    $(id).addEventListener("change", () => {
-      updateYears($("year-from").value, $("year-to").value);
-      loadEvents();
-    });
-  $("retry-load").addEventListener("click", () =>
-    state.manifest ? loadEvents() : initialize(),
-  );
+  for (const id of ["year-from", "year-to"]) $(id).addEventListener("change", () => {
+    beginNavigationChange(); updateYears($("year-from").value, $("year-to").value); loadEvents(); syncNavigation();
+  });
+  $("retry-load").addEventListener("click", () => state.manifest ? loadEvents() : initialize());
   $("event-type").addEventListener("change", () => {
-    state.category = $("event-type").value;
-    if (state.mode === "database") loadEvents();
-    else applyFilters();
+    beginNavigationChange(); state.category = $("event-type").value;
+    if (state.mode === "database") loadEvents(); else applyFilters(); syncNavigation();
   });
   $("event-search").addEventListener("input", () => {
-    state.query = $("event-search").value.trim().toLocaleLowerCase();
-    applyFilters();
+    beginNavigationChange(); state.query = $("event-search").value.trim().toLocaleLowerCase(); applyFilters(); queueNavigation();
   });
   $("location-precision").addEventListener("change", () => {
-    state.precision = $("location-precision").value;
-    if (state.mode === "database") loadEvents();
-    else applyFilters();
+    beginNavigationChange(); state.precision = $("location-precision").value;
+    if (state.mode === "database") loadEvents(); else applyFilters(); syncNavigation();
   });
   $("event-order").addEventListener("change", () => {
-    state.order = $("event-order").value;
-    applyFilters();
+    beginNavigationChange(); state.order = $("event-order").value; applyFilters(); syncNavigation();
   });
-  $("previous-page").addEventListener("click", () => {
-    state.page -= 1;
-    renderTable();
-  });
-  $("next-page").addEventListener("click", () => {
-    state.page += 1;
-    renderTable();
-  });
-  for (const [id, view] of [
-    ["map-view", "map"],
-    ["network-view", "network"],
-    ["lenses-view", "lenses"],
-  ])
-    $(id).addEventListener("click", () => {
-      state.view = view;
-      $("map-view").setAttribute("aria-pressed", String(view === "map"));
-      $("network-view").setAttribute(
-        "aria-pressed",
-        String(view === "network"),
-      );
-      $("geography-view").hidden = view !== "map";
-      $("sides-view").hidden = view !== "network";
-      $("context-lenses-view").hidden = view !== "lenses";
-      $("lenses-view").setAttribute("aria-pressed", String(view === "lenses"));
-      if (view === "lenses") loadLenses().catch(() => {});
-      state.mapDirty = true;
-      state.networkDirty = true;
-      state.lensDirty = true;
-      scheduleDraw();
-    });
+  $("previous-page").addEventListener("click", () => { state.page -= 1; renderTable(); });
+  $("next-page").addEventListener("click", () => { state.page += 1; renderTable(); });
+  for (const [id, view] of [["map-view", "map"], ["network-view", "network"], ["lenses-view", "lenses"]])
+    $(id).addEventListener("click", () => { beginNavigationChange(); setView(view); });
   $("indicator-select").addEventListener("change", () => {
-    abortExport();
-    state.indicatorCode = $("indicator-select").value;
-    renderIndicators();
-    updateExportPreview();
+    beginNavigationChange(); abortExport(); state.indicatorCode = $("indicator-select").value;
+    renderIndicators(); updateExportPreview(); syncNavigation();
   });
-  $("export-kind").addEventListener("change", () => {
-    abortExport();
-    updateExportPreview();
-  });
+  $("export-kind").addEventListener("change", () => { beginNavigationChange(); abortExport(); updateExportPreview(); syncNavigation(); });
   $("export-json").addEventListener("click", () => exportSelection("json"));
-  $("export-markdown").addEventListener("click", () =>
-    exportSelection("markdown"),
-  );
+  $("export-markdown").addEventListener("click", () => exportSelection("markdown"));
+  $("start-geography").addEventListener("click", () => startQuestion("geography"));
+  $("start-recovery").addEventListener("click", () => startQuestion("recovery"));
+  $("copy-view").addEventListener("click", async () => {
+    syncNavigation();
+    try { await navigator.clipboard.writeText($("shared-view-url").value); $("share-status").textContent = "View link copied. Research questions and analyst notes are excluded."; }
+    catch { $("shared-view-url").focus(); $("shared-view-url").select(); $("share-status").textContent = "Select and copy the URL above; this browser did not allow clipboard access."; }
+  });
+  $("network-focus").addEventListener("change", () => {
+    state.networkFocus = $("network-focus").value; state.networkLimit = 6; state.networkDirty = true; scheduleDraw(); syncNavigation();
+  });
+  $("network-expand").addEventListener("click", () => {
+    state.networkLimit = Math.min(18, state.networkLimit + 6); state.networkDirty = true; scheduleDraw(); syncNavigation();
+  });
+  window.addEventListener("popstate", () => {
+    if (state.manifest && managedSearch !== window.location.search) restoreNavigation().catch(() => {});
+  });
   document.addEventListener("visibilitychange", () => {
     if (document.hidden && state.frame) {
       cancelAnimationFrame(state.frame);
@@ -2596,16 +2710,14 @@ function connectControls() {
 
 /* Database mode is opt-in and never silently replaced by static results. */
 async function databaseJSON(path, signal) {
+  if (state.database.retryAt > Date.now())
+    throw new Error(`Database queries are paused until ${new Date(state.database.retryAt).toLocaleString()}. Choose Verified static snapshot to continue.`);
   const response = await fetch(localURL(path), {
     signal,
     cache: "no-store",
     credentials: "same-origin",
   });
-  const bytes = await response.arrayBuffer();
-  if (bytes.byteLength > 5 * 1024 * 1024)
-    throw new Error(
-      "Database response exceeds the browser’s bounded response limit.",
-    );
+  const bytes = await responseBytes(response, signal);
   let body;
   try {
     body = JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes));
@@ -2614,12 +2726,20 @@ async function databaseJSON(path, signal) {
       "The database endpoint did not return JSON. Check authentication and deployment configuration.",
     );
   }
-  if (!response.ok || body.status !== "ready")
+  if (!response.ok || body.status !== "ready") {
+    if (body.error?.code === "DB_QUOTA_EXHAUSTED") {
+      const retryAt = Date.parse(body.retry_at);
+      if (Number.isFinite(retryAt) && retryAt > Date.now() && retryAt - Date.now() <= 27 * 60 * 60 * 1000) {
+        state.database.retryAt = retryAt;
+        try { sessionStorage.setItem("research-quota:" + state.database.base, String(retryAt)); } catch { /* Storage can be disabled. */ }
+      }
+    }
     throw new Error(
       body.error?.message ||
         body.message ||
         `Database unavailable (HTTP ${response.status}).`,
     );
+  }
   if (
     body.api_version !== "policy-research-db/1" ||
     !["d1", "sqlite"].includes(body.backend) ||
@@ -2648,17 +2768,21 @@ function renderConnection(message = "") {
       ? state.database.backend === "sqlite"
         ? "Local read-only adapter. This is not a deployed D1 connection; current result page only."
         : "Read-only D1 query. The map shows the current bounded result page."
+      : state.database.retryAt > Date.now()
+        ? `Verified source files active. Database quota is exhausted until ${new Date(state.database.retryAt).toLocaleString()}. Static browsing makes no database requests.`
       : state.database.ready
         ? "Static files active. A database is available; choose it explicitly to run server queries."
-        : "Verified source files active. No database is connected to this deployment.");
+        : state.database.configured
+          ? "Verified source files active. Choose Database to connect; static browsing makes no database requests."
+          : "Verified source files active. No database is connected to this deployment.");
   $("data-source").querySelector('[value="database"]').disabled =
-    !state.database.ready;
+    !state.database.configured;
   $("data-source").value = state.mode;
   $("event-order").disabled = connected;
   $("database-pagination").hidden = !connected;
 }
 
-async function probeDatabase() {
+function configureDatabase() {
   const configured = state.manifest?.query_api;
   if (!configured || configured.enabled !== true || !configured.base_url) {
     renderConnection();
@@ -2670,20 +2794,25 @@ async function probeDatabase() {
       "",
     );
     state.database.configured = true;
-    renderConnection(
-      "Static snapshot active; checking the configured same-origin database…",
-    );
-    const status = await databaseJSON(`${state.database.base}/status`);
-    if (!status.snapshot?.id)
-      throw new Error("Database snapshot identity is missing.");
-    state.database.ready = true;
-    state.database.snapshot = status.snapshot;
-    state.database.backend = status.backend;
+    try {
+      const saved = Number(sessionStorage.getItem("research-quota:" + state.database.base));
+      if (saved > Date.now() && saved - Date.now() <= 27 * 60 * 60 * 1000) state.database.retryAt = saved;
+    } catch { /* Memory backoff still works when storage is disabled. */ }
     renderConnection();
   } catch (error) {
     state.database.ready = false;
     renderConnection(`Static snapshot active. ${error.message}`);
   }
+}
+
+async function ensureDatabase(signal) {
+  if (state.database.ready) return;
+  const status = await databaseJSON(`${state.database.base}/status`, signal);
+  if (!status.snapshot?.id || status.capabilities?.events !== true)
+    throw new Error("The database needs a compatible, bounded event snapshot. Choose Verified static snapshot instead.");
+  state.database.ready = true;
+  state.database.snapshot = status.snapshot;
+  state.database.backend = status.backend;
 }
 
 async function loadDatabaseEvents(cursor = null, history = []) {
@@ -2721,8 +2850,14 @@ async function loadDatabaseEvents(cursor = null, history = []) {
   if (state.actor) url.searchParams.set("actor", state.actor);
   if (state.category) url.searchParams.set("type", state.category);
   if (state.precision) url.searchParams.set("precision", state.precision);
+  const queryKey = url.search;
+  const receipt = state.database.countReceipt;
+  const reuseCount = receipt?.queryKey === queryKey && receipt.snapshot === state.database.snapshot?.id && receipt.backend === state.database.backend;
+  url.searchParams.set("count", reuseCount ? "none" : "exact");
   if (cursor) url.searchParams.set("cursor", cursor);
   try {
+    await ensureDatabase(controller.signal);
+    if (controller.signal.aborted || generation !== state.loadGeneration) return;
     const body = await databaseJSON(url, controller.signal);
     if (controller.signal.aborted || generation !== state.loadGeneration)
       return;
@@ -2730,8 +2865,9 @@ async function loadDatabaseEvents(cursor = null, history = []) {
       !Array.isArray(body.records) ||
       body.returned !== body.records.length ||
       body.returned > 200 ||
-      !Number.isSafeInteger(body.matched) ||
-      body.matched < body.returned ||
+      !/^[a-f0-9]{64}$/.test(body.query_fingerprint || "") ||
+      !(body.count_scope === "exact_query" && Number.isSafeInteger(body.matched) && body.matched >= body.returned
+        || body.count_scope === "not_requested" && body.matched === null && reuseCount && receipt.fingerprint === body.query_fingerprint && receipt.matched >= body.returned) ||
       body.page_scope !== "current_page" ||
       body.bounded !== true ||
       typeof body.has_more !== "boolean" ||
@@ -2749,13 +2885,15 @@ async function loadDatabaseEvents(cursor = null, history = []) {
       );
     for (const dataset of body.datasets || [])
       state.datasets.set(dataset.id, dataset);
+    const matched = body.matched === null ? receipt.matched : body.matched;
+    state.database.countReceipt = { queryKey, snapshot: body.snapshot.id, backend: body.backend, fingerprint: body.query_fingerprint, matched };
     state.events = body.records
       .map((row) => normalizeEvent({ ...row, _origin: "database" }, row))
       .sort(
         (a, b) =>
           a.date_start.localeCompare(b.date_start) || a.id.localeCompare(b.id),
       );
-    state.database.matched = body.matched;
+    state.database.matched = matched;
     state.database.nextCursor = body.next_cursor;
     state.database.cursor = cursor;
     state.database.history = history;
@@ -2765,11 +2903,11 @@ async function loadDatabaseEvents(cursor = null, history = []) {
     populateEventCategories();
     $("map-card").setAttribute("aria-busy", "false");
     $("load-status").textContent =
-      `${number.format(body.returned)} historical records loaded for ${currentCountry()?.name || state.country}, ${state.from}–${state.to}; ${number.format(body.matched)} match the database query. Current page only.`;
+      `${number.format(body.returned)} historical records loaded for ${currentCountry()?.name || state.country}, ${state.from}–${state.to}; ${number.format(matched)} match the database query. Current page only.`;
     renderConnection();
     applyFilters(false);
     $("database-page-status").textContent =
-      `Database page ${history.length + 1} · ${number.format(body.returned)} returned / ${number.format(body.matched)} matched`;
+      `Database page ${history.length + 1} · ${number.format(body.returned)} returned / ${number.format(matched)} matched`;
     $("database-previous").disabled = !history.length;
     $("database-next").disabled = !body.has_more || !body.next_cursor;
   } catch (error) {
@@ -2932,6 +3070,7 @@ async function loadLenses() {
           button.dataset.lens = lens.id;
           button.setAttribute("aria-pressed", String(lens.id === state.lens));
           button.addEventListener("click", () => {
+            beginNavigationChange();
             state.lens = lens.id;
             state.lensPage = 0;
             state.lensSelection =
@@ -2943,7 +3082,7 @@ async function loadLenses() {
                   ? { kind: "conflict_event", row: state.selected }
                   : null;
             if (lens.id === "sosa-ssn") $("lens-collection").value = "query";
-            renderLenses();
+            renderLenses(); syncNavigation();
           });
           return button;
         });
@@ -3128,6 +3267,9 @@ function renderLenses() {
     : "The optional reference index is a finite navigation sample, not a statistically representative sample or the whole source collection.";
   $("lens-layout-note").textContent =
     `Horizontal position: ${annual ? "source calendar year" : "recorded start date"}. Vertical groups: ${annual ? "the selected series’ unit" : state.lens === "prov-o" ? "provider country collections" : state.lens === "skos" ? "provider category" : state.lens === "owl-time" ? "provider date-precision category" : "provider location-precision category"}. Layout positions are not an additional geographic or causal claim. Lines highlight only a selected field path.`;
+  const shown = Math.min(state.lensRows.length, state.lensNodeLimit);
+  $("lens-visible-count").textContent = `${number.format(shown)} of ${number.format(state.lensRows.length)} source records shown. The full directory remains available below.`;
+  $("lens-layout-note").textContent += " The graph is a bounded navigation view: a selected record, then matching field group and nearest dates, or the first records in directory order. This is not a representative sample or an AI relevance score.";
   renderLensDirectory();
   renderLensPath();
   state.lensDirty = true;
@@ -3330,7 +3472,7 @@ function drawLenses() {
   if (!prepared) return;
   const { context, width, height } = prepared;
   state.lensHitGrid.clear();
-  const rows = state.lensRows;
+  const rows = lensNeighborhood(state.lensRows, state.lensSelection?.row, state.lensNodeLimit, lensFacet);
   if (!rows.length) {
     context.fillStyle = "#c5d5c2";
     context.font = "12px Arial, sans-serif";
@@ -3418,17 +3560,21 @@ function drawLenses() {
   context.fillText(new Date(end).getUTCFullYear(), right, height - 10);
   $("lens-canvas").setAttribute(
     "aria-label",
-    `${LENS_LABELS[state.lens]} lens, ${number.format(rows.length)} real source records. Use Browse lens records for keyboard selection and exact record details.`,
+    `${LENS_LABELS[state.lens]} lens, ${number.format(rows.length)} of ${number.format(state.lensRows.length)} source records shown in a bounded navigation view. Use Browse lens records for the whole directory, keyboard selection and exact record details.`,
   );
 }
 
 function connectLenses() {
+  $("lens-node-limit").addEventListener("change", () => {
+    beginNavigationChange(); state.lensNodeLimit = Number($("lens-node-limit").value); renderLenses(); syncNavigation();
+  });
   $("lens-collection").addEventListener("change", () => {
+    beginNavigationChange();
     state.lensPage = 0;
     state.lensSelection = null;
     if ($("lens-collection").value === "index" && !state.semanticGraph)
       loadSemanticIndex();
-    renderLenses();
+    renderLenses(); syncNavigation();
   });
   $("retry-lenses").addEventListener("click", () =>
     state.catalog && $("lens-collection").value === "index"
@@ -3449,13 +3595,14 @@ function connectLenses() {
     renderLensDirectory();
   });
   $("lens-indicator").addEventListener("change", () => {
+    beginNavigationChange();
     abortExport();
     state.indicatorCode = $("lens-indicator").value;
     $("indicator-select").value = state.indicatorCode;
     state.lensSelection = null;
     renderIndicators();
     renderLenses();
-    updateExportPreview();
+    updateExportPreview(); syncNavigation();
   });
   $("lens-canvas").addEventListener("click", (event) => {
     const rect = $("lens-canvas").getBoundingClientRect();
@@ -3538,13 +3685,6 @@ async function initialize() {
     state.rawShards = new Map(
       (manifest.raw_shards || []).map((shard) => [shard.path, shard]),
     );
-    const params = new URLSearchParams(window.location.search);
-    const requestedCountry = params.get("country") || "SY";
-    state.country = manifest.countries.some(
-      (country) => country.code === requestedCountry,
-    )
-      ? requestedCountry
-      : manifest.countries[0]?.code || "SY";
     $("country").replaceChildren();
     for (const country of manifest.countries) {
       const option = element("option", country.name);
@@ -3562,6 +3702,8 @@ async function initialize() {
       "actor-search",
       "apply-query",
       "full-history",
+      "start-geography",
+      "start-recovery",
     ])
       $(id).disabled = false;
     const precision =
@@ -3576,13 +3718,6 @@ async function initialize() {
       option.value = code;
       $("location-precision").append(option);
     }
-    countryYears();
-    $("full-history").textContent =
-      `Full history · ${state.minYear}–${state.maxYear}`;
-    updateYears(
-      params.get("from") || 2020,
-      params.get("to") || Math.min(2025, state.maxYear),
-    );
     const count = manifest.event_shards.reduce(
       (sum, shard) => sum + Number(shard.count || 0),
       0,
@@ -3599,10 +3734,9 @@ async function initialize() {
       ? `Snapshot built ${manifest.built_at.slice(0, 10)}`
       : "Dated dataset releases";
     renderProvenance();
-    probeDatabase();
+    configureDatabase();
     loadGeography();
-    loadEvents();
-    loadIndicators();
+    await restoreNavigation(true);
   } catch (error) {
     state.loading = false;
     state.indicatorLoading = false;
