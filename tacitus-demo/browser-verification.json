@@ -1,0 +1,21 @@
+{
+  "runtime": "v24.22.1",
+  "results": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "passed": true,
+      "exportSchema": "tacitus-teaching-brief/1"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "passed": true,
+      "exportSchema": "tacitus-teaching-brief/1"
+    }
+  ]
+}
