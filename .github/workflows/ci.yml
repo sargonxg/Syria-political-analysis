@@ -22,7 +22,18 @@ jobs:
       - run: python -m pip install -e '.[dev,desk,test]'
       - run: syria-analysis validate
       - run: python -m unittest discover -s tests -v
+      - name: Build and reopen the complete policy-document case
+        run: python scripts/build_policy_case.py --output output/policy-case
+      - run: python scripts/build_policy_case.py --database output/policy-case/research.sqlite3 --search appropriations
+      - run: python -m ruff check src/syria_analysis/document_knowledge.py src/syria_analysis/document_knowledge_view.py scripts/build_policy_case.py tests/test_document_knowledge.py
+      - run: python -m ruff format --check src/syria_analysis/document_knowledge.py src/syria_analysis/document_knowledge_view.py scripts/build_policy_case.py tests/test_document_knowledge.py
       - run: node --test cloudflare/worker.test.mjs
+      - run: python scripts/build_policy_document.py --output output/policy-document
+      - run: python scripts/build_policy_document.py --validate examples/policy-document/negotiations.json
+      - run: python scripts/build_policy_document.py --validate examples/policy-document/institutions.json
+      - run: python scripts/build_policy_document.py --validate examples/policy-document/ceasefire.json
+      - run: python -m ruff check src/syria_analysis/policy_document.py scripts/build_policy_document.py tests/test_policy_document.py
+      - run: python -m ruff format --check src/syria_analysis/policy_document.py scripts/build_policy_document.py tests/test_policy_document.py
       - run: python -m ruff check src/syria_analysis/desk tests/test_desk.py src/syria_analysis/media_assessment.py tests/test_media_assessment.py
       - run: python -m ruff format --check src/syria_analysis/desk tests/test_desk.py src/syria_analysis/media_assessment.py tests/test_media_assessment.py
       - run: syria-analysis build-context --output /tmp/context.json --jsonl /tmp/context.jsonl
@@ -34,6 +45,12 @@ jobs:
       - run: node --check src/syria_analysis/web/context.js
       - run: node --check src/syria_analysis/web/media-assessment.js
       - run: node --check src/syria_analysis/web/observations.js
+      - run: node --check src/syria_analysis/web/observations-navigation.js
+      - run: node --test tests/observations-navigation.test.mjs
+      - run: python -m ruff check src/syria_analysis/document_workshop.py scripts/build_document_workshop.py tests/test_document_workshop.py src/syria_analysis/political_developments.py scripts/build_political_developments.py tests/test_political_developments.py
+      - run: python -m ruff format --check src/syria_analysis/document_workshop.py scripts/build_document_workshop.py tests/test_document_workshop.py src/syria_analysis/political_developments.py scripts/build_political_developments.py tests/test_political_developments.py
+      - run: python scripts/build_political_developments.py --output output/political-evidence --html output/political-evidence/index.html
+      - run: python scripts/build_political_developments.py --validate output/political-evidence/study.json
       - run: policy-analysis validate-selection examples/historical-research/syria-events.json
       - run: policy-analysis validate-selection examples/historical-research/syria-country-context.json
       - run: syria-analysis brief --question "What does the Homs announcement establish?" --place area-homs-urban-recovery --output /tmp/brief.md
@@ -87,11 +104,20 @@ jobs:
       - name: Build and serve the separate read-only research database
         run: |
           python scripts/build_research_database.py --output output/research-database
+          node scripts/check_research_query_budget.mjs output/research-database/research.sqlite3 output/query-budget-proof.json
           node cloudflare/local-api.mjs --database output/research-database/research.sqlite3 --assets dist --enable-api-ui --port 8790 > /tmp/research-api.log 2>&1 &
           for i in $(seq 1 30); do curl --fail --silent http://127.0.0.1:8790/api/research/status > /dev/null && break || sleep 1; done
           curl --fail --silent http://127.0.0.1:8790/api/research/status > /dev/null
       - run: node /tmp/desk-browser/node_modules/@playwright/cli/playwright-cli.js -s=database-ci open http://127.0.0.1:8790/observations/ --browser=chrome
       - run: node /tmp/desk-browser/node_modules/@playwright/cli/playwright-cli.js -s=database-ci run-code --filename=tests/observations-database-browser.js
+      - name: Build and serve the public policy-document example
+        run: |
+          python scripts/build_policy_case.py --output output/policy-case
+          python -m http.server 8768 --bind 127.0.0.1 --directory output/policy-case > /tmp/policy-case-server.log 2>&1 &
+          for i in $(seq 1 30); do curl --fail --silent http://127.0.0.1:8768/ > /dev/null && break || sleep 1; done
+          curl --fail --silent http://127.0.0.1:8768/ > /dev/null
+      - run: node /tmp/desk-browser/node_modules/@playwright/cli/playwright-cli.js -s=policy-case-ci open http://127.0.0.1:8768 --browser=chrome
+      - run: node /tmp/desk-browser/node_modules/@playwright/cli/playwright-cli.js -s=policy-case-ci run-code --filename=tests/policy-case-browser.js
       - run: node --check src/syria_analysis/desk/web/desk.js
       - run: npx --yes prettier@3.9.9 --check src/syria_analysis/desk/web tests/desk-browser.js src/syria_analysis/web/media-assessment.js src/syria_analysis/web/media-assessment.css tests/media-browser.js
       - uses: actions/upload-artifact@v4

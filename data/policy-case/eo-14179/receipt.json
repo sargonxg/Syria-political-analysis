@@ -1,0 +1,30 @@
+{
+  "format": "policy-source-receipt/1",
+  "document_id": "us-eo-14179-2025",
+  "title": "Removing Barriers to American Leadership in Artificial Intelligence",
+  "issuer": "President of the United States",
+  "signed_on": "2025-01-23",
+  "published_on": "2025-01-31",
+  "uri": "https://www.federalregister.gov/documents/2025/01/31/2025-02172/removing-barriers-to-american-leadership-in-artificial-intelligence",
+  "text_uri": "https://www.federalregister.gov/documents/full_text/text/2025/01/31/2025-02172.txt",
+  "pdf_uri": "https://www.govinfo.gov/content/pkg/FR-2025-01-31/pdf/2025-02172.pdf",
+  "retrieved_on": "2026-11-07",
+  "sha256": "a0abdc5b1687931a348a65f8b33359b165e3ece12d96c0f728732e21fb385f06",
+  "bytes": 7060,
+  "license": {
+    "status": "US federal government work",
+    "basis": "17 U.S.C. 105; official presidential document as published by the Office of the Federal Register",
+    "attribution": "President of the United States; Office of the Federal Register / National Archives and Records Administration"
+  },
+  "capture": {
+    "scope": "Complete EO14179 body, including title, all six sections, general provisions and signature/date; raw response also retains the Federal Register front matter and footer",
+    "encoding": "UTF-8",
+    "transformation": "Preserve raw HTTP bytes in source.html. Extract PRE text, remove NUL artifacts, retain the EO14179 body before its Federal Register filing footer, remove bracketed page markers, collapse whitespace within blank-line blocks. Offsets in document.txt refer to this normalized text, not raw HTML/PDF. Section subclauses (a), (b) and (c) begin a separate text block.",
+    "factual_review": "Source identity and byte integrity checked mechanically; no independent human policy review recorded"
+  },
+  "applicability": "Historical instrument dated January 2025; this capture does not establish present legal status or implementation.",
+  "raw_file": "source.html",
+  "text_file": "document.txt",
+  "normalized_sha256": "f3c69783587304e7aa23b7d9e207ec408631e3a2c0df3c8fb441d22e770e1746",
+  "normalized_bytes": 4281
+}

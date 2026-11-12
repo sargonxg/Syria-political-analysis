@@ -1,19 +1,47 @@
 # Middle East · Political Analysis
 
-<!-- tacitus-practical-entry -->
-## Purpose, code and a playable introduction
+Explore historical conflict data, examine political documents and compare reporting. Keep source text, recorded observations and analyst interpretation distinct; export cited context for further policy research.
 
-Query historical provider records, inspect source fields and export a bounded research selection without inventing a political conclusion.
+| Start with a question | What you can do | Guide |
+| --- | --- | --- |
+| Where did recorded violence concentrate? | Explore 120,576 UCDP observations and separate annual country data; inspect original fields and share a filtered view. | [Historical atlas](docs/historical-atlas.md) · [Shareable research views](docs/research-navigation.md) |
+| What does a policy document actually say? | Structure supplied text into exact paragraph spans, annotate its claims and export a bounded selection with omissions. | [Local document workshop](docs/document-workshop.md) · [Resolution 2254 example](docs/policy-document.md) |
+| What political act is documented? | Inspect three sourced political records and a BBC/Guardian comparison; preserve event dates, publication dates and evidence gaps. | [Political evidence study](docs/political-developments.md) |
+| How do reports frame a development? | Navigate 55 source profiles and compare specific passages, attribution and reporting lineage. | [Source comparison](docs/media-assessment.md) |
+| How can a policy document become inspectable AI context? | Store a complete AI-policy instrument, search its text, inspect typed assertions and export a dependency-closed prompt. | [Document → knowledge case](docs/policy-document-knowledge.md) |
 
-**Local public-source toolkit.** Historical datasets, curated source profiles and private notebooks have separate coverage and access requirements. Records are not a current event feed.
+## Try the complete policy-document case
 
-[Setup, code walkthrough, research & verification](TACITUS_GUIDE.md) · [Play the original 8-bit teaching adventure](tacitus-demo/index.html) · [Demo credits](tacitus-demo/CREDITS.md)
+```sh
+python scripts/build_policy_case.py --output output/policy-case
+python -m http.server 8768 --bind 127.0.0.1 --directory output/policy-case
+```
 
-![The original House of Evidence teaching adventure; synthetic case, separate from this project’s runtime](tacitus-demo/mansion.png)
+Open **http://127.0.0.1:8768/**. Trace Executive Order 14179 from complete captured
+text through a source-qualified graph and searchable SQLite store to a bounded
+research prompt. All 17 text blocks are retained; eight semantic assertions are
+explicitly unreviewed drafts. Inspect how a shorter selection can lose legal and
+funding qualifications. [Provenance, ontology, exact measurements and limits](docs/policy-document-knowledge.md).
+No model call, cloud account or dependency installation is required.
 
-Research: [RAG](https://arxiv.org/abs/2005.11401), [long-context evidence use](https://arxiv.org/abs/2307.03172), [GraphRAG](https://arxiv.org/abs/2404.16130). [What TACITUS borrows, adds and still needs to measure](https://github.com/sargonxg/sargonxg/blob/main/docs/RESEARCH_AND_DESIGN.md).
-<!-- /tacitus-practical-entry -->
+## Try the current implementation
 
+The current implementation is on the default branch. Python 3.11+ is sufficient for the static atlas and standalone exporters; no model account or API key is needed.
+
+```sh
+git clone https://github.com/sargonxg/Syria-political-analysis.git
+cd Syria-political-analysis
+python -m pip install -e .
+python scripts/build_showcase.py
+python -m http.server 8766 --bind 127.0.0.1 --directory dist
+```
+
+Open **http://127.0.0.1:8766/observations/**. The committed, licensed snapshots build offline. The source directory and seven-layer context desk remain available at `/sources/` and `/`. The political/media worked study is at `/politics/`. Run the [document CLI](docs/document-workshop.md) on a local text file, or inspect the [worked political/media selections](docs/political-developments.md).
+
+The organized-violence dataset covers 2000–2025. The small political collection is a separately qualified worked example; neither is a live intelligence feed, territorial-control map or automatic political inference engine. Normative objectives, reported actions and implemented outcomes remain distinct. No human source review or model-quality gain is claimed where it has not been recorded.
+
+<details>
+<summary>Dataset details, screenshots and existing research workflows</summary>
 
 Explore historical conflict data and build source-qualified policy context. Keep provider records, exact passages and analyst judgments distinct.
 
@@ -27,8 +55,6 @@ The [read-only research database](cloudflare/README.md) adds indexed local SQLit
 
 ![Actual five-lens view of 2,048 source-linked navigation records](docs/images/historical-atlas-lenses.png)
 
-![Historical research atlas using actual provider records](docs/images/historical-atlas-desktop.png)
-
 ```sh
 git clone https://github.com/sargonxg/Syria-political-analysis.git
 cd Syria-political-analysis
@@ -40,6 +66,21 @@ python -m http.server 8766 --bind 127.0.0.1 --directory dist
 Open **http://127.0.0.1:8766/observations/**. No API key, model account or Rust build is needed. The committed, licensed snapshots build without live collection. [Query from Python/CLI, prepare a brief and reopen a selection in Workbench](docs/historical-atlas.md). A static build can be hosted on Cloudflare; the separately authenticated notebook below is a different workflow.
 
 The historical collection has nine UCDP provider country categories; the annual series cover ten World Bank economies. Provider geography is retained, without an independent border determination. This is historical research coverage, not a live event feed, current control map or causal model. Syria remains the first curated political-ontology collection.
+
+**[Work through a policy document](docs/policy-document.md)** · [Inspectable packets](examples/policy-document/) · [Selection schema](schemas/policy_document_selection.schema.json)
+
+![Actual personal-site policy walkthrough: primary paragraph, qualified assertion and downloadable selection](docs/images/policy-document-lab.png)
+
+The screenshot shows the personal site consuming this repository’s static example; the local exporter below produces the same cited packets without requiring the website.
+
+Start with Security Council resolution 2254 (2015). Three primary paragraphs map to six qualified political assertions: a request for negotiations, supported institutional objectives and a conditional ceasefire. Choose a question, retain the relevant records and export the full citations, draft-review state, omissions and implementation gaps. The original receipt and paraphrases remain unchanged. Political objectives and organized-violence observations have separate evidence types.
+
+```sh
+python scripts/build_policy_document.py --task negotiations --output output/policy-document
+python scripts/build_policy_document.py --validate output/policy-document/selection.json
+```
+
+This small offline example needs Python 3.11+ only. The exporter makes no model call and does not claim automatic extraction or tested relevance gains. Its UTF-8 byte counts compare selected evidence with the curated six-record baseline, not with the entire document. [How to pair this with conflict research without inferring causality](docs/policy-document.md#political-developments-and-conflict-observations).
 
 **[Assess media framing](docs/media-assessment.md)** · [Research/data resources](data/sources/resources.json)
 
@@ -71,7 +112,7 @@ The public code and sample corpus can be read, cloned and run locally. The optio
 
 The screenshot uses fictional browser-test records only. [Mobile view](docs/images/desk-mobile.png).
 
-![Selected source-backed regional navigation anchors](docs/source-map.svg)
+[Selected source-backed regional navigation anchors](docs/source-map.svg).
 
 An independent, public-source research toolkit by Giulio Catanzariti. Start with a source, preserve what it actually says, and keep the analyst's judgement visible.
 
@@ -82,6 +123,9 @@ The reconciled corpus contains **55 source profiles, 44 document references, 14 
 The **Syria political ontology** adds 17 entity types, 15 qualified relationship types and 18 source-scoped concepts. Seven entity records and six dated normative assertion drafts provide a working example from Security Council resolution 2254 (2015). Every assertion retains its original source verb, paragraph/page locator, date, modality, qualifications and review state. These historical objectives are not current implementation findings. No human review is claimed for the drafts. [Inspect the model](docs/political-ontology.md).
 
 This is a working foundation, not comprehensive coverage or a live intelligence service. It does not infer current territorial control, assign coordinates to headlines, or score a publisher's credibility.
+
+
+</details>
 
 ## Start locally
 
@@ -225,3 +269,17 @@ CI validates the committed corpus and exercises collection parsing, provenance, 
 For a correction, identify the record ID, original source, relevant passage or page, date and proposed change. Never submit private messages, personal contact lists, non-public documents or precise locations of vulnerable people. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 Code: [MIT](LICENSE). Original annotations and compilation: [CC BY 4.0](DATA-LICENSE.md). Linked publishers retain their rights; full articles and UN reports are not bundled. This independent project is not an official UN product and does not represent any former employer.
+
+<!-- tacitus-practical-entry -->
+## Purpose, code and a playable introduction
+
+Query historical provider records, inspect source fields and export a bounded research selection without inventing a political conclusion.
+
+**Local public-source toolkit.** Historical datasets, curated source profiles and private notebooks have separate coverage and access requirements. Records are not a current event feed.
+
+[Setup, code walkthrough, research & verification](TACITUS_GUIDE.md) · [Play the original 8-bit teaching adventure](tacitus-demo/index.html) · [Demo credits](tacitus-demo/CREDITS.md)
+
+![The original House of Evidence teaching adventure; synthetic case, separate from this project’s runtime](tacitus-demo/mansion.png)
+
+Research: [RAG](https://arxiv.org/abs/2005.11401), [long-context evidence use](https://arxiv.org/abs/2307.03172), [GraphRAG](https://arxiv.org/abs/2404.16130). [What TACITUS borrows, adds and still needs to measure](https://github.com/sargonxg/sargonxg/blob/main/docs/RESEARCH_AND_DESIGN.md).
+<!-- /tacitus-practical-entry -->
