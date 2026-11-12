@@ -62,3 +62,7 @@ Audited default-branch baseline: `4d7c6ec55c1a1435cd7449b6e02d5640205f0d89`. Cha
 | `python -m unittest discover -s tests -v` | Passed |
 
 A failure is a remaining release blocker for the affected workflow. A passing local test is not a new hosted release. Provider/model quality, current external-service setup and production deployment were not certified.
+
+## Reconciliation checkpoint · 11 November 2026
+
+203 Python tests pass, 145 subtests pass, two service-dependent tests skip. The default branch now includes the document-knowledge case and query resilience work. Historical datasets remain dated; no live intelligence or analytical-quality claim follows from these checks.
